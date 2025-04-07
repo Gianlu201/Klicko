@@ -119,7 +119,7 @@ namespace Klicko_be.Controllers
                     })
                     .ToList();
 
-                return experiences != null
+                return experiencesDto != null
                     ? Ok(
                         new GetExperiencesListResponseDto()
                         {
@@ -127,10 +127,10 @@ namespace Klicko_be.Controllers
                             Experiences = experiencesDto,
                         }
                     )
-                    : NotFound(
+                    : BadRequest(
                         new GetExperiencesListResponseDto()
                         {
-                            Message = "No experiences found",
+                            Message = "Something went wrong!",
                             Experiences = null,
                         }
                     );
@@ -177,7 +177,16 @@ namespace Klicko_be.Controllers
 
                 var result = await _experienceService.CreateExperienceAsync(newExperience);
 
-                return result ? Ok() : BadRequest();
+                return result
+                    ? Ok(
+                        new CreateExperienceResponseDto()
+                        {
+                            Message = "Experience created successfully!",
+                        }
+                    )
+                    : BadRequest(
+                        new CreateExperienceResponseDto() { Message = "Something went wrong!" }
+                    );
             }
             catch (Exception ex)
             {
@@ -190,7 +199,16 @@ namespace Klicko_be.Controllers
         {
             var result = await _experienceService.DeleteExperienceByIdAsync(experienceId);
 
-            return result ? Ok() : BadRequest();
+            return result
+                ? Ok(
+                    new DeleteExperienceResponseDto()
+                    {
+                        Message = "Experience deleted successfully!",
+                    }
+                )
+                : BadRequest(
+                    new DeleteExperienceResponseDto() { Message = "Something went wrong!" }
+                );
         }
     }
 }
