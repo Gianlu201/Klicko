@@ -1,0 +1,11 @@
+# .gitignore
+# Back-end .NET
+/backend/bin/
+/backend/obj/
+/backend/*.user
+/backend/*.suo
+
+# Front-end Node.js
+/frontend/node_modules/
+/frontend/build/
+/frontend/.env
