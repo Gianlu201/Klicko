@@ -128,7 +128,7 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("RegistrationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 7, 17, 36, 36, 62, DateTimeKind.Utc).AddTicks(684));
+                        .HasDefaultValue(new DateTime(2025, 4, 7, 18, 42, 17, 445, DateTimeKind.Utc).AddTicks(6116));
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -197,12 +197,12 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 7, 17, 36, 36, 62, DateTimeKind.Utc).AddTicks(6487));
+                        .HasDefaultValue(new DateTime(2025, 4, 7, 18, 42, 17, 446, DateTimeKind.Utc).AddTicks(6796));
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 7, 17, 36, 36, 62, DateTimeKind.Utc).AddTicks(7011));
+                        .HasDefaultValue(new DateTime(2025, 4, 7, 18, 42, 17, 446, DateTimeKind.Utc).AddTicks(7678));
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -228,7 +228,7 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 7, 17, 36, 36, 62, DateTimeKind.Utc).AddTicks(7472));
+                        .HasDefaultValue(new DateTime(2025, 4, 7, 18, 42, 17, 446, DateTimeKind.Utc).AddTicks(8779));
 
                     b.Property<Guid>("ExperienceId")
                         .HasColumnType("uniqueidentifier");
@@ -402,12 +402,12 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("LastEditDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 7, 17, 36, 36, 62, DateTimeKind.Utc).AddTicks(1950));
+                        .HasDefaultValue(new DateTime(2025, 4, 7, 18, 42, 17, 445, DateTimeKind.Utc).AddTicks(8419));
 
                     b.Property<DateTime>("LoadingDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 7, 17, 36, 36, 62, DateTimeKind.Utc).AddTicks(1337));
+                        .HasDefaultValue(new DateTime(2025, 4, 7, 18, 42, 17, 445, DateTimeKind.Utc).AddTicks(7325));
 
                     b.Property<int>("MaxParticipants")
                         .HasColumnType("int");
@@ -433,6 +433,7 @@ namespace Klicko_be.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserCreatorId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("UserLastModifyId")
@@ -486,7 +487,7 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 7, 17, 36, 36, 62, DateTimeKind.Utc).AddTicks(4986));
+                        .HasDefaultValue(new DateTime(2025, 4, 7, 18, 42, 17, 446, DateTimeKind.Utc).AddTicks(3768));
 
                     b.Property<int>("OrderNumber")
                         .ValueGeneratedOnAdd()
@@ -692,13 +693,15 @@ namespace Klicko_be.Migrations
                         .IsRequired();
 
                     b.HasOne("Klicko_be.Models.Auth.ApplicationUser", "UserCreator")
-                        .WithMany()
-                        .HasForeignKey("UserCreatorId");
+                        .WithMany("ExperiencesCreated")
+                        .HasForeignKey("UserCreatorId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.HasOne("Klicko_be.Models.Auth.ApplicationUser", "UserLastModify")
                         .WithMany()
                         .HasForeignKey("UserLastModifyId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Category");
@@ -793,6 +796,8 @@ namespace Klicko_be.Migrations
             modelBuilder.Entity("Klicko_be.Models.Auth.ApplicationUser", b =>
                 {
                     b.Navigation("Cart");
+
+                    b.Navigation("ExperiencesCreated");
 
                     b.Navigation("Orders");
 

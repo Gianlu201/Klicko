@@ -83,6 +83,22 @@ namespace Klicko_be.Data
                 .WithMany(e => e.OrderExperiences)
                 .HasForeignKey(oe => oe.ExperienceId);
 
+            // correlazione Experience a ApplicationUser (UserCreator)
+            builder
+                .Entity<Experience>()
+                .HasOne(e => e.UserCreator)
+                .WithMany(u => u.ExperiencesCreated)
+                .HasForeignKey(e => e.UserCreatorId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            // correlazione Experience a ApplicationUser (UserLastModify)
+            builder
+                .Entity<Experience>()
+                .HasOne(e => e.UserLastModify)
+                .WithMany()
+                .HasForeignKey(e => e.UserLastModifyId)
+                .OnDelete(DeleteBehavior.NoAction);
+
             // correlazione Order a OrderExperience
             builder
                 .Entity<OrderExperience>()

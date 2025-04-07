@@ -1,10 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Klicko_be.DTOs.Account;
+using Klicko_be.DTOs.CarryWith;
+using Klicko_be.DTOs.Category;
+using Klicko_be.DTOs.Image;
+using Klicko_be.Models;
 using Klicko_be.Models.Auth;
 
-namespace Klicko_be.Models
+namespace Klicko_be.DTOs.Experience
 {
-    public class Experience
+    public class ExperienceDto
     {
         [Key]
         public required Guid ExperienceId { get; set; }
@@ -66,20 +71,16 @@ namespace Klicko_be.Models
 
         // navigazione
         [ForeignKey(nameof(UserCreatorId))]
-        public ApplicationUser? UserCreator { get; set; }
+        public UserSimpleDto? UserCreator { get; set; }
 
         [ForeignKey(nameof(UserLastModifyId))]
-        public ApplicationUser? UserLastModify { get; set; }
+        public UserSimpleDto? UserLastModify { get; set; }
 
         [ForeignKey(nameof(CategoryId))]
-        public Category? Category { get; set; }
+        public CategorySimpleDto? Category { get; set; }
 
-        public ICollection<Image>? Images { get; set; }
+        public ICollection<ImageSimpleDto>? Images { get; set; }
 
-        public ICollection<CarryWith>? CarryWiths { get; set; }
-
-        public ICollection<OrderExperience>? OrderExperiences { get; set; }
-
-        public ICollection<CartExperience>? CartExperiences { get; set; }
+        public ICollection<CarryWithSimpleDto>? CarryWiths { get; set; }
     }
 }

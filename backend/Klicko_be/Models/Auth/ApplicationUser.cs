@@ -23,5 +23,7 @@ namespace Klicko_be.Models.Auth
         public Cart? Cart { get; set; }
 
         public ICollection<Order>? Orders { get; set; }
+
+        public ICollection<Experience>? ExperiencesCreated { get; set; }
     }
 }

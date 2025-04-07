@@ -38,7 +38,7 @@ namespace Klicko_be.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RegistrationDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 4, 7, 17, 36, 36, 62, DateTimeKind.Utc).AddTicks(684)),
+                    RegistrationDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 4, 7, 18, 42, 17, 445, DateTimeKind.Utc).AddTicks(6116)),
                     CartId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -187,8 +187,8 @@ namespace Klicko_be.Migrations
                 {
                     CartId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 4, 7, 17, 36, 36, 62, DateTimeKind.Utc).AddTicks(6487)),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 4, 7, 17, 36, 36, 62, DateTimeKind.Utc).AddTicks(7011))
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 4, 7, 18, 42, 17, 446, DateTimeKind.Utc).AddTicks(6796)),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 4, 7, 18, 42, 17, 446, DateTimeKind.Utc).AddTicks(7678))
                 },
                 constraints: table =>
                 {
@@ -210,7 +210,7 @@ namespace Klicko_be.Migrations
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     State = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 4, 7, 17, 36, 36, 62, DateTimeKind.Utc).AddTicks(4986))
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 4, 7, 18, 42, 17, 446, DateTimeKind.Utc).AddTicks(3768))
                 },
                 constraints: table =>
                 {
@@ -236,9 +236,9 @@ namespace Klicko_be.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MaxParticipants = table.Column<int>(type: "int", nullable: false),
                     Organiser = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LoadingDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 4, 7, 17, 36, 36, 62, DateTimeKind.Utc).AddTicks(1337)),
-                    LastEditDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 4, 7, 17, 36, 36, 62, DateTimeKind.Utc).AddTicks(1950)),
-                    UserCreatorId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    LoadingDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 4, 7, 18, 42, 17, 445, DateTimeKind.Utc).AddTicks(7325)),
+                    LastEditDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 4, 7, 18, 42, 17, 445, DateTimeKind.Utc).AddTicks(8419)),
+                    UserCreatorId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     UserLastModifyId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     IsFreeCancellable = table.Column<bool>(type: "bit", nullable: false),
                     IncludedDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -261,8 +261,7 @@ namespace Klicko_be.Migrations
                         name: "FK_Experiences_AspNetUsers_UserLastModifyId",
                         column: x => x.UserLastModifyId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Experiences_Categories_CategoryId",
                         column: x => x.CategoryId,
@@ -298,7 +297,7 @@ namespace Klicko_be.Migrations
                     ExperienceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CartId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false, defaultValue: 1),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 4, 7, 17, 36, 36, 62, DateTimeKind.Utc).AddTicks(7472))
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 4, 7, 18, 42, 17, 446, DateTimeKind.Utc).AddTicks(8779))
                 },
                 constraints: table =>
                 {

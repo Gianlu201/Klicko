@@ -1,14 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using Klicko_be.Models.Auth;
 
-namespace Klicko_be.Models
+namespace Klicko_be.DTOs.Experience
 {
-    public class Experience
+    public class CreateExperienceRequestDto
     {
-        [Key]
-        public required Guid ExperienceId { get; set; }
-
         [Required]
         public required string Title { get; set; }
 
@@ -36,16 +32,6 @@ namespace Klicko_be.Models
         [Required]
         public required string Organiser { get; set; }
 
-        public DateTime LoadingDate { get; set; }
-
-        public DateTime LastEditDate { get; set; }
-
-        [Required]
-        public required string UserCreatorId { get; set; }
-
-        [Required]
-        public required string UserLastModifyId { get; set; }
-
         [Required]
         public required bool IsFreeCancellable { get; set; }
 
@@ -63,23 +49,5 @@ namespace Klicko_be.Models
 
         [Required]
         public required int ValidityInMonths { get; set; }
-
-        // navigazione
-        [ForeignKey(nameof(UserCreatorId))]
-        public ApplicationUser? UserCreator { get; set; }
-
-        [ForeignKey(nameof(UserLastModifyId))]
-        public ApplicationUser? UserLastModify { get; set; }
-
-        [ForeignKey(nameof(CategoryId))]
-        public Category? Category { get; set; }
-
-        public ICollection<Image>? Images { get; set; }
-
-        public ICollection<CarryWith>? CarryWiths { get; set; }
-
-        public ICollection<OrderExperience>? OrderExperiences { get; set; }
-
-        public ICollection<CartExperience>? CartExperiences { get; set; }
     }
 }

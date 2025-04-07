@@ -1,6 +1,7 @@
 using System.Text;
 using Klicko_be.Data;
 using Klicko_be.Models.Auth;
+using Klicko_be.Services;
 using Klicko_be.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -89,6 +90,8 @@ builder
 builder.Services.AddScoped<UserManager<ApplicationUser>>();
 builder.Services.AddScoped<SignInManager<ApplicationUser>>();
 builder.Services.AddScoped<RoleManager<ApplicationRole>>();
+
+builder.Services.AddScoped<ExperienceService>();
 
 var app = builder.Build();
 
