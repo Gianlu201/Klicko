@@ -175,6 +175,31 @@ namespace Klicko_be.Controllers
                     UserLastModifyId = "89cfbe7e-4c65-4a8c-aed5-8bc32477e86b",
                 };
 
+                if (createExperience.Images != null && createExperience.Images.Count > 0)
+                {
+                    newExperience.Images = createExperience
+                        .Images.Select(img => new Image()
+                        {
+                            ImageId = Guid.NewGuid(),
+                            Url = img.Url,
+                            AltText = img.AltText,
+                            ExperienceId = newExperience.ExperienceId,
+                        })
+                        .ToList();
+                }
+
+                if (createExperience.CarryWiths != null && createExperience.CarryWiths.Count > 0)
+                {
+                    newExperience.CarryWiths = createExperience
+                        .CarryWiths.Select(carry => new CarryWith()
+                        {
+                            CarryWithId = Guid.NewGuid(),
+                            Name = carry.Name,
+                            ExperienceId = newExperience.ExperienceId,
+                        })
+                        .ToList();
+                }
+
                 var result = await _experienceService.CreateExperienceAsync(newExperience);
 
                 return result
@@ -192,6 +217,43 @@ namespace Klicko_be.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
+        }
+
+        [HttpPut("{experienceId:guid}")]
+        public async Task<IActionResult> Edit(
+            [FromBody] EditExperienceRequestDto experienceEdit,
+            Guid experienceId
+        )
+        {
+            try
+            {
+                var result = await _experienceService.EditEcperienceByIdAsync(
+                    experienceId,
+                    experienceEdit
+                );
+
+                return result ? Ok() : BadRequest();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpPut("softDelete/{experienceId:guid}")]
+        public async Task<IActionResult> SoftDelete(Guid experienceId)
+        {
+            var result = await _experienceService.SoftDeleteExperienceByIdAsync(experienceId);
+            return result
+                ? Ok(
+                    new DeleteExperienceResponseDto()
+                    {
+                        Message = "Experience soft deleted successfully!",
+                    }
+                )
+                : BadRequest(
+                    new DeleteExperienceResponseDto() { Message = "Something went wrong!" }
+                );
         }
 
         [HttpDelete("{experienceId:guid}")]

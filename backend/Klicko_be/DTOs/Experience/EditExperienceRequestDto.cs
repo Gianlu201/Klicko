@@ -1,11 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Klicko_be.DTOs.CarryWith;
 using Klicko_be.DTOs.Image;
-using Klicko_be.Models.Auth;
 
 namespace Klicko_be.DTOs.Experience
 {
-    public class CreateExperienceRequestDto
+    public class EditExperienceRequestDto
     {
         [Required]
         public required string Title { get; set; }
@@ -35,18 +34,27 @@ namespace Klicko_be.DTOs.Experience
         public required string Organiser { get; set; }
 
         [Required]
+        public DateTime LastEditDate { get; set; }
+
+        [Required]
+        public required string UserLastModifyId { get; set; }
+
+        [Required]
         public required bool IsFreeCancellable { get; set; }
 
+        [Required]
         public string? IncludedDescription { get; set; }
 
+        [Required]
         public int Sale { get; set; }
 
+        [Required]
         public bool IsInEvidence { get; set; }
 
+        [Required]
         public bool IsPopular { get; set; }
 
-        public bool IsDeleted { get; set; }
-
+        [Required]
         public string? CoverImage { get; set; }
 
         [Required]
