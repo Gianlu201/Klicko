@@ -50,7 +50,7 @@ namespace Klicko_be.Controllers
                         CreatedAt = o.CreatedAt,
                         User = new DTOs.Account.UserSimpleDto()
                         {
-                            UserId = o.User.Id,
+                            UserId = o.User!.Id,
                             FirstName = o.User.FirstName,
                             LastName = o.User.LastName,
                             Email = o.User.Email,
@@ -60,7 +60,7 @@ namespace Klicko_be.Controllers
                                 ? o
                                     .OrderExperiences.Select(oe => new ExperienceForOrdersDto()
                                     {
-                                        ExperienceId = oe.Experience.ExperienceId,
+                                        ExperienceId = oe.Experience!.ExperienceId,
                                         Title = oe.Experience.Title,
                                         CategoryId = oe.Experience.CategoryId,
                                         Duration = oe.Experience.Duration,
@@ -115,6 +115,13 @@ namespace Klicko_be.Controllers
                 if (experiences == null)
                 {
                     return StatusCode(500, "Impossible to reach experiences!");
+                }
+
+                if (createOrder.OrderExperiences == null || createOrder.OrderExperiences.Count == 0)
+                {
+                    return BadRequest(
+                        new CreateOrderResponseDto() { Message = "Something went wrong!" }
+                    );
                 }
 
                 var totalPrice = createOrder.OrderExperiences.Sum(oe =>
