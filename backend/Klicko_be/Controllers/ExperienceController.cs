@@ -171,8 +171,8 @@ namespace Klicko_be.Controllers
                     IsDeleted = createExperience.IsDeleted,
                     CoverImage = createExperience.CoverImage,
                     ValidityInMonths = createExperience.ValidityInMonths,
-                    UserCreatorId = "89cfbe7e-4c65-4a8c-aed5-8bc32477e86b",
-                    UserLastModifyId = "89cfbe7e-4c65-4a8c-aed5-8bc32477e86b",
+                    UserCreatorId = "70b579dd-c6a0-4075-8d7d-1326f2353c7b",
+                    UserLastModifyId = "70b579dd-c6a0-4075-8d7d-1326f2353c7b",
                 };
 
                 if (createExperience.Images != null && createExperience.Images.Count > 0)
@@ -232,7 +232,16 @@ namespace Klicko_be.Controllers
                     experienceEdit
                 );
 
-                return result ? Ok() : BadRequest();
+                return result
+                    ? Ok(
+                        new EditExperienceResponseDto()
+                        {
+                            Message = "Experience edited successfully!",
+                        }
+                    )
+                    : BadRequest(
+                        new EditExperienceResponseDto() { Message = "Something went wrong!" }
+                    );
             }
             catch (Exception ex)
             {

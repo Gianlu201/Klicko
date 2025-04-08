@@ -128,7 +128,7 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("RegistrationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 7, 18, 42, 17, 445, DateTimeKind.Utc).AddTicks(6116));
+                        .HasDefaultValue(new DateTime(2025, 4, 8, 10, 29, 38, 390, DateTimeKind.Utc).AddTicks(2733));
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -197,12 +197,12 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 7, 18, 42, 17, 446, DateTimeKind.Utc).AddTicks(6796));
+                        .HasDefaultValue(new DateTime(2025, 4, 8, 10, 29, 38, 390, DateTimeKind.Utc).AddTicks(9983));
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 7, 18, 42, 17, 446, DateTimeKind.Utc).AddTicks(7678));
+                        .HasDefaultValue(new DateTime(2025, 4, 8, 10, 29, 38, 391, DateTimeKind.Utc).AddTicks(738));
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -228,7 +228,7 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 7, 18, 42, 17, 446, DateTimeKind.Utc).AddTicks(8779));
+                        .HasDefaultValue(new DateTime(2025, 4, 8, 10, 29, 38, 391, DateTimeKind.Utc).AddTicks(1257));
 
                     b.Property<Guid>("ExperienceId")
                         .HasColumnType("uniqueidentifier");
@@ -402,12 +402,12 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("LastEditDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 7, 18, 42, 17, 445, DateTimeKind.Utc).AddTicks(8419));
+                        .HasDefaultValue(new DateTime(2025, 4, 8, 10, 29, 38, 390, DateTimeKind.Utc).AddTicks(4104));
 
                     b.Property<DateTime>("LoadingDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 7, 18, 42, 17, 445, DateTimeKind.Utc).AddTicks(7325));
+                        .HasDefaultValue(new DateTime(2025, 4, 8, 10, 29, 38, 390, DateTimeKind.Utc).AddTicks(3395));
 
                     b.Property<int>("MaxParticipants")
                         .HasColumnType("int");
@@ -487,7 +487,7 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 7, 18, 42, 17, 446, DateTimeKind.Utc).AddTicks(3768));
+                        .HasDefaultValue(new DateTime(2025, 4, 8, 10, 29, 38, 390, DateTimeKind.Utc).AddTicks(8185));
 
                     b.Property<int>("OrderNumber")
                         .ValueGeneratedOnAdd()
@@ -523,6 +523,9 @@ namespace Klicko_be.Migrations
 
                     b.Property<Guid>("OrderId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
 
                     b.HasKey("OrderExperienceId");
 

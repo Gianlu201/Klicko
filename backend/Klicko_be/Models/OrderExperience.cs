@@ -11,6 +11,8 @@ namespace Klicko_be.Models
         public required Guid ExperienceId { get; set; }
         public required Guid OrderId { get; set; }
 
+        public int Quantity { get; set; } = 1;
+
         // navigazione
         [ForeignKey(nameof(OrderId))]
         public Order? Order { get; set; }

@@ -93,6 +93,7 @@ builder.Services.AddScoped<RoleManager<ApplicationRole>>();
 
 builder.Services.AddScoped<ExperienceService>();
 builder.Services.AddScoped<CategoryService>();
+builder.Services.AddScoped<OrderService>();
 
 var app = builder.Build();
 
