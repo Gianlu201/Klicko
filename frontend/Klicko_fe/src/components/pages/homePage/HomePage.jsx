@@ -5,17 +5,19 @@ import CategoriesComponent from './CategoriesComponent';
 import PopularComponent from './PopularComponent';
 import WhyUsComponent from './WhyUsComponent';
 import CatComponent from './CatComponent';
+import Footer from '../../Footer';
 
 const HomePage = () => {
   return (
-    <div className='mb-20'>
+    <>
       <HeroComponent />
       <HighlightedComponent />
       <CategoriesComponent />
       <PopularComponent />
       <WhyUsComponent />
       <CatComponent />
-    </div>
+      <Footer />
+    </>
   );
 };
 
