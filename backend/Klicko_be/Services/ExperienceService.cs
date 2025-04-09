@@ -46,6 +46,27 @@ namespace Klicko_be.Services
             }
         }
 
+        public async Task<List<Experience>?> GetAllHighlightedExperienceAsync()
+        {
+            try
+            {
+                var experiences = await _context
+                    .Experiences.Include(e => e.Category)
+                    .Include(e => e.Images)
+                    .Include(e => e.CarryWiths)
+                    .Include(e => e.UserCreator)
+                    .Include(e => e.UserLastModify)
+                    .Where(e => e.IsInEvidence)
+                    .ToListAsync();
+
+                return experiences;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         public async Task<Experience?> GetExperienceByIdAsync(Guid experienceId)
         {
             try

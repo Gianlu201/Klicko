@@ -141,6 +141,126 @@ namespace Klicko_be.Controllers
             }
         }
 
+        [HttpGet("Highlighted")]
+        public async Task<IActionResult> GetAllHighlightedExperiences()
+        {
+            try
+            {
+                var experiences = await _experienceService.GetAllHighlightedExperienceAsync();
+
+                if (experiences == null)
+                {
+                    return NotFound(
+                        new GetExperiencesListResponseDto()
+                        {
+                            Message = "No experiences found",
+                            Experiences = null,
+                        }
+                    );
+                }
+
+                var experiencesDto = experiences
+                    .Select(exp => new ExperienceDto()
+                    {
+                        ExperienceId = exp.ExperienceId,
+                        Title = exp.Title,
+                        CategoryId = exp.CategoryId,
+                        Duration = exp.Duration,
+                        Place = exp.Place,
+                        Price = exp.Price,
+                        DescriptionShort = exp.DescriptionShort,
+                        Description = exp.Description,
+                        MaxParticipants = exp.MaxParticipants,
+                        Organiser = exp.Organiser,
+                        LoadingDate = exp.LoadingDate,
+                        LastEditDate = exp.LastEditDate,
+                        UserCreatorId = exp.UserCreatorId,
+                        UserLastModifyId = exp.UserLastModifyId,
+                        IsFreeCancellable = exp.IsFreeCancellable,
+                        IncludedDescription = exp.IncludedDescription,
+                        Sale = exp.Sale,
+                        IsInEvidence = exp.IsInEvidence,
+                        IsPopular = exp.IsPopular,
+                        IsDeleted = exp.IsDeleted,
+                        ValidityInMonths = exp.ValidityInMonths,
+                        CoverImage = exp.CoverImage,
+                        Category =
+                            exp.Category != null
+                                ? new CategorySimpleDto()
+                                {
+                                    CategoryId = exp.Category.CategoryId,
+                                    Name = exp.Category.Name,
+                                    Description = exp.Category.Description,
+                                    Image = exp.Category.Image,
+                                    Icon = exp.Category.Icon,
+                                }
+                                : null,
+                        UserCreator =
+                            exp.UserCreator != null
+                                ? new UserSimpleDto()
+                                {
+                                    UserId = exp.UserCreator.Id,
+                                    FirstName = exp.UserCreator.FirstName,
+                                    LastName = exp.UserCreator.LastName,
+                                    Email = exp.UserCreator.Email,
+                                }
+                                : null,
+                        UserLastModify =
+                            exp.UserLastModify != null
+                                ? new UserSimpleDto()
+                                {
+                                    UserId = exp.UserLastModify.Id,
+                                    FirstName = exp.UserLastModify.FirstName,
+                                    LastName = exp.UserLastModify.LastName,
+                                    Email = exp.UserLastModify.Email,
+                                }
+                                : null,
+                        Images =
+                            (exp.Images != null && exp.Images.Count > 0)
+                                ? exp
+                                    .Images.Select(img => new ImageSimpleDto()
+                                    {
+                                        ImageId = img.ImageId,
+                                        Url = img.Url,
+                                        AltText = img.AltText,
+                                    })
+                                    .ToList()
+                                : null,
+                        CarryWiths =
+                            (exp.CarryWiths != null && exp.CarryWiths.Count > 0)
+                                ? exp
+                                    .CarryWiths.Select(carry => new CarryWithSimpleDto()
+                                    {
+                                        CarryWithId = carry.CarryWithId,
+                                        Name = carry.Name,
+                                    })
+                                    .ToList()
+                                : null,
+                    })
+                    .ToList();
+
+                return experiencesDto != null
+                    ? Ok(
+                        new GetExperiencesListResponseDto()
+                        {
+                            Message = $"{experiencesDto.Count} experiences found!",
+                            Experiences = experiencesDto,
+                        }
+                    )
+                    : BadRequest(
+                        new GetExperiencesListResponseDto()
+                        {
+                            Message = "Something went wrong!",
+                            Experiences = null,
+                        }
+                    );
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateExperience(
             [FromBody] CreateExperienceRequestDto createExperience
