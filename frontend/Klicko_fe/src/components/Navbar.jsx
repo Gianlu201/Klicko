@@ -56,7 +56,8 @@ const Navbar = () => {
           </Link>
           <Link
             to='/about'
-            className='font-medium hover:text-[#19AEFF] transition-colors'
+            className='font-medium hover:text-primary transition-colors'
+            // className='font-medium hover:text-[#19AEFF] transition-colors'
           >
             Chi siamo
           </Link>

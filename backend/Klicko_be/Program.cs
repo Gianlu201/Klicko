@@ -97,6 +97,9 @@ builder.Services.AddScoped<OrderService>();
 
 var app = builder.Build();
 
+// Abilita i file statici da wwwroot
+app.UseStaticFiles();
+
 app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 // Configure the HTTP request pipeline.

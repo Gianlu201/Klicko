@@ -44,6 +44,7 @@ namespace Klicko_be.Controllers
                 FirstName = registerRequestDto.FirstName,
                 LastName = registerRequestDto.LastName,
                 RegistrationDate = DateTime.Now,
+                CartId = Guid.NewGuid(),
             };
 
             var result = await _userManager.CreateAsync(newUser, registerRequestDto.Password);

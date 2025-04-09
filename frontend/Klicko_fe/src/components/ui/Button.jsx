@@ -20,7 +20,7 @@ const Button = ({
     danger: 'bg-red-500 hover:bg-red-600 text-white',
     warning: 'bg-yellow-500 hover:bg-yellow-600 text-white',
     outline:
-      'bg-transparent border border-black/30 text-black hover:bg-[#19AEFF]/60 hover:border-black/0',
+      'bg-transparent border border-black/30 text-black hover:bg-[#19AEFF]/80 hover:border-black/0',
     ghost: 'bg-transparent hover:bg-gray-100 text-gray-700',
   };
 

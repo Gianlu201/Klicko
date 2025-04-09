@@ -4,7 +4,7 @@ using Klicko_be.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Klicko_be.Data
+namespace Klicko_be.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Klicko_be.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250408102938_Initial")]
+    [Migration("20250409134047_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -131,7 +131,7 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("RegistrationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 8, 10, 29, 38, 390, DateTimeKind.Utc).AddTicks(2733));
+                        .HasDefaultValue(new DateTime(2025, 4, 9, 13, 40, 46, 870, DateTimeKind.Utc).AddTicks(9478));
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -154,6 +154,68 @@ namespace Klicko_be.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "3a8073b2-b954-428a-a4b9-6e4b3f5db051",
+                            AccessFailedCount = 0,
+                            CartId = new Guid("ad0b8ebb-3e25-4c9f-a7dd-7e07c3e7ab3f"),
+                            ConcurrencyStamp = "0355e64a-42e1-4bb2-bbe7-2d14b10498c5",
+                            Email = "admin@exampe.com",
+                            EmailConfirmed = false,
+                            FirstName = "Admin",
+                            LastName = "User",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@EXAMPLE.COM",
+                            NormalizedUserName = "ADMIN@EXAMPLE.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJ924mp2s2BX/BpdalZ6f2s1qlMl3fxdcEPcaKFV6BxA5frV73oVpuC1V9F4PHCJ2g==",
+                            PhoneNumberConfirmed = false,
+                            RegistrationDate = new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            SecurityStamp = "903f7ec9-c24b-4992-a6c6-41b7b3f72a2c",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@exampe.com"
+                        },
+                        new
+                        {
+                            Id = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                            AccessFailedCount = 0,
+                            CartId = new Guid("59a9d57e-c339-4a73-8d02-69cc186a5385"),
+                            ConcurrencyStamp = "48cfae98-6a37-4d28-a95f-13a7917688e2",
+                            Email = "seller@exampe.com",
+                            EmailConfirmed = false,
+                            FirstName = "Seller",
+                            LastName = "User",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "SELLER@EXAMPLE.COM",
+                            NormalizedUserName = "SELLER@EXAMPLE.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJP1xbBcaikPe32EBy3MLTcexMUhKB7jQsEGuRiIlRJOWuiJwUGI/v0s83m7H70okg==",
+                            PhoneNumberConfirmed = false,
+                            RegistrationDate = new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            SecurityStamp = "8a7ca3d2-5d72-4ad4-8fe0-166db6d2a1ff",
+                            TwoFactorEnabled = false,
+                            UserName = "seller@exampe.com"
+                        },
+                        new
+                        {
+                            Id = "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2",
+                            AccessFailedCount = 0,
+                            CartId = new Guid("b64a049a-6d76-4c1c-866c-e0169c92f1d6"),
+                            ConcurrencyStamp = "65c60abb-3263-44ae-8581-90da5866e323",
+                            Email = "user@exampe.com",
+                            EmailConfirmed = false,
+                            FirstName = "Regular",
+                            LastName = "User",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "USER@EXAMPLE.COM",
+                            NormalizedUserName = "USER@EXAMPLE.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEL6u4Tox47kxNqt9nm4+vRn+SzahthaQ55UejBFFdJvvUNNCfqIWRI246s9wJiZ43A==",
+                            PhoneNumberConfirmed = false,
+                            RegistrationDate = new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            SecurityStamp = "05dfeb0b-d6a7-436e-9d27-5055a505733f",
+                            TwoFactorEnabled = false,
+                            UserName = "user@exampe.com"
+                        });
                 });
 
             modelBuilder.Entity("Klicko_be.Models.Auth.ApplicationUserRole", b =>
@@ -164,11 +226,34 @@ namespace Klicko_be.Migrations
                     b.Property<string>("RoleId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<Guid>("UserRoleId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("UserId", "RoleId");
 
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "3a8073b2-b954-428a-a4b9-6e4b3f5db051",
+                            RoleId = "8d64359a-fda6-4096-b40d-f1375775244d",
+                            UserRoleId = new Guid("6f44a915-b24b-4034-9e18-0a1775210ef3")
+                        },
+                        new
+                        {
+                            UserId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                            RoleId = "1f00a1d7-cbb6-44bf-bdc8-a3608b1284b9",
+                            UserRoleId = new Guid("5224a9f4-547b-4300-8788-26d085155b48")
+                        },
+                        new
+                        {
+                            UserId = "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2",
+                            RoleId = "849b8726-44b3-434b-9b18-48a4e8d4e9dd",
+                            UserRoleId = new Guid("16cbe3b5-128b-4e00-9fbb-4e691b00280a")
+                        });
                 });
 
             modelBuilder.Entity("Klicko_be.Models.CarryWith", b =>
@@ -200,12 +285,12 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 8, 10, 29, 38, 390, DateTimeKind.Utc).AddTicks(9983));
+                        .HasDefaultValue(new DateTime(2025, 4, 9, 13, 40, 46, 871, DateTimeKind.Utc).AddTicks(8363));
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 8, 10, 29, 38, 391, DateTimeKind.Utc).AddTicks(738));
+                        .HasDefaultValue(new DateTime(2025, 4, 9, 13, 40, 46, 871, DateTimeKind.Utc).AddTicks(9148));
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -217,6 +302,29 @@ namespace Klicko_be.Migrations
                         .IsUnique();
 
                     b.ToTable("Carts");
+
+                    b.HasData(
+                        new
+                        {
+                            CartId = new Guid("ad0b8ebb-3e25-4c9f-a7dd-7e07c3e7ab3f"),
+                            CreatedAt = new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            UpdatedAt = new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            UserId = "3a8073b2-b954-428a-a4b9-6e4b3f5db051"
+                        },
+                        new
+                        {
+                            CartId = new Guid("59a9d57e-c339-4a73-8d02-69cc186a5385"),
+                            CreatedAt = new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            UpdatedAt = new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            UserId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c"
+                        },
+                        new
+                        {
+                            CartId = new Guid("b64a049a-6d76-4c1c-866c-e0169c92f1d6"),
+                            CreatedAt = new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            UpdatedAt = new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            UserId = "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2"
+                        });
                 });
 
             modelBuilder.Entity("Klicko_be.Models.CartExperience", b =>
@@ -231,7 +339,7 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 8, 10, 29, 38, 391, DateTimeKind.Utc).AddTicks(1257));
+                        .HasDefaultValue(new DateTime(2025, 4, 9, 13, 40, 46, 871, DateTimeKind.Utc).AddTicks(9768));
 
                     b.Property<Guid>("ExperienceId")
                         .HasColumnType("uniqueidentifier");
@@ -405,12 +513,12 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("LastEditDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 8, 10, 29, 38, 390, DateTimeKind.Utc).AddTicks(4104));
+                        .HasDefaultValue(new DateTime(2025, 4, 9, 13, 40, 46, 871, DateTimeKind.Utc).AddTicks(1328));
 
                     b.Property<DateTime>("LoadingDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 8, 10, 29, 38, 390, DateTimeKind.Utc).AddTicks(3395));
+                        .HasDefaultValue(new DateTime(2025, 4, 9, 13, 40, 46, 871, DateTimeKind.Utc).AddTicks(571));
 
                     b.Property<int>("MaxParticipants")
                         .HasColumnType("int");
@@ -455,6 +563,83 @@ namespace Klicko_be.Migrations
                     b.HasIndex("UserLastModifyId");
 
                     b.ToTable("Experiences");
+
+                    b.HasData(
+                        new
+                        {
+                            ExperienceId = new Guid("589aca9c-2b07-42d2-8920-c4406e5da977"),
+                            CategoryId = new Guid("6f3a957c-df09-437c-bc37-f069173eabe2"),
+                            CoverImage = "ferrari.jpg",
+                            Description = "Vivi l'emozione di guidare una Ferrari F488 GTB sul mitico circuito di Formula 1 di Monza. Dopo un briefing teorico con un pilota professionista, avrai l'opportunità di metterti al volante di questa supercar italiana e percorrere diversi giri sul circuito. Sentirai l'adrenalina scorrere mentre acceleri sui rettilinei e affronti le curve leggendarie come la Parabolica. Un'esperienza che combina lusso, velocità e il fascino intramontabile del marchio Ferrari. Il pacchetto include anche un video ricordo della tua esperienza in pista.",
+                            DescriptionShort = "Guida una Ferrari sul leggendario circuito di Monza",
+                            Duration = "2 ore",
+                            IncludedDescription = "Tutto il necessario per la guida: casco, tuta e assicurazione. Video ricordo dell'esperienza.",
+                            IsDeleted = false,
+                            IsFreeCancellable = true,
+                            IsInEvidence = true,
+                            IsPopular = false,
+                            LastEditDate = new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            LoadingDate = new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            MaxParticipants = 1,
+                            Organiser = "Motor Experience",
+                            Place = "Monza, Lombardia",
+                            Price = 399m,
+                            Sale = 0,
+                            Title = "Ferrari Driving Experience a Monza",
+                            UserCreatorId = "3a8073b2-b954-428a-a4b9-6e4b3f5db051",
+                            UserLastModifyId = "3a8073b2-b954-428a-a4b9-6e4b3f5db051",
+                            ValidityInMonths = 24
+                        },
+                        new
+                        {
+                            ExperienceId = new Guid("62947bc9-568c-4c34-a8e1-2fb6f05bca61"),
+                            CategoryId = new Guid("5fdffa0f-a615-43f2-aa15-88bc8dcec27f"),
+                            CoverImage = "cucinaToscana.jpg",
+                            Description = "Questa esperienza culinaria si svolge in un autentico castello toscano circondato da vigneti e uliveti. Sotto la guida di uno chef locale, imparerai a preparare un menu completo di piatti tradizionali toscani utilizzando ingredienti freschi provenienti direttamente dall'orto del castello e da produttori locali. Il corso inizia con una passeggiata nei giardini per raccogliere erbe aromatiche, seguita dalla preparazione di pasta fatta in casa, un secondo a base di carne e un dolce tipico. Al termine della lezione, gusterai i piatti preparati accompagnati dai vini prodotti nella tenuta. Un'esperienza che coinvolge tutti i sensi e ti permette di portare a casa ricette e tecniche autentiche.",
+                            DescriptionShort = "Impara a cucinare i piatti tradizionali toscani con la guida di uno chef locale",
+                            Duration = "5 ore",
+                            IncludedDescription = "L'esperienza include tutto il necessario per goderti l'avventura in totale sicurezza e comfort.",
+                            IsDeleted = false,
+                            IsFreeCancellable = true,
+                            IsInEvidence = true,
+                            IsPopular = false,
+                            LastEditDate = new DateTime(2023, 3, 15, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            LoadingDate = new DateTime(2023, 3, 15, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            MaxParticipants = 2,
+                            Organiser = "Sapori d'Italia",
+                            Place = "Chianti, Toscana",
+                            Price = 150m,
+                            Sale = 0,
+                            Title = "Cucina toscana nella tenuta di un castello",
+                            UserCreatorId = "3a8073b2-b954-428a-a4b9-6e4b3f5db051",
+                            UserLastModifyId = "3a8073b2-b954-428a-a4b9-6e4b3f5db051",
+                            ValidityInMonths = 12
+                        },
+                        new
+                        {
+                            ExperienceId = new Guid("bb36c355-2c8e-4a45-9be3-151934e2ff4c"),
+                            CategoryId = new Guid("bda4ee71-af9c-46c6-b1bf-95f178773a2f"),
+                            CoverImage = "sentieroDegliDei.jpg",
+                            Description = "Il Sentiero degli Dei è uno dei percorsi di trekking più affascinanti d'Italia, che collega Agerola a Positano offrendo viste mozzafiato sulla Costiera Amalfitana. Questa escursione guidata ti porterà lungo antiche mulattiere e sentieri di montagna, attraverso terrazzamenti coltivati a limoni e ulivi, macchia mediterranea e boschi. Durante il cammino, potrai ammirare il blu intenso del mar Tirreno, le isole Li Galli e Capri, e i caratteristici villaggi aggrappati alle scogliere. La guida ti racconterà la storia e le leggende locali, e ti indicherà i luoghi migliori per scattare fotografie indimenticabili.",
+                            DescriptionShort = "Esplora il famoso sentiero con viste panoramiche sulla Costiera Amalfitana",
+                            Duration = "6 ore",
+                            IncludedDescription = "L'esperienza include tutto il necessario per goderti l'avventura in totale sicurezza e comfort.",
+                            IsDeleted = false,
+                            IsFreeCancellable = true,
+                            IsInEvidence = true,
+                            IsPopular = false,
+                            LastEditDate = new DateTime(2023, 4, 5, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            LoadingDate = new DateTime(2023, 4, 5, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            MaxParticipants = 2,
+                            Organiser = "Italia Escursioni",
+                            Place = "Costiera Amalfitana, Campania",
+                            Price = 65m,
+                            Sale = 0,
+                            Title = "Trekking sul sentiero degli Dei",
+                            UserCreatorId = "3a8073b2-b954-428a-a4b9-6e4b3f5db051",
+                            UserLastModifyId = "3a8073b2-b954-428a-a4b9-6e4b3f5db051",
+                            ValidityInMonths = 6
+                        });
                 });
 
             modelBuilder.Entity("Klicko_be.Models.Image", b =>
@@ -490,7 +675,7 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 8, 10, 29, 38, 390, DateTimeKind.Utc).AddTicks(8185));
+                        .HasDefaultValue(new DateTime(2025, 4, 9, 13, 40, 46, 871, DateTimeKind.Utc).AddTicks(6110));
 
                     b.Property<int>("OrderNumber")
                         .ValueGeneratedOnAdd()
