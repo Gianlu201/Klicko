@@ -12,29 +12,26 @@ const Button = ({
   icon = null,
   iconPosition = 'left',
 }) => {
-  // Varianti di stile
   const variants = {
-    primary: 'bg-[#19AEFF] hover:bg-[#19AEFF]/80 text-white', // #19AEFF
-    secondary: 'bg-[#F97415] hover:bg-gray-300 text-white', //#F97415
+    primary: 'bg-primary hover:bg-primary/80 text-white', // #19AEFF
+    secondary: 'bg-secondary hover:bg-secondary/90 text-white', //#F97415
     success: 'bg-green-500 hover:bg-green-600 text-white',
     danger: 'bg-red-500 hover:bg-red-600 text-white',
     warning: 'bg-yellow-500 hover:bg-yellow-600 text-white',
     outline:
-      'bg-transparent border border-black/30 text-black hover:bg-[#19AEFF]/80 hover:border-black/0',
+      'bg-transparent border border-black/30 text-black hover:bg-primary/80 hover:border-black/0',
     ghost: 'bg-transparent hover:bg-gray-100 text-gray-700',
+    cat: 'bg-white text-primary border-gray-500 hover:bg-[#b8e1f7] hover:text-black',
   };
 
-  // Dimensioni
   const sizes = {
     sm: 'py-1 px-3 text-sm',
     md: 'py-2 px-4 text-base',
     lg: 'py-3 px-6 text-lg',
   };
 
-  // Gestione larghezza piena
   const width = fullWidth ? 'w-full' : '';
 
-  // Gestione disabilitato
   const disabledStyles = disabled
     ? 'opacity-50 cursor-not-allowed'
     : 'cursor-pointer';

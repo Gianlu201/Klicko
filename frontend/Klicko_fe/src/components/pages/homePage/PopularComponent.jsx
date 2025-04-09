@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Button from '../../ui/Button';
 import { Clock, MapPin } from 'lucide-react';
 
-const HighlightedComponent = () => {
-  const [highlightedExperiences, setHighlightedExperiences] = useState([]);
+const PopularComponent = () => {
+  const [popularExperiences, setPopularExperiences] = useState([]);
 
   const getExperiences = async () => {
     try {
@@ -20,7 +20,7 @@ const HighlightedComponent = () => {
         const data = await response.json();
         console.log(data);
 
-        setHighlightedExperiences(data.experiences);
+        setPopularExperiences(data.experiences);
       } else {
         throw new Error('Errore nel recupero dei dati!');
       }
@@ -35,9 +35,9 @@ const HighlightedComponent = () => {
 
   return (
     <>
-      {highlightedExperiences.length > 0 && (
+      {popularExperiences.length > 0 && (
         <div className='max-w-7xl mx-auto my-18'>
-          <p className='text-secondary font-semibold mb-2'>
+          <p className='text-[#19aeff] font-semibold mb-2'>
             Esperienze in evidenza
           </p>
           <div className='flex justify-between items-center'>
@@ -49,8 +49,8 @@ const HighlightedComponent = () => {
             </Button>
           </div>
 
-          <div className='columns-3 gap-8 mt-10'>
-            {highlightedExperiences.map((experience) => {
+          <div className='columns-4 gap-8 mt-10'>
+            {popularExperiences.map((experience) => {
               return (
                 // card
                 <div
@@ -63,8 +63,8 @@ const HighlightedComponent = () => {
                       src={`https://localhost:7235/uploads/${experience.coverImage}`}
                       className='z-0'
                     />
-                    <span className='absolute top-2 start-2 text-white text-xs font-semibold px-2 py-1 bg-secondary rounded-full z-10'>
-                      In evidenza
+                    <span className='absolute top-2 start-2 text-white text-xs font-semibold px-2 py-1 bg-primary rounded-full z-10'>
+                      Popolare
                     </span>
                   </div>
 
@@ -105,4 +105,4 @@ const HighlightedComponent = () => {
   );
 };
 
-export default HighlightedComponent;
+export default PopularComponent;

@@ -44,20 +44,19 @@ const Navbar = () => {
         <nav className='hidden md:flex items-center space-x-6'>
           <Link
             to='/experiences'
-            className='font-medium hover:text-[#19AEFF] transition-colors'
+            className='font-medium hover:text-primary transition-colors'
           >
             Esperienze
           </Link>
           <Link
             to='/categories'
-            className='font-medium hover:text-[#19AEFF] transition-colors'
+            className='font-medium hover:text-primary transition-colors'
           >
             Categorie
           </Link>
           <Link
             to='/about'
             className='font-medium hover:text-primary transition-colors'
-            // className='font-medium hover:text-[#19AEFF] transition-colors'
           >
             Chi siamo
           </Link>
@@ -155,21 +154,21 @@ const Navbar = () => {
           <div className='container mx-auto py-4 space-y-3'>
             <Link
               to='/experiences'
-              className='block px-4 py-2 hover:bg-muted rounded-md hover:text-[#19AEFF]'
+              className='block px-4 py-2 hover:bg-muted rounded-md hover:text-primary'
               onClick={toggleMobileMenu}
             >
               Esperienze
             </Link>
             <Link
               to='/categories'
-              className='block px-4 py-2 hover:bg-muted rounded-md hover:text-[#19AEFF]'
+              className='block px-4 py-2 hover:bg-muted rounded-md hover:text-primary'
               onClick={toggleMobileMenu}
             >
               Categorie
             </Link>
             <Link
               to='/about'
-              className='block px-4 py-2 hover:bg-muted rounded-md hover:text-[#19AEFF]'
+              className='block px-4 py-2 hover:bg-muted rounded-md hover:text-primary'
               onClick={toggleMobileMenu}
             >
               Chi siamo

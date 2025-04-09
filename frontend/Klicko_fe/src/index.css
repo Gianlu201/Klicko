@@ -3,6 +3,20 @@
 /* azzurro => #19aeff */
 /* arancione => #F97415 */
 
+@theme {
+  --color-primary: #19aeff;
+  --color-secondary: #f97415;
+}
+
 * {
   font-family: 'Inter', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Playfair Display', serif;
 }
