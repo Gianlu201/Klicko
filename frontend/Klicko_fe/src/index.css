@@ -6,10 +6,15 @@
 @theme {
   --color-primary: #19aeff;
   --color-secondary: #f97415;
+  --color-background: #f8fafc;
 }
 
 * {
   font-family: 'Inter', sans-serif;
+}
+
+body {
+  background-color: var(--color-background);
 }
 
 h1,

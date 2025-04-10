@@ -19,9 +19,9 @@ const Button = ({
     danger: 'bg-red-500 hover:bg-red-600 text-white',
     warning: 'bg-yellow-500 hover:bg-yellow-600 text-white',
     outline:
-      'bg-transparent border border-black/30 text-black hover:bg-primary/80 hover:border-black/0',
+      'bg-background border border-black/30 text-black hover:bg-primary/80 hover:border-black/0',
     ghost: 'bg-transparent hover:bg-gray-100 text-gray-700',
-    cat: 'bg-white text-primary border-gray-500 hover:bg-[#b8e1f7] hover:text-black',
+    cat: 'bg-background text-primary border-gray-500 hover:bg-[#b8e1f7] hover:text-black',
   };
 
   const sizes = {

@@ -5,7 +5,6 @@ import CategoriesComponent from './CategoriesComponent';
 import PopularComponent from './PopularComponent';
 import WhyUsComponent from './WhyUsComponent';
 import CatComponent from './CatComponent';
-import Footer from '../../Footer';
 
 const HomePage = () => {
   return (
@@ -16,7 +15,6 @@ const HomePage = () => {
       <PopularComponent />
       <WhyUsComponent />
       <CatComponent />
-      <Footer />
     </>
   );
 };
