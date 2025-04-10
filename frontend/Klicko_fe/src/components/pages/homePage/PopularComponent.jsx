@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Button from '../../ui/Button';
 import { Clock, MapPin } from 'lucide-react';
+import ExperienceCard from '../../ExperienceCard';
 
 const PopularComponent = () => {
   const [popularExperiences, setPopularExperiences] = useState([]);
@@ -52,50 +53,10 @@ const PopularComponent = () => {
           <div className='columns-4 gap-8 mt-10'>
             {popularExperiences.map((experience) => {
               return (
-                // card
-                <div
+                <ExperienceCard
                   key={experience.experienceId}
-                  className='relative rounded-lg overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-3 duration-700 ease-in-out cursor-pointer'
-                >
-                  {/* card top */}
-                  <div className='relative h-[230px] overflow-hidden'>
-                    <img
-                      src={`https://localhost:7235/uploads/${experience.coverImage}`}
-                      className='z-0'
-                    />
-                    <span className='absolute top-2 start-2 text-white text-xs font-semibold px-2 py-1 bg-primary rounded-full z-10'>
-                      Popolare
-                    </span>
-                  </div>
-
-                  {/* card bottom */}
-                  <div className='p-4'>
-                    <div className='flex justify-between items-center'>
-                      <span className='text-gray-500 text-sm'>
-                        {experience.category.name}
-                      </span>
-                      <span className='text-secondary text-xl font-semibold'>
-                        {experience.price},00 €
-                      </span>
-                    </div>
-                    <h4 className='text-lg font-semibold'>
-                      {experience.title}
-                    </h4>
-                    <p className='text-gray-600 text-[0.9rem]'>
-                      {experience.descriptionShort}
-                    </p>
-                    <div className='flex justify-between'>
-                      <span className='flex items-center gap-1 text-sm text-gray-500'>
-                        <MapPin className='h-4 w-4' />
-                        {experience.place}
-                      </span>
-                      <span className='flex items-center gap-1 text-sm text-gray-500'>
-                        <Clock className='h-4 w-4' />
-                        {experience.duration}
-                      </span>
-                    </div>
-                  </div>
-                </div>
+                  experience={experience}
+                />
               );
             })}
           </div>

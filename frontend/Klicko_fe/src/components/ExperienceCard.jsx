@@ -1,0 +1,59 @@
+import { Clock, MapPin } from 'lucide-react';
+import React from 'react';
+
+const ExperienceCard = ({ experience }) => {
+  return (
+    <>
+      {experience && (
+        <div className='relative rounded-lg overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-3 duration-700 ease-in-out cursor-pointer'>
+          {/* card top */}
+          <div className='relative aspect-16/9 overflow-hidden'>
+            <img
+              src={`https://localhost:7235/uploads/${experience.coverImage}`}
+              className='absolute top-1/2 start-1/2 -translate-y-1/2 -translate-x-1/2 z-0'
+            />
+            {experience.isInEvidence ? (
+              <span className='absolute top-2 start-2 text-white text-xs font-semibold px-2 py-1 bg-secondary rounded-full z-10'>
+                In evidenza
+              </span>
+            ) : (
+              experience.isPopular && (
+                <span className='absolute top-2 start-2 text-white text-xs font-semibold px-2 py-1 bg-primary rounded-full z-10'>
+                  Popolare
+                </span>
+              )
+            )}
+          </div>
+
+          {/* card bottom */}
+          <div className='p-4'>
+            <div className='flex justify-between items-center mb-2'>
+              <span className='text-gray-500 text-sm'>
+                {experience.category.name}
+              </span>
+              <span className='text-secondary text-xl font-semibold'>
+                {experience.price},00 €
+              </span>
+            </div>
+            <h4 className='text-lg font-semibold mb-2'>{experience.title}</h4>
+            <p className='text-gray-600 text-[0.9rem]'>
+              {experience.descriptionShort}
+            </p>
+            <div className='flex justify-between my-2'>
+              <span className='flex items-center gap-1 text-sm text-gray-500'>
+                <MapPin className='h-4 w-4' />
+                {experience.place}
+              </span>
+              <span className='flex items-center gap-1 text-sm text-gray-500'>
+                <Clock className='h-4 w-4' />
+                {experience.duration}
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+
+export default ExperienceCard;

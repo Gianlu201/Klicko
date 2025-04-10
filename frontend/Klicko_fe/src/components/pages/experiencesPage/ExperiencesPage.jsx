@@ -1,6 +1,7 @@
 import { Funnel, Search } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import Button from '../../ui/Button';
+import ExperienceCard from '../../ExperienceCard';
 
 const ExperiencesPage = () => {
   const [experiences, setExperiences] = useState([]);
@@ -31,9 +32,9 @@ const ExperiencesPage = () => {
   }, []);
 
   return (
-    <div className='max-w-7xl mx-auto'>
+    <div className='max-w-7xl mx-auto mb-8 mt-6'>
       <div>
-        <h1 className='text-3xl font-bold'>Esperienze</h1>
+        <h1 className='text-3xl font-bold mb-3'>Esperienze</h1>
         <p className='text-gray-500 max-w-1/2'>
           Esplora la nostra collezione di avventure incredibili. Dalle
           esperienze adrenaliniche al relax, trova l atua prossima avventura.
@@ -41,7 +42,7 @@ const ExperiencesPage = () => {
       </div>
 
       {/* search area */}
-      <div className='bg-white flex justify-between items-center gap-2 p-4 rounded-2xl'>
+      <div className='bg-white flex justify-between items-center gap-2 p-4 rounded-2xl my-6'>
         <div className='relative grow flex items-center me-3'>
           <input
             className='bg-background border border-gray-800/30 rounded-xl py-2 ps-10 w-full'
@@ -59,7 +60,7 @@ const ExperiencesPage = () => {
       </div>
 
       <div>
-        <div className='flex justify-between items-center'>
+        <div className='flex justify-between items-center my-6'>
           <h4 className='text-xl font-semibold'>
             {experiences.length} esperienze trovate
           </h4>
@@ -75,10 +76,10 @@ const ExperiencesPage = () => {
           </select>
         </div>
         {experiences.length > 0 && (
-          <div>
+          <div className='columns-4'>
             {/* elenco esperienze */}
             {experiences.map((exp) => (
-              <div key={exp.id}>{exp.title}</div>
+              <ExperienceCard key={exp.id} experience={exp}></ExperienceCard>
             ))}
           </div>
         )}
