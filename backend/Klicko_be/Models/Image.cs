@@ -14,7 +14,6 @@ namespace Klicko_be.Models
         [Required]
         public required string AltText { get; set; }
 
-        [Required]
         public required Guid ExperienceId { get; set; }
 
         // navigazione

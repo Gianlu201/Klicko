@@ -52,11 +52,26 @@ namespace Klicko_be.Services
             {
                 var experiences = await _context
                     .Experiences.Include(e => e.Category)
-                    .Include(e => e.Images)
-                    .Include(e => e.CarryWiths)
-                    .Include(e => e.UserCreator)
-                    .Include(e => e.UserLastModify)
                     .Where(e => e.IsInEvidence)
+                    .AsNoTracking()
+                    .ToListAsync();
+
+                return experiences;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public async Task<List<Experience>?> GetAllPopularExperienceAsync()
+        {
+            try
+            {
+                var experiences = await _context
+                    .Experiences.Include(e => e.Category)
+                    .Where(e => e.IsPopular)
+                    .AsNoTracking()
                     .ToListAsync();
 
                 return experiences;
