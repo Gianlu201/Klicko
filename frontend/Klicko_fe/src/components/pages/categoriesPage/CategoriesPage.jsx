@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+// import React, { useEffect, useState } from 'react';
 import Button from '../../ui/Button';
 import airImg from '/assets/images/categories/categoryAir.avif';
 import waterImg from '/assets/images/categories/categoryWater.avif';
@@ -13,6 +13,7 @@ import {
   UtensilsCrossed,
   Waves,
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const CategoriesPage = () => {
   // const [categories, setCategories] = useState([]);
@@ -146,7 +147,9 @@ const CategoriesPage = () => {
           Sfoglia tutte le nostre esperienze e trova quella perfetta per te,
           indipendentemente dalla categoria.
         </p>
-        <Button variant='primary'>Esplora tutte le esperienze</Button>
+        <Button variant='primary'>
+          <Link to='/experiences'>Esplora tutte le esperienze</Link>
+        </Button>
       </div>
     </div>
   );

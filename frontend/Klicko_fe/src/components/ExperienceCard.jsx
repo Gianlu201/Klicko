@@ -1,16 +1,22 @@
 import { Clock, MapPin } from 'lucide-react';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const ExperienceCard = ({ experience }) => {
+const ExperienceCard = ({ experience, className }) => {
   return (
     <>
       {experience && (
-        <div className='relative rounded-lg overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-3 duration-700 ease-in-out cursor-pointer'>
+        <Link
+          to={`/experiences/detail/${experience.experienceId}`}
+          className={`relative rounded-lg overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-3 duration-700 ease-in-out cursor-pointer ${
+            className ? className : ' '
+          }`}
+        >
           {/* card top */}
           <div className='relative aspect-16/9 overflow-hidden'>
             <img
               src={`https://localhost:7235/uploads/${experience.coverImage}`}
-              className='absolute top-1/2 start-1/2 -translate-y-1/2 -translate-x-1/2 z-0'
+              className='absolute top-1/2 start-1/2 -translate-y-1/2 -translate-x-1/2 z-0 w-full h-full'
             />
             {experience.isInEvidence ? (
               <span className='absolute top-2 start-2 text-white text-xs font-semibold px-2 py-1 bg-secondary rounded-full z-10'>
@@ -23,6 +29,11 @@ const ExperienceCard = ({ experience }) => {
                 </span>
               )
             )}
+            {experience.sale && (
+              <span className='absolute top-0 right-0 z-10 w-full transform rotate-45 translate-x-14 -translate-y-4 bg-red-600 text-white text-sm font-bold text-end py-1.5 pe-18 shadow-md'>
+                -{experience.sale}%
+              </span>
+            )}
           </div>
 
           {/* card bottom */}
@@ -32,7 +43,7 @@ const ExperienceCard = ({ experience }) => {
                 {experience.category.name}
               </span>
               <span className='text-secondary text-xl font-semibold'>
-                {experience.price},00 €
+                {experience.price.toFixed(2).replace('.', ',')} €
               </span>
             </div>
             <h4 className='text-lg font-semibold mb-2'>{experience.title}</h4>
@@ -50,7 +61,7 @@ const ExperienceCard = ({ experience }) => {
               </span>
             </div>
           </div>
-        </div>
+        </Link>
       )}
     </>
   );

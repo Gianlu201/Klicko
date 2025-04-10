@@ -102,7 +102,7 @@ namespace Klicko_be.Services
             }
         }
 
-        public async Task<bool> EditEcperienceByIdAsync(
+        public async Task<bool> EditExperienceByIdAsync(
             Guid experienceId,
             EditExperienceRequestDto experienceEdit
         )

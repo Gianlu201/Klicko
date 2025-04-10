@@ -16,7 +16,7 @@ const ExperiencesPage = () => {
       });
       if (response.ok) {
         const data = await response.json();
-        // console.log(data);
+        console.log(data);
 
         setExperiences(data.experiences);
       } else {
@@ -76,10 +76,14 @@ const ExperiencesPage = () => {
           </select>
         </div>
         {experiences.length > 0 && (
-          <div className='columns-4'>
+          <div className='grid grid-cols-4 gap-6'>
             {/* elenco esperienze */}
             {experiences.map((exp) => (
-              <ExperienceCard key={exp.id} experience={exp}></ExperienceCard>
+              <ExperienceCard
+                key={exp.id}
+                experience={exp}
+                className={'mb-8'}
+              ></ExperienceCard>
             ))}
           </div>
         )}

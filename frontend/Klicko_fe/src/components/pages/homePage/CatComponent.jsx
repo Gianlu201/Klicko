@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '../../ui/Button';
+import { Link } from 'react-router-dom';
 
 const CatComponent = () => {
   return (
@@ -20,7 +21,9 @@ const CatComponent = () => {
           selezionate.
         </p>
         <div className='flex gap-2'>
-          <Button variant='cat'>Esplora le esperienze</Button>
+          <Button variant='cat'>
+            <Link to='/experiences'>Esplora le esperienze</Link>
+          </Button>
           <Button variant='secondary'>Registrati ora</Button>
         </div>
       </div>

@@ -307,6 +307,124 @@ namespace Klicko_be.Controllers
             }
         }
 
+        [HttpGet("Experience/{experienceId:guid}")]
+        public async Task<IActionResult> GetSingleExperience(Guid experienceId)
+        {
+            try
+            {
+                var experience = await _experienceService.GetExperienceByIdAsync(experienceId);
+
+                if (experience == null)
+                {
+                    return NotFound(
+                        new GetExperienceResponseDto()
+                        {
+                            Message = "Experience not found!",
+                            Experience = null,
+                        }
+                    );
+                }
+
+                var experienceDto = new ExperienceDto()
+                {
+                    ExperienceId = experience.ExperienceId,
+                    Title = experience.Title,
+                    CategoryId = experience.CategoryId,
+                    Duration = experience.Duration,
+                    Place = experience.Place,
+                    Price = experience.Price,
+                    DescriptionShort = experience.DescriptionShort,
+                    Description = experience.Description,
+                    MaxParticipants = experience.MaxParticipants,
+                    Organiser = experience.Organiser,
+                    LoadingDate = experience.LoadingDate,
+                    LastEditDate = experience.LastEditDate,
+                    UserCreatorId = experience.UserCreatorId,
+                    UserLastModifyId = experience.UserLastModifyId,
+                    IsFreeCancellable = experience.IsFreeCancellable,
+                    IncludedDescription = experience.IncludedDescription,
+                    Sale = experience.Sale,
+                    IsInEvidence = experience.IsInEvidence,
+                    IsPopular = experience.IsPopular,
+                    IsDeleted = experience.IsDeleted,
+                    ValidityInMonths = experience.ValidityInMonths,
+                    CoverImage = experience.CoverImage,
+                    Category =
+                        experience.Category != null
+                            ? new CategorySimpleDto()
+                            {
+                                CategoryId = experience.Category.CategoryId,
+                                Name = experience.Category.Name,
+                                Description = experience.Category.Description,
+                                Image = experience.Category.Image,
+                                Icon = experience.Category.Icon,
+                            }
+                            : null,
+                    UserCreator =
+                        experience.UserCreator != null
+                            ? new UserSimpleDto()
+                            {
+                                UserId = experience.UserCreator.Id,
+                                FirstName = experience.UserCreator.FirstName,
+                                LastName = experience.UserCreator.LastName,
+                                Email = experience.UserCreator.Email,
+                            }
+                            : null,
+                    UserLastModify =
+                        experience.UserLastModify != null
+                            ? new UserSimpleDto()
+                            {
+                                UserId = experience.UserLastModify.Id,
+                                FirstName = experience.UserLastModify.FirstName,
+                                LastName = experience.UserLastModify.LastName,
+                                Email = experience.UserLastModify.Email,
+                            }
+                            : null,
+                    Images =
+                        (experience.Images != null && experience.Images.Count > 0)
+                            ? experience
+                                .Images.Select(img => new ImageSimpleDto()
+                                {
+                                    ImageId = img.ImageId,
+                                    Url = img.Url,
+                                    AltText = img.AltText,
+                                })
+                                .ToList()
+                            : null,
+                    CarryWiths =
+                        (experience.CarryWiths != null && experience.CarryWiths.Count > 0)
+                            ? experience
+                                .CarryWiths.Select(carry => new CarryWithSimpleDto()
+                                {
+                                    CarryWithId = carry.CarryWithId,
+                                    Name = carry.Name,
+                                })
+                                .ToList()
+                            : null,
+                };
+
+                return experienceDto != null
+                    ? Ok(
+                        new GetExperienceResponseDto()
+                        {
+                            Message = "Experience found!",
+                            Experience = experienceDto,
+                        }
+                    )
+                    : BadRequest(
+                        new GetExperienceResponseDto()
+                        {
+                            Message = "Something went wrong!",
+                            Experience = null,
+                        }
+                    );
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateExperience(
             [FromBody] CreateExperienceRequestDto createExperience
@@ -393,7 +511,7 @@ namespace Klicko_be.Controllers
         {
             try
             {
-                var result = await _experienceService.EditEcperienceByIdAsync(
+                var result = await _experienceService.EditExperienceByIdAsync(
                     experienceId,
                     experienceEdit
                 );

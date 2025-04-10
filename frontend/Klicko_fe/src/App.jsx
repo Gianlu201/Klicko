@@ -6,6 +6,7 @@ import 'tailwindcss';
 import ExperiencesPage from './components/pages/experiencesPage/ExperiencesPage';
 import Footer from './components/Footer';
 import CategoriesPage from './components/pages/categoriesPage/CategoriesPage';
+import DetailPage from './components/pages/detailPage/DetailPage';
 
 function App() {
   return (
@@ -17,6 +18,10 @@ function App() {
             <Routes>
               <Route path='/' element={<HomePage />} />
               <Route path='/experiences' element={<ExperiencesPage />} />
+              <Route
+                path='/experiences/detail/:experienceId'
+                element={<DetailPage />}
+              />
               <Route path='/categories' element={<CategoriesPage />} />
             </Routes>
           </div>

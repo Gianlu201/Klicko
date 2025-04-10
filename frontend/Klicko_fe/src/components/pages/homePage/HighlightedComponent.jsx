@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Button from '../../ui/Button';
 import { Clock, MapPin } from 'lucide-react';
 import ExperienceCard from '../../ExperienceCard';
+import { Link } from 'react-router-dom';
 
 const HighlightedComponent = () => {
   const [highlightedExperiences, setHighlightedExperiences] = useState([]);
@@ -46,7 +47,7 @@ const HighlightedComponent = () => {
               Le nostre migliori avventure
             </h2>
             <Button variant='outline' size='md'>
-              Vedi tutte
+              <Link to='/experiences'>Vedi tutte</Link>
             </Button>
           </div>
 

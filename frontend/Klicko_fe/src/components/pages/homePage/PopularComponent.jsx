@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Button from '../../ui/Button';
 import { Clock, MapPin } from 'lucide-react';
 import ExperienceCard from '../../ExperienceCard';
+import { Link } from 'react-router-dom';
 
 const PopularComponent = () => {
   const [popularExperiences, setPopularExperiences] = useState([]);
@@ -9,7 +10,7 @@ const PopularComponent = () => {
   const getExperiences = async () => {
     try {
       const response = await fetch(
-        'https://localhost:7235/api/Experience/Highlighted',
+        'https://localhost:7235/api/Experience/Popular',
         {
           method: 'GET',
           headers: {
@@ -46,7 +47,7 @@ const PopularComponent = () => {
               Le nostre migliori avventure
             </h2>
             <Button variant='outline' size='md'>
-              Vedi tutte
+              <Link to='/experiences'>Vedi tutte</Link>
             </Button>
           </div>
 
