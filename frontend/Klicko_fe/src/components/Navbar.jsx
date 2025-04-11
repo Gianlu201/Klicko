@@ -5,6 +5,7 @@ import Button from './ui/Button';
 import { Dropdown, DropdownItem, DropdownHeader } from './ui/DropdownMenu';
 import { useDispatch, useSelector } from 'react-redux';
 import { jwtDecode } from 'jwt-decode';
+import { toast } from 'sonner';
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -61,6 +62,8 @@ const Navbar = () => {
       type: 'SET_LOGGED_USER',
       payload: userInfos,
     });
+
+    toast.success(`Bentornato ${userInfos.fullName}`);
   };
 
   const logout = () => {

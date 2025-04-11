@@ -9,6 +9,7 @@ import 'tailwindcss';
 import Footer from './components/Footer';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import { Toaster } from 'sonner';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             </Routes>
           </div>
           <Footer />
+          <Toaster />
         </div>
       </BrowserRouter>
     </>
