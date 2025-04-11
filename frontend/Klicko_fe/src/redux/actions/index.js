@@ -3,6 +3,8 @@ import { toast } from 'sonner';
 
 export const SET_LOGGED_USER = 'SET_LOGGED_USER';
 export const LOGOUT = 'LOGOUT';
+export const SET_USER_CART = 'SET_USER_CART';
+export const CART_MODIFIED = 'CART_MODIFIED';
 
 export const setLoggedUser = (data) => {
   const tokenDecoded = jwtDecode(data.token);
@@ -38,3 +40,41 @@ export const logoutUser = () => {
     type: LOGOUT,
   };
 };
+
+export const setUserCart = (cart) => {
+  const experiences = [];
+
+  if (cart.cartExperiences !== null) {
+    cart.cartExperiences.forEach((exp) => {
+      experiences.push({
+        title: exp.title,
+        categoryName: exp.category.name,
+        coverImage: exp.coverImage,
+        experienceId: exp.experienceId,
+        isFreeCancellable: exp.isFreeCancellable,
+        place: exp.place,
+        duration: exp.duration,
+        price: exp.price,
+        quantity: exp.quantity,
+        sale: exp.sale,
+      });
+    });
+  }
+
+  const userCart = {
+    cartId: cart.cartId,
+    createdAt: cart.createdAt,
+    updatedAt: cart.updatedAt,
+    experiences: experiences,
+    modified: false,
+  };
+
+  return {
+    type: SET_USER_CART,
+    payload: userCart,
+  };
+};
+
+export const cartModified = () => ({
+  type: CART_MODIFIED,
+});

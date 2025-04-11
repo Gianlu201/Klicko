@@ -1,4 +1,9 @@
-import { LOGOUT, SET_LOGGED_USER } from '../actions';
+import {
+  CART_MODIFIED,
+  LOGOUT,
+  SET_LOGGED_USER,
+  SET_USER_CART,
+} from '../actions';
 
 const initialState = {
   profile: {},
@@ -17,6 +22,22 @@ const mainReducer = (state = initialState, action) => {
       return {
         ...state,
         profile: {},
+        cart: {},
+      };
+
+    case SET_USER_CART:
+      return {
+        ...state,
+        cart: action.payload,
+      };
+
+    case CART_MODIFIED:
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          modified: true,
+        },
       };
 
     default:

@@ -16,7 +16,7 @@ const ExperiencesPage = () => {
       });
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
 
         setExperiences(data.experiences);
       } else {

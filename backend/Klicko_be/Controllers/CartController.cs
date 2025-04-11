@@ -66,6 +66,7 @@ namespace Klicko_be.Controllers
                                             Title = expCart.Experience.Title,
                                             CategoryId = expCart.Experience.CategoryId,
                                             Place = expCart.Experience.Place,
+                                            Duration = expCart.Experience.Duration,
                                             Price = expCart.Experience.Price,
                                             Quantity = expCart.Quantity,
                                             IsFreeCancellable = expCart
@@ -112,17 +113,14 @@ namespace Klicko_be.Controllers
         }
 
         [HttpPost("AddExperience/{cartId:guid}")]
-        public async Task<IActionResult> AddExperience(
-            [FromBody] CreateCartExperienceRequestDto createCartExperience,
-            Guid cartId
-        )
+        public async Task<IActionResult> AddExperience([FromBody] Guid experienceId, Guid cartId)
         {
             try
             {
                 var newCartExperience = new CartExperience()
                 {
                     CartExperienceId = Guid.NewGuid(),
-                    ExperienceId = createCartExperience.ExperienceId,
+                    ExperienceId = experienceId,
                     CartId = cartId,
                     CreatedAt = DateTime.UtcNow,
                 };

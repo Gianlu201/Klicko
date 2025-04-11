@@ -13,12 +13,20 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Carousel from '../components/ui/Corousel';
 import Button from '../components/ui/Button';
+import { useDispatch, useSelector } from 'react-redux';
+import { cartModified } from '../redux/actions';
 
 const DetailPage = () => {
   const [experience, setExperience] = useState({});
   const [description, setDescription] = useState(true);
   const [foto, setFoto] = useState(false);
   const [info, setInfo] = useState(false);
+
+  const cart = useSelector((state) => {
+    return state.cart;
+  });
+
+  const dispatch = useDispatch();
 
   const params = useParams();
 
@@ -35,7 +43,7 @@ const DetailPage = () => {
       );
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
 
         setExperience(data.experience);
       } else {
@@ -68,6 +76,32 @@ const DetailPage = () => {
 
       default:
         break;
+    }
+  };
+
+  const addExperienceToCart = async (experienceId) => {
+    try {
+      const response = await fetch(
+        `https://localhost:7235/api/Cart/AddExperience/${cart.cartId}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(experienceId),
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        dispatch(cartModified());
+        // console.log(data.cart);
+
+        console.log(data);
+      } else {
+        throw new Error('Errore nel recupero dei dati!');
+      }
+    } catch {
+      console.log('Error');
     }
   };
 
@@ -262,7 +296,13 @@ const DetailPage = () => {
                 <p className='text-3xl font-bold mb-3'>
                   {experience.price.toFixed(2).replace('.', ',')}€
                 </p>
-                <Button variant='primary' fullWidth={true}>
+                <Button
+                  variant='primary'
+                  fullWidth={true}
+                  onClick={() => {
+                    addExperienceToCart(experience.experienceId);
+                  }}
+                >
                   Aggiungi al carrello
                 </Button>
 

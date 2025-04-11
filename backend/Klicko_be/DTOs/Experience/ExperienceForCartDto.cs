@@ -19,6 +19,9 @@ namespace Klicko_be.DTOs.Experience
         public required string Place { get; set; }
 
         [Required]
+        public required string Duration { get; set; }
+
+        [Required]
         public required decimal Price { get; set; }
 
         [Required]

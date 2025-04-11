@@ -4,13 +4,18 @@ import { ShoppingCart, Menu, X, User, Settings, LogOut } from 'lucide-react';
 import Button from './ui/Button';
 import { Dropdown, DropdownItem, DropdownHeader } from './ui/DropdownMenu';
 import { useDispatch, useSelector } from 'react-redux';
-import { logoutUser, setLoggedUser } from '../redux/actions';
+import { logoutUser, setLoggedUser, setUserCart } from '../redux/actions';
+import { jwtDecode } from 'jwt-decode';
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const profile = useSelector((state) => {
     return state.profile;
+  });
+
+  const cart = useSelector((state) => {
+    return state.cart;
   });
 
   const dispatch = useDispatch();
@@ -22,17 +27,52 @@ const Navbar = () => {
 
     if (exp - Date.now() > 0) {
       console.log('Effettuo login automatico');
-      login(accessData);
+      const data = await JSON.parse(accessData);
+      login(data);
+
+      getUserCart(data);
     } else {
       console.log('Effettuo logout automatico');
       logout();
     }
   };
 
-  const login = async (accessData) => {
-    const data = await JSON.parse(accessData);
-
+  const login = async (data) => {
     dispatch(setLoggedUser(data));
+  };
+
+  const getUserCart = async (data) => {
+    try {
+      let cartId = '';
+      if (data === null) {
+        cartId = profile.cartId;
+      } else {
+        const tokenDecoded = jwtDecode(data.token);
+
+        cartId = tokenDecoded.cartId;
+      }
+
+      const response = await fetch(
+        `https://localhost:7235/api/Cart/GetCart/${cartId}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+
+        // console.log(data.cart);
+
+        dispatch(setUserCart(data.cart));
+      } else {
+        throw new Error('Errore nel recupero dei dati!');
+      }
+    } catch {
+      console.log('Error');
+    }
   };
 
   const logout = () => {
@@ -47,7 +87,13 @@ const Navbar = () => {
     if (accessData !== null && !profile?.email) {
       manageProfile(accessData);
     }
-  }, []);
+  }, [profile]);
+
+  useEffect(() => {
+    if (cart.modified === true) {
+      getUserCart(null);
+    }
+  }, [cart]);
 
   return (
     <header className='bg-white shadow-sm sticky top-0 z-40'>
@@ -80,13 +126,13 @@ const Navbar = () => {
         </nav>
 
         <div className='flex items-center space-x-4'>
-          <Link to='/cart' className='relative'>
-            <ShoppingCart className='h-6 w-6' />
-            {/* {totalItems > 0 && (
-              <span className="absolute -top-2 -right-2 bg-secondary text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
-                {totalItems}
+          <Link to='/cart' className='relative flex items-center gap-1'>
+            {cart.experiences != undefined && cart.experiences.length > 0 && (
+              <span className='text-lg font-semibold'>
+                {cart.experiences.length}
               </span>
-            )} */}
+            )}
+            <ShoppingCart className='h-6 w-6' />
           </Link>
 
           {profile?.email ? (

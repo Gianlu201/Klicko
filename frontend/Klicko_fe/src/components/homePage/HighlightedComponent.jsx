@@ -20,7 +20,7 @@ const HighlightedComponent = () => {
       );
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
 
         setHighlightedExperiences(data.experiences);
       } else {
