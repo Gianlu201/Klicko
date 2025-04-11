@@ -24,7 +24,9 @@ const CatComponent = () => {
           <Button variant='cat'>
             <Link to='/experiences'>Esplora le esperienze</Link>
           </Button>
-          <Button variant='secondary'>Registrati ora</Button>
+          <Button variant='secondary'>
+            <Link to='/register'>Registrati ora</Link>
+          </Button>
         </div>
       </div>
     </div>

@@ -108,15 +108,17 @@ const Navbar = () => {
           </Link>
 
           {profile?.email ? (
+            // dropdown opzioni profilo
             <Dropdown
               trigger={
-                <Button variant='outline' size='icon' className='rounded-full'>
+                <Button variant='icon' size='icon'>
                   <User className='h-5 w-5' />
                 </Button>
               }
               align='right'
             >
               <DropdownHeader>Il tuo account</DropdownHeader>
+              <p className='text-gray-500 text-xs px-4'>{profile.email}</p>
               <DropdownItem
                 icon={<User size={16} />}
                 onClick={() => console.log('Profilo')}

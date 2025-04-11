@@ -1,8 +1,22 @@
 import { SquareUserRound, Users } from 'lucide-react';
 import Button from '../components/ui/Button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 const RegisterPage = () => {
+  const profile = useSelector((state) => {
+    return state.profile;
+  });
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (profile?.email) {
+      navigate('/');
+    }
+  });
+
   return (
     <div className='grid grid-cols-2 max-w-7xl mx-auto min-h-screen pt-14 pb-20 items-center gap-12'>
       <div>

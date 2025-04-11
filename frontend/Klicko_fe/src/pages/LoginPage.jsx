@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '../components/ui/Button';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { jwtDecode } from 'jwt-decode';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const profile = useSelector((state) => {
+    return state.profile;
+  });
 
   const dispatch = useDispatch();
 
@@ -76,6 +80,12 @@ const LoginPage = () => {
       payload: userInfos,
     });
   };
+
+  useEffect(() => {
+    if (profile?.email) {
+      navigate('/');
+    }
+  });
 
   return (
     <div className='flex flex-col justify-center items-center gap-5 min-h-screen'>

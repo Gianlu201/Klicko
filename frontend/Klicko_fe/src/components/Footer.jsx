@@ -36,7 +36,7 @@ const Footer = () => {
     {
       id: 1,
       title: 'Chi siamo',
-      url: '/#',
+      url: '/about',
     },
     {
       id: 2,
@@ -107,7 +107,7 @@ const Footer = () => {
         <div className='lg:w-1/4'>
           <h4 className='text-white text-lg font-semibold mb-4'>Newsletter</h4>
           <p className='mb-4'>
-            Insriviti per ricevere offerte speciali e scoprire nuove esperienze
+            Iscriviti per ricevere offerte speciali e scoprire nuove esperienze
           </p>
           <input
             type='email'
