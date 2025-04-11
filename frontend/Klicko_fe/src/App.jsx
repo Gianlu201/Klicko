@@ -7,6 +7,8 @@ import DetailPage from './pages/DetailPage';
 import CategoriesPage from './pages/CategoriesPage';
 import 'tailwindcss';
 import Footer from './components/Footer';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
                 element={<DetailPage />}
               />
               <Route path='/categories' element={<CategoriesPage />} />
+              <Route path='/login' element={<LoginPage />} />
+              <Route path='/register' element={<RegisterPage />} />
             </Routes>
           </div>
           <Footer />

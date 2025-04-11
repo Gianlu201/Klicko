@@ -1,36 +1,71 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-// import { useAuthStore, useCartStore } from '@/lib/store';
-// import { Button } from '@/components/ui/button';
 import { ShoppingCart, Menu, X, User, Settings, LogOut } from 'lucide-react';
 import Button from './ui/Button';
 import { Dropdown, DropdownItem, DropdownHeader } from './ui/DropdownMenu';
+import { useDispatch, useSelector } from 'react-redux';
+import { jwtDecode } from 'jwt-decode';
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  // const { isAuthenticated, user, logout } = useAuthStore();
-  // const { totalItems } = useCartStore();
+
+  const profile = useSelector((state) => {
+    return state.profile;
+  });
+
+  const dispatch = useDispatch();
+
+  const login = async (accessData) => {
+    const data = await JSON.parse(accessData);
+
+    const tokenDecoded = jwtDecode(data.token);
+
+    const userInfos = {
+      aud: tokenDecoded.aud,
+      exp: tokenDecoded.exp,
+      role: tokenDecoded[
+        'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
+      ],
+      email:
+        tokenDecoded[
+          'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'
+        ],
+      fullName:
+        tokenDecoded[
+          'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'
+        ],
+      id: tokenDecoded[
+        'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'
+      ],
+      iss: tokenDecoded.iss,
+      expiration: data.expires,
+    };
+
+    // console.log(userInfos);
+
+    dispatch({
+      type: 'SET_LOGGED_USER',
+      payload: userInfos,
+    });
+  };
+
+  const logout = () => {
+    localStorage.removeItem('klicko_token');
+
+    dispatch({
+      type: 'LOGOUT',
+    });
+  };
 
   const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
 
-  // const getProfileMenuItems = () => {
-  //   if (!user) return [];
+  useEffect(() => {
+    const accessData = localStorage.getItem('klicko_token');
 
-  //   const items = [
-  //     { label: 'Il mio profilo', href: '/profile' },
-  //     { label: 'I miei ordini', href: '/dashboard/orders' },
-  //   ];
-
-  //   if (user.role === 'seller' || user.role === 'admin') {
-  //     items.push({ label: 'Le mie esperienze', href: '/dashboard/experiences' });
-  //   }
-
-  //   if (user.role === 'admin') {
-  //     items.push({ label: 'Gestione utenti', href: '/dashboard/users' });
-  //   }
-
-  //   return items;
-  // };
+    if (accessData !== null && !profile?.email) {
+      login(accessData);
+    }
+  }, []);
 
   return (
     <header className='bg-white shadow-sm sticky top-0 z-40'>
@@ -72,72 +107,43 @@ const Navbar = () => {
             )} */}
           </Link>
 
-          {/* {isAuthenticated ? (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="icon" className="rounded-full">
-                  <User className="h-5 w-5" />
+          {profile?.email ? (
+            <Dropdown
+              trigger={
+                <Button variant='outline' size='icon' className='rounded-full'>
+                  <User className='h-5 w-5' />
                 </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56">
-                <DropdownMenuLabel>
-                  {user?.name}
-                  <p className="text-xs text-muted-foreground mt-1">{user?.email}</p>
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                {getProfileMenuItems().map((item, index) => (
-                  <DropdownMenuItem key={index} asChild>
-                    <Link to={item.href}>{item.label}</Link>
-                  </DropdownMenuItem>
-                ))}
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={logout} className="text-destructive">
-                  Logout
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          ) : ( */}
-
-          <Dropdown
-            trigger={
-              <Button variant='outline' size='icon' className='rounded-full'>
-                <User className='h-5 w-5' />
+              }
+              align='right'
+            >
+              <DropdownHeader>Il tuo account</DropdownHeader>
+              <DropdownItem
+                icon={<User size={16} />}
+                onClick={() => console.log('Profilo')}
+              >
+                Profilo
+              </DropdownItem>
+              <DropdownItem
+                icon={<Settings size={16} />}
+                onClick={() => console.log('Impostazioni')}
+              >
+                Impostazioni
+              </DropdownItem>
+              <DropdownItem divider />
+              <DropdownItem icon={<LogOut size={16} />} onClick={logout} danger>
+                Disconnetti
+              </DropdownItem>
+            </Dropdown>
+          ) : (
+            <div className='hidden md:flex items-center space-x-2'>
+              <Button variant='outline' size='md'>
+                <Link to='/login'>Accedi</Link>
               </Button>
-            }
-            align='right'
-          >
-            <DropdownHeader>Il tuo account</DropdownHeader>
-            <DropdownItem
-              icon={<User size={16} />}
-              onClick={() => console.log('Profilo')}
-            >
-              Profilo
-            </DropdownItem>
-            <DropdownItem
-              icon={<Settings size={16} />}
-              onClick={() => console.log('Impostazioni')}
-            >
-              Impostazioni
-            </DropdownItem>
-            <DropdownItem divider />
-            <DropdownItem
-              icon={<LogOut size={16} />}
-              onClick={() => console.log('Logout')}
-              danger
-            >
-              Disconnetti
-            </DropdownItem>
-          </Dropdown>
-
-          <div className='hidden md:flex items-center space-x-2'>
-            <Button variant='outline' size='md'>
-              <Link to='/login'>Accedi</Link>
-            </Button>
-            <Button variant='primary'>
-              <Link to='/register'>Registrati</Link>
-            </Button>
-          </div>
-          {/* )} */}
+              <Button variant='primary'>
+                <Link to='/register'>Registrati</Link>
+              </Button>
+            </div>
+          )}
 
           <button className='md:hidden' onClick={toggleMobileMenu}>
             {mobileMenuOpen ? (
@@ -173,17 +179,6 @@ const Navbar = () => {
             >
               Chi siamo
             </Link>
-
-            {/* {!isAuthenticated && (
-              <div className="flex flex-col space-y-2 pt-3 border-t">
-                <Button variant="outline" asChild>
-                  <Link to="/login" onClick={toggleMobileMenu}>Accedi</Link>
-                </Button>
-                <Button asChild>
-                  <Link to="/register" onClick={toggleMobileMenu}>Registrati</Link>
-                </Button>
-              </div>
-            )} */}
 
             <div className='flex flex-col space-y-2 pt-3 border-t'>
               <Button variant='outline' size='md' className='mx-4'>

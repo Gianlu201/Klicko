@@ -4,9 +4,16 @@ const initialState = {
 
 const mainReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'A':
+    case 'SET_LOGGED_USER':
       return {
         ...state,
+        profile: action.payload,
+      };
+
+    case 'LOGOUT':
+      return {
+        ...state,
+        profile: {},
       };
 
     default:
