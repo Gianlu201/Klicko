@@ -13,24 +13,18 @@ export const setLoggedUser = (data) => {
     role: tokenDecoded[
       'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
     ],
-    email:
-      tokenDecoded[
-        'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'
-      ],
-    fullName:
-      tokenDecoded[
-        'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'
-      ],
-    id: tokenDecoded[
-      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'
-    ],
+    email: tokenDecoded.email,
+    name: tokenDecoded.name,
+    surname: tokenDecoded.surname,
+    id: tokenDecoded.nameidentifier,
+    cartId: tokenDecoded.cartId,
     iss: tokenDecoded.iss,
     expiration: data.expires,
   };
 
   // console.log(userInfos);
 
-  toast.success(`Bentornato ${userInfos.fullName}`);
+  toast.success(`Bentornato ${userInfos.name}`);
 
   return {
     type: SET_LOGGED_USER,

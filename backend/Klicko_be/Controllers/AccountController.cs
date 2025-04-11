@@ -78,9 +78,11 @@ namespace Klicko_be.Controllers
 
             List<Claim> claims = new List<Claim>();
 
-            claims.Add(new Claim(ClaimTypes.Email, user.Email));
-            claims.Add(new Claim(ClaimTypes.Name, $"{user.FirstName} {user.LastName}"));
-            claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id));
+            claims.Add(new Claim("email", user.Email));
+            claims.Add(new Claim("name", user.FirstName));
+            claims.Add(new Claim("surname", user.LastName));
+            claims.Add(new Claim("cartId", user.CartId.ToString()));
+            claims.Add(new Claim("nameIdentifier", user.Id));
 
             foreach (var role in roles)
             {
