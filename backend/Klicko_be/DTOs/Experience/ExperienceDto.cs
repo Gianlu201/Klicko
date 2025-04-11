@@ -11,7 +11,7 @@ namespace Klicko_be.DTOs.Experience
 {
     public class ExperienceDto
     {
-        [Key]
+        [Required]
         public required Guid ExperienceId { get; set; }
 
         [Required]
