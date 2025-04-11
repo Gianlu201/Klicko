@@ -15,6 +15,20 @@ const Navbar = () => {
 
   const dispatch = useDispatch();
 
+  const manageProfile = async (accessData) => {
+    const expiration = await JSON.parse(accessData).expires;
+
+    const exp = new Date(expiration);
+
+    if (exp - Date.now() > 0) {
+      console.log('Effettuo login automatico');
+      login(accessData);
+    } else {
+      console.log('Effettuo logout automatico');
+      logout();
+    }
+  };
+
   const login = async (accessData) => {
     const data = await JSON.parse(accessData);
 
@@ -63,7 +77,7 @@ const Navbar = () => {
     const accessData = localStorage.getItem('klicko_token');
 
     if (accessData !== null && !profile?.email) {
-      login(accessData);
+      manageProfile(accessData);
     }
   }, []);
 
