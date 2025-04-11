@@ -8,7 +8,7 @@ const ExperienceCard = ({ experience, className }) => {
       {experience && (
         <Link
           to={`/experiences/detail/${experience.experienceId}`}
-          className={`relative rounded-lg overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-3 duration-700 ease-in-out cursor-pointer ${
+          className={`block relative rounded-lg overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-3 duration-700 ease-in-out cursor-pointer ${
             className ? className : ' '
           }`}
         >

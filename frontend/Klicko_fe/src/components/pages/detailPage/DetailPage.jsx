@@ -109,10 +109,10 @@ const DetailPage = () => {
             {/* first column */}
             <div className='bg-white col-span-2 rounded-b-2xl shadow-lg'>
               {/* navigation tables */}
-              <div className=' inline-block ms-6 px-4 py-2 bg-gray-100 rounded-b-2xl'>
+              <div className=' inline-block ms-6 px-2 pb-2 bg-gray-100 rounded-b-2xl'>
                 <button
-                  className={`px-2 py-1 cursor-pointer ${
-                    description ? 'border-b-2 border-b-primary/60' : ''
+                  className={`px-4 py-1 cursor-pointer ${
+                    description ? 'bg-white rounded-b-xl' : ''
                   }`}
                   onClick={() => {
                     handleTabs('description');
@@ -121,8 +121,8 @@ const DetailPage = () => {
                   Descrizione
                 </button>
                 <button
-                  className={`px-2 py-1 cursor-pointer border-s border-e border-x-gray-600/30 ${
-                    foto ? 'border-b-2 border-b-primary/60' : ''
+                  className={`px-4 py-1 cursor-pointer ${
+                    foto ? 'bg-white rounded-b-xl' : ''
                   }`}
                   onClick={() => {
                     handleTabs('foto');
@@ -131,8 +131,8 @@ const DetailPage = () => {
                   Foto
                 </button>
                 <button
-                  className={`px-2 py-1 cursor-pointer ${
-                    info ? 'border-b-2 border-b-primary/60' : ''
+                  className={`px-4 py-1 cursor-pointer ${
+                    info ? 'bg-white rounded-b-xl' : ''
                   }`}
                   onClick={() => {
                     handleTabs('info');

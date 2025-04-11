@@ -42,7 +42,7 @@ const ExperiencesPage = () => {
       </div>
 
       {/* search area */}
-      <div className='bg-white flex justify-between items-center gap-2 p-4 rounded-2xl my-6'>
+      <div className='bg-white flex justify-between items-center gap-2 p-4 rounded-2xl my-6 shadow-xs'>
         <div className='relative grow flex items-center me-3'>
           <input
             className='bg-background border border-gray-800/30 rounded-xl py-2 ps-10 w-full'
