@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import Button from '../../ui/Button';
+import Button from '../ui/Button';
 import { Clock, MapPin } from 'lucide-react';
-import ExperienceCard from '../../ExperienceCard';
+import ExperienceCard from '../ExperienceCard';
 import { Link } from 'react-router-dom';
 
-const HighlightedComponent = () => {
-  const [highlightedExperiences, setHighlightedExperiences] = useState([]);
+const PopularComponent = () => {
+  const [popularExperiences, setPopularExperiences] = useState([]);
 
   const getExperiences = async () => {
     try {
       const response = await fetch(
-        'https://localhost:7235/api/Experience/Highlighted',
+        'https://localhost:7235/api/Experience/Popular',
         {
           method: 'GET',
           headers: {
@@ -22,7 +22,7 @@ const HighlightedComponent = () => {
         const data = await response.json();
         console.log(data);
 
-        setHighlightedExperiences(data.experiences);
+        setPopularExperiences(data.experiences);
       } else {
         throw new Error('Errore nel recupero dei dati!');
       }
@@ -37,9 +37,9 @@ const HighlightedComponent = () => {
 
   return (
     <>
-      {highlightedExperiences.length > 0 && (
+      {popularExperiences.length > 0 && (
         <div className='max-w-7xl mx-auto my-18'>
-          <p className='text-secondary font-semibold mb-2'>
+          <p className='text-[#19aeff] font-semibold mb-2'>
             Esperienze in evidenza
           </p>
           <div className='flex justify-between items-center'>
@@ -51,8 +51,8 @@ const HighlightedComponent = () => {
             </Button>
           </div>
 
-          <div className='columns-3 gap-8 mt-10'>
-            {highlightedExperiences.map((experience) => {
+          <div className='columns-4 gap-8 mt-10'>
+            {popularExperiences.map((experience) => {
               return (
                 <ExperienceCard
                   key={experience.experienceId}
@@ -67,4 +67,4 @@ const HighlightedComponent = () => {
   );
 };
 
-export default HighlightedComponent;
+export default PopularComponent;

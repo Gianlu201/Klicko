@@ -11,8 +11,8 @@ import {
 } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Carousel from '../../ui/Corousel';
-import Button from '../../ui/Button';
+import Carousel from '../components/ui/Corousel';
+import Button from '../components/ui/Button';
 
 const DetailPage = () => {
   const [experience, setExperience] = useState({});

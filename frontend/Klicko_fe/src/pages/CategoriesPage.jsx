@@ -1,5 +1,5 @@
 // import React, { useEffect, useState } from 'react';
-import Button from '../../ui/Button';
+import Button from '../components/ui/Button';
 import airImg from '/assets/images/categories/categoryAir.avif';
 import waterImg from '/assets/images/categories/categoryWater.avif';
 import mountainImg from '/assets/images/categories/categoryMountain.avif';

@@ -1,12 +1,12 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import HomePage from './components/pages/homePage/HomePage';
+import HomePage from './pages/HomePage';
+import ExperiencesPage from './pages/ExperiencesPage';
+import DetailPage from './pages/DetailPage';
+import CategoriesPage from './pages/CategoriesPage';
 import 'tailwindcss';
-import ExperiencesPage from './components/pages/experiencesPage/ExperiencesPage';
 import Footer from './components/Footer';
-import CategoriesPage from './components/pages/categoriesPage/CategoriesPage';
-import DetailPage from './components/pages/detailPage/DetailPage';
 
 function App() {
   return (

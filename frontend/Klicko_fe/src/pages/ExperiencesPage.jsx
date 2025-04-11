@@ -1,7 +1,7 @@
 import { Funnel, Search } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
-import Button from '../../ui/Button';
-import ExperienceCard from '../../ExperienceCard';
+import Button from '../components/ui/Button';
+import ExperienceCard from '../components/ExperienceCard';
 
 const ExperiencesPage = () => {
   const [experiences, setExperiences] = useState([]);
@@ -80,7 +80,7 @@ const ExperiencesPage = () => {
             {/* elenco esperienze */}
             {experiences.map((exp) => (
               <ExperienceCard
-                key={exp.id}
+                key={exp.experienceId}
                 experience={exp}
                 className={'mb-8'}
               ></ExperienceCard>
