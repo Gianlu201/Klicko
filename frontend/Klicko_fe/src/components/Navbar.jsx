@@ -4,8 +4,7 @@ import { ShoppingCart, Menu, X, User, Settings, LogOut } from 'lucide-react';
 import Button from './ui/Button';
 import { Dropdown, DropdownItem, DropdownHeader } from './ui/DropdownMenu';
 import { useDispatch, useSelector } from 'react-redux';
-import { jwtDecode } from 'jwt-decode';
-import { toast } from 'sonner';
+import { logoutUser, setLoggedUser } from '../redux/actions';
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -33,45 +32,11 @@ const Navbar = () => {
   const login = async (accessData) => {
     const data = await JSON.parse(accessData);
 
-    const tokenDecoded = jwtDecode(data.token);
-
-    const userInfos = {
-      aud: tokenDecoded.aud,
-      exp: tokenDecoded.exp,
-      role: tokenDecoded[
-        'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
-      ],
-      email:
-        tokenDecoded[
-          'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'
-        ],
-      fullName:
-        tokenDecoded[
-          'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'
-        ],
-      id: tokenDecoded[
-        'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'
-      ],
-      iss: tokenDecoded.iss,
-      expiration: data.expires,
-    };
-
-    // console.log(userInfos);
-
-    dispatch({
-      type: 'SET_LOGGED_USER',
-      payload: userInfos,
-    });
-
-    toast.success(`Bentornato ${userInfos.fullName}`);
+    dispatch(setLoggedUser(data));
   };
 
   const logout = () => {
-    localStorage.removeItem('klicko_token');
-
-    dispatch({
-      type: 'LOGOUT',
-    });
+    dispatch(logoutUser());
   };
 
   const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
