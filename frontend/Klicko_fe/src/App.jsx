@@ -1,14 +1,15 @@
 import './App.css';
+import 'tailwindcss';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
 import ExperiencesPage from './pages/ExperiencesPage';
 import DetailPage from './pages/DetailPage';
 import CategoriesPage from './pages/CategoriesPage';
-import 'tailwindcss';
 import Footer from './components/Footer';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import CartPage from './pages/CartPage';
 import { Toaster } from 'sonner';
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
               <Route path='/categories' element={<CategoriesPage />} />
               <Route path='/login' element={<LoginPage />} />
               <Route path='/register' element={<RegisterPage />} />
+              <Route path='/cart' element={<CartPage />} />
             </Routes>
           </div>
           <Footer />
