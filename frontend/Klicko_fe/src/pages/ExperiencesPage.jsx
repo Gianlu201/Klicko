@@ -2,9 +2,18 @@ import { Funnel, Search } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import Button from '../components/ui/Button';
 import ExperienceCard from '../components/ExperienceCard';
+import { useDispatch, useSelector } from 'react-redux';
+import { setExperiencesList } from '../redux/actions';
 
 const ExperiencesPage = () => {
   const [experiences, setExperiences] = useState([]);
+  const [searchBar, setSearchBar] = useState('');
+
+  const experiencesRedux = useSelector((state) => {
+    return state.experiences;
+  });
+
+  const dispatch = useDispatch();
 
   const getAllExperiences = async () => {
     try {
@@ -18,6 +27,8 @@ const ExperiencesPage = () => {
         const data = await response.json();
         // console.log(data);
 
+        dispatch(setExperiencesList(data.experiences));
+
         setExperiences(data.experiences);
       } else {
         throw new Error('Errore nel recupero dei dati!');
@@ -27,9 +38,27 @@ const ExperiencesPage = () => {
     }
   };
 
+  // const searchExperiences = () => {
+
+  // }
+
   useEffect(() => {
-    getAllExperiences();
+    if (experiencesRedux.length === 0) {
+      getAllExperiences();
+    } else {
+      setExperiences(experiencesRedux);
+    }
   }, []);
+
+  useEffect(() => {
+    // search by experience title
+    const filteredExperiences = experiencesRedux.filter((exp) =>
+      exp.title.toLowerCase().includes(searchBar)
+    );
+
+    console.log(filteredExperiences);
+    setExperiences(filteredExperiences);
+  }, [searchBar]);
 
   return (
     <div className='max-w-7xl mx-auto mb-8 mt-6'>
@@ -47,6 +76,10 @@ const ExperiencesPage = () => {
           <input
             className='bg-background border border-gray-800/30 rounded-xl py-2 ps-10 w-full'
             placeholder='Cerca esperienze...'
+            value={searchBar}
+            onChange={(e) => {
+              setSearchBar(e.target.value);
+            }}
           />
           <Search className='absolute start-2 top-1/2 -translate-y-1/2' />
         </div>

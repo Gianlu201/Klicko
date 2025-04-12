@@ -1,6 +1,7 @@
 import {
   CART_MODIFIED,
   LOGOUT,
+  SET_EXPERIENCES_LIST,
   SET_LOGGED_USER,
   SET_USER_CART,
 } from '../actions';
@@ -8,6 +9,7 @@ import {
 const initialState = {
   profile: {},
   cart: {},
+  experiences: [],
 };
 
 const mainReducer = (state = initialState, action) => {
@@ -38,6 +40,12 @@ const mainReducer = (state = initialState, action) => {
           ...state.cart,
           modified: true,
         },
+      };
+
+    case SET_EXPERIENCES_LIST:
+      return {
+        ...state,
+        experiences: action.payload,
       };
 
     default:

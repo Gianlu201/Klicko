@@ -5,6 +5,7 @@ export const SET_LOGGED_USER = 'SET_LOGGED_USER';
 export const LOGOUT = 'LOGOUT';
 export const SET_USER_CART = 'SET_USER_CART';
 export const CART_MODIFIED = 'CART_MODIFIED';
+export const SET_EXPERIENCES_LIST = 'SET_EXPERIENCES_LIST';
 
 export const setLoggedUser = (data) => {
   const tokenDecoded = jwtDecode(data.token);
@@ -77,4 +78,9 @@ export const setUserCart = (cart) => {
 
 export const cartModified = () => ({
   type: CART_MODIFIED,
+});
+
+export const setExperiencesList = (experiencesList) => ({
+  type: SET_EXPERIENCES_LIST,
+  payload: experiencesList,
 });
