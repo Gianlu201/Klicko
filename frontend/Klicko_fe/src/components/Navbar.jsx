@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ShoppingCart, Menu, X, User, Settings, LogOut } from 'lucide-react';
+import {
+  ShoppingCart,
+  Menu,
+  X,
+  User,
+  Settings,
+  LogOut,
+  ShoppingBag,
+} from 'lucide-react';
 import Button from './ui/Button';
 import { Dropdown, DropdownItem, DropdownHeader } from './ui/DropdownMenu';
 import { useDispatch, useSelector } from 'react-redux';
@@ -146,18 +154,32 @@ const Navbar = () => {
               align='right'
             >
               <DropdownHeader>Il tuo account</DropdownHeader>
-              <p className='text-gray-500 text-xs px-4'>{profile.email}</p>
-              <DropdownItem
-                icon={<User size={16} />}
-                onClick={() => console.log('Profilo')}
-              >
-                Profilo
+              <p className='text-gray-500 text-xs px-4 mb-2'>{profile.email}</p>
+              <DropdownItem>
+                <Link
+                  to='/dashboard'
+                  className='w-full flex items-center justify-start gap-2'
+                >
+                  <User size={16} />
+                  Dashbord
+                </Link>
               </DropdownItem>
-              <DropdownItem
-                icon={<Settings size={16} />}
-                onClick={() => console.log('Impostazioni')}
-              >
-                Impostazioni
+              <DropdownItem>
+                <Link
+                  to='/dashboard/orders'
+                  className='w-full flex items-center justify-start gap-2'
+                >
+                  <ShoppingBag size={16} />I miei ordini
+                </Link>
+              </DropdownItem>
+              <DropdownItem>
+                <Link
+                  to='/dashboard/settings'
+                  className='w-full flex items-center justify-start gap-2'
+                >
+                  <Settings size={16} />
+                  Impostazioni
+                </Link>
               </DropdownItem>
               <DropdownItem divider />
               <DropdownItem icon={<LogOut size={16} />} onClick={logout} danger>

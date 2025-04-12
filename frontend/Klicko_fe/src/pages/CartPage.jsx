@@ -109,10 +109,12 @@ const CartPage = () => {
                     className='grid grid-cols-24 gap-4 items-center hover:bg-gray-100 border-b border-gray-400/30 py-3 px-2 last-of-type:border-0'
                   >
                     <td className='col-span-3 overflow-hidden'>
-                      <img
-                        src={`https://localhost:7235/uploads/${exp.coverImage}`}
-                        className='aspect-square rounded-lg'
-                      />
+                      <div className='aspect-square rounded-lg overflow-hidden'>
+                        <img
+                          src={`https://localhost:7235/uploads/${exp.coverImage}`}
+                          className='w-full h-full object-cover'
+                        />
+                      </div>
                     </td>
 
                     <td className='col-span-10'>
