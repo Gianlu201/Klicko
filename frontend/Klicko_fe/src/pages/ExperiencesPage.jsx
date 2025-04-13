@@ -138,7 +138,9 @@ const ExperiencesPage = () => {
           >
             Filtri
           </Button>
-          <Button variant='primary'>Cerca</Button>
+          <Button variant='primary' onClick={searchExperiences}>
+            Cerca
+          </Button>
         </div>
 
         {showFilters && (
