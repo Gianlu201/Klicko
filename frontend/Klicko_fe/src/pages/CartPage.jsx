@@ -77,6 +77,32 @@ const CartPage = () => {
     }
   };
 
+  const removeExperienceFromCart = async (experienceId) => {
+    try {
+      const response = await fetch(
+        `https://localhost:7235/api/Cart/RemoveExperience/${cart.cartId}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(experienceId),
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        dispatch(cartModified());
+        // console.log(data.cart);
+
+        console.log(data);
+      } else {
+        throw new Error('Errore nel recupero dei dati!');
+      }
+    } catch {
+      console.log('Error');
+    }
+  };
+
   return (
     <div className='max-w-7xl mx-auto min-h-screen'>
       <h1 className='text-4xl font-bold mt-10 mb-8'>Carrello</h1>
@@ -174,7 +200,12 @@ const CartPage = () => {
                     </td>
 
                     <td className='col-span-2'>
-                      <Trash2 className='text-red-500 w-4 h-4 ms-auto me-4 cursor-pointer' />
+                      <Trash2
+                        className='text-red-500 w-4 h-4 ms-auto me-4 cursor-pointer'
+                        onClick={() => {
+                          removeExperienceFromCart(exp.experienceId);
+                        }}
+                      />
                     </td>
                   </tr>
                 ))}
