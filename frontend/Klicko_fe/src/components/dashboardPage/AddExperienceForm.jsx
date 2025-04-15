@@ -3,6 +3,7 @@ import Button from '../ui/Button';
 import { Funnel, Pencil, Plus, Search, Trash2 } from 'lucide-react';
 import ToggleSwitch from '../ui/ToggleSwitch';
 import { useNavigate } from 'react-router-dom';
+import UploadFile from '../ui/UploadFile';
 
 const AddExperienceForm = () => {
   const [title, setTitle] = useState('');
@@ -521,10 +522,13 @@ const AddExperienceForm = () => {
 
         {/* immagine copertina */}
         <div className='flex flex-col justify-start items-start gap-2 mb-8'>
-          <label htmlFor='coverImg' className='font-semibold text-sm'>
-            Immagine copertina
-          </label>
-          <input
+          <label className='font-semibold text-sm'>Immagine copertina</label>
+
+          <UploadFile
+            multiple={false}
+            onFilesSelected={(files) => setCoverImage(files)}
+          />
+          {/* <input
             type='file'
             accept='image/*'
             id='coverImg'
@@ -532,9 +536,9 @@ const AddExperienceForm = () => {
             onChange={(e) => {
               setCoverImage(e.target.files[0]);
             }}
-          />
+          /> */}
           <span className='text-gray-500 text-sm'>
-            Questa immagine verrà mostrata nelle anteprime delle card
+            Questa immagine verrà mostrata nell'anteprima dell'esperienza
           </span>
         </div>
 
@@ -558,8 +562,8 @@ const AddExperienceForm = () => {
           </span>
         </div>
 
-        {/* elenco foto multiple */}
-        <div className='flex flex-col justify-start items-start gap-2 mb-8'>
+        {/* elenco immagini multiple */}
+        {/* <div className='flex flex-col justify-start items-start gap-2 mb-8'>
           <label htmlFor='otherimages' className='font-semibold text-sm'>
             Immagini aggiuntive
           </label>
@@ -574,7 +578,19 @@ const AddExperienceForm = () => {
             }}
           />
           <span className='text-gray-500 text-sm'>
-            Questa immagine verrà mostrata nelle anteprime delle card
+            Questa immagine verrà mostrata nei dettagli dell'esperienza
+          </span>
+        </div> */}
+
+        {/* elenco immagini multiple */}
+        <div className='flex flex-col justify-start items-start gap-2 my-8'>
+          <label className='font-semibold text-sm'>Immagini aggiuntive</label>
+          <UploadFile
+            multiple={true}
+            onFilesSelected={(files) => setImages(files)}
+          />
+          <span className='text-gray-500 text-sm'>
+            Questa immagine verrà mostrata nei dettagli dell'esperienza
           </span>
         </div>
 
