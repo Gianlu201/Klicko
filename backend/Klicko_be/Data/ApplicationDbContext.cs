@@ -244,9 +244,9 @@ namespace Klicko_be.Data
                         FirstName = "Admin",
                         LastName = "User",
                         RegistrationDate = DateTime.Parse("09/04/2025 11:00:56"),
-                        Email = "admin@exampe.com",
+                        Email = "admin@example.com",
                         NormalizedEmail = "ADMIN@EXAMPLE.COM",
-                        UserName = "admin@exampe.com",
+                        UserName = "admin@example.com",
                         NormalizedUserName = "ADMIN@EXAMPLE.COM",
                         // adminadmin
                         PasswordHash =
@@ -259,9 +259,9 @@ namespace Klicko_be.Data
                         FirstName = "Seller",
                         LastName = "User",
                         RegistrationDate = DateTime.Parse("09/04/2025 11:00:56"),
-                        Email = "seller@exampe.com",
+                        Email = "seller@example.com",
                         NormalizedEmail = "SELLER@EXAMPLE.COM",
-                        UserName = "seller@exampe.com",
+                        UserName = "seller@example.com",
                         NormalizedUserName = "SELLER@EXAMPLE.COM",
                         // sellerseller
                         PasswordHash =
@@ -271,7 +271,7 @@ namespace Klicko_be.Data
                     new ApplicationUser()
                     {
                         Id = "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2",
-                        FirstName = "Regular",
+                        FirstName = "User",
                         LastName = "User",
                         RegistrationDate = DateTime.Parse("09/04/2025 11:00:56"),
                         Email = "user@example.com",
@@ -423,7 +423,7 @@ namespace Klicko_be.Data
                         IsInEvidence = true,
                         IsPopular = false,
                         IsDeleted = false,
-                        CoverImage = "ferrari.jpg",
+                        CoverImage = "372a18e3-7932-4ef5-8471-99ce5f3e098a.jpg",
                         ValidityInMonths = 24,
                     },
                     new Experience()
@@ -451,7 +451,7 @@ namespace Klicko_be.Data
                         IsInEvidence = true,
                         IsPopular = false,
                         IsDeleted = false,
-                        CoverImage = "cucinaToscana.jpg",
+                        CoverImage = "350540d5-80b9-49fa-8fb2-8a58c80d149c.jpg",
                         ValidityInMonths = 12,
                     },
                     new Experience()
@@ -479,7 +479,7 @@ namespace Klicko_be.Data
                         IsInEvidence = true,
                         IsPopular = false,
                         IsDeleted = false,
-                        CoverImage = "sentieroDegliDei.jpg",
+                        CoverImage = "f34f2a25-8e55-4826-8ce4-aca2a2a76c3a.jpg",
                         ValidityInMonths = 6,
                     },
                     new Experience()
@@ -507,7 +507,7 @@ namespace Klicko_be.Data
                         IsInEvidence = false,
                         IsPopular = true,
                         IsDeleted = false,
-                        CoverImage = "mongolfieraTramonto.jpg",
+                        CoverImage = "b33390f8-430a-456c-b821-83a8b9406043.jpg",
                         ValidityInMonths = 8,
                     },
                     new Experience()
@@ -535,7 +535,7 @@ namespace Klicko_be.Data
                         IsInEvidence = false,
                         IsPopular = true,
                         IsDeleted = false,
-                        CoverImage = "veneziaFotografica.jpg",
+                        CoverImage = "280b9c0f-257e-4f05-b2db-84e704fda33d.jpg",
                         ValidityInMonths = 8,
                     },
                     new Experience()
@@ -562,7 +562,7 @@ namespace Klicko_be.Data
                         IsInEvidence = false,
                         IsPopular = true,
                         IsDeleted = false,
-                        CoverImage = "degustazioneMontepulciano.jpg",
+                        CoverImage = "4949849a-cc7a-4481-9c77-929fdbb71310.jpg",
                         ValidityInMonths = 12,
                     },
                     new Experience()
@@ -590,7 +590,7 @@ namespace Klicko_be.Data
                         IsInEvidence = false,
                         IsPopular = true,
                         IsDeleted = false,
-                        CoverImage = "raftingUmbria.jpg",
+                        CoverImage = "a8b9cf9c-4f8e-4e18-8413-bf5de4cb4b3c.jpg",
                         ValidityInMonths = 12,
                     },
                     new Experience()
@@ -618,7 +618,7 @@ namespace Klicko_be.Data
                         IsInEvidence = false,
                         IsPopular = false,
                         IsDeleted = false,
-                        CoverImage = "ebikeMontefeltro.jpg",
+                        CoverImage = "5f37b647-e33d-440e-88ed-2e0d956f377a.jpg",
                         ValidityInMonths = 12,
                     },
                     new Experience()
@@ -646,7 +646,7 @@ namespace Klicko_be.Data
                         IsInEvidence = false,
                         IsPopular = false,
                         IsDeleted = false,
-                        CoverImage = "termeSaturnia.jpg",
+                        CoverImage = "44811c06-278a-45e5-8411-717827a59107.jpg",
                         ValidityInMonths = 12,
                     },
                     new Experience()
@@ -673,7 +673,7 @@ namespace Klicko_be.Data
                         IsInEvidence = false,
                         IsPopular = false,
                         IsDeleted = false,
-                        CoverImage = "escursioneEtna.jpg",
+                        CoverImage = "cf8e8bf0-59b5-44b2-bb5c-478b18b7f767.jpg",
                         ValidityInMonths = 24,
                     }
                 );
@@ -1002,250 +1002,250 @@ namespace Klicko_be.Data
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("1fda0cd4-e54a-47dc-985f-55295e9d0405"),
-                        Url = "exp1img1.jpg",
+                        Url = "d709d72d-e919-4e25-90e7-f7174fab8b45.jpg",
                         ExperienceId = Guid.Parse("589aca9c-2b07-42d2-8920-c4406e5da977"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("5e3b3401-2668-4ec9-a893-ee6c535ddd78"),
-                        Url = "exp1img2.jpg",
+                        Url = "82b24643-7e82-4042-be6b-d1704c537371.jpg",
                         ExperienceId = Guid.Parse("589aca9c-2b07-42d2-8920-c4406e5da977"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("f4840eb1-e492-480f-a418-5f30d68cb215"),
-                        Url = "exp1img3.jpg",
+                        Url = "69fee451-9f08-4ab1-bcfb-cf7c8068c3a4.jpg",
                         ExperienceId = Guid.Parse("589aca9c-2b07-42d2-8920-c4406e5da977"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("eb227c65-5393-4c68-9eab-68406b78a89d"),
-                        Url = "exp1img4.jpg",
+                        Url = "f12738bf-a7f0-4dc1-a16e-90c3fc6ea823.jpg",
                         ExperienceId = Guid.Parse("589aca9c-2b07-42d2-8920-c4406e5da977"),
                     },
                     // esperienza 2 (Cucina toscana nella tenuta di un castello)
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("ead880ce-bc68-40ff-982c-639e96f3de15"),
-                        Url = "exp2img1.jpg",
+                        Url = "8a18db5b-415d-4c79-ba04-f6c2bd3e534d.jpg",
                         ExperienceId = Guid.Parse("62947bc9-568c-4c34-a8e1-2fb6f05bca61"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("7f58809a-c241-4e3e-b841-9327111940d4"),
-                        Url = "exp2img2.jpg",
+                        Url = "e10af629-01f0-41f5-b078-fe56db331999.jpg",
                         ExperienceId = Guid.Parse("62947bc9-568c-4c34-a8e1-2fb6f05bca61"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("67673f47-35fd-4c14-a026-d7a61a8936ed"),
-                        Url = "exp2img3.jpg",
+                        Url = "d5de5dc4-2e9c-4c2b-8284-85039169bca9.jpg",
                         ExperienceId = Guid.Parse("62947bc9-568c-4c34-a8e1-2fb6f05bca61"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("92c77996-58e0-44ad-b263-f02f11820a6d"),
-                        Url = "exp2img4.jpg",
+                        Url = "54b08176-c485-416f-8950-9c74a5b1feea.jpg",
                         ExperienceId = Guid.Parse("62947bc9-568c-4c34-a8e1-2fb6f05bca61"),
                     },
                     // esperienza 3 (Trekking sul sentiero degli Dei)
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("220d183a-888b-4974-b8f6-ee506f647338"),
-                        Url = "exp3img1.jpg",
+                        Url = "f2a0c878-277c-4ab7-ac8b-aee7dbf4bfa2.jpg",
                         ExperienceId = Guid.Parse("bb36c355-2c8e-4a45-9be3-151934e2ff4c"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("bba9ae96-13a7-4e28-abcd-63f33f63a28d"),
-                        Url = "exp3img2.jpg",
+                        Url = "afab16dd-fb18-4b62-ba16-bea8c4514d68.jpg",
                         ExperienceId = Guid.Parse("bb36c355-2c8e-4a45-9be3-151934e2ff4c"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("f9ae8eaf-069a-47cd-b19e-6b6e8166165e"),
-                        Url = "exp3img3.jpg",
+                        Url = "e46dace3-f0ac-4bca-8fd1-b8e25c815472.jpg",
                         ExperienceId = Guid.Parse("bb36c355-2c8e-4a45-9be3-151934e2ff4c"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("4bfd8674-47b5-481a-80ca-bc07ab00d627"),
-                        Url = "exp3img4.jpg",
+                        Url = "199c2fa1-560a-4a26-b0e3-7e59f5b04e9f.jpg",
                         ExperienceId = Guid.Parse("bb36c355-2c8e-4a45-9be3-151934e2ff4c"),
                     },
                     // esperienza 4 (Volo in mongolfiera al tramonto)
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("67d4b845-2959-41cd-ac95-b442a4e32cb5"),
-                        Url = "exp4img1.jpg",
+                        Url = "cce26a3b-f6dc-47eb-a624-2bc4df0a7623.jpg",
                         ExperienceId = Guid.Parse("8dc3b2f9-850b-42cc-824c-7758112b9370"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("e20bf13c-a35a-44f6-ba11-12eca65c0366"),
-                        Url = "exp4img2.jpg",
+                        Url = "edaf24b2-0a7b-4a18-b44f-eca6ad470460.jpg",
                         ExperienceId = Guid.Parse("8dc3b2f9-850b-42cc-824c-7758112b9370"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("9b2c4cb0-59a6-41b4-84ae-0ddeee3f4e9e"),
-                        Url = "exp4img3.jpg",
+                        Url = "800cffd3-c4f6-4395-b444-ff09cf93ba01.jpg",
                         ExperienceId = Guid.Parse("8dc3b2f9-850b-42cc-824c-7758112b9370"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("721063ed-d498-4070-a4e1-940a9f849a14"),
-                        Url = "exp4img4.jpg",
+                        Url = "3b6f886f-a15a-45ff-9644-944d0b97eaaa.jpg",
                         ExperienceId = Guid.Parse("8dc3b2f9-850b-42cc-824c-7758112b9370"),
                     },
                     // esperienza 5 (Tour fotografico di Venezia all'alba)
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("73138467-d5af-499a-8624-f9d5de52a54f"),
-                        Url = "exp5img1.jpg",
+                        Url = "77264134-6aab-419e-ad5d-3503697c6823.jpg",
                         ExperienceId = Guid.Parse("cec8f297-d65b-485a-adc3-f015139cd0c2"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("00889ac8-a53d-4d5e-b655-aac991787de0"),
-                        Url = "exp5img2.jpg",
+                        Url = "206d26ab-33c5-4e4a-b79c-9271e14909ef.jpg",
                         ExperienceId = Guid.Parse("cec8f297-d65b-485a-adc3-f015139cd0c2"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("8fae68b9-e4f8-420a-91a8-4fea7c80b7e0"),
-                        Url = "exp5img3.jpg",
+                        Url = "b2bbcf89-6fb0-44a5-924e-6271a8f824b6.jpg",
                         ExperienceId = Guid.Parse("cec8f297-d65b-485a-adc3-f015139cd0c2"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("a06f8821-9e20-4a89-bd19-27db1ac39f11"),
-                        Url = "exp5img4.jpg",
+                        Url = "296d02ff-cc6c-4027-81d6-fa75630d9e5b.jpg",
                         ExperienceId = Guid.Parse("cec8f297-d65b-485a-adc3-f015139cd0c2"),
                     },
                     // esperienza 6 (Degustazione di vini in cantina sotterranea)
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("b23f5aef-aa7e-44c9-b38f-29c89fd60831"),
-                        Url = "exp6img1.jpg",
+                        Url = "fbb011ba-234d-4b67-9edd-4e5a5f7c103e.jpg",
                         ExperienceId = Guid.Parse("6f236570-1625-4190-9a4f-0da2d0639386"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("a9ceabed-f21c-4f01-9303-26852c15524a"),
-                        Url = "exp6img2.jpg",
+                        Url = "91ccd7ae-1cec-4462-bae5-a0f97cc43713.jpg",
                         ExperienceId = Guid.Parse("6f236570-1625-4190-9a4f-0da2d0639386"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("fd56c8cb-ee90-4140-9134-ab759f6b5be5"),
-                        Url = "exp6img3.jpg",
+                        Url = "26ba5e64-1634-41a0-a3de-d08ea7e86d9d.jpg",
                         ExperienceId = Guid.Parse("6f236570-1625-4190-9a4f-0da2d0639386"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("93c20292-3ece-4b3a-b5d7-0eeb103f021e"),
-                        Url = "exp6img4.jpg",
+                        Url = "61bf3454-723f-44f2-831e-340673d566fd.jpg",
                         ExperienceId = Guid.Parse("6f236570-1625-4190-9a4f-0da2d0639386"),
                     },
                     // esperienza 7 (Rafting nelle rapide del fiume Nera)
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("4e0c61df-cc97-4538-bc2e-b922d1e4e17b"),
-                        Url = "exp7img1.jpg",
+                        Url = "e53b1924-4882-4551-bd05-fe72a6a7769e.jpg",
                         ExperienceId = Guid.Parse("81c17e89-5bc3-42bb-9897-ddf27d111440"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("714a64bf-fae0-40c6-a198-ec84d320a03c"),
-                        Url = "exp7img2.jpg",
+                        Url = "60b84064-9f5b-454e-a2ea-d38c46c2f03f.jpg",
                         ExperienceId = Guid.Parse("81c17e89-5bc3-42bb-9897-ddf27d111440"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("f2dfc283-587d-4fd9-a29b-599868a05bf6"),
-                        Url = "exp7img3.jpg",
+                        Url = "906885f5-840b-4410-bb69-84f6b492c876.jpg",
                         ExperienceId = Guid.Parse("81c17e89-5bc3-42bb-9897-ddf27d111440"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("e83e40ee-9a82-4885-b661-6e1ecb6dadef"),
-                        Url = "exp7img4.jpg",
+                        Url = "ae68d8ba-1066-4c99-b1a0-e487da50c0a6.jpg",
                         ExperienceId = Guid.Parse("81c17e89-5bc3-42bb-9897-ddf27d111440"),
                     },
                     // esperienza 8 (Escursione in e-bike nei borghi del Montefeltro)
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("8b13d878-8ebc-452e-bf29-b483f72c6887"),
-                        Url = "exp8img1.jpg",
+                        Url = "0ff472a2-8be1-43a5-8671-4bf71150b036.jpg",
                         ExperienceId = Guid.Parse("ff3ed239-e178-4632-8385-042286991c66"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("9ea84996-fb02-49ac-8a73-c315e1bc6abd"),
-                        Url = "exp8img2.jpg",
+                        Url = "5d1e782c-7e22-4045-92bc-eb53b15164ce.jpg",
                         ExperienceId = Guid.Parse("ff3ed239-e178-4632-8385-042286991c66"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("0c665169-d7a3-4781-8ad3-b656ed553183"),
-                        Url = "exp8img3.jpg",
+                        Url = "e676f25d-4eb5-4a57-a5ec-93a8b7d0c26c.jpg",
                         ExperienceId = Guid.Parse("ff3ed239-e178-4632-8385-042286991c66"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("411e1f6a-7bb8-48bb-9a50-8de52bff30fb"),
-                        Url = "exp8img4.jpg",
+                        Url = "ab6653b8-dcd2-4cf3-9402-78a29db6f26c.jpg",
                         ExperienceId = Guid.Parse("ff3ed239-e178-4632-8385-042286991c66"),
                     },
                     // esperienza 9 (Percorso benessere in grotta termale)
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("dac61436-2392-47d6-a679-6f6d1ae94225"),
-                        Url = "exp9img1.jpg",
+                        Url = "d8c1f786-4bb3-44df-b5a8-7b806788c246.jpg",
                         ExperienceId = Guid.Parse("0c94ee3c-86f3-4e83-afb2-2a753416227a"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("3f4df348-1950-4ce6-9d8a-3b5803cdef49"),
-                        Url = "exp9img2.jpg",
+                        Url = "54b7f0e6-9115-4b2c-b0a9-37b2f049eaad.jpg",
                         ExperienceId = Guid.Parse("0c94ee3c-86f3-4e83-afb2-2a753416227a"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("79f38fb1-39b2-4f72-a08c-16dac303f0ef"),
-                        Url = "exp9img3.jpg",
+                        Url = "0785f2aa-1e76-4d82-ada6-1e70c27621e1.jpg",
                         ExperienceId = Guid.Parse("0c94ee3c-86f3-4e83-afb2-2a753416227a"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("0e33f4df-9337-4158-b444-caedb779b555"),
-                        Url = "exp9img4.jpg",
+                        Url = "020a0db7-2ca2-472a-bb79-6fe49dbbb328.jpg",
                         ExperienceId = Guid.Parse("0c94ee3c-86f3-4e83-afb2-2a753416227a"),
                     },
                     // esperienza 10 (Escursione notturna sull'Etna)
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("1d43d597-036f-4c7c-976b-84a49d8a802a"),
-                        Url = "exp10img1.jpg",
+                        Url = "87e71440-0f75-4752-9932-89875061ae2a.jpg",
                         ExperienceId = Guid.Parse("e25b1044-5049-4ca9-954c-db76ae235862"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("0f3000ac-68fd-46e3-b0cc-bcd40f2927bc"),
-                        Url = "exp10img2.jpg",
+                        Url = "cc614324-72a9-4020-bf14-57806546f28f.jpg",
                         ExperienceId = Guid.Parse("e25b1044-5049-4ca9-954c-db76ae235862"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("e343c782-8671-4eba-b282-d5fd7a86c9ab"),
-                        Url = "exp10img3.jpg",
+                        Url = "0a056b0c-8418-4d1a-8a1e-fd5e366aef78.jpg",
                         ExperienceId = Guid.Parse("e25b1044-5049-4ca9-954c-db76ae235862"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("ed5a4c3e-d0b2-4f75-a1e4-825ebe7a748d"),
-                        Url = "exp10img4.jpg",
+                        Url = "39f57bd8-d2db-4d9e-8674-16d015703285.jpg",
                         ExperienceId = Guid.Parse("e25b1044-5049-4ca9-954c-db76ae235862"),
                     }
                 );
