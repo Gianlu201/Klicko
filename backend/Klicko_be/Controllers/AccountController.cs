@@ -210,5 +210,45 @@ namespace Klicko_be.Controllers
 
             return Ok(new TokenResponseDto() { Token = tokenString, Expires = expiry });
         }
+
+        [HttpPut("EditRole/{userId:guid}")]
+        public async Task<IActionResult> EditUserRole([FromBody] Guid newRoleId, Guid userId)
+        {
+            try
+            {
+                var role = await _roleManager.FindByIdAsync(newRoleId.ToString());
+
+                if (role == null)
+                {
+                    return BadRequest(new { Message = "Role not found!" });
+                }
+
+                var user = await _userManager.FindByIdAsync(userId.ToString());
+
+                if (user == null)
+                {
+                    return BadRequest(new { Message = "User not found!" });
+                }
+
+                var userRoles = await _userManager.GetRolesAsync(user);
+                if (userRoles.Count > 0)
+                {
+                    await _userManager.RemoveFromRolesAsync(user, userRoles);
+                }
+                var result = await _userManager.AddToRoleAsync(user, role.Name);
+                if (!result.Succeeded)
+                {
+                    return BadRequest(new { Message = "Something went wrong!" });
+                }
+
+                return Ok(
+                    new EditUserRoleResponseDto() { Message = "User role updated successfully!" }
+                );
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
     }
 }
