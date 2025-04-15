@@ -33,6 +33,10 @@ function App() {
               <Route path='/cart' element={<CartPage />} />
               <Route path='/dashboard' element={<DashboardPage />} />
               <Route path='/dashboard/:tab' element={<DashboardPage />} />
+              <Route
+                path='/dashboard/:tab/:option'
+                element={<DashboardPage />}
+              />
             </Routes>
           </div>
           <Footer />

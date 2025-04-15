@@ -128,7 +128,7 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("RegistrationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 10, 14, 30, 29, 129, DateTimeKind.Utc).AddTicks(867));
+                        .HasDefaultValue(new DateTime(2025, 4, 15, 14, 26, 49, 974, DateTimeKind.Utc).AddTicks(8856));
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -158,7 +158,7 @@ namespace Klicko_be.Migrations
                             Id = "3a8073b2-b954-428a-a4b9-6e4b3f5db051",
                             AccessFailedCount = 0,
                             CartId = new Guid("ad0b8ebb-3e25-4c9f-a7dd-7e07c3e7ab3f"),
-                            ConcurrencyStamp = "0e2372de-69b4-4864-b0e8-34d2e22b4071",
+                            ConcurrencyStamp = "3f55bd75-e2b3-40a4-9e93-975344af2937",
                             Email = "admin@exampe.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -169,7 +169,7 @@ namespace Klicko_be.Migrations
                             PasswordHash = "AQAAAAIAAYagAAAAEJ924mp2s2BX/BpdalZ6f2s1qlMl3fxdcEPcaKFV6BxA5frV73oVpuC1V9F4PHCJ2g==",
                             PhoneNumberConfirmed = false,
                             RegistrationDate = new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified),
-                            SecurityStamp = "e9647b42-7a15-497a-9611-cef17b3c434e",
+                            SecurityStamp = "6c11c51d-ef5c-43c6-984b-5d3e8d46e212",
                             TwoFactorEnabled = false,
                             UserName = "admin@exampe.com"
                         },
@@ -178,7 +178,7 @@ namespace Klicko_be.Migrations
                             Id = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
                             AccessFailedCount = 0,
                             CartId = new Guid("59a9d57e-c339-4a73-8d02-69cc186a5385"),
-                            ConcurrencyStamp = "22fe549b-bbdf-48ee-9304-e4b13d9578eb",
+                            ConcurrencyStamp = "003b983f-ea4f-47c6-a4f2-9f29bc4e1365",
                             Email = "seller@exampe.com",
                             EmailConfirmed = false,
                             FirstName = "Seller",
@@ -189,7 +189,7 @@ namespace Klicko_be.Migrations
                             PasswordHash = "AQAAAAIAAYagAAAAEJP1xbBcaikPe32EBy3MLTcexMUhKB7jQsEGuRiIlRJOWuiJwUGI/v0s83m7H70okg==",
                             PhoneNumberConfirmed = false,
                             RegistrationDate = new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified),
-                            SecurityStamp = "2aa54c78-327e-461b-becb-3e51a0a969ef",
+                            SecurityStamp = "00e2b372-2b7e-4648-898a-7ecf0ae1f4c4",
                             TwoFactorEnabled = false,
                             UserName = "seller@exampe.com"
                         },
@@ -198,8 +198,8 @@ namespace Klicko_be.Migrations
                             Id = "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2",
                             AccessFailedCount = 0,
                             CartId = new Guid("b64a049a-6d76-4c1c-866c-e0169c92f1d6"),
-                            ConcurrencyStamp = "76d68f8d-f480-48ad-bd46-a92d306001fb",
-                            Email = "user@exampe.com",
+                            ConcurrencyStamp = "d9acd8e2-66e8-4869-bedd-1f657cd2dfad",
+                            Email = "user@example.com",
                             EmailConfirmed = false,
                             FirstName = "Regular",
                             LastName = "User",
@@ -209,9 +209,9 @@ namespace Klicko_be.Migrations
                             PasswordHash = "AQAAAAIAAYagAAAAEL6u4Tox47kxNqt9nm4+vRn+SzahthaQ55UejBFFdJvvUNNCfqIWRI246s9wJiZ43A==",
                             PhoneNumberConfirmed = false,
                             RegistrationDate = new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified),
-                            SecurityStamp = "0a1ea1e2-0eae-488d-8374-574057d34f11",
+                            SecurityStamp = "3c597795-9e36-4797-8534-6ddf94064bb4",
                             TwoFactorEnabled = false,
-                            UserName = "user@exampe.com"
+                            UserName = "user@example.com"
                         });
                 });
 
@@ -584,12 +584,12 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 10, 14, 30, 29, 129, DateTimeKind.Utc).AddTicks(9325));
+                        .HasDefaultValue(new DateTime(2025, 4, 15, 14, 26, 49, 975, DateTimeKind.Utc).AddTicks(3682));
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 10, 14, 30, 29, 130, DateTimeKind.Utc).AddTicks(62));
+                        .HasDefaultValue(new DateTime(2025, 4, 15, 14, 26, 49, 975, DateTimeKind.Utc).AddTicks(4104));
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -638,7 +638,7 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 10, 14, 30, 29, 130, DateTimeKind.Utc).AddTicks(871));
+                        .HasDefaultValue(new DateTime(2025, 4, 15, 14, 26, 49, 975, DateTimeKind.Utc).AddTicks(4452));
 
                     b.Property<Guid>("ExperienceId")
                         .HasColumnType("uniqueidentifier");
@@ -812,12 +812,12 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("LastEditDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 10, 14, 30, 29, 129, DateTimeKind.Utc).AddTicks(2647));
+                        .HasDefaultValue(new DateTime(2025, 4, 15, 14, 26, 49, 975, DateTimeKind.Utc).AddTicks(26));
 
                     b.Property<DateTime>("LoadingDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 10, 14, 30, 29, 129, DateTimeKind.Utc).AddTicks(1781));
+                        .HasDefaultValue(new DateTime(2025, 4, 15, 14, 26, 49, 974, DateTimeKind.Utc).AddTicks(9305));
 
                     b.Property<int>("MaxParticipants")
                         .HasColumnType("int");
@@ -1122,10 +1122,6 @@ namespace Klicko_be.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("AltText")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<Guid>("ExperienceId")
                         .HasColumnType("uniqueidentifier");
 
@@ -1143,280 +1139,240 @@ namespace Klicko_be.Migrations
                         new
                         {
                             ImageId = new Guid("1fda0cd4-e54a-47dc-985f-55295e9d0405"),
-                            AltText = "Ferrari Driving Experience a Monza",
                             ExperienceId = new Guid("589aca9c-2b07-42d2-8920-c4406e5da977"),
                             Url = "exp1img1.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("5e3b3401-2668-4ec9-a893-ee6c535ddd78"),
-                            AltText = "Ferrari Driving Experience a Monza",
                             ExperienceId = new Guid("589aca9c-2b07-42d2-8920-c4406e5da977"),
                             Url = "exp1img2.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("f4840eb1-e492-480f-a418-5f30d68cb215"),
-                            AltText = "Ferrari Driving Experience a Monza",
                             ExperienceId = new Guid("589aca9c-2b07-42d2-8920-c4406e5da977"),
                             Url = "exp1img3.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("eb227c65-5393-4c68-9eab-68406b78a89d"),
-                            AltText = "Ferrari Driving Experience a Monza",
                             ExperienceId = new Guid("589aca9c-2b07-42d2-8920-c4406e5da977"),
                             Url = "exp1img4.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("ead880ce-bc68-40ff-982c-639e96f3de15"),
-                            AltText = "Cucina toscana nella tenuta di un castello",
                             ExperienceId = new Guid("62947bc9-568c-4c34-a8e1-2fb6f05bca61"),
                             Url = "exp2img1.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("7f58809a-c241-4e3e-b841-9327111940d4"),
-                            AltText = "Cucina toscana nella tenuta di un castello",
                             ExperienceId = new Guid("62947bc9-568c-4c34-a8e1-2fb6f05bca61"),
                             Url = "exp2img2.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("67673f47-35fd-4c14-a026-d7a61a8936ed"),
-                            AltText = "Cucina toscana nella tenuta di un castello",
                             ExperienceId = new Guid("62947bc9-568c-4c34-a8e1-2fb6f05bca61"),
                             Url = "exp2img3.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("92c77996-58e0-44ad-b263-f02f11820a6d"),
-                            AltText = "Cucina toscana nella tenuta di un castello",
                             ExperienceId = new Guid("62947bc9-568c-4c34-a8e1-2fb6f05bca61"),
                             Url = "exp2img4.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("220d183a-888b-4974-b8f6-ee506f647338"),
-                            AltText = "Trekking sul sentiero degli Dei",
                             ExperienceId = new Guid("bb36c355-2c8e-4a45-9be3-151934e2ff4c"),
                             Url = "exp3img1.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("bba9ae96-13a7-4e28-abcd-63f33f63a28d"),
-                            AltText = "Trekking sul sentiero degli Dei",
                             ExperienceId = new Guid("bb36c355-2c8e-4a45-9be3-151934e2ff4c"),
                             Url = "exp3img2.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("f9ae8eaf-069a-47cd-b19e-6b6e8166165e"),
-                            AltText = "Trekking sul sentiero degli Dei",
                             ExperienceId = new Guid("bb36c355-2c8e-4a45-9be3-151934e2ff4c"),
                             Url = "exp3img3.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("4bfd8674-47b5-481a-80ca-bc07ab00d627"),
-                            AltText = "Trekking sul sentiero degli Dei",
                             ExperienceId = new Guid("bb36c355-2c8e-4a45-9be3-151934e2ff4c"),
                             Url = "exp3img4.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("67d4b845-2959-41cd-ac95-b442a4e32cb5"),
-                            AltText = "Volo in mongolfiera al tramonto",
                             ExperienceId = new Guid("8dc3b2f9-850b-42cc-824c-7758112b9370"),
                             Url = "exp4img1.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("e20bf13c-a35a-44f6-ba11-12eca65c0366"),
-                            AltText = "Volo in mongolfiera al tramonto",
                             ExperienceId = new Guid("8dc3b2f9-850b-42cc-824c-7758112b9370"),
                             Url = "exp4img2.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("9b2c4cb0-59a6-41b4-84ae-0ddeee3f4e9e"),
-                            AltText = "Volo in mongolfiera al tramonto",
                             ExperienceId = new Guid("8dc3b2f9-850b-42cc-824c-7758112b9370"),
                             Url = "exp4img3.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("721063ed-d498-4070-a4e1-940a9f849a14"),
-                            AltText = "Volo in mongolfiera al tramonto",
                             ExperienceId = new Guid("8dc3b2f9-850b-42cc-824c-7758112b9370"),
                             Url = "exp4img4.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("73138467-d5af-499a-8624-f9d5de52a54f"),
-                            AltText = "Tour fotografico di Venezia all'alba",
                             ExperienceId = new Guid("cec8f297-d65b-485a-adc3-f015139cd0c2"),
                             Url = "exp5img1.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("00889ac8-a53d-4d5e-b655-aac991787de0"),
-                            AltText = "Tour fotografico di Venezia all'alba",
                             ExperienceId = new Guid("cec8f297-d65b-485a-adc3-f015139cd0c2"),
                             Url = "exp5img2.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("8fae68b9-e4f8-420a-91a8-4fea7c80b7e0"),
-                            AltText = "Tour fotografico di Venezia all'alba",
                             ExperienceId = new Guid("cec8f297-d65b-485a-adc3-f015139cd0c2"),
                             Url = "exp5img3.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("a06f8821-9e20-4a89-bd19-27db1ac39f11"),
-                            AltText = "Tour fotografico di Venezia all'alba",
                             ExperienceId = new Guid("cec8f297-d65b-485a-adc3-f015139cd0c2"),
                             Url = "exp5img4.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("b23f5aef-aa7e-44c9-b38f-29c89fd60831"),
-                            AltText = "Degustazione di vini in cantina sotterranea",
                             ExperienceId = new Guid("6f236570-1625-4190-9a4f-0da2d0639386"),
                             Url = "exp6img1.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("a9ceabed-f21c-4f01-9303-26852c15524a"),
-                            AltText = "Degustazione di vini in cantina sotterranea",
                             ExperienceId = new Guid("6f236570-1625-4190-9a4f-0da2d0639386"),
                             Url = "exp6img2.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("fd56c8cb-ee90-4140-9134-ab759f6b5be5"),
-                            AltText = "Degustazione di vini in cantina sotterranea",
                             ExperienceId = new Guid("6f236570-1625-4190-9a4f-0da2d0639386"),
                             Url = "exp6img3.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("93c20292-3ece-4b3a-b5d7-0eeb103f021e"),
-                            AltText = "Degustazione di vini in cantina sotterranea",
                             ExperienceId = new Guid("6f236570-1625-4190-9a4f-0da2d0639386"),
                             Url = "exp6img4.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("4e0c61df-cc97-4538-bc2e-b922d1e4e17b"),
-                            AltText = "Rafting nelle rapide del fiume Nera",
                             ExperienceId = new Guid("81c17e89-5bc3-42bb-9897-ddf27d111440"),
                             Url = "exp7img1.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("714a64bf-fae0-40c6-a198-ec84d320a03c"),
-                            AltText = "Rafting nelle rapide del fiume Nera",
                             ExperienceId = new Guid("81c17e89-5bc3-42bb-9897-ddf27d111440"),
                             Url = "exp7img2.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("f2dfc283-587d-4fd9-a29b-599868a05bf6"),
-                            AltText = "Rafting nelle rapide del fiume Nera",
                             ExperienceId = new Guid("81c17e89-5bc3-42bb-9897-ddf27d111440"),
                             Url = "exp7img3.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("e83e40ee-9a82-4885-b661-6e1ecb6dadef"),
-                            AltText = "Rafting nelle rapide del fiume Nera",
                             ExperienceId = new Guid("81c17e89-5bc3-42bb-9897-ddf27d111440"),
                             Url = "exp7img4.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("8b13d878-8ebc-452e-bf29-b483f72c6887"),
-                            AltText = "Escursione in e-bike nei borghi del Montefeltro",
                             ExperienceId = new Guid("ff3ed239-e178-4632-8385-042286991c66"),
                             Url = "exp8img1.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("9ea84996-fb02-49ac-8a73-c315e1bc6abd"),
-                            AltText = "Escursione in e-bike nei borghi del Montefeltro",
                             ExperienceId = new Guid("ff3ed239-e178-4632-8385-042286991c66"),
                             Url = "exp8img2.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("0c665169-d7a3-4781-8ad3-b656ed553183"),
-                            AltText = "Escursione in e-bike nei borghi del Montefeltro",
                             ExperienceId = new Guid("ff3ed239-e178-4632-8385-042286991c66"),
                             Url = "exp8img3.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("411e1f6a-7bb8-48bb-9a50-8de52bff30fb"),
-                            AltText = "Escursione in e-bike nei borghi del Montefeltro",
                             ExperienceId = new Guid("ff3ed239-e178-4632-8385-042286991c66"),
                             Url = "exp8img4.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("dac61436-2392-47d6-a679-6f6d1ae94225"),
-                            AltText = "Percorso benessere in grotta termale",
                             ExperienceId = new Guid("0c94ee3c-86f3-4e83-afb2-2a753416227a"),
                             Url = "exp9img1.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("3f4df348-1950-4ce6-9d8a-3b5803cdef49"),
-                            AltText = "Percorso benessere in grotta termale",
                             ExperienceId = new Guid("0c94ee3c-86f3-4e83-afb2-2a753416227a"),
                             Url = "exp9img2.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("79f38fb1-39b2-4f72-a08c-16dac303f0ef"),
-                            AltText = "Percorso benessere in grotta termale",
                             ExperienceId = new Guid("0c94ee3c-86f3-4e83-afb2-2a753416227a"),
                             Url = "exp9img3.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("0e33f4df-9337-4158-b444-caedb779b555"),
-                            AltText = "Percorso benessere in grotta termale",
                             ExperienceId = new Guid("0c94ee3c-86f3-4e83-afb2-2a753416227a"),
                             Url = "exp9img4.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("1d43d597-036f-4c7c-976b-84a49d8a802a"),
-                            AltText = "Escursione notturna sull'Etna",
                             ExperienceId = new Guid("e25b1044-5049-4ca9-954c-db76ae235862"),
                             Url = "exp10img1.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("0f3000ac-68fd-46e3-b0cc-bcd40f2927bc"),
-                            AltText = "Escursione notturna sull'Etna",
                             ExperienceId = new Guid("e25b1044-5049-4ca9-954c-db76ae235862"),
                             Url = "exp10img2.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("e343c782-8671-4eba-b282-d5fd7a86c9ab"),
-                            AltText = "Escursione notturna sull'Etna",
                             ExperienceId = new Guid("e25b1044-5049-4ca9-954c-db76ae235862"),
                             Url = "exp10img3.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("ed5a4c3e-d0b2-4f75-a1e4-825ebe7a748d"),
-                            AltText = "Escursione notturna sull'Etna",
                             ExperienceId = new Guid("e25b1044-5049-4ca9-954c-db76ae235862"),
                             Url = "exp10img4.jpg"
                         });
@@ -1431,7 +1387,7 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 10, 14, 30, 29, 129, DateTimeKind.Utc).AddTicks(6931));
+                        .HasDefaultValue(new DateTime(2025, 4, 15, 14, 26, 49, 975, DateTimeKind.Utc).AddTicks(2529));
 
                     b.Property<int>("OrderNumber")
                         .ValueGeneratedOnAdd()

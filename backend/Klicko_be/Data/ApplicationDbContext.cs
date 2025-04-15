@@ -274,9 +274,9 @@ namespace Klicko_be.Data
                         FirstName = "Regular",
                         LastName = "User",
                         RegistrationDate = DateTime.Parse("09/04/2025 11:00:56"),
-                        Email = "user@exampe.com",
+                        Email = "user@example.com",
                         NormalizedEmail = "USER@EXAMPLE.COM",
-                        UserName = "user@exampe.com",
+                        UserName = "user@example.com",
                         NormalizedUserName = "USER@EXAMPLE.COM",
                         // useruser
                         PasswordHash =
@@ -1003,28 +1003,24 @@ namespace Klicko_be.Data
                     {
                         ImageId = Guid.Parse("1fda0cd4-e54a-47dc-985f-55295e9d0405"),
                         Url = "exp1img1.jpg",
-                        AltText = "Ferrari Driving Experience a Monza",
                         ExperienceId = Guid.Parse("589aca9c-2b07-42d2-8920-c4406e5da977"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("5e3b3401-2668-4ec9-a893-ee6c535ddd78"),
                         Url = "exp1img2.jpg",
-                        AltText = "Ferrari Driving Experience a Monza",
                         ExperienceId = Guid.Parse("589aca9c-2b07-42d2-8920-c4406e5da977"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("f4840eb1-e492-480f-a418-5f30d68cb215"),
                         Url = "exp1img3.jpg",
-                        AltText = "Ferrari Driving Experience a Monza",
                         ExperienceId = Guid.Parse("589aca9c-2b07-42d2-8920-c4406e5da977"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("eb227c65-5393-4c68-9eab-68406b78a89d"),
                         Url = "exp1img4.jpg",
-                        AltText = "Ferrari Driving Experience a Monza",
                         ExperienceId = Guid.Parse("589aca9c-2b07-42d2-8920-c4406e5da977"),
                     },
                     // esperienza 2 (Cucina toscana nella tenuta di un castello)
@@ -1032,28 +1028,24 @@ namespace Klicko_be.Data
                     {
                         ImageId = Guid.Parse("ead880ce-bc68-40ff-982c-639e96f3de15"),
                         Url = "exp2img1.jpg",
-                        AltText = "Cucina toscana nella tenuta di un castello",
                         ExperienceId = Guid.Parse("62947bc9-568c-4c34-a8e1-2fb6f05bca61"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("7f58809a-c241-4e3e-b841-9327111940d4"),
                         Url = "exp2img2.jpg",
-                        AltText = "Cucina toscana nella tenuta di un castello",
                         ExperienceId = Guid.Parse("62947bc9-568c-4c34-a8e1-2fb6f05bca61"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("67673f47-35fd-4c14-a026-d7a61a8936ed"),
                         Url = "exp2img3.jpg",
-                        AltText = "Cucina toscana nella tenuta di un castello",
                         ExperienceId = Guid.Parse("62947bc9-568c-4c34-a8e1-2fb6f05bca61"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("92c77996-58e0-44ad-b263-f02f11820a6d"),
                         Url = "exp2img4.jpg",
-                        AltText = "Cucina toscana nella tenuta di un castello",
                         ExperienceId = Guid.Parse("62947bc9-568c-4c34-a8e1-2fb6f05bca61"),
                     },
                     // esperienza 3 (Trekking sul sentiero degli Dei)
@@ -1061,28 +1053,24 @@ namespace Klicko_be.Data
                     {
                         ImageId = Guid.Parse("220d183a-888b-4974-b8f6-ee506f647338"),
                         Url = "exp3img1.jpg",
-                        AltText = "Trekking sul sentiero degli Dei",
                         ExperienceId = Guid.Parse("bb36c355-2c8e-4a45-9be3-151934e2ff4c"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("bba9ae96-13a7-4e28-abcd-63f33f63a28d"),
                         Url = "exp3img2.jpg",
-                        AltText = "Trekking sul sentiero degli Dei",
                         ExperienceId = Guid.Parse("bb36c355-2c8e-4a45-9be3-151934e2ff4c"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("f9ae8eaf-069a-47cd-b19e-6b6e8166165e"),
                         Url = "exp3img3.jpg",
-                        AltText = "Trekking sul sentiero degli Dei",
                         ExperienceId = Guid.Parse("bb36c355-2c8e-4a45-9be3-151934e2ff4c"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("4bfd8674-47b5-481a-80ca-bc07ab00d627"),
                         Url = "exp3img4.jpg",
-                        AltText = "Trekking sul sentiero degli Dei",
                         ExperienceId = Guid.Parse("bb36c355-2c8e-4a45-9be3-151934e2ff4c"),
                     },
                     // esperienza 4 (Volo in mongolfiera al tramonto)
@@ -1090,28 +1078,24 @@ namespace Klicko_be.Data
                     {
                         ImageId = Guid.Parse("67d4b845-2959-41cd-ac95-b442a4e32cb5"),
                         Url = "exp4img1.jpg",
-                        AltText = "Volo in mongolfiera al tramonto",
                         ExperienceId = Guid.Parse("8dc3b2f9-850b-42cc-824c-7758112b9370"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("e20bf13c-a35a-44f6-ba11-12eca65c0366"),
                         Url = "exp4img2.jpg",
-                        AltText = "Volo in mongolfiera al tramonto",
                         ExperienceId = Guid.Parse("8dc3b2f9-850b-42cc-824c-7758112b9370"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("9b2c4cb0-59a6-41b4-84ae-0ddeee3f4e9e"),
                         Url = "exp4img3.jpg",
-                        AltText = "Volo in mongolfiera al tramonto",
                         ExperienceId = Guid.Parse("8dc3b2f9-850b-42cc-824c-7758112b9370"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("721063ed-d498-4070-a4e1-940a9f849a14"),
                         Url = "exp4img4.jpg",
-                        AltText = "Volo in mongolfiera al tramonto",
                         ExperienceId = Guid.Parse("8dc3b2f9-850b-42cc-824c-7758112b9370"),
                     },
                     // esperienza 5 (Tour fotografico di Venezia all'alba)
@@ -1119,28 +1103,24 @@ namespace Klicko_be.Data
                     {
                         ImageId = Guid.Parse("73138467-d5af-499a-8624-f9d5de52a54f"),
                         Url = "exp5img1.jpg",
-                        AltText = "Tour fotografico di Venezia all'alba",
                         ExperienceId = Guid.Parse("cec8f297-d65b-485a-adc3-f015139cd0c2"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("00889ac8-a53d-4d5e-b655-aac991787de0"),
                         Url = "exp5img2.jpg",
-                        AltText = "Tour fotografico di Venezia all'alba",
                         ExperienceId = Guid.Parse("cec8f297-d65b-485a-adc3-f015139cd0c2"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("8fae68b9-e4f8-420a-91a8-4fea7c80b7e0"),
                         Url = "exp5img3.jpg",
-                        AltText = "Tour fotografico di Venezia all'alba",
                         ExperienceId = Guid.Parse("cec8f297-d65b-485a-adc3-f015139cd0c2"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("a06f8821-9e20-4a89-bd19-27db1ac39f11"),
                         Url = "exp5img4.jpg",
-                        AltText = "Tour fotografico di Venezia all'alba",
                         ExperienceId = Guid.Parse("cec8f297-d65b-485a-adc3-f015139cd0c2"),
                     },
                     // esperienza 6 (Degustazione di vini in cantina sotterranea)
@@ -1148,28 +1128,24 @@ namespace Klicko_be.Data
                     {
                         ImageId = Guid.Parse("b23f5aef-aa7e-44c9-b38f-29c89fd60831"),
                         Url = "exp6img1.jpg",
-                        AltText = "Degustazione di vini in cantina sotterranea",
                         ExperienceId = Guid.Parse("6f236570-1625-4190-9a4f-0da2d0639386"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("a9ceabed-f21c-4f01-9303-26852c15524a"),
                         Url = "exp6img2.jpg",
-                        AltText = "Degustazione di vini in cantina sotterranea",
                         ExperienceId = Guid.Parse("6f236570-1625-4190-9a4f-0da2d0639386"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("fd56c8cb-ee90-4140-9134-ab759f6b5be5"),
                         Url = "exp6img3.jpg",
-                        AltText = "Degustazione di vini in cantina sotterranea",
                         ExperienceId = Guid.Parse("6f236570-1625-4190-9a4f-0da2d0639386"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("93c20292-3ece-4b3a-b5d7-0eeb103f021e"),
                         Url = "exp6img4.jpg",
-                        AltText = "Degustazione di vini in cantina sotterranea",
                         ExperienceId = Guid.Parse("6f236570-1625-4190-9a4f-0da2d0639386"),
                     },
                     // esperienza 7 (Rafting nelle rapide del fiume Nera)
@@ -1177,28 +1153,24 @@ namespace Klicko_be.Data
                     {
                         ImageId = Guid.Parse("4e0c61df-cc97-4538-bc2e-b922d1e4e17b"),
                         Url = "exp7img1.jpg",
-                        AltText = "Rafting nelle rapide del fiume Nera",
                         ExperienceId = Guid.Parse("81c17e89-5bc3-42bb-9897-ddf27d111440"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("714a64bf-fae0-40c6-a198-ec84d320a03c"),
                         Url = "exp7img2.jpg",
-                        AltText = "Rafting nelle rapide del fiume Nera",
                         ExperienceId = Guid.Parse("81c17e89-5bc3-42bb-9897-ddf27d111440"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("f2dfc283-587d-4fd9-a29b-599868a05bf6"),
                         Url = "exp7img3.jpg",
-                        AltText = "Rafting nelle rapide del fiume Nera",
                         ExperienceId = Guid.Parse("81c17e89-5bc3-42bb-9897-ddf27d111440"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("e83e40ee-9a82-4885-b661-6e1ecb6dadef"),
                         Url = "exp7img4.jpg",
-                        AltText = "Rafting nelle rapide del fiume Nera",
                         ExperienceId = Guid.Parse("81c17e89-5bc3-42bb-9897-ddf27d111440"),
                     },
                     // esperienza 8 (Escursione in e-bike nei borghi del Montefeltro)
@@ -1206,28 +1178,24 @@ namespace Klicko_be.Data
                     {
                         ImageId = Guid.Parse("8b13d878-8ebc-452e-bf29-b483f72c6887"),
                         Url = "exp8img1.jpg",
-                        AltText = "Escursione in e-bike nei borghi del Montefeltro",
                         ExperienceId = Guid.Parse("ff3ed239-e178-4632-8385-042286991c66"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("9ea84996-fb02-49ac-8a73-c315e1bc6abd"),
                         Url = "exp8img2.jpg",
-                        AltText = "Escursione in e-bike nei borghi del Montefeltro",
                         ExperienceId = Guid.Parse("ff3ed239-e178-4632-8385-042286991c66"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("0c665169-d7a3-4781-8ad3-b656ed553183"),
                         Url = "exp8img3.jpg",
-                        AltText = "Escursione in e-bike nei borghi del Montefeltro",
                         ExperienceId = Guid.Parse("ff3ed239-e178-4632-8385-042286991c66"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("411e1f6a-7bb8-48bb-9a50-8de52bff30fb"),
                         Url = "exp8img4.jpg",
-                        AltText = "Escursione in e-bike nei borghi del Montefeltro",
                         ExperienceId = Guid.Parse("ff3ed239-e178-4632-8385-042286991c66"),
                     },
                     // esperienza 9 (Percorso benessere in grotta termale)
@@ -1235,28 +1203,24 @@ namespace Klicko_be.Data
                     {
                         ImageId = Guid.Parse("dac61436-2392-47d6-a679-6f6d1ae94225"),
                         Url = "exp9img1.jpg",
-                        AltText = "Percorso benessere in grotta termale",
                         ExperienceId = Guid.Parse("0c94ee3c-86f3-4e83-afb2-2a753416227a"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("3f4df348-1950-4ce6-9d8a-3b5803cdef49"),
                         Url = "exp9img2.jpg",
-                        AltText = "Percorso benessere in grotta termale",
                         ExperienceId = Guid.Parse("0c94ee3c-86f3-4e83-afb2-2a753416227a"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("79f38fb1-39b2-4f72-a08c-16dac303f0ef"),
                         Url = "exp9img3.jpg",
-                        AltText = "Percorso benessere in grotta termale",
                         ExperienceId = Guid.Parse("0c94ee3c-86f3-4e83-afb2-2a753416227a"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("0e33f4df-9337-4158-b444-caedb779b555"),
                         Url = "exp9img4.jpg",
-                        AltText = "Percorso benessere in grotta termale",
                         ExperienceId = Guid.Parse("0c94ee3c-86f3-4e83-afb2-2a753416227a"),
                     },
                     // esperienza 10 (Escursione notturna sull'Etna)
@@ -1264,28 +1228,24 @@ namespace Klicko_be.Data
                     {
                         ImageId = Guid.Parse("1d43d597-036f-4c7c-976b-84a49d8a802a"),
                         Url = "exp10img1.jpg",
-                        AltText = "Escursione notturna sull'Etna",
                         ExperienceId = Guid.Parse("e25b1044-5049-4ca9-954c-db76ae235862"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("0f3000ac-68fd-46e3-b0cc-bcd40f2927bc"),
                         Url = "exp10img2.jpg",
-                        AltText = "Escursione notturna sull'Etna",
                         ExperienceId = Guid.Parse("e25b1044-5049-4ca9-954c-db76ae235862"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("e343c782-8671-4eba-b282-d5fd7a86c9ab"),
                         Url = "exp10img3.jpg",
-                        AltText = "Escursione notturna sull'Etna",
                         ExperienceId = Guid.Parse("e25b1044-5049-4ca9-954c-db76ae235862"),
                     },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("ed5a4c3e-d0b2-4f75-a1e4-825ebe7a748d"),
                         Url = "exp10img4.jpg",
-                        AltText = "Escursione notturna sull'Etna",
                         ExperienceId = Guid.Parse("e25b1044-5049-4ca9-954c-db76ae235862"),
                     }
                 );

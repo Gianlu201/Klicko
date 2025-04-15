@@ -1,10 +1,12 @@
-﻿using Klicko_be.DTOs.Account;
+﻿using System.Security.Claims;
+using Klicko_be.DTOs.Account;
 using Klicko_be.DTOs.CarryWith;
 using Klicko_be.DTOs.Category;
 using Klicko_be.DTOs.Experience;
 using Klicko_be.DTOs.Image;
 using Klicko_be.Models;
 using Klicko_be.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -102,7 +104,6 @@ namespace Klicko_be.Controllers
                                     {
                                         ImageId = img.ImageId,
                                         Url = img.Url,
-                                        AltText = img.AltText,
                                     })
                                     .ToList()
                                 : null,
@@ -387,7 +388,6 @@ namespace Klicko_be.Controllers
                                 {
                                     ImageId = img.ImageId,
                                     Url = img.Url,
-                                    AltText = img.AltText,
                                 })
                                 .ToList()
                             : null,
@@ -426,13 +426,16 @@ namespace Klicko_be.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> CreateExperience(
-            [FromBody] CreateExperienceRequestDto createExperience
+            [FromForm] CreateExperienceRequestDto createExperience
         )
         {
             try
             {
-                // TODO: aggiungere UserId automatico tramite riconoscimento token
+                var user = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+                var userId = user!.Value;
+
                 var newExperience = new Experience()
                 {
                     ExperienceId = Guid.NewGuid(),
@@ -452,33 +455,78 @@ namespace Klicko_be.Controllers
                     Sale = createExperience.Sale,
                     IsInEvidence = createExperience.IsInEvidence,
                     IsPopular = createExperience.IsPopular,
-                    IsDeleted = createExperience.IsDeleted,
-                    CoverImage = createExperience.CoverImage,
                     ValidityInMonths = createExperience.ValidityInMonths,
-                    UserCreatorId = "70b579dd-c6a0-4075-8d7d-1326f2353c7b",
-                    UserLastModifyId = "70b579dd-c6a0-4075-8d7d-1326f2353c7b",
+                    UserCreatorId = userId,
+                    UserLastModifyId = userId,
                 };
 
-                if (createExperience.Images != null && createExperience.Images.Count > 0)
+                // Salvataggio immagine
+                if (createExperience.CoverImage != null && createExperience.CoverImage.Length > 0)
                 {
-                    newExperience.Images = createExperience
-                        .Images.Select(img => new Image()
-                        {
-                            ImageId = Guid.NewGuid(),
-                            Url = img.Url,
-                            AltText = img.AltText,
-                            ExperienceId = newExperience.ExperienceId,
-                        })
-                        .ToList();
+                    var fileName =
+                        Guid.NewGuid().ToString()
+                        + Path.GetExtension(createExperience.CoverImage.FileName);
+                    var uploadsPath = Path.Combine(
+                        Directory.GetCurrentDirectory(),
+                        "wwwroot",
+                        "uploads"
+                    );
+
+                    if (!Directory.Exists(uploadsPath))
+                        Directory.CreateDirectory(uploadsPath);
+
+                    var filePath = Path.Combine(uploadsPath, fileName);
+
+                    await using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await createExperience.CoverImage.CopyToAsync(stream);
+                    }
+
+                    newExperience.CoverImage = fileName;
                 }
 
-                if (createExperience.CarryWiths != null && createExperience.CarryWiths.Count > 0)
+                // Immagini aggiuntive
+                if (createExperience.Images != null && createExperience.Images.Count > 0)
                 {
-                    newExperience.CarryWiths = createExperience
-                        .CarryWiths.Select(carry => new CarryWith()
+                    var imagesList = new List<Image>();
+
+                    foreach (var img in createExperience.Images)
+                    {
+                        var fileName = Guid.NewGuid() + Path.GetExtension(img.FileName);
+                        var filePath = Path.Combine(
+                            Directory.GetCurrentDirectory(),
+                            "wwwroot",
+                            "uploads",
+                            fileName
+                        );
+
+                        await using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await img.CopyToAsync(stream);
+                        }
+
+                        imagesList.Add(
+                            new Image
+                            {
+                                ImageId = Guid.NewGuid(),
+                                Url = fileName,
+                                ExperienceId = newExperience.ExperienceId,
+                            }
+                        );
+                    }
+
+                    newExperience.Images = imagesList;
+                }
+
+                if (createExperience.CarryWiths != null && createExperience.CarryWiths.Length > 0)
+                {
+                    var carryList = createExperience.CarryWiths.Split(",").ToList();
+
+                    newExperience.CarryWiths = carryList
+                        .Select(carry => new CarryWith()
                         {
                             CarryWithId = Guid.NewGuid(),
-                            Name = carry.Name,
+                            Name = carry,
                             ExperienceId = newExperience.ExperienceId,
                         })
                         .ToList();

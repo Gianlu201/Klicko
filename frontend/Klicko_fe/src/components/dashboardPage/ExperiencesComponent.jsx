@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Button from '../ui/Button';
 import { Funnel, Pencil, Plus, Search, Trash2 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const ExperiencesComponent = () => {
   const [experiences, setExperiences] = useState([]);
+
+  const navigate = useNavigate();
 
   const getAllExperiences = async () => {
     try {
@@ -35,7 +38,13 @@ const ExperiencesComponent = () => {
     <>
       <div className='flex justify-between items-center mb-6'>
         <h2 className='text-2xl font-bold mb-2'>Gestione esperienze</h2>
-        <Button variant='primary' icon={<Plus />}>
+        <Button
+          variant='primary'
+          icon={<Plus />}
+          onClick={() => {
+            navigate('/dashboard/experiences/add');
+          }}
+        >
           Nuova esperienza
         </Button>
       </div>

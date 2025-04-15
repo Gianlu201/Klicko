@@ -141,7 +141,6 @@ namespace Klicko_be.Services
                         .Images.Select(i => new Image()
                         {
                             Url = i.Url,
-                            AltText = i.AltText,
                             ExperienceId = experience.ExperienceId,
                         })
                         .ToList();

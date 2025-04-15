@@ -6,8 +6,5 @@ namespace Klicko_be.DTOs.Image
     {
         [Required]
         public required string Url { get; set; }
-
-        [Required]
-        public required string AltText { get; set; }
     }
 }

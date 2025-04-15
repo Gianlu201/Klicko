@@ -188,6 +188,7 @@ namespace Klicko_be.Controllers
             claims.Add(new Claim("surname", user.LastName));
             claims.Add(new Claim("cartId", user.CartId.ToString()));
             claims.Add(new Claim("nameIdentifier", user.Id));
+            claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id));
 
             foreach (var role in roles)
             {

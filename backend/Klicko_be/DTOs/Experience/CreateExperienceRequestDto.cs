@@ -45,15 +45,13 @@ namespace Klicko_be.DTOs.Experience
 
         public bool IsPopular { get; set; }
 
-        public bool IsDeleted { get; set; }
-
-        public string? CoverImage { get; set; }
+        public IFormFile? CoverImage { get; set; }
 
         [Required]
         public required int ValidityInMonths { get; set; }
 
-        public List<CreateImageRequestDto>? Images { get; set; }
+        public List<IFormFile>? Images { get; set; }
 
-        public List<CreateCarryWithRequestDto>? CarryWiths { get; set; }
+        public string? CarryWiths { get; set; }
     }
 }
