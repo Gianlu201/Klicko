@@ -7,6 +7,7 @@ export const SET_USER_CART = 'SET_USER_CART';
 export const CART_MODIFIED = 'CART_MODIFIED';
 export const SET_EXPERIENCES_LIST = 'SET_EXPERIENCES_LIST';
 export const SET_CATEGORIES_LIST = 'SET_CATEGORIES_LIST';
+export const EMPTY_CART = 'EMPTY_CART';
 
 export const setLoggedUser = (data) => {
   const tokenDecoded = jwtDecode(data.token);
@@ -76,6 +77,10 @@ export const setUserCart = (cart) => {
     payload: userCart,
   };
 };
+
+export const emptyCart = () => ({
+  type: EMPTY_CART,
+});
 
 export const cartModified = () => ({
   type: CART_MODIFIED,

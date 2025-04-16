@@ -1,5 +1,6 @@
 import {
   CART_MODIFIED,
+  EMPTY_CART,
   LOGOUT,
   SET_CATEGORIES_LIST,
   SET_EXPERIENCES_LIST,
@@ -33,6 +34,15 @@ const mainReducer = (state = initialState, action) => {
       return {
         ...state,
         cart: action.payload,
+      };
+
+    case EMPTY_CART:
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          experiences: [],
+        },
       };
 
     case CART_MODIFIED:

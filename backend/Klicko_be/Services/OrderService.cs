@@ -44,6 +44,26 @@ namespace Klicko_be.Services
             }
         }
 
+        public async Task<List<Order>?> GetAllOrdersForUserByIdAsync(string userId)
+        {
+            try
+            {
+                var orders = await _context
+                    .Orders.Include(o => o.OrderExperiences)
+                    .ThenInclude(oe => oe.Experience)
+                    .ThenInclude(e => e.Category)
+                    .Include(o => o.User)
+                    .Where(o => o.UserId == userId)
+                    .ToListAsync();
+
+                return orders;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         public async Task<bool> CreateOrderAsync(Order newOrder)
         {
             try

@@ -15,6 +15,7 @@ import Carousel from '../components/ui/Corousel';
 import Button from '../components/ui/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { cartModified } from '../redux/actions';
+import { toast } from 'sonner';
 
 const DetailPage = () => {
   const [experience, setExperience] = useState({});
@@ -92,11 +93,11 @@ const DetailPage = () => {
         }
       );
       if (response.ok) {
-        const data = await response.json();
-        dispatch(cartModified());
+        // const data = await response.json();
         // console.log(data.cart);
 
-        console.log(data);
+        toast.success(`${experience.title} aggiunta al carrello!`);
+        dispatch(cartModified());
       } else {
         throw new Error('Errore nel recupero dei dati!');
       }

@@ -232,7 +232,14 @@ const CartPage = () => {
               <span>{cartTotal()} €</span>
             </div>
 
-            <Button variant='primary' fullWidth={true} className='mb-3'>
+            <Button
+              variant='primary'
+              fullWidth={true}
+              className='mb-3'
+              onClick={() => {
+                navigate('/checkout');
+              }}
+            >
               Procedi al checkout
             </Button>
 

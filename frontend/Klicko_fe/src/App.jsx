@@ -12,6 +12,7 @@ import RegisterPage from './pages/RegisterPage';
 import CartPage from './pages/CartPage';
 import { Toaster } from 'sonner';
 import DashboardPage from './pages/DashboardPage';
+import CheckOutPage from './pages/CheckOutPage';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
                 path='/dashboard/:tab/:option'
                 element={<DashboardPage />}
               />
+              <Route path='checkout' element={<CheckOutPage />} />
             </Routes>
           </div>
           <Footer />
