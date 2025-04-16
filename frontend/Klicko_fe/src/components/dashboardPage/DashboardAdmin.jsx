@@ -67,7 +67,7 @@ const DashboardAdmin = () => {
         <div className='relative grow'>
           <input
             type='text'
-            placeholder='Cerca esperienze...'
+            placeholder='Cerca ordini, clienti...'
             className='bg-background border border-gray-400/30 rounded-xl py-2 ps-10 w-full'
           />
           <Search className='absolute top-1/2 left-3 -translate-y-1/2 w-5 h-5 pb-0.5' />
