@@ -257,5 +257,42 @@ namespace Klicko_be.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+
+        [HttpPut("editOrderState/{orderId:guid}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> EditState(
+            [FromBody] EditOrderStateRequestDto newOrderState,
+            Guid orderId
+        )
+        {
+            try
+            {
+                var options = new List<string>() { "In attesa", "Completato", "Cancellato" };
+
+                if (!options.Contains(newOrderState.State))
+                {
+                    return BadRequest(
+                        new EditOrderStateResponseDto() { Message = "Something went wrong!" }
+                    );
+                }
+
+                var result = await _orderService.EditOrderStateAsync(orderId, newOrderState.State);
+
+                return result
+                    ? Ok(
+                        new EditOrderStateResponseDto()
+                        {
+                            Message = "Order state updated successfully!",
+                        }
+                    )
+                    : BadRequest(
+                        new EditOrderStateResponseDto() { Message = "Something went wrong!" }
+                    );
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
     }
 }

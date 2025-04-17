@@ -77,5 +77,26 @@ namespace Klicko_be.Services
                 return false;
             }
         }
+
+        public async Task<bool> EditOrderStateAsync(Guid orderId, string orderState)
+        {
+            try
+            {
+                var order = await _context.Orders.FindAsync(orderId);
+
+                if (order == null)
+                {
+                    return false;
+                }
+
+                order.State = orderState;
+
+                return await TrySaveAsync();
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

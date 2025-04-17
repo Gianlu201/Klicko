@@ -185,7 +185,7 @@ const OrdersComponent = () => {
           <>
             <h2 className='text-xl font-semibold mb-2'>Tutti gli ordini</h2>
             <p className='text-gray-500 font-normal mb-6'>
-              {filteredOrders.length} trovati
+              {filteredOrders.length} ordini trovati
             </p>
 
             <div>
