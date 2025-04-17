@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import Button from '../ui/Button';
-import { Funnel, Pencil, Plus, Search, Trash2 } from 'lucide-react';
+import { Funnel, Pencil, Plus, Search, Trash2, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const ExperiencesComponent = () => {
   const [experiences, setExperiences] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [filteredExperiences, setFilteredExperiences] = useState([]);
+  const [searchBar, setSearchBar] = useState('');
+  const [showFilters, setShowFilters] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(1000);
 
   const navigate = useNavigate();
 
@@ -22,6 +29,7 @@ const ExperiencesComponent = () => {
         console.log(data);
 
         setExperiences(data.experiences);
+        setFilteredExperiences(data.experiences);
       } else {
         throw new Error('Errore nel recupero dei dati!');
       }
@@ -30,9 +38,58 @@ const ExperiencesComponent = () => {
     }
   };
 
+  const getAllCategories = async () => {
+    try {
+      const response = await fetch('https://localhost:7235/api/Category', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+
+        console.log(data);
+
+        setCategories(data.categories);
+      } else {
+        throw new Error('Errore nel recupero dei dati!');
+      }
+    } catch {
+      console.log('Error');
+    }
+  };
+
+  const searchExperiences = () => {
+    const experiencesList = experiences.filter(
+      (exp) =>
+        (exp.title.toLowerCase().includes(searchBar.toLowerCase()) ||
+          exp.place.toLowerCase().includes(searchBar.toLowerCase())) &&
+        (exp.category.name === selectedCategory ||
+          exp.category.name.includes(selectedCategory)) &&
+        exp.price >= minPrice &&
+        exp.price <= maxPrice
+    );
+
+    console.log(experiencesList);
+    setFilteredExperiences(experiencesList);
+  };
+
+  const resetFilters = () => {
+    setSearchBar('');
+    setSelectedCategory('');
+    setMinPrice(0);
+    setMaxPrice(1000);
+  };
+
   useEffect(() => {
     getAllExperiences();
+    getAllCategories();
   }, []);
+
+  useEffect(() => {
+    searchExperiences();
+  }, [searchBar, selectedCategory, minPrice, maxPrice]);
 
   return (
     <>
@@ -49,23 +106,97 @@ const ExperiencesComponent = () => {
         </Button>
       </div>
 
-      <div className='flex justify-between items-center gap-4 mb-8'>
-        <div className='relative grow'>
-          <input
-            type='text'
-            placeholder='Cerca esperienze...'
-            className='bg-background border border-gray-400/30 rounded-xl py-2 ps-10 w-full'
-          />
-          <Search className='absolute top-1/2 left-3 -translate-y-1/2 w-5 h-5 pb-0.5' />
-        </div>
+      <div className='mb-12'>
+        <div className='flex justify-between items-center gap-4'>
+          <div className='relative grow'>
+            <input
+              type='text'
+              placeholder='Cerca esperienze...'
+              className='bg-background border border-gray-400/30 rounded-xl py-2 ps-10 w-full'
+              value={searchBar}
+              onChange={(e) => {
+                setSearchBar(e.target.value);
+              }}
+            />
+            <Search className='absolute top-1/2 left-3 -translate-y-1/2 w-5 h-5 pb-0.5' />
+          </div>
 
-        <Button variant='outline' icon={<Funnel className='w-4 h-4' />}>
-          Filtri
-        </Button>
+          <Button
+            variant='outline'
+            icon={<Funnel className='w-4 h-4' />}
+            onClick={() => {
+              setShowFilters(!showFilters);
+            }}
+          >
+            Filtri
+          </Button>
+        </div>
+        {showFilters && (
+          <div className='grid grid-cols-4 justify-start items-end gap-8 mt-4'>
+            <div className='flex flex-col justify-start items-start gap-2'>
+              <span className='font-medium text-sm'>Categoria</span>
+              <select
+                name='category'
+                id='categorySelect'
+                className='text-sm border border-gray-500/30 bg-background rounded-lg py-1.5 px-3 w-full'
+                value={selectedCategory}
+                onChange={(e) => {
+                  setSelectedCategory(e.target.value);
+                }}
+              >
+                <option value=''>Tutte le categorie</option>
+                {categories.map((category) => (
+                  <option key={category.categoryId} value={category.name}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className='flex flex-col justify-start items-start gap-2'>
+              <span className='font-medium text-sm'>Prezzo minimo</span>
+              <input
+                type='number'
+                step={1}
+                min={0}
+                max={parseInt(maxPrice) - 1}
+                className='text-sm border border-gray-500/30 bg-background rounded-lg py-1.5 px-3 w-full'
+                value={minPrice}
+                onChange={(e) => {
+                  setMinPrice(e.target.value);
+                }}
+              />
+            </div>
+            <div className='flex flex-col justify-start items-start gap-2'>
+              <span className='font-medium text-sm'>Prezzo massimo</span>
+              <input
+                type='number'
+                step={1}
+                min={parseInt(minPrice) + 1}
+                className='text-sm border border-gray-500/30 bg-background rounded-lg py-1.5 px-3 w-full'
+                value={maxPrice}
+                onChange={(e) => {
+                  setMaxPrice(e.target.value);
+                }}
+              />
+            </div>
+            <div>
+              <Button
+                variant='outline'
+                icon={<X className='w-4 h-4' />}
+                onClick={() => {
+                  resetFilters();
+                }}
+                className='text-sm'
+              >
+                Cancella filtri
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
 
       <div>
-        {experiences.length > 0 && (
+        {filteredExperiences.length > 0 && (
           <div>
             <table className='w-full'>
               <thead>
@@ -91,8 +222,7 @@ const ExperiencesComponent = () => {
                 </tr>
               </thead>
               <tbody>
-                {/* TODO: fare il map delle esperienze */}
-                {experiences.map((exp) => (
+                {filteredExperiences.map((exp) => (
                   <tr
                     key={exp.experienceId}
                     className='grid grid-cols-24 gap-4 items-center hover:bg-gray-100 border-b border-gray-400/30 py-3 px-2 last-of-type:border-0'
