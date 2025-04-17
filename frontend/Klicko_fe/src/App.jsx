@@ -13,6 +13,8 @@ import CartPage from './pages/CartPage';
 import { Toaster } from 'sonner';
 import DashboardPage from './pages/DashboardPage';
 import CheckOutPage from './pages/CheckOutPage';
+import NotFoundPage from './pages/NotFoundPage';
+import AboutPage from './pages/AboutPage';
 
 function App() {
   return (
@@ -29,6 +31,7 @@ function App() {
                 element={<DetailPage />}
               />
               <Route path='/categories' element={<CategoriesPage />} />
+              <Route path='/about' element={<AboutPage />} />
               <Route path='/login' element={<LoginPage />} />
               <Route path='/register' element={<RegisterPage />} />
               <Route path='/cart' element={<CartPage />} />
@@ -39,6 +42,7 @@ function App() {
                 element={<DashboardPage />}
               />
               <Route path='checkout' element={<CheckOutPage />} />
+              <Route path='*' element={<NotFoundPage />} />
             </Routes>
           </div>
           <Footer />
