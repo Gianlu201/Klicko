@@ -25,12 +25,15 @@ const ExperiencesPage = () => {
 
   const getAllExperiences = async () => {
     try {
-      const response = await fetch('https://localhost:7235/api/Experience', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const response = await fetch(
+        'https://localhost:7235/api/Experience/getExperiences',
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
       if (response.ok) {
         const data = await response.json();
         // console.log(data);

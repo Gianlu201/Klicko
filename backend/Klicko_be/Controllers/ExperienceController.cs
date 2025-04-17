@@ -24,11 +24,11 @@ namespace Klicko_be.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllExperiences()
+        public async Task<IActionResult> GetAllExperiencesAsAdmin()
         {
             try
             {
-                var experiences = await _experienceService.GetAllExperienceAsync();
+                var experiences = await _experienceService.GetAllExperienceAsAdminAsync();
 
                 if (experiences == null)
                 {
@@ -97,6 +97,107 @@ namespace Klicko_be.Controllers
                                     Email = exp.UserLastModify.Email,
                                 }
                                 : null,
+                        Images =
+                            (exp.Images != null && exp.Images.Count > 0)
+                                ? exp
+                                    .Images.Select(img => new ImageSimpleDto()
+                                    {
+                                        ImageId = img.ImageId,
+                                        Url = img.Url,
+                                    })
+                                    .ToList()
+                                : null,
+                        CarryWiths =
+                            (exp.CarryWiths != null && exp.CarryWiths.Count > 0)
+                                ? exp
+                                    .CarryWiths.Select(carry => new CarryWithSimpleDto()
+                                    {
+                                        CarryWithId = carry.CarryWithId,
+                                        Name = carry.Name,
+                                    })
+                                    .ToList()
+                                : null,
+                    })
+                    .ToList();
+
+                return experiencesDto != null
+                    ? Ok(
+                        new GetExperiencesListResponseDto()
+                        {
+                            Message = $"{experiencesDto.Count} experiences found!",
+                            Experiences = experiencesDto,
+                        }
+                    )
+                    : BadRequest(
+                        new GetExperiencesListResponseDto()
+                        {
+                            Message = "Something went wrong!",
+                            Experiences = null,
+                        }
+                    );
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpGet("getExperiences")]
+        public async Task<IActionResult> GetAllExperiencesAsUser()
+        {
+            try
+            {
+                var experiences = await _experienceService.GetAllExperienceAsync();
+
+                if (experiences == null)
+                {
+                    return NotFound(
+                        new GetExperiencesListResponseDto()
+                        {
+                            Message = "No experiences found",
+                            Experiences = null,
+                        }
+                    );
+                }
+
+                var experiencesDto = experiences
+                    .Select(exp => new ExperienceDto()
+                    {
+                        ExperienceId = exp.ExperienceId,
+                        Title = exp.Title,
+                        CategoryId = exp.CategoryId,
+                        Duration = exp.Duration,
+                        Place = exp.Place,
+                        Price = exp.Price,
+                        DescriptionShort = exp.DescriptionShort,
+                        Description = exp.Description,
+                        MaxParticipants = exp.MaxParticipants,
+                        Organiser = exp.Organiser,
+                        LoadingDate = exp.LoadingDate,
+                        LastEditDate = exp.LastEditDate,
+                        UserCreatorId = exp.UserCreatorId,
+                        UserLastModifyId = exp.UserLastModifyId,
+                        IsFreeCancellable = exp.IsFreeCancellable,
+                        IncludedDescription = exp.IncludedDescription,
+                        Sale = exp.Sale,
+                        IsInEvidence = exp.IsInEvidence,
+                        IsPopular = exp.IsPopular,
+                        IsDeleted = exp.IsDeleted,
+                        ValidityInMonths = exp.ValidityInMonths,
+                        CoverImage = exp.CoverImage,
+                        Category =
+                            exp.Category != null
+                                ? new CategorySimpleDto()
+                                {
+                                    CategoryId = exp.Category.CategoryId,
+                                    Name = exp.Category.Name,
+                                    Description = exp.Category.Description,
+                                    Image = exp.Category.Image,
+                                    Icon = exp.Category.Icon,
+                                }
+                                : null,
+                        UserCreator = null,
+                        UserLastModify = null,
                         Images =
                             (exp.Images != null && exp.Images.Count > 0)
                                 ? exp
@@ -590,6 +691,22 @@ namespace Klicko_be.Controllers
                     new DeleteExperienceResponseDto()
                     {
                         Message = "Experience soft deleted successfully!",
+                    }
+                )
+                : BadRequest(
+                    new DeleteExperienceResponseDto() { Message = "Something went wrong!" }
+                );
+        }
+
+        [HttpPut("restoreExperience/{experienceId:guid}")]
+        public async Task<IActionResult> Restore(Guid experienceId)
+        {
+            var result = await _experienceService.RestoreExperienceByIdAsync(experienceId);
+            return result
+                ? Ok(
+                    new DeleteExperienceResponseDto()
+                    {
+                        Message = "Experience restored successfully!",
                     }
                 )
                 : BadRequest(

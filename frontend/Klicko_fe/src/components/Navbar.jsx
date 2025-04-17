@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import {
   ShoppingCart,
   Menu,
@@ -25,6 +25,8 @@ const Navbar = () => {
   const cart = useSelector((state) => {
     return state.cart;
   });
+
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -233,11 +235,24 @@ const Navbar = () => {
             </Link>
 
             <div className='flex flex-col space-y-2 pt-3 border-t'>
-              <Button variant='outline' size='md' className='mx-4'>
-                <Link to='/login'>Accedi</Link>
+              <Button
+                variant='outline'
+                size='md'
+                className='mx-4'
+                onClick={() => {
+                  navigate('/login');
+                }}
+              >
+                Accedi
               </Button>
-              <Button variant='primary' className='mx-4'>
-                <Link to='/register'>Registrati</Link>
+              <Button
+                variant='primary'
+                className='mx-4'
+                onClick={() => {
+                  navigate('/register');
+                }}
+              >
+                Registrati
               </Button>
             </div>
           </div>

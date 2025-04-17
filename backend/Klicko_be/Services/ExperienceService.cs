@@ -26,7 +26,7 @@ namespace Klicko_be.Services
             }
         }
 
-        public async Task<List<Experience>?> GetAllExperienceAsync()
+        public async Task<List<Experience>?> GetAllExperienceAsAdminAsync()
         {
             try
             {
@@ -36,6 +36,27 @@ namespace Klicko_be.Services
                     .Include(e => e.CarryWiths)
                     .Include(e => e.UserCreator)
                     .Include(e => e.UserLastModify)
+                    .OrderBy(e => e.IsDeleted)
+                    .ToListAsync();
+
+                return experiences;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public async Task<List<Experience>?> GetAllExperienceAsync()
+        {
+            try
+            {
+                var experiences = await _context
+                    .Experiences.Include(e => e.Category)
+                    .Include(e => e.Images)
+                    .Include(e => e.CarryWiths)
+                    .OrderBy(e => e.IsDeleted)
+                    .Where(e => e.IsDeleted == false)
                     .ToListAsync();
 
                 return experiences;
@@ -191,6 +212,27 @@ namespace Klicko_be.Services
                 }
 
                 experience.IsDeleted = true;
+
+                return await TrySaveAsync();
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> RestoreExperienceByIdAsync(Guid experienceId)
+        {
+            try
+            {
+                var experience = await GetExperienceByIdAsync(experienceId);
+
+                if (experience == null)
+                {
+                    return false;
+                }
+
+                experience.IsDeleted = false;
 
                 return await TrySaveAsync();
             }

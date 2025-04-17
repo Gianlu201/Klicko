@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import Button from '../ui/Button';
-import { Funnel, Pencil, Plus, Search, Trash2, X } from 'lucide-react';
+import {
+  ArchiveRestore,
+  Funnel,
+  Pencil,
+  Plus,
+  Search,
+  Trash2,
+  X,
+} from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const ExperiencesComponent = () => {
@@ -80,6 +88,70 @@ const ExperiencesComponent = () => {
     setSelectedCategory('');
     setMinPrice(0);
     setMaxPrice(1000);
+  };
+
+  const softDeleteExperience = async (experienceId) => {
+    try {
+      let tokenObj = localStorage.getItem('klicko_token');
+
+      if (!tokenObj) {
+        navigate('/login');
+      }
+
+      let token = JSON.parse(tokenObj).token;
+
+      const response = await fetch(
+        `https://localhost:7235/api/Experience/softDelete/${experienceId}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        getAllExperiences();
+      } else {
+        throw new Error('Errore nel recupero dei dati!');
+      }
+    } catch {
+      console.log('Error');
+    }
+  };
+
+  const restoreExperience = async (experienceId) => {
+    try {
+      let tokenObj = localStorage.getItem('klicko_token');
+
+      if (!tokenObj) {
+        navigate('/login');
+      }
+
+      let token = JSON.parse(tokenObj).token;
+
+      const response = await fetch(
+        `https://localhost:7235/api/Experience/restoreExperience/${experienceId}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        getAllExperiences();
+      } else {
+        throw new Error('Errore nel recupero dei dati!');
+      }
+    } catch {
+      console.log('Error');
+    }
   };
 
   useEffect(() => {
@@ -272,8 +344,22 @@ const ExperiencesComponent = () => {
 
                     <td className='col-span-3'>
                       <div className='flex justify-end items-center gap-4 pe-3'>
-                        <Pencil className='w-4 h-4 text-gray-600' />
-                        <Trash2 className='w-4 h-4 text-red-600' />
+                        <Pencil className='w-4 h-4 text-gray-600 cursor-pointer' />
+                        {exp.isDeleted ? (
+                          <ArchiveRestore
+                            className='w-4 h-4 text-green-600 cursor-pointer'
+                            onClick={() => {
+                              restoreExperience(exp.experienceId);
+                            }}
+                          />
+                        ) : (
+                          <Trash2
+                            className='w-4 h-4 text-red-600 cursor-pointer'
+                            onClick={() => {
+                              softDeleteExperience(exp.experienceId);
+                            }}
+                          />
+                        )}
                       </div>
                     </td>
                   </tr>
