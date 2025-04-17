@@ -19,6 +19,7 @@ const DashboardAdmin = () => {
   const [filteredOrders, setFilteredOrders] = useState([]);
   const [isBannerOpen, setIsBannerOpen] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
+  const [stateFilter, setStateFilter] = useState('');
 
   const navigate = useNavigate();
 
@@ -44,12 +45,6 @@ const DashboardAdmin = () => {
 
         setOrders(data.orders);
         setFilteredOrders(data.orders);
-        // dispatch(emptyCart());
-        // navigate('/');
-        // toast.success('Acquisto effettuato con successo!');
-
-        // dispatch(cartModified());
-        // console.log(data.cart);
 
         console.log(data);
       } else {
@@ -89,6 +84,54 @@ const DashboardAdmin = () => {
     });
 
     return customersEmailList.length;
+  };
+
+  const filterBy = (search, state) => {
+    console.log(stateFilter);
+
+    let orderList = [];
+
+    if (state !== null && state !== undefined) {
+      console.log('Sto per settare lo stato a ' + state);
+      setStateFilter(state);
+
+      if (state === '') {
+        orderList = orders;
+      } else {
+        orderList = orders.filter((order) => order.state === state);
+      }
+    } else {
+      if (stateFilter === '') {
+        orderList = orders;
+      } else {
+        orderList = orders.filter((order) => order.state === stateFilter);
+      }
+    }
+
+    if (search.trim !== '') {
+      const filteredList = [];
+
+      orderList.forEach((order) => {
+        console.log(order.orderNumber.toString());
+        if (
+          order.orderNumber.toString().includes(search.toLowerCase()) ||
+          order.totalPrice.toString().includes(search.toLowerCase()) ||
+          order.user.firstName.toLowerCase().includes(search.toLowerCase()) ||
+          order.user.lastName.toLowerCase().includes(search.toLowerCase()) ||
+          order.user.email.toLowerCase().includes(search.toLowerCase())
+        ) {
+          filteredList.push(order);
+        }
+      });
+
+      console.log(filteredList);
+
+      return setFilteredOrders(filteredList);
+    }
+
+    console.log(orderList);
+
+    return setFilteredOrders(orderList);
   };
 
   const getStateStyle = (state) => {
@@ -222,13 +265,27 @@ const DashboardAdmin = () => {
             type='text'
             placeholder='Cerca ordini, clienti...'
             className='bg-background border border-gray-400/30 rounded-xl py-2 ps-10 w-full'
+            onChange={(e) => {
+              filterBy(e.target.value);
+            }}
           />
           <Search className='absolute top-1/2 left-3 -translate-y-1/2 w-5 h-5 pb-0.5' />
         </div>
 
-        <Button variant='outline' icon={<Funnel className='w-4 h-4' />}>
-          Filtri
-        </Button>
+        <select
+          className='rounded-md border border-gray-300 bg-white py-2 px-4 pr-8 shadow-sm focus:border-primary focus:ring-primary focus:outline-none focus:ring-1 text-gray-700 text-sm'
+          value={stateFilter}
+          onChange={(e) => {
+            filterBy('', e.target.value);
+          }}
+        >
+          <option value=''>Tutti gli stati</option>
+          {stateOption.map((state) => (
+            <option key={state.id} value={state.option}>
+              {state.option}
+            </option>
+          ))}
+        </select>
       </div>
 
       {/* tabella storico ordini */}
