@@ -612,6 +612,7 @@ namespace Klicko_be.Controllers
                                 ImageId = Guid.NewGuid(),
                                 Url = fileName,
                                 ExperienceId = newExperience.ExperienceId,
+                                IsCover = false,
                             }
                         );
                     }

@@ -13,6 +13,8 @@ namespace Klicko_be.Models
 
         public required Guid ExperienceId { get; set; }
 
+        public bool IsCover { get; set; }
+
         // navigazione
         [ForeignKey(nameof(ExperienceId))]
         public Experience? Experience { get; set; }

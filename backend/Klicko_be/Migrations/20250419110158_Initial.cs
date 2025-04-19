@@ -15,7 +15,7 @@ namespace Klicko_be.Migrations
         {
             migrationBuilder.CreateSequence<int>(
                 name: "OrderNumber_seq",
-                startValue: 100000000L);
+                startValue: 123456L);
 
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
@@ -38,7 +38,7 @@ namespace Klicko_be.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RegistrationDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 4, 15, 15, 56, 48, 593, DateTimeKind.Utc).AddTicks(6990)),
+                    RegistrationDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 4, 19, 11, 1, 57, 545, DateTimeKind.Utc).AddTicks(2785)),
                     CartId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -188,8 +188,8 @@ namespace Klicko_be.Migrations
                 {
                     CartId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 4, 15, 15, 56, 48, 594, DateTimeKind.Utc).AddTicks(5891)),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 4, 15, 15, 56, 48, 594, DateTimeKind.Utc).AddTicks(6552))
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 4, 19, 11, 1, 57, 546, DateTimeKind.Utc).AddTicks(395)),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 4, 19, 11, 1, 57, 546, DateTimeKind.Utc).AddTicks(939))
                 },
                 constraints: table =>
                 {
@@ -211,7 +211,7 @@ namespace Klicko_be.Migrations
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     State = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 4, 15, 15, 56, 48, 594, DateTimeKind.Utc).AddTicks(3716))
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 4, 19, 11, 1, 57, 545, DateTimeKind.Utc).AddTicks(8604))
                 },
                 constraints: table =>
                 {
@@ -237,8 +237,8 @@ namespace Klicko_be.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MaxParticipants = table.Column<int>(type: "int", nullable: false),
                     Organiser = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LoadingDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 4, 15, 15, 56, 48, 593, DateTimeKind.Utc).AddTicks(7916)),
-                    LastEditDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 4, 15, 15, 56, 48, 593, DateTimeKind.Utc).AddTicks(8805)),
+                    LoadingDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 4, 19, 11, 1, 57, 545, DateTimeKind.Utc).AddTicks(4055)),
+                    LastEditDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 4, 19, 11, 1, 57, 545, DateTimeKind.Utc).AddTicks(5161)),
                     UserCreatorId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     UserLastModifyId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     IsFreeCancellable = table.Column<bool>(type: "bit", nullable: false),
@@ -298,7 +298,7 @@ namespace Klicko_be.Migrations
                     ExperienceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CartId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false, defaultValue: 1),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 4, 15, 15, 56, 48, 594, DateTimeKind.Utc).AddTicks(7256))
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 4, 19, 11, 1, 57, 546, DateTimeKind.Utc).AddTicks(1797))
                 },
                 constraints: table =>
                 {
@@ -321,7 +321,8 @@ namespace Klicko_be.Migrations
                 {
                     ImageId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ExperienceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    ExperienceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IsCover = table.Column<bool>(type: "bit", nullable: false, defaultValue: false)
                 },
                 constraints: table =>
                 {
@@ -375,9 +376,11 @@ namespace Klicko_be.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "CartId", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RegistrationDate", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2", 0, new Guid("b64a049a-6d76-4c1c-866c-e0169c92f1d6"), "81d84916-e48e-4772-ad20-9f0ceec51c6d", "user@example.com", false, "User", "User", false, null, "USER@EXAMPLE.COM", "USER@EXAMPLE.COM", "AQAAAAIAAYagAAAAEL6u4Tox47kxNqt9nm4+vRn+SzahthaQ55UejBFFdJvvUNNCfqIWRI246s9wJiZ43A==", null, false, new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified), "c1da45ea-16db-4d85-804e-3cb1cf34f689", false, "user@example.com" },
-                    { "3a8073b2-b954-428a-a4b9-6e4b3f5db051", 0, new Guid("ad0b8ebb-3e25-4c9f-a7dd-7e07c3e7ab3f"), "b36df503-0bc4-4197-9205-0a222bea4be8", "admin@example.com", false, "Admin", "User", false, null, "ADMIN@EXAMPLE.COM", "ADMIN@EXAMPLE.COM", "AQAAAAIAAYagAAAAEJ924mp2s2BX/BpdalZ6f2s1qlMl3fxdcEPcaKFV6BxA5frV73oVpuC1V9F4PHCJ2g==", null, false, new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified), "1e374ad4-bc4b-4abf-ba84-878d6d0f5e6c", false, "admin@example.com" },
-                    { "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c", 0, new Guid("59a9d57e-c339-4a73-8d02-69cc186a5385"), "f137d749-f909-4f96-8229-698bbab5023c", "seller@example.com", false, "Seller", "User", false, null, "SELLER@EXAMPLE.COM", "SELLER@EXAMPLE.COM", "AQAAAAIAAYagAAAAEJP1xbBcaikPe32EBy3MLTcexMUhKB7jQsEGuRiIlRJOWuiJwUGI/v0s83m7H70okg==", null, false, new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified), "1536c6ab-470a-44c0-a960-e19ad96affc2", false, "seller@example.com" }
+                    { "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2", 0, new Guid("b64a049a-6d76-4c1c-866c-e0169c92f1d6"), "f5a23942-7781-45e9-ba32-026a701bcc4f", "user@example.com", false, "User", "User", false, null, "USER@EXAMPLE.COM", "USER@EXAMPLE.COM", "AQAAAAIAAYagAAAAEL6u4Tox47kxNqt9nm4+vRn+SzahthaQ55UejBFFdJvvUNNCfqIWRI246s9wJiZ43A==", null, false, new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified), "04b82e3e-e80e-4e77-992c-d8fe72b530ee", false, "user@example.com" },
+                    { "3a8073b2-b954-428a-a4b9-6e4b3f5db051", 0, new Guid("ad0b8ebb-3e25-4c9f-a7dd-7e07c3e7ab3f"), "16c8f3a4-5ad9-4874-9c92-345db1a9e730", "admin@example.com", false, "Admin", "User", false, null, "ADMIN@EXAMPLE.COM", "ADMIN@EXAMPLE.COM", "AQAAAAIAAYagAAAAEJ924mp2s2BX/BpdalZ6f2s1qlMl3fxdcEPcaKFV6BxA5frV73oVpuC1V9F4PHCJ2g==", null, false, new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified), "e41f9045-6d2e-474a-bd28-03f9b6b76265", false, "admin@example.com" },
+                    { "698c347e-bb57-4cb4-b672-9940647f250d", 0, new Guid("a32de9e5-58e6-4ae8-8590-204bf8677abf"), "c005b0ae-2495-44cd-bb70-b26fc43d612d", "mario.rossi@example.com", false, "Mario", "Rossi", false, null, "MARIO.ROSSI@EXAMPLE.COM", "MARIO.ROSSI@EXAMPLE.COM", "AQAAAAIAAYagAAAAEGqAB3rWtm9yNytryjcGs97J9AVY4J6GC/pnd/eL+/lSc8KXctmVoydETBEp6qnKAg==", null, false, new DateTime(2025, 4, 19, 11, 0, 56, 0, DateTimeKind.Unspecified), "bbd59bfb-05a3-4fcc-9a16-f8ae2fef79b6", false, "mario.rossi@example.com" },
+                    { "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c", 0, new Guid("59a9d57e-c339-4a73-8d02-69cc186a5385"), "d75ef455-83b2-4e34-82fb-724b48e03423", "seller@example.com", false, "Seller", "User", false, null, "SELLER@EXAMPLE.COM", "SELLER@EXAMPLE.COM", "AQAAAAIAAYagAAAAEJP1xbBcaikPe32EBy3MLTcexMUhKB7jQsEGuRiIlRJOWuiJwUGI/v0s83m7H70okg==", null, false, new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified), "e550c03e-8a34-41ad-b3d7-eb579df00052", false, "seller@example.com" },
+                    { "e5675086-e91e-442a-9c22-27d41bee49a4", 0, new Guid("0b61eb1c-7294-49ea-94a2-f90273f7e5c9"), "bebba5f9-2276-4b3f-bc70-651fba1b774b", "luigi.bianchi@example.com", false, "Luigi", "Bianchi", false, null, "LUIGI.BIANCHI@EXAMPLE.COM", "LUIGI.BIANCHI@EXAMPLE.COM", "AQAAAAIAAYagAAAAENabfBTfVAnfCT/fg0+WNYZFHUGtBkj2cdOTFH8XkxudV8ZObX5QzlvepD9DwevyLA==", null, false, new DateTime(2025, 4, 19, 11, 0, 56, 0, DateTimeKind.Unspecified), "7f890f76-0f77-496c-b1ec-10f0c8ebd7f3", false, "luigi.bianchi@example.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -404,7 +407,9 @@ namespace Klicko_be.Migrations
                 {
                     { "849b8726-44b3-434b-9b18-48a4e8d4e9dd", "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2", new Guid("16cbe3b5-128b-4e00-9fbb-4e691b00280a") },
                     { "8d64359a-fda6-4096-b40d-f1375775244d", "3a8073b2-b954-428a-a4b9-6e4b3f5db051", new Guid("6f44a915-b24b-4034-9e18-0a1775210ef3") },
-                    { "1f00a1d7-cbb6-44bf-bdc8-a3608b1284b9", "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c", new Guid("5224a9f4-547b-4300-8788-26d085155b48") }
+                    { "849b8726-44b3-434b-9b18-48a4e8d4e9dd", "698c347e-bb57-4cb4-b672-9940647f250d", new Guid("4c4992c2-1d6e-48d5-ad2c-eccfae98c53f") },
+                    { "1f00a1d7-cbb6-44bf-bdc8-a3608b1284b9", "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c", new Guid("5224a9f4-547b-4300-8788-26d085155b48") },
+                    { "849b8726-44b3-434b-9b18-48a4e8d4e9dd", "e5675086-e91e-442a-9c22-27d41bee49a4", new Guid("24d7ceb7-a7c8-48d8-a0b0-1ad0ce9f0fcf") }
                 });
 
             migrationBuilder.InsertData(
@@ -412,7 +417,9 @@ namespace Klicko_be.Migrations
                 columns: new[] { "CartId", "CreatedAt", "UpdatedAt", "UserId" },
                 values: new object[,]
                 {
+                    { new Guid("0b61eb1c-7294-49ea-94a2-f90273f7e5c9"), new DateTime(2025, 4, 19, 11, 0, 56, 0, DateTimeKind.Unspecified), new DateTime(2025, 4, 19, 11, 0, 56, 0, DateTimeKind.Unspecified), "e5675086-e91e-442a-9c22-27d41bee49a4" },
                     { new Guid("59a9d57e-c339-4a73-8d02-69cc186a5385"), new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified), new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified), "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c" },
+                    { new Guid("a32de9e5-58e6-4ae8-8590-204bf8677abf"), new DateTime(2025, 4, 19, 11, 0, 56, 0, DateTimeKind.Unspecified), new DateTime(2025, 4, 19, 11, 0, 56, 0, DateTimeKind.Unspecified), "698c347e-bb57-4cb4-b672-9940647f250d" },
                     { new Guid("ad0b8ebb-3e25-4c9f-a7dd-7e07c3e7ab3f"), new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified), new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified), "3a8073b2-b954-428a-a4b9-6e4b3f5db051" },
                     { new Guid("b64a049a-6d76-4c1c-866c-e0169c92f1d6"), new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified), new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified), "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2" }
                 });
@@ -462,6 +469,18 @@ namespace Klicko_be.Migrations
                 {
                     { new Guid("e25b1044-5049-4ca9-954c-db76ae235862"), new Guid("1652310e-b8f3-43e7-bd9d-287f73f939b5"), "cf8e8bf0-59b5-44b2-bb5c-478b18b7f767.jpg", "Un'esperienza mozzafiato sul vulcano attivo più grande d'Europa. Questa escursione notturna ti porterà a scoprire l'affascinante paesaggio lunare dell'Etna quando il buio avvolge il vulcano e le stelle brillano intense nel cielo siciliano. Accompagnato da guide vulcanologiche esperte, inizierai il percorso al tramonto per raggiungere i punti panoramici dove godere della vista sulla costa e sui paesi etnei che si illuminano con il calare della notte. Durante il cammino su sentieri di lava solidificata, potrai osservare le colate recenti e i crateri secondari, ascoltando il racconto delle eruzioni storiche e dei miti legati a questo vulcano. Al calare completo della notte, con l'aiuto di lampade frontali, raggiungerai un punto di osservazione privilegiato da cui, con un po' di fortuna, potrai vedere il bagliore rossastro dell'attività vulcanica. L'escursione include una sosta per una cena al sacco in un rifugio di montagna, con degustazione di vini dell'Etna.", "Ammira il vulcano attivo sotto il cielo stellato", "6 ore", "L'esperienza include tutto il necessario per goderti l'avventura in totale sicurezza e comfort.", true, new DateTime(2023, 4, 10, 11, 0, 56, 0, DateTimeKind.Unspecified), new DateTime(2023, 4, 10, 11, 0, 56, 0, DateTimeKind.Unspecified), 2, "Sicilia Avventure", "Catania, Sicilia", 120m, "Escursione notturna sull'Etna", "3a8073b2-b954-428a-a4b9-6e4b3f5db051", "3a8073b2-b954-428a-a4b9-6e4b3f5db051", 24 },
                     { new Guid("ff3ed239-e178-4632-8385-042286991c66"), new Guid("a4049ef8-1e86-48bf-b514-3930469ddcbd"), "5f37b647-e33d-440e-88ed-2e0d956f377a.jpg", "Esplora le colline del Montefeltro, al confine tra Marche, Toscana ed Emilia-Romagna, a bordo di una moderna e-bike che ti permetterà di percorrere distanze importanti senza eccessiva fatica. Questo tour guidato ti porterà alla scoperta di antichi borghi medievali, castelli rinascimentali e abbazie secolari, immersi in un paesaggio che ha ispirato i fondali di molti dipinti di Piero della Francesca. Partendo da Urbino, patrimonio UNESCO e culla del Rinascimento italiano, pedalerai lungo strade secondarie poco trafficate e sentieri panoramici, visitando perle nascoste come San Leo, con la sua imponente fortezza, Pennabilli, con i suoi misteriosi giardini, e Sant'Agata Feltria, famosa per il tartufo. Durante il percorso, sono previste soste per visite culturali e per degustare prodotti tipici locali, come il formaggio di fossa, il prosciutto di Carpegna e i vini del territorio. La guida ti racconterà la storia e le leggende di questi luoghi, svelando curiosità e aneddoti poco conosciuti. L'esperienza è adatta a tutti, grazie all'assistenza elettrica delle biciclette che rende accessibili anche i tratti in salita.", "Pedalata assistita tra castelli, abbazie e panorami mozzafiato", "7 ore", "L'esperienza include tutto il necessario per goderti l'avventura in totale sicurezza e comfort.", true, new DateTime(2023, 8, 10, 11, 0, 56, 0, DateTimeKind.Unspecified), new DateTime(2023, 8, 10, 11, 0, 56, 0, DateTimeKind.Unspecified), 1, "Marche Experience", "Urbino, Marche", 70m, "Escursione in e-bike nei borghi del Montefeltro", "3a8073b2-b954-428a-a4b9-6e4b3f5db051", "3a8073b2-b954-428a-a4b9-6e4b3f5db051", 12 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Orders",
+                columns: new[] { "OrderId", "CreatedAt", "OrderNumber", "State", "TotalPrice", "UserId" },
+                values: new object[,]
+                {
+                    { new Guid("089b2a7e-4287-4e1c-8928-693a736db304"), new DateTime(2024, 2, 9, 11, 0, 56, 0, DateTimeKind.Unspecified), 123450, "Completato", 145m, "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2" },
+                    { new Guid("1baad7eb-e2a6-45d9-bf8c-e68579cedfd6"), new DateTime(2025, 2, 23, 11, 0, 56, 0, DateTimeKind.Unspecified), 123453, "Completato", 360m, "698c347e-bb57-4cb4-b672-9940647f250d" },
+                    { new Guid("cf854aee-04c4-43ff-bb30-445daa75478a"), new DateTime(2024, 7, 25, 11, 0, 56, 0, DateTimeKind.Unspecified), 123451, "Completato", 150m, "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2" },
+                    { new Guid("d1f55060-cb7a-4c66-b674-adda6099dde5"), new DateTime(2025, 4, 28, 11, 0, 56, 0, DateTimeKind.Unspecified), 123454, "In attesa", 479.75m, "698c347e-bb57-4cb4-b672-9940647f250d" },
+                    { new Guid("dc2a8bdd-f6cc-4637-9104-639f0e020777"), new DateTime(2025, 1, 12, 11, 0, 56, 0, DateTimeKind.Unspecified), 123452, "Completato", 397.49m, "698c347e-bb57-4cb4-b672-9940647f250d" }
                 });
 
             migrationBuilder.InsertData(
@@ -524,19 +543,77 @@ namespace Klicko_be.Migrations
             migrationBuilder.InsertData(
                 table: "Images",
                 columns: new[] { "ImageId", "ExperienceId", "Url" },
+                values: new object[] { new Guid("00889ac8-a53d-4d5e-b655-aac991787de0"), new Guid("cec8f297-d65b-485a-adc3-f015139cd0c2"), "206d26ab-33c5-4e4a-b79c-9271e14909ef.jpg" });
+
+            migrationBuilder.InsertData(
+                table: "Images",
+                columns: new[] { "ImageId", "ExperienceId", "IsCover", "Url" },
+                values: new object[] { new Guid("0a39012b-5764-4b46-b674-4f72ea74bacb"), new Guid("0c94ee3c-86f3-4e83-afb2-2a753416227a"), true, "44811c06-278a-45e5-8411-717827a59107.jpg" });
+
+            migrationBuilder.InsertData(
+                table: "Images",
+                columns: new[] { "ImageId", "ExperienceId", "Url" },
                 values: new object[,]
                 {
-                    { new Guid("00889ac8-a53d-4d5e-b655-aac991787de0"), new Guid("cec8f297-d65b-485a-adc3-f015139cd0c2"), "206d26ab-33c5-4e4a-b79c-9271e14909ef.jpg" },
                     { new Guid("0c665169-d7a3-4781-8ad3-b656ed553183"), new Guid("ff3ed239-e178-4632-8385-042286991c66"), "e676f25d-4eb5-4a57-a5ec-93a8b7d0c26c.jpg" },
                     { new Guid("0e33f4df-9337-4158-b444-caedb779b555"), new Guid("0c94ee3c-86f3-4e83-afb2-2a753416227a"), "020a0db7-2ca2-472a-bb79-6fe49dbbb328.jpg" },
-                    { new Guid("0f3000ac-68fd-46e3-b0cc-bcd40f2927bc"), new Guid("e25b1044-5049-4ca9-954c-db76ae235862"), "cc614324-72a9-4020-bf14-57806546f28f.jpg" },
+                    { new Guid("0f3000ac-68fd-46e3-b0cc-bcd40f2927bc"), new Guid("e25b1044-5049-4ca9-954c-db76ae235862"), "cc614324-72a9-4020-bf14-57806546f28f.jpg" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Images",
+                columns: new[] { "ImageId", "ExperienceId", "IsCover", "Url" },
+                values: new object[,]
+                {
+                    { new Guid("124f2af3-8b9a-4963-b272-638cd975e988"), new Guid("ff3ed239-e178-4632-8385-042286991c66"), true, "5f37b647-e33d-440e-88ed-2e0d956f377a.jpg" },
+                    { new Guid("1c95b993-955d-45ce-853b-984a03a441f8"), new Guid("bb36c355-2c8e-4a45-9be3-151934e2ff4c"), true, "f34f2a25-8e55-4826-8ce4-aca2a2a76c3a.jpg" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Images",
+                columns: new[] { "ImageId", "ExperienceId", "Url" },
+                values: new object[,]
+                {
                     { new Guid("1d43d597-036f-4c7c-976b-84a49d8a802a"), new Guid("e25b1044-5049-4ca9-954c-db76ae235862"), "87e71440-0f75-4752-9932-89875061ae2a.jpg" },
                     { new Guid("1fda0cd4-e54a-47dc-985f-55295e9d0405"), new Guid("589aca9c-2b07-42d2-8920-c4406e5da977"), "d709d72d-e919-4e25-90e7-f7174fab8b45.jpg" },
-                    { new Guid("220d183a-888b-4974-b8f6-ee506f647338"), new Guid("bb36c355-2c8e-4a45-9be3-151934e2ff4c"), "f2a0c878-277c-4ab7-ac8b-aee7dbf4bfa2.jpg" },
+                    { new Guid("220d183a-888b-4974-b8f6-ee506f647338"), new Guid("bb36c355-2c8e-4a45-9be3-151934e2ff4c"), "f2a0c878-277c-4ab7-ac8b-aee7dbf4bfa2.jpg" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Images",
+                columns: new[] { "ImageId", "ExperienceId", "IsCover", "Url" },
+                values: new object[] { new Guid("25098581-ef31-4bfb-b64b-a4dfaa6b765d"), new Guid("6f236570-1625-4190-9a4f-0da2d0639386"), true, "4949849a-cc7a-4481-9c77-929fdbb71310.jpg" });
+
+            migrationBuilder.InsertData(
+                table: "Images",
+                columns: new[] { "ImageId", "ExperienceId", "Url" },
+                values: new object[,]
+                {
                     { new Guid("3f4df348-1950-4ce6-9d8a-3b5803cdef49"), new Guid("0c94ee3c-86f3-4e83-afb2-2a753416227a"), "54b7f0e6-9115-4b2c-b0a9-37b2f049eaad.jpg" },
                     { new Guid("411e1f6a-7bb8-48bb-9a50-8de52bff30fb"), new Guid("ff3ed239-e178-4632-8385-042286991c66"), "ab6653b8-dcd2-4cf3-9402-78a29db6f26c.jpg" },
-                    { new Guid("4bfd8674-47b5-481a-80ca-bc07ab00d627"), new Guid("bb36c355-2c8e-4a45-9be3-151934e2ff4c"), "199c2fa1-560a-4a26-b0e3-7e59f5b04e9f.jpg" },
-                    { new Guid("4e0c61df-cc97-4538-bc2e-b922d1e4e17b"), new Guid("81c17e89-5bc3-42bb-9897-ddf27d111440"), "e53b1924-4882-4551-bd05-fe72a6a7769e.jpg" },
+                    { new Guid("4bfd8674-47b5-481a-80ca-bc07ab00d627"), new Guid("bb36c355-2c8e-4a45-9be3-151934e2ff4c"), "199c2fa1-560a-4a26-b0e3-7e59f5b04e9f.jpg" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Images",
+                columns: new[] { "ImageId", "ExperienceId", "IsCover", "Url" },
+                values: new object[] { new Guid("4dbf4c05-cfd0-4584-9717-2443b9dbcc38"), new Guid("62947bc9-568c-4c34-a8e1-2fb6f05bca61"), true, "350540d5-80b9-49fa-8fb2-8a58c80d149c.jpg" });
+
+            migrationBuilder.InsertData(
+                table: "Images",
+                columns: new[] { "ImageId", "ExperienceId", "Url" },
+                values: new object[] { new Guid("4e0c61df-cc97-4538-bc2e-b922d1e4e17b"), new Guid("81c17e89-5bc3-42bb-9897-ddf27d111440"), "e53b1924-4882-4551-bd05-fe72a6a7769e.jpg" });
+
+            migrationBuilder.InsertData(
+                table: "Images",
+                columns: new[] { "ImageId", "ExperienceId", "IsCover", "Url" },
+                values: new object[] { new Guid("53600cbe-3ae0-4ff2-9d9e-baba24a5a468"), new Guid("81c17e89-5bc3-42bb-9897-ddf27d111440"), true, "a8b9cf9c-4f8e-4e18-8413-bf5de4cb4b3c.jpg" });
+
+            migrationBuilder.InsertData(
+                table: "Images",
+                columns: new[] { "ImageId", "ExperienceId", "Url" },
+                values: new object[,]
+                {
                     { new Guid("5e3b3401-2668-4ec9-a893-ee6c535ddd78"), new Guid("589aca9c-2b07-42d2-8920-c4406e5da977"), "82b24643-7e82-4042-be6b-d1704c537371.jpg" },
                     { new Guid("67673f47-35fd-4c14-a026-d7a61a8936ed"), new Guid("62947bc9-568c-4c34-a8e1-2fb6f05bca61"), "d5de5dc4-2e9c-4c2b-8284-85039169bca9.jpg" },
                     { new Guid("67d4b845-2959-41cd-ac95-b442a4e32cb5"), new Guid("8dc3b2f9-850b-42cc-824c-7758112b9370"), "cce26a3b-f6dc-47eb-a624-2bc4df0a7623.jpg" },
@@ -544,7 +621,19 @@ namespace Klicko_be.Migrations
                     { new Guid("721063ed-d498-4070-a4e1-940a9f849a14"), new Guid("8dc3b2f9-850b-42cc-824c-7758112b9370"), "3b6f886f-a15a-45ff-9644-944d0b97eaaa.jpg" },
                     { new Guid("73138467-d5af-499a-8624-f9d5de52a54f"), new Guid("cec8f297-d65b-485a-adc3-f015139cd0c2"), "77264134-6aab-419e-ad5d-3503697c6823.jpg" },
                     { new Guid("79f38fb1-39b2-4f72-a08c-16dac303f0ef"), new Guid("0c94ee3c-86f3-4e83-afb2-2a753416227a"), "0785f2aa-1e76-4d82-ada6-1e70c27621e1.jpg" },
-                    { new Guid("7f58809a-c241-4e3e-b841-9327111940d4"), new Guid("62947bc9-568c-4c34-a8e1-2fb6f05bca61"), "e10af629-01f0-41f5-b078-fe56db331999.jpg" },
+                    { new Guid("7f58809a-c241-4e3e-b841-9327111940d4"), new Guid("62947bc9-568c-4c34-a8e1-2fb6f05bca61"), "e10af629-01f0-41f5-b078-fe56db331999.jpg" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Images",
+                columns: new[] { "ImageId", "ExperienceId", "IsCover", "Url" },
+                values: new object[] { new Guid("86359d64-b633-4db1-8c30-04737b55cb36"), new Guid("cec8f297-d65b-485a-adc3-f015139cd0c2"), true, "280b9c0f-257e-4f05-b2db-84e704fda33d.jpg" });
+
+            migrationBuilder.InsertData(
+                table: "Images",
+                columns: new[] { "ImageId", "ExperienceId", "Url" },
+                values: new object[,]
+                {
                     { new Guid("8b13d878-8ebc-452e-bf29-b483f72c6887"), new Guid("ff3ed239-e178-4632-8385-042286991c66"), "0ff472a2-8be1-43a5-8671-4bf71150b036.jpg" },
                     { new Guid("8fae68b9-e4f8-420a-91a8-4fea7c80b7e0"), new Guid("cec8f297-d65b-485a-adc3-f015139cd0c2"), "b2bbcf89-6fb0-44a5-924e-6271a8f824b6.jpg" },
                     { new Guid("92c77996-58e0-44ad-b263-f02f11820a6d"), new Guid("62947bc9-568c-4c34-a8e1-2fb6f05bca61"), "54b08176-c485-416f-8950-9c74a5b1feea.jpg" },
@@ -554,7 +643,19 @@ namespace Klicko_be.Migrations
                     { new Guid("a06f8821-9e20-4a89-bd19-27db1ac39f11"), new Guid("cec8f297-d65b-485a-adc3-f015139cd0c2"), "296d02ff-cc6c-4027-81d6-fa75630d9e5b.jpg" },
                     { new Guid("a9ceabed-f21c-4f01-9303-26852c15524a"), new Guid("6f236570-1625-4190-9a4f-0da2d0639386"), "91ccd7ae-1cec-4462-bae5-a0f97cc43713.jpg" },
                     { new Guid("b23f5aef-aa7e-44c9-b38f-29c89fd60831"), new Guid("6f236570-1625-4190-9a4f-0da2d0639386"), "fbb011ba-234d-4b67-9edd-4e5a5f7c103e.jpg" },
-                    { new Guid("bba9ae96-13a7-4e28-abcd-63f33f63a28d"), new Guid("bb36c355-2c8e-4a45-9be3-151934e2ff4c"), "afab16dd-fb18-4b62-ba16-bea8c4514d68.jpg" },
+                    { new Guid("bba9ae96-13a7-4e28-abcd-63f33f63a28d"), new Guid("bb36c355-2c8e-4a45-9be3-151934e2ff4c"), "afab16dd-fb18-4b62-ba16-bea8c4514d68.jpg" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Images",
+                columns: new[] { "ImageId", "ExperienceId", "IsCover", "Url" },
+                values: new object[] { new Guid("c904526c-50f9-4bc3-9d3f-e5ce2a1d6400"), new Guid("e25b1044-5049-4ca9-954c-db76ae235862"), true, "cf8e8bf0-59b5-44b2-bb5c-478b18b7f767.jpg" });
+
+            migrationBuilder.InsertData(
+                table: "Images",
+                columns: new[] { "ImageId", "ExperienceId", "Url" },
+                values: new object[,]
+                {
                     { new Guid("dac61436-2392-47d6-a679-6f6d1ae94225"), new Guid("0c94ee3c-86f3-4e83-afb2-2a753416227a"), "d8c1f786-4bb3-44df-b5a8-7b806788c246.jpg" },
                     { new Guid("e20bf13c-a35a-44f6-ba11-12eca65c0366"), new Guid("8dc3b2f9-850b-42cc-824c-7758112b9370"), "edaf24b2-0a7b-4a18-b44f-eca6ad470460.jpg" },
                     { new Guid("e343c782-8671-4eba-b282-d5fd7a86c9ab"), new Guid("e25b1044-5049-4ca9-954c-db76ae235862"), "0a056b0c-8418-4d1a-8a1e-fd5e366aef78.jpg" },
@@ -563,9 +664,43 @@ namespace Klicko_be.Migrations
                     { new Guid("eb227c65-5393-4c68-9eab-68406b78a89d"), new Guid("589aca9c-2b07-42d2-8920-c4406e5da977"), "f12738bf-a7f0-4dc1-a16e-90c3fc6ea823.jpg" },
                     { new Guid("ed5a4c3e-d0b2-4f75-a1e4-825ebe7a748d"), new Guid("e25b1044-5049-4ca9-954c-db76ae235862"), "39f57bd8-d2db-4d9e-8674-16d015703285.jpg" },
                     { new Guid("f2dfc283-587d-4fd9-a29b-599868a05bf6"), new Guid("81c17e89-5bc3-42bb-9897-ddf27d111440"), "906885f5-840b-4410-bb69-84f6b492c876.jpg" },
-                    { new Guid("f4840eb1-e492-480f-a418-5f30d68cb215"), new Guid("589aca9c-2b07-42d2-8920-c4406e5da977"), "69fee451-9f08-4ab1-bcfb-cf7c8068c3a4.jpg" },
-                    { new Guid("f9ae8eaf-069a-47cd-b19e-6b6e8166165e"), new Guid("bb36c355-2c8e-4a45-9be3-151934e2ff4c"), "e46dace3-f0ac-4bca-8fd1-b8e25c815472.jpg" },
-                    { new Guid("fd56c8cb-ee90-4140-9134-ab759f6b5be5"), new Guid("6f236570-1625-4190-9a4f-0da2d0639386"), "26ba5e64-1634-41a0-a3de-d08ea7e86d9d.jpg" }
+                    { new Guid("f4840eb1-e492-480f-a418-5f30d68cb215"), new Guid("589aca9c-2b07-42d2-8920-c4406e5da977"), "69fee451-9f08-4ab1-bcfb-cf7c8068c3a4.jpg" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Images",
+                columns: new[] { "ImageId", "ExperienceId", "IsCover", "Url" },
+                values: new object[] { new Guid("f90c38c4-5c6f-467c-b2b1-7cc2967735c1"), new Guid("8dc3b2f9-850b-42cc-824c-7758112b9370"), true, "b33390f8-430a-456c-b821-83a8b9406043.jpg" });
+
+            migrationBuilder.InsertData(
+                table: "Images",
+                columns: new[] { "ImageId", "ExperienceId", "Url" },
+                values: new object[] { new Guid("f9ae8eaf-069a-47cd-b19e-6b6e8166165e"), new Guid("bb36c355-2c8e-4a45-9be3-151934e2ff4c"), "e46dace3-f0ac-4bca-8fd1-b8e25c815472.jpg" });
+
+            migrationBuilder.InsertData(
+                table: "Images",
+                columns: new[] { "ImageId", "ExperienceId", "IsCover", "Url" },
+                values: new object[] { new Guid("fd1319bd-125b-44d7-b257-9f6b05b23a09"), new Guid("589aca9c-2b07-42d2-8920-c4406e5da977"), true, "372a18e3-7932-4ef5-8471-99ce5f3e098a.jpg" });
+
+            migrationBuilder.InsertData(
+                table: "Images",
+                columns: new[] { "ImageId", "ExperienceId", "Url" },
+                values: new object[] { new Guid("fd56c8cb-ee90-4140-9134-ab759f6b5be5"), new Guid("6f236570-1625-4190-9a4f-0da2d0639386"), "26ba5e64-1634-41a0-a3de-d08ea7e86d9d.jpg" });
+
+            migrationBuilder.InsertData(
+                table: "OrderExperiences",
+                columns: new[] { "OrderExperienceId", "ExperienceId", "OrderId", "Quantity" },
+                values: new object[,]
+                {
+                    { new Guid("30f7aa04-aa62-41bc-99a7-9729a455d0a8"), new Guid("e25b1044-5049-4ca9-954c-db76ae235862"), new Guid("1baad7eb-e2a6-45d9-bf8c-e68579cedfd6"), 3 },
+                    { new Guid("39ea9347-0d41-403a-81c5-baf69a343eb9"), new Guid("ff3ed239-e178-4632-8385-042286991c66"), new Guid("089b2a7e-4287-4e1c-8928-693a736db304"), 1 },
+                    { new Guid("471f10b0-b759-49c0-b34d-aec032d163f6"), new Guid("0c94ee3c-86f3-4e83-afb2-2a753416227a"), new Guid("dc2a8bdd-f6cc-4637-9104-639f0e020777"), 2 },
+                    { new Guid("5bf549b8-f233-4be8-ba39-57377100149e"), new Guid("6f236570-1625-4190-9a4f-0da2d0639386"), new Guid("089b2a7e-4287-4e1c-8928-693a736db304"), 1 },
+                    { new Guid("78bcc835-6806-4d4e-b6fb-1a8cbe0bc1c1"), new Guid("bb36c355-2c8e-4a45-9be3-151934e2ff4c"), new Guid("dc2a8bdd-f6cc-4637-9104-639f0e020777"), 1 },
+                    { new Guid("99c4650a-29ea-4ae9-8c4c-26d86c4497ca"), new Guid("62947bc9-568c-4c34-a8e1-2fb6f05bca61"), new Guid("cf854aee-04c4-43ff-bb30-445daa75478a"), 2 },
+                    { new Guid("ecc02f40-aeab-4b84-b4e9-308da99eaf22"), new Guid("589aca9c-2b07-42d2-8920-c4406e5da977"), new Guid("d1f55060-cb7a-4c66-b674-adda6099dde5"), 1 },
+                    { new Guid("f1b25b3f-60b1-4103-a342-76ef3346f1ed"), new Guid("8dc3b2f9-850b-42cc-824c-7758112b9370"), new Guid("dc2a8bdd-f6cc-4637-9104-639f0e020777"), 1 },
+                    { new Guid("f9bf51b8-0db6-4f5a-86e4-454e4bba6634"), new Guid("81c17e89-5bc3-42bb-9897-ddf27d111440"), new Guid("d1f55060-cb7a-4c66-b674-adda6099dde5"), 1 }
                 });
 
             migrationBuilder.CreateIndex(

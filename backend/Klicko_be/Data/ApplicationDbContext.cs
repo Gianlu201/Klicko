@@ -163,7 +163,7 @@ namespace Klicko_be.Data
             // Tabella Order
             builder.Entity<Order>().Property(o => o.CreatedAt).HasDefaultValue(DateTime.UtcNow);
 
-            builder.HasSequence<int>("OrderNumber_seq").StartsAt(100000000).IncrementsBy(1);
+            builder.HasSequence<int>("OrderNumber_seq").StartsAt(123456).IncrementsBy(1);
 
             builder
                 .Entity<Order>()
@@ -182,6 +182,9 @@ namespace Klicko_be.Data
                 .HasDefaultValue(DateTime.UtcNow);
 
             builder.Entity<CartExperience>().Property(ce => ce.Quantity).HasDefaultValue(1);
+
+            // Tabella Image
+            builder.Entity<Models.Image>().Property(i => i.IsCover).HasDefaultValue(false);
 
             // inserimento ruoli nella tabella ApplicationRoles
             builder
@@ -231,6 +234,22 @@ namespace Klicko_be.Data
                         UserId = "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2",
                         CreatedAt = DateTime.Parse("09/04/2025 11:00:56"),
                         UpdatedAt = DateTime.Parse("09/04/2025 11:00:56"),
+                    },
+                    new Cart()
+                    {
+                        //Mario Rossi
+                        CartId = Guid.Parse("a32de9e5-58e6-4ae8-8590-204bf8677abf"),
+                        UserId = "698c347e-bb57-4cb4-b672-9940647f250d",
+                        CreatedAt = DateTime.Parse("19/04/2025 11:00:56"),
+                        UpdatedAt = DateTime.Parse("19/04/2025 11:00:56"),
+                    },
+                    new Cart()
+                    {
+                        //Luigi Bianchi
+                        CartId = Guid.Parse("0b61eb1c-7294-49ea-94a2-f90273f7e5c9"),
+                        UserId = "e5675086-e91e-442a-9c22-27d41bee49a4",
+                        CreatedAt = DateTime.Parse("19/04/2025 11:00:56"),
+                        UpdatedAt = DateTime.Parse("19/04/2025 11:00:56"),
                     }
                 );
 
@@ -282,6 +301,36 @@ namespace Klicko_be.Data
                         PasswordHash =
                             "AQAAAAIAAYagAAAAEL6u4Tox47kxNqt9nm4+vRn+SzahthaQ55UejBFFdJvvUNNCfqIWRI246s9wJiZ43A==",
                         CartId = Guid.Parse("b64a049a-6d76-4c1c-866c-e0169c92f1d6"),
+                    },
+                    new ApplicationUser()
+                    {
+                        Id = "698c347e-bb57-4cb4-b672-9940647f250d",
+                        FirstName = "Mario",
+                        LastName = "Rossi",
+                        RegistrationDate = DateTime.Parse("19/04/2025 11:00:56"),
+                        Email = "mario.rossi@example.com",
+                        NormalizedEmail = "MARIO.ROSSI@EXAMPLE.COM",
+                        UserName = "mario.rossi@example.com",
+                        NormalizedUserName = "MARIO.ROSSI@EXAMPLE.COM",
+                        // mariorossi
+                        PasswordHash =
+                            "AQAAAAIAAYagAAAAEGqAB3rWtm9yNytryjcGs97J9AVY4J6GC/pnd/eL+/lSc8KXctmVoydETBEp6qnKAg==",
+                        CartId = Guid.Parse("a32de9e5-58e6-4ae8-8590-204bf8677abf"),
+                    },
+                    new ApplicationUser()
+                    {
+                        Id = "e5675086-e91e-442a-9c22-27d41bee49a4",
+                        FirstName = "Luigi",
+                        LastName = "Bianchi",
+                        RegistrationDate = DateTime.Parse("19/04/2025 11:00:56"),
+                        Email = "luigi.bianchi@example.com",
+                        NormalizedEmail = "LUIGI.BIANCHI@EXAMPLE.COM",
+                        UserName = "luigi.bianchi@example.com",
+                        NormalizedUserName = "LUIGI.BIANCHI@EXAMPLE.COM",
+                        // luigibianchi
+                        PasswordHash =
+                            "AQAAAAIAAYagAAAAENabfBTfVAnfCT/fg0+WNYZFHUGtBkj2cdOTFH8XkxudV8ZObX5QzlvepD9DwevyLA==",
+                        CartId = Guid.Parse("0b61eb1c-7294-49ea-94a2-f90273f7e5c9"),
                     }
                 );
 
@@ -305,6 +354,18 @@ namespace Klicko_be.Data
                     {
                         UserRoleId = Guid.Parse("16cbe3b5-128b-4e00-9fbb-4e691b00280a"),
                         UserId = "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2",
+                        RoleId = "849b8726-44b3-434b-9b18-48a4e8d4e9dd",
+                    },
+                    new ApplicationUserRole()
+                    {
+                        UserRoleId = Guid.Parse("4c4992c2-1d6e-48d5-ad2c-eccfae98c53f"),
+                        UserId = "698c347e-bb57-4cb4-b672-9940647f250d",
+                        RoleId = "849b8726-44b3-434b-9b18-48a4e8d4e9dd",
+                    },
+                    new ApplicationUserRole()
+                    {
+                        UserRoleId = Guid.Parse("24d7ceb7-a7c8-48d8-a0b0-1ad0ce9f0fcf"),
+                        UserId = "e5675086-e91e-442a-9c22-27d41bee49a4",
                         RoleId = "849b8726-44b3-434b-9b18-48a4e8d4e9dd",
                     }
                 );
@@ -1001,6 +1062,13 @@ namespace Klicko_be.Data
                     // esperienza 1 (Ferrari Driving Experience a Monza)
                     new Models.Image()
                     {
+                        ImageId = Guid.Parse("fd1319bd-125b-44d7-b257-9f6b05b23a09"),
+                        Url = "372a18e3-7932-4ef5-8471-99ce5f3e098a.jpg",
+                        ExperienceId = Guid.Parse("589aca9c-2b07-42d2-8920-c4406e5da977"),
+                        IsCover = true,
+                    },
+                    new Models.Image()
+                    {
                         ImageId = Guid.Parse("1fda0cd4-e54a-47dc-985f-55295e9d0405"),
                         Url = "d709d72d-e919-4e25-90e7-f7174fab8b45.jpg",
                         ExperienceId = Guid.Parse("589aca9c-2b07-42d2-8920-c4406e5da977"),
@@ -1024,6 +1092,13 @@ namespace Klicko_be.Data
                         ExperienceId = Guid.Parse("589aca9c-2b07-42d2-8920-c4406e5da977"),
                     },
                     // esperienza 2 (Cucina toscana nella tenuta di un castello)
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("4dbf4c05-cfd0-4584-9717-2443b9dbcc38"),
+                        Url = "350540d5-80b9-49fa-8fb2-8a58c80d149c.jpg",
+                        ExperienceId = Guid.Parse("62947bc9-568c-4c34-a8e1-2fb6f05bca61"),
+                        IsCover = true,
+                    },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("ead880ce-bc68-40ff-982c-639e96f3de15"),
@@ -1051,6 +1126,13 @@ namespace Klicko_be.Data
                     // esperienza 3 (Trekking sul sentiero degli Dei)
                     new Models.Image()
                     {
+                        ImageId = Guid.Parse("1c95b993-955d-45ce-853b-984a03a441f8"),
+                        Url = "f34f2a25-8e55-4826-8ce4-aca2a2a76c3a.jpg",
+                        ExperienceId = Guid.Parse("bb36c355-2c8e-4a45-9be3-151934e2ff4c"),
+                        IsCover = true,
+                    },
+                    new Models.Image()
+                    {
                         ImageId = Guid.Parse("220d183a-888b-4974-b8f6-ee506f647338"),
                         Url = "f2a0c878-277c-4ab7-ac8b-aee7dbf4bfa2.jpg",
                         ExperienceId = Guid.Parse("bb36c355-2c8e-4a45-9be3-151934e2ff4c"),
@@ -1074,6 +1156,13 @@ namespace Klicko_be.Data
                         ExperienceId = Guid.Parse("bb36c355-2c8e-4a45-9be3-151934e2ff4c"),
                     },
                     // esperienza 4 (Volo in mongolfiera al tramonto)
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("f90c38c4-5c6f-467c-b2b1-7cc2967735c1"),
+                        Url = "b33390f8-430a-456c-b821-83a8b9406043.jpg",
+                        ExperienceId = Guid.Parse("8dc3b2f9-850b-42cc-824c-7758112b9370"),
+                        IsCover = true,
+                    },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("67d4b845-2959-41cd-ac95-b442a4e32cb5"),
@@ -1101,6 +1190,13 @@ namespace Klicko_be.Data
                     // esperienza 5 (Tour fotografico di Venezia all'alba)
                     new Models.Image()
                     {
+                        ImageId = Guid.Parse("86359d64-b633-4db1-8c30-04737b55cb36"),
+                        Url = "280b9c0f-257e-4f05-b2db-84e704fda33d.jpg",
+                        ExperienceId = Guid.Parse("cec8f297-d65b-485a-adc3-f015139cd0c2"),
+                        IsCover = true,
+                    },
+                    new Models.Image()
+                    {
                         ImageId = Guid.Parse("73138467-d5af-499a-8624-f9d5de52a54f"),
                         Url = "77264134-6aab-419e-ad5d-3503697c6823.jpg",
                         ExperienceId = Guid.Parse("cec8f297-d65b-485a-adc3-f015139cd0c2"),
@@ -1124,6 +1220,13 @@ namespace Klicko_be.Data
                         ExperienceId = Guid.Parse("cec8f297-d65b-485a-adc3-f015139cd0c2"),
                     },
                     // esperienza 6 (Degustazione di vini in cantina sotterranea)
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("25098581-ef31-4bfb-b64b-a4dfaa6b765d"),
+                        Url = "4949849a-cc7a-4481-9c77-929fdbb71310.jpg",
+                        ExperienceId = Guid.Parse("6f236570-1625-4190-9a4f-0da2d0639386"),
+                        IsCover = true,
+                    },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("b23f5aef-aa7e-44c9-b38f-29c89fd60831"),
@@ -1151,6 +1254,13 @@ namespace Klicko_be.Data
                     // esperienza 7 (Rafting nelle rapide del fiume Nera)
                     new Models.Image()
                     {
+                        ImageId = Guid.Parse("53600cbe-3ae0-4ff2-9d9e-baba24a5a468"),
+                        Url = "a8b9cf9c-4f8e-4e18-8413-bf5de4cb4b3c.jpg",
+                        ExperienceId = Guid.Parse("81c17e89-5bc3-42bb-9897-ddf27d111440"),
+                        IsCover = true,
+                    },
+                    new Models.Image()
+                    {
                         ImageId = Guid.Parse("4e0c61df-cc97-4538-bc2e-b922d1e4e17b"),
                         Url = "e53b1924-4882-4551-bd05-fe72a6a7769e.jpg",
                         ExperienceId = Guid.Parse("81c17e89-5bc3-42bb-9897-ddf27d111440"),
@@ -1174,6 +1284,13 @@ namespace Klicko_be.Data
                         ExperienceId = Guid.Parse("81c17e89-5bc3-42bb-9897-ddf27d111440"),
                     },
                     // esperienza 8 (Escursione in e-bike nei borghi del Montefeltro)
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("124f2af3-8b9a-4963-b272-638cd975e988"),
+                        Url = "5f37b647-e33d-440e-88ed-2e0d956f377a.jpg",
+                        ExperienceId = Guid.Parse("ff3ed239-e178-4632-8385-042286991c66"),
+                        IsCover = true,
+                    },
                     new Models.Image()
                     {
                         ImageId = Guid.Parse("8b13d878-8ebc-452e-bf29-b483f72c6887"),
@@ -1201,6 +1318,13 @@ namespace Klicko_be.Data
                     // esperienza 9 (Percorso benessere in grotta termale)
                     new Models.Image()
                     {
+                        ImageId = Guid.Parse("0a39012b-5764-4b46-b674-4f72ea74bacb"),
+                        Url = "44811c06-278a-45e5-8411-717827a59107.jpg",
+                        ExperienceId = Guid.Parse("0c94ee3c-86f3-4e83-afb2-2a753416227a"),
+                        IsCover = true,
+                    },
+                    new Models.Image()
+                    {
                         ImageId = Guid.Parse("dac61436-2392-47d6-a679-6f6d1ae94225"),
                         Url = "d8c1f786-4bb3-44df-b5a8-7b806788c246.jpg",
                         ExperienceId = Guid.Parse("0c94ee3c-86f3-4e83-afb2-2a753416227a"),
@@ -1226,6 +1350,13 @@ namespace Klicko_be.Data
                     // esperienza 10 (Escursione notturna sull'Etna)
                     new Models.Image()
                     {
+                        ImageId = Guid.Parse("c904526c-50f9-4bc3-9d3f-e5ce2a1d6400"),
+                        Url = "cf8e8bf0-59b5-44b2-bb5c-478b18b7f767.jpg",
+                        ExperienceId = Guid.Parse("e25b1044-5049-4ca9-954c-db76ae235862"),
+                        IsCover = true,
+                    },
+                    new Models.Image()
+                    {
                         ImageId = Guid.Parse("1d43d597-036f-4c7c-976b-84a49d8a802a"),
                         Url = "87e71440-0f75-4752-9932-89875061ae2a.jpg",
                         ExperienceId = Guid.Parse("e25b1044-5049-4ca9-954c-db76ae235862"),
@@ -1247,6 +1378,133 @@ namespace Klicko_be.Data
                         ImageId = Guid.Parse("ed5a4c3e-d0b2-4f75-a1e4-825ebe7a748d"),
                         Url = "39f57bd8-d2db-4d9e-8674-16d015703285.jpg",
                         ExperienceId = Guid.Parse("e25b1044-5049-4ca9-954c-db76ae235862"),
+                    }
+                );
+
+            // inserimento dati nella tabella Orders
+            builder
+                .Entity<Order>()
+                .HasData(
+                    // Ordini User
+                    new Order()
+                    {
+                        OrderId = Guid.Parse("089b2a7e-4287-4e1c-8928-693a736db304"),
+                        OrderNumber = 123450,
+                        UserId = "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2",
+                        State = "Completato",
+                        TotalPrice = 145,
+                        CreatedAt = DateTime.Parse("09/02/2024 11:00:56"),
+                    },
+                    new Order()
+                    {
+                        OrderId = Guid.Parse("cf854aee-04c4-43ff-bb30-445daa75478a"),
+                        OrderNumber = 123451,
+                        UserId = "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2",
+                        State = "Completato",
+                        TotalPrice = 150,
+                        CreatedAt = DateTime.Parse("25/07/2024 11:00:56"),
+                    },
+                    // Ordini Mario Rossi
+                    new Order()
+                    {
+                        OrderId = Guid.Parse("dc2a8bdd-f6cc-4637-9104-639f0e020777"),
+                        OrderNumber = 123452,
+                        UserId = "698c347e-bb57-4cb4-b672-9940647f250d",
+                        State = "Completato",
+                        TotalPrice = 397.49m,
+                        CreatedAt = DateTime.Parse("12/01/2025 11:00:56"),
+                    },
+                    new Order()
+                    {
+                        OrderId = Guid.Parse("1baad7eb-e2a6-45d9-bf8c-e68579cedfd6"),
+                        OrderNumber = 123453,
+                        UserId = "698c347e-bb57-4cb4-b672-9940647f250d",
+                        State = "Completato",
+                        TotalPrice = 360,
+                        CreatedAt = DateTime.Parse("23/02/2025 11:00:56"),
+                    },
+                    new Order()
+                    {
+                        OrderId = Guid.Parse("d1f55060-cb7a-4c66-b674-adda6099dde5"),
+                        OrderNumber = 123454,
+                        UserId = "698c347e-bb57-4cb4-b672-9940647f250d",
+                        State = "In attesa",
+                        TotalPrice = 479.75m,
+                        CreatedAt = DateTime.Parse("28/04/2025 11:00:56"),
+                    }
+                );
+
+            // inserimento dati nella tabella OrderExperiences
+            builder
+                .Entity<OrderExperience>()
+                .HasData(
+                    // primo ordine
+                    new OrderExperience()
+                    {
+                        OrderExperienceId = Guid.Parse("39ea9347-0d41-403a-81c5-baf69a343eb9"),
+                        ExperienceId = Guid.Parse("FF3ED239-E178-4632-8385-042286991C66"),
+                        OrderId = Guid.Parse("089b2a7e-4287-4e1c-8928-693a736db304"),
+                        Quantity = 1,
+                    },
+                    new OrderExperience()
+                    {
+                        OrderExperienceId = Guid.Parse("5bf549b8-f233-4be8-ba39-57377100149e"),
+                        ExperienceId = Guid.Parse("6F236570-1625-4190-9A4F-0DA2D0639386"),
+                        OrderId = Guid.Parse("089b2a7e-4287-4e1c-8928-693a736db304"),
+                        Quantity = 1,
+                    },
+                    // secondo ordine
+                    new OrderExperience()
+                    {
+                        OrderExperienceId = Guid.Parse("99c4650a-29ea-4ae9-8c4c-26d86c4497ca"),
+                        ExperienceId = Guid.Parse("62947BC9-568C-4C34-A8E1-2FB6F05BCA61"),
+                        OrderId = Guid.Parse("cf854aee-04c4-43ff-bb30-445daa75478a"),
+                        Quantity = 2,
+                    },
+                    // terzo ordine
+                    new OrderExperience()
+                    {
+                        OrderExperienceId = Guid.Parse("78bcc835-6806-4d4e-b6fb-1a8cbe0bc1c1"),
+                        ExperienceId = Guid.Parse("BB36C355-2C8E-4A45-9BE3-151934E2FF4C"),
+                        OrderId = Guid.Parse("dc2a8bdd-f6cc-4637-9104-639f0e020777"),
+                        Quantity = 1,
+                    },
+                    new OrderExperience()
+                    {
+                        OrderExperienceId = Guid.Parse("471f10b0-b759-49c0-b34d-aec032d163f6"),
+                        ExperienceId = Guid.Parse("0C94EE3C-86F3-4E83-AFB2-2A753416227A"),
+                        OrderId = Guid.Parse("dc2a8bdd-f6cc-4637-9104-639f0e020777"),
+                        Quantity = 2,
+                    },
+                    new OrderExperience()
+                    {
+                        OrderExperienceId = Guid.Parse("f1b25b3f-60b1-4103-a342-76ef3346f1ed"),
+                        ExperienceId = Guid.Parse("8DC3B2F9-850B-42CC-824C-7758112B9370"),
+                        OrderId = Guid.Parse("dc2a8bdd-f6cc-4637-9104-639f0e020777"),
+                        Quantity = 1,
+                    },
+                    // quarto ordine
+                    new OrderExperience()
+                    {
+                        OrderExperienceId = Guid.Parse("30f7aa04-aa62-41bc-99a7-9729a455d0a8"),
+                        ExperienceId = Guid.Parse("E25B1044-5049-4CA9-954C-DB76AE235862"),
+                        OrderId = Guid.Parse("1baad7eb-e2a6-45d9-bf8c-e68579cedfd6"),
+                        Quantity = 3,
+                    },
+                    // quinto ordine
+                    new OrderExperience()
+                    {
+                        OrderExperienceId = Guid.Parse("f9bf51b8-0db6-4f5a-86e4-454e4bba6634"),
+                        ExperienceId = Guid.Parse("81C17E89-5BC3-42BB-9897-DDF27D111440"),
+                        OrderId = Guid.Parse("d1f55060-cb7a-4c66-b674-adda6099dde5"),
+                        Quantity = 1,
+                    },
+                    new OrderExperience()
+                    {
+                        OrderExperienceId = Guid.Parse("ecc02f40-aeab-4b84-b4e9-308da99eaf22"),
+                        ExperienceId = Guid.Parse("589ACA9C-2B07-42D2-8920-C4406E5DA977"),
+                        OrderId = Guid.Parse("d1f55060-cb7a-4c66-b674-adda6099dde5"),
+                        Quantity = 1,
                     }
                 );
         }

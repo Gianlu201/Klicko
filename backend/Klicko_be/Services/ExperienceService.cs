@@ -115,6 +115,12 @@ namespace Klicko_be.Services
                     .Include(e => e.UserLastModify)
                     .FirstOrDefaultAsync(e => e.ExperienceId == experienceId);
 
+                // l'esperienza include tutte le immagini associate all'esperienza tranne le immagini che hanno la proprietà IsCover = true
+                if (experience != null)
+                {
+                    experience.Images = experience.Images.Where(i => i.IsCover == false).ToList();
+                }
+
                 return experience;
             }
             catch
@@ -195,6 +201,7 @@ namespace Klicko_be.Services
                             ImageId = Guid.NewGuid(),
                             Url = fileName,
                             ExperienceId = experience.ExperienceId,
+                            IsCover = true,
                         }
                     );
                 }
@@ -224,6 +231,7 @@ namespace Klicko_be.Services
                                 ImageId = Guid.NewGuid(),
                                 Url = fileName,
                                 ExperienceId = experience.ExperienceId,
+                                IsCover = false,
                             }
                         );
                     }
@@ -351,6 +359,7 @@ namespace Klicko_be.Services
                             ImageId = Guid.NewGuid(),
                             Url = newExperience.CoverImage,
                             ExperienceId = newExperience.ExperienceId,
+                            IsCover = true,
                         }
                     );
                 }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Klicko_be.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250415155649_Initial")]
+    [Migration("20250419110158_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -26,7 +26,7 @@ namespace Klicko_be.Migrations
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.HasSequence<int>("OrderNumber_seq")
-                .StartsAt(100000000L);
+                .StartsAt(123456L);
 
             modelBuilder.Entity("Klicko_be.Models.Auth.ApplicationRole", b =>
                 {
@@ -131,7 +131,7 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("RegistrationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 15, 15, 56, 48, 593, DateTimeKind.Utc).AddTicks(6990));
+                        .HasDefaultValue(new DateTime(2025, 4, 19, 11, 1, 57, 545, DateTimeKind.Utc).AddTicks(2785));
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -161,7 +161,7 @@ namespace Klicko_be.Migrations
                             Id = "3a8073b2-b954-428a-a4b9-6e4b3f5db051",
                             AccessFailedCount = 0,
                             CartId = new Guid("ad0b8ebb-3e25-4c9f-a7dd-7e07c3e7ab3f"),
-                            ConcurrencyStamp = "b36df503-0bc4-4197-9205-0a222bea4be8",
+                            ConcurrencyStamp = "16c8f3a4-5ad9-4874-9c92-345db1a9e730",
                             Email = "admin@example.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -172,7 +172,7 @@ namespace Klicko_be.Migrations
                             PasswordHash = "AQAAAAIAAYagAAAAEJ924mp2s2BX/BpdalZ6f2s1qlMl3fxdcEPcaKFV6BxA5frV73oVpuC1V9F4PHCJ2g==",
                             PhoneNumberConfirmed = false,
                             RegistrationDate = new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified),
-                            SecurityStamp = "1e374ad4-bc4b-4abf-ba84-878d6d0f5e6c",
+                            SecurityStamp = "e41f9045-6d2e-474a-bd28-03f9b6b76265",
                             TwoFactorEnabled = false,
                             UserName = "admin@example.com"
                         },
@@ -181,7 +181,7 @@ namespace Klicko_be.Migrations
                             Id = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
                             AccessFailedCount = 0,
                             CartId = new Guid("59a9d57e-c339-4a73-8d02-69cc186a5385"),
-                            ConcurrencyStamp = "f137d749-f909-4f96-8229-698bbab5023c",
+                            ConcurrencyStamp = "d75ef455-83b2-4e34-82fb-724b48e03423",
                             Email = "seller@example.com",
                             EmailConfirmed = false,
                             FirstName = "Seller",
@@ -192,7 +192,7 @@ namespace Klicko_be.Migrations
                             PasswordHash = "AQAAAAIAAYagAAAAEJP1xbBcaikPe32EBy3MLTcexMUhKB7jQsEGuRiIlRJOWuiJwUGI/v0s83m7H70okg==",
                             PhoneNumberConfirmed = false,
                             RegistrationDate = new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified),
-                            SecurityStamp = "1536c6ab-470a-44c0-a960-e19ad96affc2",
+                            SecurityStamp = "e550c03e-8a34-41ad-b3d7-eb579df00052",
                             TwoFactorEnabled = false,
                             UserName = "seller@example.com"
                         },
@@ -201,7 +201,7 @@ namespace Klicko_be.Migrations
                             Id = "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2",
                             AccessFailedCount = 0,
                             CartId = new Guid("b64a049a-6d76-4c1c-866c-e0169c92f1d6"),
-                            ConcurrencyStamp = "81d84916-e48e-4772-ad20-9f0ceec51c6d",
+                            ConcurrencyStamp = "f5a23942-7781-45e9-ba32-026a701bcc4f",
                             Email = "user@example.com",
                             EmailConfirmed = false,
                             FirstName = "User",
@@ -212,9 +212,49 @@ namespace Klicko_be.Migrations
                             PasswordHash = "AQAAAAIAAYagAAAAEL6u4Tox47kxNqt9nm4+vRn+SzahthaQ55UejBFFdJvvUNNCfqIWRI246s9wJiZ43A==",
                             PhoneNumberConfirmed = false,
                             RegistrationDate = new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified),
-                            SecurityStamp = "c1da45ea-16db-4d85-804e-3cb1cf34f689",
+                            SecurityStamp = "04b82e3e-e80e-4e77-992c-d8fe72b530ee",
                             TwoFactorEnabled = false,
                             UserName = "user@example.com"
+                        },
+                        new
+                        {
+                            Id = "698c347e-bb57-4cb4-b672-9940647f250d",
+                            AccessFailedCount = 0,
+                            CartId = new Guid("a32de9e5-58e6-4ae8-8590-204bf8677abf"),
+                            ConcurrencyStamp = "c005b0ae-2495-44cd-bb70-b26fc43d612d",
+                            Email = "mario.rossi@example.com",
+                            EmailConfirmed = false,
+                            FirstName = "Mario",
+                            LastName = "Rossi",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "MARIO.ROSSI@EXAMPLE.COM",
+                            NormalizedUserName = "MARIO.ROSSI@EXAMPLE.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGqAB3rWtm9yNytryjcGs97J9AVY4J6GC/pnd/eL+/lSc8KXctmVoydETBEp6qnKAg==",
+                            PhoneNumberConfirmed = false,
+                            RegistrationDate = new DateTime(2025, 4, 19, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            SecurityStamp = "bbd59bfb-05a3-4fcc-9a16-f8ae2fef79b6",
+                            TwoFactorEnabled = false,
+                            UserName = "mario.rossi@example.com"
+                        },
+                        new
+                        {
+                            Id = "e5675086-e91e-442a-9c22-27d41bee49a4",
+                            AccessFailedCount = 0,
+                            CartId = new Guid("0b61eb1c-7294-49ea-94a2-f90273f7e5c9"),
+                            ConcurrencyStamp = "bebba5f9-2276-4b3f-bc70-651fba1b774b",
+                            Email = "luigi.bianchi@example.com",
+                            EmailConfirmed = false,
+                            FirstName = "Luigi",
+                            LastName = "Bianchi",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "LUIGI.BIANCHI@EXAMPLE.COM",
+                            NormalizedUserName = "LUIGI.BIANCHI@EXAMPLE.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAENabfBTfVAnfCT/fg0+WNYZFHUGtBkj2cdOTFH8XkxudV8ZObX5QzlvepD9DwevyLA==",
+                            PhoneNumberConfirmed = false,
+                            RegistrationDate = new DateTime(2025, 4, 19, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            SecurityStamp = "7f890f76-0f77-496c-b1ec-10f0c8ebd7f3",
+                            TwoFactorEnabled = false,
+                            UserName = "luigi.bianchi@example.com"
                         });
                 });
 
@@ -253,6 +293,18 @@ namespace Klicko_be.Migrations
                             UserId = "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2",
                             RoleId = "849b8726-44b3-434b-9b18-48a4e8d4e9dd",
                             UserRoleId = new Guid("16cbe3b5-128b-4e00-9fbb-4e691b00280a")
+                        },
+                        new
+                        {
+                            UserId = "698c347e-bb57-4cb4-b672-9940647f250d",
+                            RoleId = "849b8726-44b3-434b-9b18-48a4e8d4e9dd",
+                            UserRoleId = new Guid("4c4992c2-1d6e-48d5-ad2c-eccfae98c53f")
+                        },
+                        new
+                        {
+                            UserId = "e5675086-e91e-442a-9c22-27d41bee49a4",
+                            RoleId = "849b8726-44b3-434b-9b18-48a4e8d4e9dd",
+                            UserRoleId = new Guid("24d7ceb7-a7c8-48d8-a0b0-1ad0ce9f0fcf")
                         });
                 });
 
@@ -587,12 +639,12 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 15, 15, 56, 48, 594, DateTimeKind.Utc).AddTicks(5891));
+                        .HasDefaultValue(new DateTime(2025, 4, 19, 11, 1, 57, 546, DateTimeKind.Utc).AddTicks(395));
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 15, 15, 56, 48, 594, DateTimeKind.Utc).AddTicks(6552));
+                        .HasDefaultValue(new DateTime(2025, 4, 19, 11, 1, 57, 546, DateTimeKind.Utc).AddTicks(939));
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -626,6 +678,20 @@ namespace Klicko_be.Migrations
                             CreatedAt = new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified),
                             UpdatedAt = new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified),
                             UserId = "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2"
+                        },
+                        new
+                        {
+                            CartId = new Guid("a32de9e5-58e6-4ae8-8590-204bf8677abf"),
+                            CreatedAt = new DateTime(2025, 4, 19, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            UpdatedAt = new DateTime(2025, 4, 19, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            UserId = "698c347e-bb57-4cb4-b672-9940647f250d"
+                        },
+                        new
+                        {
+                            CartId = new Guid("0b61eb1c-7294-49ea-94a2-f90273f7e5c9"),
+                            CreatedAt = new DateTime(2025, 4, 19, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            UpdatedAt = new DateTime(2025, 4, 19, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            UserId = "e5675086-e91e-442a-9c22-27d41bee49a4"
                         });
                 });
 
@@ -641,7 +707,7 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 15, 15, 56, 48, 594, DateTimeKind.Utc).AddTicks(7256));
+                        .HasDefaultValue(new DateTime(2025, 4, 19, 11, 1, 57, 546, DateTimeKind.Utc).AddTicks(1797));
 
                     b.Property<Guid>("ExperienceId")
                         .HasColumnType("uniqueidentifier");
@@ -815,12 +881,12 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("LastEditDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 15, 15, 56, 48, 593, DateTimeKind.Utc).AddTicks(8805));
+                        .HasDefaultValue(new DateTime(2025, 4, 19, 11, 1, 57, 545, DateTimeKind.Utc).AddTicks(5161));
 
                     b.Property<DateTime>("LoadingDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 15, 15, 56, 48, 593, DateTimeKind.Utc).AddTicks(7916));
+                        .HasDefaultValue(new DateTime(2025, 4, 19, 11, 1, 57, 545, DateTimeKind.Utc).AddTicks(4055));
 
                     b.Property<int>("MaxParticipants")
                         .HasColumnType("int");
@@ -1128,6 +1194,11 @@ namespace Klicko_be.Migrations
                     b.Property<Guid>("ExperienceId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<bool>("IsCover")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.Property<string>("Url")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -1141,242 +1212,352 @@ namespace Klicko_be.Migrations
                     b.HasData(
                         new
                         {
+                            ImageId = new Guid("fd1319bd-125b-44d7-b257-9f6b05b23a09"),
+                            ExperienceId = new Guid("589aca9c-2b07-42d2-8920-c4406e5da977"),
+                            IsCover = true,
+                            Url = "372a18e3-7932-4ef5-8471-99ce5f3e098a.jpg"
+                        },
+                        new
+                        {
                             ImageId = new Guid("1fda0cd4-e54a-47dc-985f-55295e9d0405"),
                             ExperienceId = new Guid("589aca9c-2b07-42d2-8920-c4406e5da977"),
+                            IsCover = false,
                             Url = "d709d72d-e919-4e25-90e7-f7174fab8b45.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("5e3b3401-2668-4ec9-a893-ee6c535ddd78"),
                             ExperienceId = new Guid("589aca9c-2b07-42d2-8920-c4406e5da977"),
+                            IsCover = false,
                             Url = "82b24643-7e82-4042-be6b-d1704c537371.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("f4840eb1-e492-480f-a418-5f30d68cb215"),
                             ExperienceId = new Guid("589aca9c-2b07-42d2-8920-c4406e5da977"),
+                            IsCover = false,
                             Url = "69fee451-9f08-4ab1-bcfb-cf7c8068c3a4.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("eb227c65-5393-4c68-9eab-68406b78a89d"),
                             ExperienceId = new Guid("589aca9c-2b07-42d2-8920-c4406e5da977"),
+                            IsCover = false,
                             Url = "f12738bf-a7f0-4dc1-a16e-90c3fc6ea823.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("4dbf4c05-cfd0-4584-9717-2443b9dbcc38"),
+                            ExperienceId = new Guid("62947bc9-568c-4c34-a8e1-2fb6f05bca61"),
+                            IsCover = true,
+                            Url = "350540d5-80b9-49fa-8fb2-8a58c80d149c.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("ead880ce-bc68-40ff-982c-639e96f3de15"),
                             ExperienceId = new Guid("62947bc9-568c-4c34-a8e1-2fb6f05bca61"),
+                            IsCover = false,
                             Url = "8a18db5b-415d-4c79-ba04-f6c2bd3e534d.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("7f58809a-c241-4e3e-b841-9327111940d4"),
                             ExperienceId = new Guid("62947bc9-568c-4c34-a8e1-2fb6f05bca61"),
+                            IsCover = false,
                             Url = "e10af629-01f0-41f5-b078-fe56db331999.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("67673f47-35fd-4c14-a026-d7a61a8936ed"),
                             ExperienceId = new Guid("62947bc9-568c-4c34-a8e1-2fb6f05bca61"),
+                            IsCover = false,
                             Url = "d5de5dc4-2e9c-4c2b-8284-85039169bca9.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("92c77996-58e0-44ad-b263-f02f11820a6d"),
                             ExperienceId = new Guid("62947bc9-568c-4c34-a8e1-2fb6f05bca61"),
+                            IsCover = false,
                             Url = "54b08176-c485-416f-8950-9c74a5b1feea.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("1c95b993-955d-45ce-853b-984a03a441f8"),
+                            ExperienceId = new Guid("bb36c355-2c8e-4a45-9be3-151934e2ff4c"),
+                            IsCover = true,
+                            Url = "f34f2a25-8e55-4826-8ce4-aca2a2a76c3a.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("220d183a-888b-4974-b8f6-ee506f647338"),
                             ExperienceId = new Guid("bb36c355-2c8e-4a45-9be3-151934e2ff4c"),
+                            IsCover = false,
                             Url = "f2a0c878-277c-4ab7-ac8b-aee7dbf4bfa2.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("bba9ae96-13a7-4e28-abcd-63f33f63a28d"),
                             ExperienceId = new Guid("bb36c355-2c8e-4a45-9be3-151934e2ff4c"),
+                            IsCover = false,
                             Url = "afab16dd-fb18-4b62-ba16-bea8c4514d68.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("f9ae8eaf-069a-47cd-b19e-6b6e8166165e"),
                             ExperienceId = new Guid("bb36c355-2c8e-4a45-9be3-151934e2ff4c"),
+                            IsCover = false,
                             Url = "e46dace3-f0ac-4bca-8fd1-b8e25c815472.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("4bfd8674-47b5-481a-80ca-bc07ab00d627"),
                             ExperienceId = new Guid("bb36c355-2c8e-4a45-9be3-151934e2ff4c"),
+                            IsCover = false,
                             Url = "199c2fa1-560a-4a26-b0e3-7e59f5b04e9f.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("f90c38c4-5c6f-467c-b2b1-7cc2967735c1"),
+                            ExperienceId = new Guid("8dc3b2f9-850b-42cc-824c-7758112b9370"),
+                            IsCover = true,
+                            Url = "b33390f8-430a-456c-b821-83a8b9406043.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("67d4b845-2959-41cd-ac95-b442a4e32cb5"),
                             ExperienceId = new Guid("8dc3b2f9-850b-42cc-824c-7758112b9370"),
+                            IsCover = false,
                             Url = "cce26a3b-f6dc-47eb-a624-2bc4df0a7623.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("e20bf13c-a35a-44f6-ba11-12eca65c0366"),
                             ExperienceId = new Guid("8dc3b2f9-850b-42cc-824c-7758112b9370"),
+                            IsCover = false,
                             Url = "edaf24b2-0a7b-4a18-b44f-eca6ad470460.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("9b2c4cb0-59a6-41b4-84ae-0ddeee3f4e9e"),
                             ExperienceId = new Guid("8dc3b2f9-850b-42cc-824c-7758112b9370"),
+                            IsCover = false,
                             Url = "800cffd3-c4f6-4395-b444-ff09cf93ba01.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("721063ed-d498-4070-a4e1-940a9f849a14"),
                             ExperienceId = new Guid("8dc3b2f9-850b-42cc-824c-7758112b9370"),
+                            IsCover = false,
                             Url = "3b6f886f-a15a-45ff-9644-944d0b97eaaa.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("86359d64-b633-4db1-8c30-04737b55cb36"),
+                            ExperienceId = new Guid("cec8f297-d65b-485a-adc3-f015139cd0c2"),
+                            IsCover = true,
+                            Url = "280b9c0f-257e-4f05-b2db-84e704fda33d.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("73138467-d5af-499a-8624-f9d5de52a54f"),
                             ExperienceId = new Guid("cec8f297-d65b-485a-adc3-f015139cd0c2"),
+                            IsCover = false,
                             Url = "77264134-6aab-419e-ad5d-3503697c6823.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("00889ac8-a53d-4d5e-b655-aac991787de0"),
                             ExperienceId = new Guid("cec8f297-d65b-485a-adc3-f015139cd0c2"),
+                            IsCover = false,
                             Url = "206d26ab-33c5-4e4a-b79c-9271e14909ef.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("8fae68b9-e4f8-420a-91a8-4fea7c80b7e0"),
                             ExperienceId = new Guid("cec8f297-d65b-485a-adc3-f015139cd0c2"),
+                            IsCover = false,
                             Url = "b2bbcf89-6fb0-44a5-924e-6271a8f824b6.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("a06f8821-9e20-4a89-bd19-27db1ac39f11"),
                             ExperienceId = new Guid("cec8f297-d65b-485a-adc3-f015139cd0c2"),
+                            IsCover = false,
                             Url = "296d02ff-cc6c-4027-81d6-fa75630d9e5b.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("25098581-ef31-4bfb-b64b-a4dfaa6b765d"),
+                            ExperienceId = new Guid("6f236570-1625-4190-9a4f-0da2d0639386"),
+                            IsCover = true,
+                            Url = "4949849a-cc7a-4481-9c77-929fdbb71310.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("b23f5aef-aa7e-44c9-b38f-29c89fd60831"),
                             ExperienceId = new Guid("6f236570-1625-4190-9a4f-0da2d0639386"),
+                            IsCover = false,
                             Url = "fbb011ba-234d-4b67-9edd-4e5a5f7c103e.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("a9ceabed-f21c-4f01-9303-26852c15524a"),
                             ExperienceId = new Guid("6f236570-1625-4190-9a4f-0da2d0639386"),
+                            IsCover = false,
                             Url = "91ccd7ae-1cec-4462-bae5-a0f97cc43713.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("fd56c8cb-ee90-4140-9134-ab759f6b5be5"),
                             ExperienceId = new Guid("6f236570-1625-4190-9a4f-0da2d0639386"),
+                            IsCover = false,
                             Url = "26ba5e64-1634-41a0-a3de-d08ea7e86d9d.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("93c20292-3ece-4b3a-b5d7-0eeb103f021e"),
                             ExperienceId = new Guid("6f236570-1625-4190-9a4f-0da2d0639386"),
+                            IsCover = false,
                             Url = "61bf3454-723f-44f2-831e-340673d566fd.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("53600cbe-3ae0-4ff2-9d9e-baba24a5a468"),
+                            ExperienceId = new Guid("81c17e89-5bc3-42bb-9897-ddf27d111440"),
+                            IsCover = true,
+                            Url = "a8b9cf9c-4f8e-4e18-8413-bf5de4cb4b3c.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("4e0c61df-cc97-4538-bc2e-b922d1e4e17b"),
                             ExperienceId = new Guid("81c17e89-5bc3-42bb-9897-ddf27d111440"),
+                            IsCover = false,
                             Url = "e53b1924-4882-4551-bd05-fe72a6a7769e.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("714a64bf-fae0-40c6-a198-ec84d320a03c"),
                             ExperienceId = new Guid("81c17e89-5bc3-42bb-9897-ddf27d111440"),
+                            IsCover = false,
                             Url = "60b84064-9f5b-454e-a2ea-d38c46c2f03f.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("f2dfc283-587d-4fd9-a29b-599868a05bf6"),
                             ExperienceId = new Guid("81c17e89-5bc3-42bb-9897-ddf27d111440"),
+                            IsCover = false,
                             Url = "906885f5-840b-4410-bb69-84f6b492c876.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("e83e40ee-9a82-4885-b661-6e1ecb6dadef"),
                             ExperienceId = new Guid("81c17e89-5bc3-42bb-9897-ddf27d111440"),
+                            IsCover = false,
                             Url = "ae68d8ba-1066-4c99-b1a0-e487da50c0a6.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("124f2af3-8b9a-4963-b272-638cd975e988"),
+                            ExperienceId = new Guid("ff3ed239-e178-4632-8385-042286991c66"),
+                            IsCover = true,
+                            Url = "5f37b647-e33d-440e-88ed-2e0d956f377a.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("8b13d878-8ebc-452e-bf29-b483f72c6887"),
                             ExperienceId = new Guid("ff3ed239-e178-4632-8385-042286991c66"),
+                            IsCover = false,
                             Url = "0ff472a2-8be1-43a5-8671-4bf71150b036.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("9ea84996-fb02-49ac-8a73-c315e1bc6abd"),
                             ExperienceId = new Guid("ff3ed239-e178-4632-8385-042286991c66"),
+                            IsCover = false,
                             Url = "5d1e782c-7e22-4045-92bc-eb53b15164ce.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("0c665169-d7a3-4781-8ad3-b656ed553183"),
                             ExperienceId = new Guid("ff3ed239-e178-4632-8385-042286991c66"),
+                            IsCover = false,
                             Url = "e676f25d-4eb5-4a57-a5ec-93a8b7d0c26c.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("411e1f6a-7bb8-48bb-9a50-8de52bff30fb"),
                             ExperienceId = new Guid("ff3ed239-e178-4632-8385-042286991c66"),
+                            IsCover = false,
                             Url = "ab6653b8-dcd2-4cf3-9402-78a29db6f26c.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("0a39012b-5764-4b46-b674-4f72ea74bacb"),
+                            ExperienceId = new Guid("0c94ee3c-86f3-4e83-afb2-2a753416227a"),
+                            IsCover = true,
+                            Url = "44811c06-278a-45e5-8411-717827a59107.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("dac61436-2392-47d6-a679-6f6d1ae94225"),
                             ExperienceId = new Guid("0c94ee3c-86f3-4e83-afb2-2a753416227a"),
+                            IsCover = false,
                             Url = "d8c1f786-4bb3-44df-b5a8-7b806788c246.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("3f4df348-1950-4ce6-9d8a-3b5803cdef49"),
                             ExperienceId = new Guid("0c94ee3c-86f3-4e83-afb2-2a753416227a"),
+                            IsCover = false,
                             Url = "54b7f0e6-9115-4b2c-b0a9-37b2f049eaad.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("79f38fb1-39b2-4f72-a08c-16dac303f0ef"),
                             ExperienceId = new Guid("0c94ee3c-86f3-4e83-afb2-2a753416227a"),
+                            IsCover = false,
                             Url = "0785f2aa-1e76-4d82-ada6-1e70c27621e1.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("0e33f4df-9337-4158-b444-caedb779b555"),
                             ExperienceId = new Guid("0c94ee3c-86f3-4e83-afb2-2a753416227a"),
+                            IsCover = false,
                             Url = "020a0db7-2ca2-472a-bb79-6fe49dbbb328.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("c904526c-50f9-4bc3-9d3f-e5ce2a1d6400"),
+                            ExperienceId = new Guid("e25b1044-5049-4ca9-954c-db76ae235862"),
+                            IsCover = true,
+                            Url = "cf8e8bf0-59b5-44b2-bb5c-478b18b7f767.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("1d43d597-036f-4c7c-976b-84a49d8a802a"),
                             ExperienceId = new Guid("e25b1044-5049-4ca9-954c-db76ae235862"),
+                            IsCover = false,
                             Url = "87e71440-0f75-4752-9932-89875061ae2a.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("0f3000ac-68fd-46e3-b0cc-bcd40f2927bc"),
                             ExperienceId = new Guid("e25b1044-5049-4ca9-954c-db76ae235862"),
+                            IsCover = false,
                             Url = "cc614324-72a9-4020-bf14-57806546f28f.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("e343c782-8671-4eba-b282-d5fd7a86c9ab"),
                             ExperienceId = new Guid("e25b1044-5049-4ca9-954c-db76ae235862"),
+                            IsCover = false,
                             Url = "0a056b0c-8418-4d1a-8a1e-fd5e366aef78.jpg"
                         },
                         new
                         {
                             ImageId = new Guid("ed5a4c3e-d0b2-4f75-a1e4-825ebe7a748d"),
                             ExperienceId = new Guid("e25b1044-5049-4ca9-954c-db76ae235862"),
+                            IsCover = false,
                             Url = "39f57bd8-d2db-4d9e-8674-16d015703285.jpg"
                         });
                 });
@@ -1390,7 +1571,7 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 15, 15, 56, 48, 594, DateTimeKind.Utc).AddTicks(3716));
+                        .HasDefaultValue(new DateTime(2025, 4, 19, 11, 1, 57, 545, DateTimeKind.Utc).AddTicks(8604));
 
                     b.Property<int>("OrderNumber")
                         .ValueGeneratedOnAdd()
@@ -1413,6 +1594,53 @@ namespace Klicko_be.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Orders");
+
+                    b.HasData(
+                        new
+                        {
+                            OrderId = new Guid("089b2a7e-4287-4e1c-8928-693a736db304"),
+                            CreatedAt = new DateTime(2024, 2, 9, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            OrderNumber = 123450,
+                            State = "Completato",
+                            TotalPrice = 145m,
+                            UserId = "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2"
+                        },
+                        new
+                        {
+                            OrderId = new Guid("cf854aee-04c4-43ff-bb30-445daa75478a"),
+                            CreatedAt = new DateTime(2024, 7, 25, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            OrderNumber = 123451,
+                            State = "Completato",
+                            TotalPrice = 150m,
+                            UserId = "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2"
+                        },
+                        new
+                        {
+                            OrderId = new Guid("dc2a8bdd-f6cc-4637-9104-639f0e020777"),
+                            CreatedAt = new DateTime(2025, 1, 12, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            OrderNumber = 123452,
+                            State = "Completato",
+                            TotalPrice = 397.49m,
+                            UserId = "698c347e-bb57-4cb4-b672-9940647f250d"
+                        },
+                        new
+                        {
+                            OrderId = new Guid("1baad7eb-e2a6-45d9-bf8c-e68579cedfd6"),
+                            CreatedAt = new DateTime(2025, 2, 23, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            OrderNumber = 123453,
+                            State = "Completato",
+                            TotalPrice = 360m,
+                            UserId = "698c347e-bb57-4cb4-b672-9940647f250d"
+                        },
+                        new
+                        {
+                            OrderId = new Guid("d1f55060-cb7a-4c66-b674-adda6099dde5"),
+                            CreatedAt = new DateTime(2025, 4, 28, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            OrderNumber = 123454,
+                            State = "In attesa",
+                            TotalPrice = 479.75m,
+                            UserId = "698c347e-bb57-4cb4-b672-9940647f250d"
+                        });
                 });
 
             modelBuilder.Entity("Klicko_be.Models.OrderExperience", b =>
@@ -1437,6 +1665,71 @@ namespace Klicko_be.Migrations
                     b.HasIndex("OrderId");
 
                     b.ToTable("OrderExperiences");
+
+                    b.HasData(
+                        new
+                        {
+                            OrderExperienceId = new Guid("39ea9347-0d41-403a-81c5-baf69a343eb9"),
+                            ExperienceId = new Guid("ff3ed239-e178-4632-8385-042286991c66"),
+                            OrderId = new Guid("089b2a7e-4287-4e1c-8928-693a736db304"),
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            OrderExperienceId = new Guid("5bf549b8-f233-4be8-ba39-57377100149e"),
+                            ExperienceId = new Guid("6f236570-1625-4190-9a4f-0da2d0639386"),
+                            OrderId = new Guid("089b2a7e-4287-4e1c-8928-693a736db304"),
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            OrderExperienceId = new Guid("99c4650a-29ea-4ae9-8c4c-26d86c4497ca"),
+                            ExperienceId = new Guid("62947bc9-568c-4c34-a8e1-2fb6f05bca61"),
+                            OrderId = new Guid("cf854aee-04c4-43ff-bb30-445daa75478a"),
+                            Quantity = 2
+                        },
+                        new
+                        {
+                            OrderExperienceId = new Guid("78bcc835-6806-4d4e-b6fb-1a8cbe0bc1c1"),
+                            ExperienceId = new Guid("bb36c355-2c8e-4a45-9be3-151934e2ff4c"),
+                            OrderId = new Guid("dc2a8bdd-f6cc-4637-9104-639f0e020777"),
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            OrderExperienceId = new Guid("471f10b0-b759-49c0-b34d-aec032d163f6"),
+                            ExperienceId = new Guid("0c94ee3c-86f3-4e83-afb2-2a753416227a"),
+                            OrderId = new Guid("dc2a8bdd-f6cc-4637-9104-639f0e020777"),
+                            Quantity = 2
+                        },
+                        new
+                        {
+                            OrderExperienceId = new Guid("f1b25b3f-60b1-4103-a342-76ef3346f1ed"),
+                            ExperienceId = new Guid("8dc3b2f9-850b-42cc-824c-7758112b9370"),
+                            OrderId = new Guid("dc2a8bdd-f6cc-4637-9104-639f0e020777"),
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            OrderExperienceId = new Guid("30f7aa04-aa62-41bc-99a7-9729a455d0a8"),
+                            ExperienceId = new Guid("e25b1044-5049-4ca9-954c-db76ae235862"),
+                            OrderId = new Guid("1baad7eb-e2a6-45d9-bf8c-e68579cedfd6"),
+                            Quantity = 3
+                        },
+                        new
+                        {
+                            OrderExperienceId = new Guid("f9bf51b8-0db6-4f5a-86e4-454e4bba6634"),
+                            ExperienceId = new Guid("81c17e89-5bc3-42bb-9897-ddf27d111440"),
+                            OrderId = new Guid("d1f55060-cb7a-4c66-b674-adda6099dde5"),
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            OrderExperienceId = new Guid("ecc02f40-aeab-4b84-b4e9-308da99eaf22"),
+                            ExperienceId = new Guid("589aca9c-2b07-42d2-8920-c4406e5da977"),
+                            OrderId = new Guid("d1f55060-cb7a-4c66-b674-adda6099dde5"),
+                            Quantity = 1
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
