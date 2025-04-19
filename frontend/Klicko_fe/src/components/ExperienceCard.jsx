@@ -29,7 +29,7 @@ const ExperienceCard = ({ experience, className }) => {
                 </span>
               )
             )}
-            {experience.sale && (
+            {experience.sale > 0 && (
               <span className='absolute top-0 right-0 z-10 w-full transform rotate-45 translate-x-14 -translate-y-4 bg-red-600 text-white text-sm font-bold text-end py-1.5 pe-18 shadow-md'>
                 -{experience.sale}%
               </span>

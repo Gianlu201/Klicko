@@ -13,7 +13,7 @@ import { BrowserRouter, Link, Routes, useParams } from 'react-router-dom';
 import MainComponent from '../components/dashboardPage/MainComponent';
 import OrdersComponent from '../components/dashboardPage/OrdersComponent';
 import ExperiencesComponent from '../components/dashboardPage/ExperiencesComponent';
-import AddExperienceForm from '../components/dashboardPage/AddExperienceForm';
+import ExperienceForm from '../components/dashboardPage/ExperienceForm';
 import DashboardAdmin from '../components/dashboardPage/DashboardAdmin';
 import DashboardUsers from '../components/dashboardPage/DashboardUsers';
 
@@ -82,8 +82,8 @@ const DashboardPage = () => {
 
       case 'experiences':
         console.log('experiences');
-        if (params.option === 'add') {
-          return <AddExperienceForm />;
+        if (params.option === 'add' || params.option === 'edit') {
+          return <ExperienceForm />;
         }
         return <ExperiencesComponent />;
 

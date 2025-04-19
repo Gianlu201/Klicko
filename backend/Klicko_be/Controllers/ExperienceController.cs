@@ -653,16 +653,21 @@ namespace Klicko_be.Controllers
         }
 
         [HttpPut("{experienceId:guid}")]
+        [Authorize]
         public async Task<IActionResult> Edit(
-            [FromBody] EditExperienceRequestDto experienceEdit,
+            [FromForm] EditExperienceRequestDto experienceEdit,
             Guid experienceId
         )
         {
             try
             {
+                var user = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+                var userId = user!.Value;
+
                 var result = await _experienceService.EditExperienceByIdAsync(
                     experienceId,
-                    experienceEdit
+                    experienceEdit,
+                    userId
                 );
 
                 return result

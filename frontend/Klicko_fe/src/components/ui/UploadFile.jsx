@@ -3,6 +3,8 @@ import React, { useRef, useState, useEffect } from 'react';
 
 let counter = 0;
 
+// onFileSelected è il metodo che sarà chiamato quando un'immagine viene selezionata e caricata
+
 const UploadFile = ({ onFilesSelected, multiple = false }) => {
   const inputRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);

@@ -34,12 +34,6 @@ namespace Klicko_be.DTOs.Experience
         public required string Organiser { get; set; }
 
         [Required]
-        public DateTime LastEditDate { get; set; }
-
-        [Required]
-        public required string UserLastModifyId { get; set; }
-
-        [Required]
         public required bool IsFreeCancellable { get; set; }
 
         [Required]
@@ -54,14 +48,18 @@ namespace Klicko_be.DTOs.Experience
         [Required]
         public bool IsPopular { get; set; }
 
-        [Required]
-        public string? CoverImage { get; set; }
+        public IFormFile? CoverImage { get; set; }
 
         [Required]
         public required int ValidityInMonths { get; set; }
 
-        public List<CreateImageRequestDto>? Images { get; set; }
+        public List<IFormFile>? Images { get; set; }
 
-        public List<CreateCarryWithRequestDto>? CarryWiths { get; set; }
+        public string? CarryWiths { get; set; }
+
+        public List<Guid>? RemovedImages { get; set; }
+
+        [Required]
+        public required bool RemovedCoverImage { get; set; }
     }
 }

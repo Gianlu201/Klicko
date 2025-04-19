@@ -125,7 +125,8 @@ namespace Klicko_be.Services
 
         public async Task<bool> EditExperienceByIdAsync(
             Guid experienceId,
-            EditExperienceRequestDto experienceEdit
+            EditExperienceRequestDto experienceEdit,
+            string userId
         )
         {
             try
@@ -146,39 +147,189 @@ namespace Klicko_be.Services
                 experience.Description = experienceEdit.Description;
                 experience.MaxParticipants = experienceEdit.MaxParticipants;
                 experience.Organiser = experienceEdit.Organiser;
-                experience.LastEditDate = experienceEdit.LastEditDate;
-                experience.UserLastModifyId = experienceEdit.UserLastModifyId;
+                experience.LastEditDate = DateTime.Now;
+                experience.UserLastModifyId = userId;
                 experience.IsFreeCancellable = experienceEdit.IsFreeCancellable;
                 experience.IncludedDescription = experienceEdit.IncludedDescription;
                 experience.Sale = experienceEdit.Sale;
                 experience.IsInEvidence = experienceEdit.IsInEvidence;
                 experience.IsPopular = experienceEdit.IsPopular;
-                experience.CoverImage = experienceEdit.CoverImage;
                 experience.ValidityInMonths = experienceEdit.ValidityInMonths;
+
+                Image? prevCoverImg = null;
+                if (experienceEdit.RemovedCoverImage)
+                {
+                    prevCoverImg = await _context.Images.FirstOrDefaultAsync(i =>
+                        i.Url == experience.CoverImage && i.ExperienceId == experienceId
+                    );
+
+                    if (prevCoverImg == null)
+                    {
+                        return false;
+                    }
+
+                    var fileName =
+                        Guid.NewGuid().ToString()
+                        + Path.GetExtension(experienceEdit.CoverImage.FileName);
+                    var uploadsPath = Path.Combine(
+                        Directory.GetCurrentDirectory(),
+                        "wwwroot",
+                        "uploads"
+                    );
+
+                    if (!Directory.Exists(uploadsPath))
+                        Directory.CreateDirectory(uploadsPath);
+
+                    var filePath = Path.Combine(uploadsPath, fileName);
+
+                    await using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await experienceEdit.CoverImage.CopyToAsync(stream);
+                    }
+
+                    experience.CoverImage = fileName;
+
+                    _context.Images.Add(
+                        new Image
+                        {
+                            ImageId = Guid.NewGuid(),
+                            Url = fileName,
+                            ExperienceId = experience.ExperienceId,
+                        }
+                    );
+                }
 
                 if (experienceEdit.Images != null)
                 {
-                    experience.Images = experienceEdit
-                        .Images.Select(i => new Image()
+                    var imagesList = new List<Image>();
+
+                    foreach (var img in experienceEdit.Images)
+                    {
+                        var fileName = Guid.NewGuid() + Path.GetExtension(img.FileName);
+                        var filePath = Path.Combine(
+                            Directory.GetCurrentDirectory(),
+                            "wwwroot",
+                            "uploads",
+                            fileName
+                        );
+
+                        await using (var stream = new FileStream(filePath, FileMode.Create))
                         {
-                            Url = i.Url,
-                            ExperienceId = experience.ExperienceId,
-                        })
-                        .ToList();
+                            await img.CopyToAsync(stream);
+                        }
+
+                        imagesList.Add(
+                            new Image
+                            {
+                                ImageId = Guid.NewGuid(),
+                                Url = fileName,
+                                ExperienceId = experience.ExperienceId,
+                            }
+                        );
+                    }
+
+                    foreach (var img in imagesList)
+                    {
+                        _context.Images.Add(img);
+                    }
                 }
 
-                if (experienceEdit.CarryWiths != null)
+                if (experienceEdit.RemovedImages != null)
                 {
-                    experience.CarryWiths = experienceEdit
-                        .CarryWiths.Select(c => new CarryWith()
+                    // rimuovere i file fisici
+                    foreach (var imgId in experienceEdit.RemovedImages)
+                    {
+                        var imgToRemove = await _context.Images.FindAsync(imgId);
+                        if (imgToRemove != null)
                         {
-                            Name = c.Name,
-                            ExperienceId = experience.ExperienceId,
-                        })
-                        .ToList();
+                            var filePath = Path.Combine(
+                                Directory.GetCurrentDirectory(),
+                                "wwwroot",
+                                "uploads",
+                                imgToRemove.Url
+                            );
+                            if (File.Exists(filePath))
+                            {
+                                File.Delete(filePath);
+                            }
+                        }
+                    }
+
+                    var result2 = await TrySaveAsync();
+
+                    if (!result2)
+                    {
+                        return false;
+                    }
+
+                    foreach (var imgId in experienceEdit.RemovedImages)
+                    {
+                        var imgToRemove = await _context.Images.FindAsync(imgId);
+                        if (imgToRemove != null)
+                        {
+                            _context.Images.Remove(imgToRemove);
+                        }
+                    }
+
+                    var result3 = await TrySaveAsync();
+
+                    if (!result3)
+                    {
+                        return false;
+                    }
                 }
 
-                return await TrySaveAsync();
+                if (!string.IsNullOrEmpty(experienceEdit.CarryWiths))
+                {
+                    // rimuovo tutti i carryWiths associati
+                    var carryWiths = await _context
+                        .CarryWiths.Where(c => c.ExperienceId == experienceId)
+                        .ToListAsync();
+
+                    if (carryWiths != null)
+                    {
+                        foreach (var carryWith in carryWiths)
+                        {
+                            _context.CarryWiths.Remove(carryWith);
+                        }
+                    }
+
+                    // aggiungo i nuovi carryWiths
+                    var carryWithsToAdd = experienceEdit
+                        .CarryWiths.Split(',')
+                        .Select(c => new CarryWith
+                        {
+                            CarryWithId = Guid.NewGuid(),
+                            ExperienceId = experienceId,
+                            Name = c.Trim(),
+                        })
+                        .ToList();
+                    _context.CarryWiths.AddRange(carryWithsToAdd);
+                }
+
+                var result = await TrySaveAsync();
+                if (result)
+                {
+                    if (prevCoverImg != null)
+                    {
+                        _context.Images.Remove(prevCoverImg);
+
+                        // rimuovere anche il file fisico
+                        var filePath = Path.Combine(
+                            Directory.GetCurrentDirectory(),
+                            "wwwroot",
+                            "uploads",
+                            prevCoverImg.Url
+                        );
+                        if (File.Exists(filePath))
+                        {
+                            File.Delete(filePath);
+                        }
+                        return await TrySaveAsync();
+                    }
+                    return true;
+                }
+                return false;
             }
             catch
             {
@@ -186,11 +337,23 @@ namespace Klicko_be.Services
             }
         }
 
-        public async Task<bool> CreateExperienceAsync(Experience newExoerience)
+        public async Task<bool> CreateExperienceAsync(Experience newExperience)
         {
             try
             {
-                _context.Experiences.Add(newExoerience);
+                _context.Experiences.Add(newExperience);
+
+                if (newExperience.CoverImage != null)
+                {
+                    _context.Images.Add(
+                        new Image
+                        {
+                            ImageId = Guid.NewGuid(),
+                            Url = newExperience.CoverImage,
+                            ExperienceId = newExperience.ExperienceId,
+                        }
+                    );
+                }
 
                 return await TrySaveAsync();
             }

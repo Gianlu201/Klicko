@@ -2,10 +2,13 @@ import React, { useEffect, useState } from 'react';
 import Button from '../ui/Button';
 import { Funnel, Pencil, Plus, Search, Trash2 } from 'lucide-react';
 import ToggleSwitch from '../ui/ToggleSwitch';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import UploadFile from '../ui/UploadFile';
+import ImagesPreview from './ImagesPreview';
 
-const AddExperienceForm = () => {
+const ExperienceForm = () => {
+  const [editMode, setEditMode] = useState(false);
+
   const [title, setTitle] = useState('');
   const [categoryId, setCategoryId] = useState('');
   const [descriptionShort, setDescriptionShort] = useState('');
@@ -25,31 +28,71 @@ const AddExperienceForm = () => {
   const [carryWith, setCarryWith] = useState('');
   const [images, setImages] = useState(null);
 
+  const [removedImages, setRemovedImages] = useState([]);
+  const [removedCoverImage, setRemovedCoverImage] = useState(false);
+
   const [categories, setCategories] = useState([]);
+
+  const [experience, setExperience] = useState(null);
+
+  const params = useParams();
 
   const navigate = useNavigate();
 
-  // const getAllExperiences = async () => {
-  //   try {
-  //     const response = await fetch('https://localhost:7235/api/Experience', {
-  //       method: 'GET',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //     });
-  //     if (response.ok) {
-  //       const data = await response.json();
+  const getExperience = async (expId) => {
+    try {
+      console.log(expId);
+      const response = await fetch(
+        `https://localhost:7235/api/Experience/Experience/${expId}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
 
-  //       console.log(data);
+        console.log(data);
 
-  //       setExperiences(data.experiences);
-  //     } else {
-  //       throw new Error('Errore nel recupero dei dati!');
-  //     }
-  //   } catch {
-  //     console.log('Error');
-  //   }
-  // };
+        setExperience(data.experience);
+
+        updateFields(data.experience);
+      } else {
+        throw new Error('Errore nel recupero dei dati!');
+      }
+    } catch {
+      console.log('Error');
+    }
+  };
+
+  const updateFields = (exp) => {
+    setTitle(exp.title);
+    setCategoryId(exp.categoryId);
+    setDescriptionShort(exp.descriptionShort);
+    setDescription(exp.description);
+    setPrice(exp.price);
+    setPlace(exp.place);
+    setDuration(exp.duration);
+    setMaxParticipants(exp.maxParticipants);
+    setOrganiser(exp.organiser);
+    setSale(exp.sale);
+    setValidityInMonths(exp.validityInMonths);
+    setIncludedDescription(exp.includedDescription);
+    setIsFreeCancellable(exp.isFreeCancellable);
+    setIsInEvidence(exp.isInEvidence);
+    setIsPopular(exp.isPopular);
+
+    let carry = '';
+    exp.carryWiths.forEach((element, i) => {
+      carry += element.name;
+      if (i < exp.carryWiths.length - 1) {
+        carry += ', ';
+      }
+    });
+    setCarryWith(carry);
+  };
 
   const getAllCategories = async () => {
     try {
@@ -72,69 +115,6 @@ const AddExperienceForm = () => {
       console.log('Error');
     }
   };
-
-  // const sendForm = async () => {
-  //   try {
-  //     const body = {
-  //       title: title,
-  //       categoryId: categoryId,
-  //       duration: duration,
-  //       place: place,
-  //       price: price,
-  //       descriptionShort: descriptionShort,
-  //       description: description,
-  //       maxParticipants: maxParticipants,
-  //       organiser: organiser,
-  //       isFreeCancellable: isFreeCancellable,
-  //       includedDescription: includedDescription,
-  //       sale: sale,
-  //       isInEvidence: isInEvidence,
-  //       isPopular: isPopular,
-  //       validityInMonths: validityInMonths,
-  //       coverImage: null,
-  //     };
-
-  //     // formData.append('title', title);
-  //     // formData.append('categoryId', categoryId);
-  //     // formData.append('duration', duration);
-  //     // formData.append('place', place);
-  //     // formData.append('price', price);
-  //     // formData.append('descriptionShort', descriptionShort);
-  //     // formData.append('description', description);
-  //     // formData.append('maxParticipants', maxParticipants);
-  //     // formData.append('organiser', organiser);
-  //     // formData.append('isFreeCancellable', isFreeCancellable);
-  //     // formData.append('includedDescription', includedDescription);
-  //     // formData.append('sale', sale);
-  //     // formData.append('isInEvidence', isInEvidence);
-  //     // formData.append('isPopular', isPopular);
-  //     // formData.append('validityInMonths', validityInMonths);
-  //     // formData.append('coverImage', coverImage);
-  //     // formData.append('images', null);
-  //     // formData.append('carryWiths', null);
-
-  //     console.log(body);
-
-  //     const response = await fetch('https://localhost:7235/api/Experience', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify(body),
-  //     });
-  //     if (response.ok) {
-  //       const data = await response.json();
-
-  //       // console.log(data);
-
-  //       setCategories(data.categories);
-  //     } else {
-  //       throw new Error('Errore nel recupero dei dati!');
-  //     }
-  //   } catch {
-  //     console.log('Error');
-  //   }
-  // };
 
   const sendForm = async () => {
     try {
@@ -178,16 +158,30 @@ const AddExperienceForm = () => {
         }
       }
 
-      if (coverImage) {
-        formData.append('CoverImage', coverImage); // file immagine
-      }
+      // if (coverImage) {
+      formData.append('CoverImage', coverImage); // file immagine
+      // }
 
       if (images && images.length > 0) {
         for (let i = 0; i < images.length; i++) {
           formData.append('Images', images[i]);
         }
+      } else {
+        formData.append('Images', null);
       }
 
+      if (editMode) {
+        editExperience(token, formData);
+      } else {
+        createExperience(token, formData);
+      }
+    } catch (err) {
+      console.error('Errore:', err);
+    }
+  };
+
+  const createExperience = async (token, formData) => {
+    try {
       const response = await fetch('https://localhost:7235/api/Experience', {
         method: 'POST',
         headers: {
@@ -203,21 +197,65 @@ const AddExperienceForm = () => {
       } else {
         throw new Error('Errore nel salvataggio!');
       }
-    } catch (err) {
-      console.error('Errore:', err);
+    } catch {
+      console.log('Error');
+    }
+  };
+
+  const editExperience = async (token, formData) => {
+    try {
+      if (removedImages.length > 0) {
+        for (let i = 0; i < removedImages.length; i++) {
+          formData.append('RemovedImages', removedImages[i]);
+        }
+
+        // formData.append('RemovedImages', removedImages);
+      }
+      formData.append('RemovedCoverImage', removedCoverImage);
+
+      console.log(formData);
+      const response = await fetch(
+        `https://localhost:7235/api/Experience/${params.expId}`,
+        {
+          method: 'PUT',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+
+          body: formData,
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Upload riuscito:', data);
+      } else {
+        throw new Error('Errore nel salvataggio!');
+      }
+    } catch {
+      console.log('Error');
     }
   };
 
   useEffect(() => {
+    if (params.expId !== undefined && experience === null) {
+      getExperience(params.expId);
+      setEditMode(true);
+    }
+
     getAllCategories();
   }, []);
 
   return (
     <>
       <div className='flex flex-col justify-start items-start mb-6'>
-        <h2 className='text-2xl font-bold mb-2'>Aggiungi esperienza</h2>
+        <h2 className='text-2xl font-bold mb-2'>
+          {editMode ? 'Modifica esperienza' : 'Aggiungi esperienza'}
+        </h2>
         <p className='text-gray-500 font-normal'>
-          Crea una nuova esperienza da offrire ai clienti
+          {editMode
+            ? `Modifica i dettagli dell'esperienza`
+            : 'Crea una nuova esperienza da offrire ai clienti'}
         </p>
       </div>
 
@@ -537,6 +575,15 @@ const AddExperienceForm = () => {
               setCoverImage(e.target.files[0]);
             }}
           /> */}
+
+          {experience !== null && experience.images !== null && (
+            <ImagesPreview
+              coverImage={experience.coverImage}
+              onItemRemove={(items) => setRemovedCoverImage(items)}
+              initialState={removedCoverImage}
+            />
+          )}
+
           <span className='text-gray-500 text-sm'>
             Questa immagine verrà mostrata nell'anteprima dell'esperienza
           </span>
@@ -585,10 +632,20 @@ const AddExperienceForm = () => {
         {/* elenco immagini multiple */}
         <div className='flex flex-col justify-start items-start gap-2 my-8'>
           <label className='font-semibold text-sm'>Immagini aggiuntive</label>
+
           <UploadFile
             multiple={true}
             onFilesSelected={(files) => setImages(files)}
           />
+
+          {experience !== null && experience.images !== null && (
+            <ImagesPreview
+              images={experience.images}
+              onItemRemove={(items) => setRemovedImages(items)}
+              initialState={removedImages}
+            />
+          )}
+
           <span className='text-gray-500 text-sm'>
             Questa immagine verrà mostrata nei dettagli dell'esperienza
           </span>
@@ -609,7 +666,7 @@ const AddExperienceForm = () => {
               sendForm();
             }}
           >
-            Crea esperienza
+            {editMode ? 'Modifica esperienza' : 'Crea esperienza'}
           </Button>
         </div>
       </form>
@@ -617,4 +674,4 @@ const AddExperienceForm = () => {
   );
 };
 
-export default AddExperienceForm;
+export default ExperienceForm;

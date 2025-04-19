@@ -87,6 +87,7 @@ const Navbar = () => {
 
   const logout = () => {
     dispatch(logoutUser());
+    navigate('/');
   };
 
   const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
@@ -157,31 +158,54 @@ const Navbar = () => {
             >
               <DropdownHeader>Il tuo account</DropdownHeader>
               <p className='text-gray-500 text-xs px-4 mb-2'>{profile.email}</p>
-              <DropdownItem>
-                <Link
+              <DropdownItem
+                onClick={() => {
+                  navigate('/dashboard');
+                }}
+              >
+                {/* <Link
                   to='/dashboard'
                   className='w-full flex items-center justify-start gap-2'
                 >
                   <User size={16} />
                   Dashbord
-                </Link>
+                </Link> */}
+                <span className='w-full flex items-center justify-start gap-2'>
+                  <User size={16} />
+                  Dashbord
+                </span>
               </DropdownItem>
-              <DropdownItem>
-                <Link
+              <DropdownItem
+                onClick={() => {
+                  navigate('/dashboard/orders');
+                }}
+              >
+                {/* <Link
                   to='/dashboard/orders'
                   className='w-full flex items-center justify-start gap-2'
                 >
                   <ShoppingBag size={16} />I miei ordini
-                </Link>
+                </Link> */}
+                <span className='w-full flex items-center justify-start gap-2'>
+                  <ShoppingBag size={16} />I miei ordini
+                </span>
               </DropdownItem>
-              <DropdownItem>
-                <Link
+              <DropdownItem
+                onClick={() => {
+                  navigate('/dashboard/settings');
+                }}
+              >
+                {/* <Link
                   to='/dashboard/settings'
                   className='w-full flex items-center justify-start gap-2'
                 >
                   <Settings size={16} />
                   Impostazioni
-                </Link>
+                </Link> */}
+                <span className='w-full flex items-center justify-start gap-2'>
+                  <Settings size={16} />
+                  Impostazioni
+                </span>
               </DropdownItem>
               <DropdownItem divider />
               <DropdownItem icon={<LogOut size={16} />} onClick={logout} danger>
@@ -190,20 +214,33 @@ const Navbar = () => {
             </Dropdown>
           ) : (
             <div className='hidden md:flex items-center space-x-2'>
-              <Button variant='outline' size='md'>
-                <Link to='/login'>Accedi</Link>
+              <Button
+                variant='outline'
+                size='md'
+                onClick={() => {
+                  navigate('login');
+                }}
+              >
+                {/* <Link to='/login'>Accedi</Link> */}
+                Accedi
               </Button>
-              <Button variant='primary'>
-                <Link to='/register'>Registrati</Link>
+              <Button
+                variant='primary'
+                onClick={() => {
+                  navigate('/register');
+                }}
+              >
+                {/* <Link to='/register'>Registrati</Link> */}
+                Registrati
               </Button>
             </div>
           )}
 
           <button className='md:hidden' onClick={toggleMobileMenu}>
             {mobileMenuOpen ? (
-              <X className='h-6 w-6' />
+              <X className='h-6 w-6 cursor-pointer' />
             ) : (
-              <Menu className='h-6 w-6' />
+              <Menu className='h-6 w-6 cursor-pointer' />
             )}
           </button>
         </div>

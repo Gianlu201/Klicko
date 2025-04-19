@@ -41,6 +41,10 @@ function App() {
                 path='/dashboard/:tab/:option'
                 element={<DashboardPage />}
               />
+              <Route
+                path='/dashboard/:tab/:option/:expId'
+                element={<DashboardPage />}
+              />
               <Route path='checkout' element={<CheckOutPage />} />
               <Route path='*' element={<NotFoundPage />} />
             </Routes>

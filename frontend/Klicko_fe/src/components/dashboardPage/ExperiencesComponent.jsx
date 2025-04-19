@@ -344,7 +344,14 @@ const ExperiencesComponent = () => {
 
                     <td className='col-span-3'>
                       <div className='flex justify-end items-center gap-4 pe-3'>
-                        <Pencil className='w-4 h-4 text-gray-600 cursor-pointer' />
+                        <Pencil
+                          className='w-4 h-4 text-gray-600 cursor-pointer'
+                          onClick={() => {
+                            navigate(
+                              `/dashboard/experiences/edit/${exp.experienceId}`
+                            );
+                          }}
+                        />
                         {exp.isDeleted ? (
                           <ArchiveRestore
                             className='w-4 h-4 text-green-600 cursor-pointer'
