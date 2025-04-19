@@ -15,6 +15,7 @@ import DashboardPage from './pages/DashboardPage';
 import CheckOutPage from './pages/CheckOutPage';
 import NotFoundPage from './pages/NotFoundPage';
 import AboutPage from './pages/AboutPage';
+import OrderConfirmationPage from './pages/OrderConfirmationPage';
 
 function App() {
   return (
@@ -46,6 +47,11 @@ function App() {
                 element={<DashboardPage />}
               />
               <Route path='checkout' element={<CheckOutPage />} />
+              <Route
+                path='/orderConfirmation/:orderId'
+                element={<OrderConfirmationPage />}
+              />
+
               <Route path='*' element={<NotFoundPage />} />
             </Routes>
           </div>

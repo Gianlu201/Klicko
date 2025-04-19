@@ -60,13 +60,9 @@ const CheckOutPage = () => {
         const data = await response.json();
 
         dispatch(emptyCart());
-        navigate('/');
-        toast.success('Acquisto effettuato con successo!');
-
-        // dispatch(cartModified());
-        // console.log(data.cart);
-
         console.log(data);
+        toast.success('Acquisto effettuato con successo!');
+        navigate(`/orderConfirmation/${data.orderId}`);
       } else {
         throw new Error('Errore nel recupero dei dati!');
       }

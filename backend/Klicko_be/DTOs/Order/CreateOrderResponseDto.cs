@@ -6,5 +6,7 @@ namespace Klicko_be.DTOs.Order
     {
         [Required]
         public required string Message { get; set; }
+
+        public Guid OrderId { get; set; }
     }
 }

@@ -196,6 +196,79 @@ namespace Klicko_be.Controllers
             }
         }
 
+        [HttpGet("getOrderById/{orderId:guid}")]
+        [Authorize(Roles = "Admin, Seller, User")]
+        public async Task<IActionResult> GetOrderById(Guid orderId)
+        {
+            try
+            {
+                var order = await _orderService.GetOrderByIdAsync(orderId);
+
+                if (order == null)
+                {
+                    return Ok(
+                        new GetOrderByIdResponseDto() { Message = "No orders found!", Order = null }
+                    );
+                }
+
+                var orderDto = new OrderDto()
+                {
+                    OrderId = order.OrderId,
+                    OrderNumber = order.OrderNumber,
+                    UserId = order.UserId,
+                    State = order.State,
+                    TotalPrice = order.TotalPrice,
+                    CreatedAt = order.CreatedAt,
+                    User = new DTOs.Account.UserSimpleDto()
+                    {
+                        UserId = order.User!.Id,
+                        FirstName = order.User.FirstName,
+                        LastName = order.User.LastName,
+                        Email = order.User.Email,
+                    },
+                    Experiences =
+                        (order.OrderExperiences != null && order.OrderExperiences.Count > 0)
+                            ? order
+                                .OrderExperiences.Select(oe => new ExperienceForOrdersDto()
+                                {
+                                    ExperienceId = oe.Experience!.ExperienceId,
+                                    Title = oe.Experience.Title,
+                                    CategoryId = oe.Experience.CategoryId,
+                                    Duration = oe.Experience.Duration,
+                                    Place = oe.Experience.Place,
+                                    Price = oe.Experience.Price,
+                                    Quantity = oe.Quantity,
+                                    DescriptionShort = oe.Experience.DescriptionShort,
+                                    MaxParticipants = oe.Experience.MaxParticipants,
+                                    Organiser = oe.Experience.Organiser,
+                                    CoverImage = oe.Experience.CoverImage,
+                                    ValidityInMonths = oe.Experience.ValidityInMonths,
+                                    Category =
+                                        oe.Experience.Category != null
+                                            ? new CategorySimpleDto()
+                                            {
+                                                CategoryId = oe.Experience.Category.CategoryId,
+                                                Name = oe.Experience.Category.Name,
+                                                Description = oe.Experience.Category.Description,
+                                                Image = oe.Experience.Category.Image,
+                                                Icon = oe.Experience.Category.Icon,
+                                            }
+                                            : null,
+                                })
+                                .ToList()
+                            : null,
+                };
+
+                return Ok(
+                    new GetOrderByIdResponseDto() { Message = "Order found!", Order = orderDto }
+                );
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
         [HttpPost]
         [Authorize(Roles = "User, Seller, Admin")]
         public async Task<IActionResult> Create([FromBody] CreateOrderRequestDto createOrder)
@@ -247,7 +320,13 @@ namespace Klicko_be.Controllers
                 var result = await _orderService.CreateOrderAsync(newOrder);
 
                 return result
-                    ? Ok(new CreateOrderResponseDto() { Message = "Order created successfully!" })
+                    ? Ok(
+                        new CreateOrderResponseDto()
+                        {
+                            Message = "Order created successfully!",
+                            OrderId = newOrderId,
+                        }
+                    )
                     : BadRequest(
                         new CreateOrderResponseDto() { Message = "Something went wrong!" }
                     );

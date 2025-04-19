@@ -9,13 +9,14 @@ import {
 } from 'lucide-react';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { BrowserRouter, Link, Routes, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import MainComponent from '../components/dashboardPage/MainComponent';
 import OrdersComponent from '../components/dashboardPage/OrdersComponent';
 import ExperiencesComponent from '../components/dashboardPage/ExperiencesComponent';
 import ExperienceForm from '../components/dashboardPage/ExperienceForm';
 import DashboardAdmin from '../components/dashboardPage/DashboardAdmin';
 import DashboardUsers from '../components/dashboardPage/DashboardUsers';
+import ProfileComponent from '../components/dashboardPage/ProfileComponent';
 
 const DashboardPage = () => {
   const profile = useSelector((state) => {
@@ -73,15 +74,15 @@ const DashboardPage = () => {
     console.log(params);
     switch (params.tab) {
       case undefined:
-        console.log('undefined');
         return <MainComponent />;
 
       case 'orders':
-        console.log('orders');
         return <OrdersComponent />;
 
+      case 'profile':
+        return <ProfileComponent />;
+
       case 'experiences':
-        console.log('experiences');
         if (params.option === 'add' || params.option === 'edit') {
           return <ExperienceForm />;
         }
