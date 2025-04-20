@@ -42,9 +42,25 @@ const ExperienceCard = ({ experience, className }) => {
               <span className='text-gray-500 text-sm'>
                 {experience.category.name}
               </span>
-              <span className='text-secondary text-xl font-semibold'>
-                {experience.price.toFixed(2).replace('.', ',')} €
-              </span>
+              <div className='flex items-center'>
+                <span
+                  className={`font-semibold ${
+                    experience.sale > 0
+                      ? 'line-through text-gray-500 me-2'
+                      : 'text-secondary text-xl'
+                  }`}
+                >
+                  {experience.price.toFixed(2).replace('.', ',')} €
+                </span>
+                {experience.sale > 0 && (
+                  <span className={`font-semibold text-secondary text-xl`}>
+                    {((experience.price * (100 - experience.sale)) / 100)
+                      .toFixed(2)
+                      .replace('.', ',')}{' '}
+                    €
+                  </span>
+                )}
+              </div>
             </div>
             <h4 className='text-lg font-semibold mb-2'>{experience.title}</h4>
             <p className='text-gray-600 text-[0.9rem]'>
