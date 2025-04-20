@@ -1,8 +1,10 @@
-﻿using Klicko_be.DTOs.Category;
+﻿using System.Security.Claims;
+using Klicko_be.DTOs.Category;
 using Klicko_be.DTOs.Experience;
 using Klicko_be.DTOs.Order;
 using Klicko_be.Models;
 using Klicko_be.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,6 +24,7 @@ namespace Klicko_be.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAll()
         {
             try
@@ -105,11 +108,176 @@ namespace Klicko_be.Controllers
             }
         }
 
+        [HttpGet("getAllUserOrders")]
+        [Authorize(Roles = "Admin, Seller, User")]
+        public async Task<IActionResult> GetAllForUser()
+        {
+            try
+            {
+                var user = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+                var userId = user!.Value;
+
+                var orders = await _orderService.GetAllOrdersForUserByIdAsync(userId);
+
+                if (orders == null)
+                {
+                    return Ok(
+                        new GetOrdersListResponseDto()
+                        {
+                            Message = "No orders found!",
+                            Orders = null,
+                        }
+                    );
+                }
+
+                var ordersDto = orders
+                    .Select(o => new OrderDto()
+                    {
+                        OrderId = o.OrderId,
+                        OrderNumber = o.OrderNumber,
+                        UserId = o.UserId,
+                        State = o.State,
+                        TotalPrice = o.TotalPrice,
+                        CreatedAt = o.CreatedAt,
+                        User = new DTOs.Account.UserSimpleDto()
+                        {
+                            UserId = o.User!.Id,
+                            FirstName = o.User.FirstName,
+                            LastName = o.User.LastName,
+                            Email = o.User.Email,
+                        },
+                        Experiences =
+                            (o.OrderExperiences != null && o.OrderExperiences.Count > 0)
+                                ? o
+                                    .OrderExperiences.Select(oe => new ExperienceForOrdersDto()
+                                    {
+                                        ExperienceId = oe.Experience!.ExperienceId,
+                                        Title = oe.Experience.Title,
+                                        CategoryId = oe.Experience.CategoryId,
+                                        Duration = oe.Experience.Duration,
+                                        Place = oe.Experience.Place,
+                                        Price = oe.Experience.Price,
+                                        Quantity = oe.Quantity,
+                                        DescriptionShort = oe.Experience.DescriptionShort,
+                                        MaxParticipants = oe.Experience.MaxParticipants,
+                                        Organiser = oe.Experience.Organiser,
+                                        CoverImage = oe.Experience.CoverImage,
+                                        ValidityInMonths = oe.Experience.ValidityInMonths,
+                                        Category =
+                                            oe.Experience.Category != null
+                                                ? new CategorySimpleDto()
+                                                {
+                                                    CategoryId = oe.Experience.Category.CategoryId,
+                                                    Name = oe.Experience.Category.Name,
+                                                    Description = oe.Experience
+                                                        .Category
+                                                        .Description,
+                                                    Image = oe.Experience.Category.Image,
+                                                    Icon = oe.Experience.Category.Icon,
+                                                }
+                                                : null,
+                                    })
+                                    .ToList()
+                                : null,
+                    })
+                    .ToList();
+
+                return Ok(
+                    new GetOrdersListResponseDto()
+                    {
+                        Message = $"{ordersDto.Count} orders found!",
+                        Orders = ordersDto,
+                    }
+                );
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpGet("getOrderById/{orderId:guid}")]
+        [Authorize(Roles = "Admin, Seller, User")]
+        public async Task<IActionResult> GetOrderById(Guid orderId)
+        {
+            try
+            {
+                var order = await _orderService.GetOrderByIdAsync(orderId);
+
+                if (order == null)
+                {
+                    return Ok(
+                        new GetOrderByIdResponseDto() { Message = "No orders found!", Order = null }
+                    );
+                }
+
+                var orderDto = new OrderDto()
+                {
+                    OrderId = order.OrderId,
+                    OrderNumber = order.OrderNumber,
+                    UserId = order.UserId,
+                    State = order.State,
+                    TotalPrice = order.TotalPrice,
+                    CreatedAt = order.CreatedAt,
+                    User = new DTOs.Account.UserSimpleDto()
+                    {
+                        UserId = order.User!.Id,
+                        FirstName = order.User.FirstName,
+                        LastName = order.User.LastName,
+                        Email = order.User.Email,
+                    },
+                    Experiences =
+                        (order.OrderExperiences != null && order.OrderExperiences.Count > 0)
+                            ? order
+                                .OrderExperiences.Select(oe => new ExperienceForOrdersDto()
+                                {
+                                    ExperienceId = oe.Experience!.ExperienceId,
+                                    Title = oe.Experience.Title,
+                                    CategoryId = oe.Experience.CategoryId,
+                                    Duration = oe.Experience.Duration,
+                                    Place = oe.Experience.Place,
+                                    Price = oe.Experience.Price,
+                                    Quantity = oe.Quantity,
+                                    DescriptionShort = oe.Experience.DescriptionShort,
+                                    MaxParticipants = oe.Experience.MaxParticipants,
+                                    Organiser = oe.Experience.Organiser,
+                                    CoverImage = oe.Experience.CoverImage,
+                                    ValidityInMonths = oe.Experience.ValidityInMonths,
+                                    Category =
+                                        oe.Experience.Category != null
+                                            ? new CategorySimpleDto()
+                                            {
+                                                CategoryId = oe.Experience.Category.CategoryId,
+                                                Name = oe.Experience.Category.Name,
+                                                Description = oe.Experience.Category.Description,
+                                                Image = oe.Experience.Category.Image,
+                                                Icon = oe.Experience.Category.Icon,
+                                            }
+                                            : null,
+                                })
+                                .ToList()
+                            : null,
+                };
+
+                return Ok(
+                    new GetOrderByIdResponseDto() { Message = "Order found!", Order = orderDto }
+                );
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
         [HttpPost]
+        [Authorize(Roles = "User, Seller, Admin")]
         public async Task<IActionResult> Create([FromBody] CreateOrderRequestDto createOrder)
         {
             try
             {
+                var user = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+                var userId = user!.Value;
+
                 var experiences = await _experienceService.GetAllExperienceAsync();
 
                 if (experiences == null)
@@ -134,7 +302,7 @@ namespace Klicko_be.Controllers
                 var newOrder = new Order()
                 {
                     OrderId = newOrderId,
-                    UserId = "70b579dd-c6a0-4075-8d7d-1326f2353c7b",
+                    UserId = userId,
                     State = "In attesa",
                     TotalPrice = totalPrice,
                     CreatedAt = DateTime.UtcNow,
@@ -152,9 +320,52 @@ namespace Klicko_be.Controllers
                 var result = await _orderService.CreateOrderAsync(newOrder);
 
                 return result
-                    ? Ok(new CreateOrderResponseDto() { Message = "Order created successfully!" })
+                    ? Ok(
+                        new CreateOrderResponseDto()
+                        {
+                            Message = "Order created successfully!",
+                            OrderId = newOrderId,
+                        }
+                    )
                     : BadRequest(
                         new CreateOrderResponseDto() { Message = "Something went wrong!" }
+                    );
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpPut("editOrderState/{orderId:guid}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> EditState(
+            [FromBody] EditOrderStateRequestDto newOrderState,
+            Guid orderId
+        )
+        {
+            try
+            {
+                var options = new List<string>() { "In attesa", "Completato", "Cancellato" };
+
+                if (!options.Contains(newOrderState.State))
+                {
+                    return BadRequest(
+                        new EditOrderStateResponseDto() { Message = "Something went wrong!" }
+                    );
+                }
+
+                var result = await _orderService.EditOrderStateAsync(orderId, newOrderState.State);
+
+                return result
+                    ? Ok(
+                        new EditOrderStateResponseDto()
+                        {
+                            Message = "Order state updated successfully!",
+                        }
+                    )
+                    : BadRequest(
+                        new EditOrderStateResponseDto() { Message = "Something went wrong!" }
                     );
             }
             catch (Exception ex)

@@ -2,11 +2,14 @@
 using System.Security.Claims;
 using System.Text;
 using Klicko_be.DTOs.Account;
+using Klicko_be.DTOs.ApplicationRole;
+using Klicko_be.DTOs.ApplicationUserRole;
 using Klicko_be.Models.Auth;
 using Klicko_be.Settings;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
@@ -34,6 +37,108 @@ namespace Klicko_be.Controllers
             _roleManager = roleManager;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAllAccountByAdminDash()
+        {
+            try
+            {
+                var accountsList = await _userManager
+                    .Users.Include(a => a.UserRoles)
+                    .ThenInclude(ur => ur.ApplicationRole)
+                    .ToListAsync();
+
+                if (accountsList == null)
+                {
+                    return BadRequest(new { Message = "Something went wrong!" });
+                }
+
+                var accountsListDto = accountsList
+                    .Select(account => new AccountDto()
+                    {
+                        UserId = account.Id,
+                        FirstName = account.FirstName,
+                        LastName = account.LastName,
+                        Email = account.Email,
+                        RegistrationDate = account.RegistrationDate,
+                        UserRole =
+                            account.UserRoles != null && account.UserRoles.Count > 0
+                                ? account
+                                    .UserRoles.Select(ur => new UserRoleForUserDto()
+                                    {
+                                        UserRoleId = ur.UserRoleId,
+                                        RoleId = ur.ApplicationRole.Id,
+                                        RoleName =
+                                            ur.ApplicationRole != null
+                                                ? ur.ApplicationRole.Name
+                                                : null,
+                                    })
+                                    .FirstOrDefault()
+                                : null,
+                    })
+                    .ToList();
+
+                return accountsList.Count == 0
+                    ? BadRequest(
+                        new GetAccountsListResponseDto()
+                        {
+                            Message = "No accounts found!",
+                            Accounts = null,
+                        }
+                    )
+                    : Ok(
+                        new GetAccountsListResponseDto()
+                        {
+                            Message = $"{accountsList.Count} accounts found!",
+                            Accounts = accountsListDto,
+                        }
+                    );
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpGet("GetRoles")]
+        public async Task<IActionResult> GetRoles()
+        {
+            try
+            {
+                var rolesList = await _roleManager.Roles.ToListAsync();
+
+                if (rolesList == null)
+                {
+                    return BadRequest(
+                        new GetRolesListResponseDto()
+                        {
+                            Message = "Something went wrong!",
+                            Roles = null,
+                        }
+                    );
+                }
+
+                var rolesListDto = rolesList
+                    .Select(role => new RoleDto() { RoleId = role.Id, RoleName = role.Name })
+                    .ToList();
+
+                return rolesList.Count == 0
+                    ? BadRequest(
+                        new GetRolesListResponseDto() { Message = "No roles found!", Roles = null }
+                    )
+                    : Ok(
+                        new GetRolesListResponseDto()
+                        {
+                            Message = $"{rolesListDto.Count} roles found!",
+                            Roles = rolesListDto,
+                        }
+                    );
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequestDto registerRequestDto)
         {
@@ -44,6 +149,7 @@ namespace Klicko_be.Controllers
                 FirstName = registerRequestDto.FirstName,
                 LastName = registerRequestDto.LastName,
                 RegistrationDate = DateTime.Now,
+                CartId = Guid.NewGuid(),
             };
 
             var result = await _userManager.CreateAsync(newUser, registerRequestDto.Password);
@@ -77,8 +183,11 @@ namespace Klicko_be.Controllers
 
             List<Claim> claims = new List<Claim>();
 
-            claims.Add(new Claim(ClaimTypes.Email, user.Email));
-            claims.Add(new Claim(ClaimTypes.Name, $"{user.FirstName} {user.LastName}"));
+            claims.Add(new Claim("email", user.Email));
+            claims.Add(new Claim("name", user.FirstName));
+            claims.Add(new Claim("surname", user.LastName));
+            claims.Add(new Claim("cartId", user.CartId.ToString()));
+            claims.Add(new Claim("nameIdentifier", user.Id));
             claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id));
 
             foreach (var role in roles)
@@ -101,6 +210,46 @@ namespace Klicko_be.Controllers
             string tokenString = new JwtSecurityTokenHandler().WriteToken(token);
 
             return Ok(new TokenResponseDto() { Token = tokenString, Expires = expiry });
+        }
+
+        [HttpPut("EditRole/{userId:guid}")]
+        public async Task<IActionResult> EditUserRole([FromBody] Guid newRoleId, Guid userId)
+        {
+            try
+            {
+                var role = await _roleManager.FindByIdAsync(newRoleId.ToString());
+
+                if (role == null)
+                {
+                    return BadRequest(new { Message = "Role not found!" });
+                }
+
+                var user = await _userManager.FindByIdAsync(userId.ToString());
+
+                if (user == null)
+                {
+                    return BadRequest(new { Message = "User not found!" });
+                }
+
+                var userRoles = await _userManager.GetRolesAsync(user);
+                if (userRoles.Count > 0)
+                {
+                    await _userManager.RemoveFromRolesAsync(user, userRoles);
+                }
+                var result = await _userManager.AddToRoleAsync(user, role.Name);
+                if (!result.Succeeded)
+                {
+                    return BadRequest(new { Message = "Something went wrong!" });
+                }
+
+                return Ok(
+                    new EditUserRoleResponseDto() { Message = "User role updated successfully!" }
+                );
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
         }
     }
 }

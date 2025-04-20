@@ -17,7 +17,7 @@ namespace Klicko_be.Models.Auth
         public Guid CartId { get; set; }
 
         // navigazione
-        public ICollection<ApplicationUserRole> UserRoles { get; set; }
+        public ICollection<ApplicationUserRole>? UserRoles { get; set; }
 
         [InverseProperty(nameof(Cart.User))]
         public Cart? Cart { get; set; }

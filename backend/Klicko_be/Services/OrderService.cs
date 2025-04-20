@@ -44,11 +44,71 @@ namespace Klicko_be.Services
             }
         }
 
+        public async Task<List<Order>?> GetAllOrdersForUserByIdAsync(string userId)
+        {
+            try
+            {
+                var orders = await _context
+                    .Orders.Include(o => o.OrderExperiences)
+                    .ThenInclude(oe => oe.Experience)
+                    .ThenInclude(e => e.Category)
+                    .Include(o => o.User)
+                    .Where(o => o.UserId == userId)
+                    .ToListAsync();
+
+                return orders;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public async Task<Order?> GetOrderByIdAsync(Guid orderId)
+        {
+            try
+            {
+                var order = await _context
+                    .Orders.Include(o => o.OrderExperiences)
+                    .ThenInclude(oe => oe.Experience)
+                    .ThenInclude(e => e.Category)
+                    .Include(o => o.User)
+                    .FirstOrDefaultAsync(o => o.OrderId == orderId);
+
+                return order;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         public async Task<bool> CreateOrderAsync(Order newOrder)
         {
             try
             {
                 _context.Orders.Add(newOrder);
+
+                return await TrySaveAsync();
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> EditOrderStateAsync(Guid orderId, string orderState)
+        {
+            try
+            {
+                var order = await _context.Orders.FindAsync(orderId);
+
+                if (order == null)
+                {
+                    return false;
+                }
+
+                order.State = orderState;
 
                 return await TrySaveAsync();
             }

@@ -1,17 +1,63 @@
 import './App.css';
+import 'tailwindcss';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import HomePage from './components/pages/homePage/HomePage';
-import 'tailwindcss';
+import HomePage from './pages/HomePage';
+import ExperiencesPage from './pages/ExperiencesPage';
+import DetailPage from './pages/DetailPage';
+import CategoriesPage from './pages/CategoriesPage';
+import Footer from './components/Footer';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import CartPage from './pages/CartPage';
+import { Toaster } from 'sonner';
+import DashboardPage from './pages/DashboardPage';
+import CheckOutPage from './pages/CheckOutPage';
+import NotFoundPage from './pages/NotFoundPage';
+import AboutPage from './pages/AboutPage';
+import OrderConfirmationPage from './pages/OrderConfirmationPage';
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path='/' element={<HomePage />} />
-        </Routes>
+        <div className='min-h-screen flex flex-col'>
+          <Navbar />
+          <div className='grow'>
+            <Routes>
+              <Route path='/' element={<HomePage />} />
+              <Route path='/experiences' element={<ExperiencesPage />} />
+              <Route
+                path='/experiences/detail/:experienceId'
+                element={<DetailPage />}
+              />
+              <Route path='/categories' element={<CategoriesPage />} />
+              <Route path='/about' element={<AboutPage />} />
+              <Route path='/login' element={<LoginPage />} />
+              <Route path='/register' element={<RegisterPage />} />
+              <Route path='/cart' element={<CartPage />} />
+              <Route path='/dashboard' element={<DashboardPage />} />
+              <Route path='/dashboard/:tab' element={<DashboardPage />} />
+              <Route
+                path='/dashboard/:tab/:option'
+                element={<DashboardPage />}
+              />
+              <Route
+                path='/dashboard/:tab/:option/:expId'
+                element={<DashboardPage />}
+              />
+              <Route path='checkout' element={<CheckOutPage />} />
+              <Route
+                path='/orderConfirmation/:orderId'
+                element={<OrderConfirmationPage />}
+              />
+
+              <Route path='*' element={<NotFoundPage />} />
+            </Routes>
+          </div>
+          <Footer />
+          <Toaster />
+        </div>
       </BrowserRouter>
     </>
   );

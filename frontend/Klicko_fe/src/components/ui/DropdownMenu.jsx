@@ -95,7 +95,7 @@ const DropdownItem = ({
   const baseClasses = 'flex items-center w-full px-4 py-2 text-sm';
   const stateClasses = disabled
     ? 'opacity-50 cursor-not-allowed text-gray-500'
-    : 'hover:bg-gray-100 cursor-pointer';
+    : 'hover:bg-gray-100 rounded-xl duration-150 ease-in-out cursor-pointer';
   const textColor = danger ? 'text-red-600' : 'text-gray-700';
 
   // Se è un divisore, mostra solo una linea

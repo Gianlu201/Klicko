@@ -1,12 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
 
 namespace Klicko_be.Models.Auth
 {
     public class ApplicationUserRole : IdentityUserRole<string>
     {
-        public Guid UserId { get; set; }
-        public Guid RoleId { get; set; }
+        [Key]
+        public Guid UserRoleId { get; set; }
+        public override required string UserId { get; set; }
+        public override required string RoleId { get; set; }
 
         // navigazione
         [ForeignKey(nameof(UserId))]

@@ -1,36 +1,110 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-// import { useAuthStore, useCartStore } from '@/lib/store';
-// import { Button } from '@/components/ui/button';
-import { ShoppingCart, Menu, X, User, Settings, LogOut } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
+import {
+  ShoppingCart,
+  Menu,
+  X,
+  User,
+  Settings,
+  LogOut,
+  ShoppingBag,
+} from 'lucide-react';
 import Button from './ui/Button';
 import { Dropdown, DropdownItem, DropdownHeader } from './ui/DropdownMenu';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutUser, setLoggedUser, setUserCart } from '../redux/actions';
+import { jwtDecode } from 'jwt-decode';
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  // const { isAuthenticated, user, logout } = useAuthStore();
-  // const { totalItems } = useCartStore();
+
+  const profile = useSelector((state) => {
+    return state.profile;
+  });
+
+  const cart = useSelector((state) => {
+    return state.cart;
+  });
+
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+  const manageProfile = async (accessData) => {
+    const expiration = await JSON.parse(accessData).expires;
+
+    const exp = new Date(expiration);
+
+    if (exp - Date.now() > 0) {
+      console.log('Effettuo login automatico');
+      const data = await JSON.parse(accessData);
+      login(data);
+
+      getUserCart(data);
+    } else {
+      console.log('Effettuo logout automatico');
+      logout();
+    }
+  };
+
+  const login = async (data) => {
+    dispatch(setLoggedUser(data));
+  };
+
+  const getUserCart = async (data) => {
+    try {
+      let cartId = '';
+      if (data === null) {
+        cartId = profile.cartId;
+      } else {
+        const tokenDecoded = jwtDecode(data.token);
+
+        cartId = tokenDecoded.cartId;
+      }
+
+      const response = await fetch(
+        `https://localhost:7235/api/Cart/GetCart/${cartId}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+
+        // console.log(data.cart);
+
+        dispatch(setUserCart(data.cart));
+      } else {
+        throw new Error('Errore nel recupero dei dati!');
+      }
+    } catch {
+      console.log('Error');
+    }
+  };
+
+  const logout = () => {
+    dispatch(logoutUser());
+    navigate('/');
+  };
 
   const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
 
-  // const getProfileMenuItems = () => {
-  //   if (!user) return [];
+  useEffect(() => {
+    const accessData = localStorage.getItem('klicko_token');
 
-  //   const items = [
-  //     { label: 'Il mio profilo', href: '/profile' },
-  //     { label: 'I miei ordini', href: '/dashboard/orders' },
-  //   ];
+    if (accessData !== null && !profile?.email) {
+      manageProfile(accessData);
+    }
+  }, [profile]);
 
-  //   if (user.role === 'seller' || user.role === 'admin') {
-  //     items.push({ label: 'Le mie esperienze', href: '/dashboard/experiences' });
-  //   }
-
-  //   if (user.role === 'admin') {
-  //     items.push({ label: 'Gestione utenti', href: '/dashboard/users' });
-  //   }
-
-  //   return items;
-  // };
+  useEffect(() => {
+    if (cart.modified === true) {
+      getUserCart(null);
+    }
+  }, [cart]);
 
   return (
     <header className='bg-white shadow-sm sticky top-0 z-40'>
@@ -44,106 +118,129 @@ const Navbar = () => {
         <nav className='hidden md:flex items-center space-x-6'>
           <Link
             to='/experiences'
-            className='font-medium hover:text-[#19AEFF] transition-colors'
+            className='font-medium hover:text-primary transition-colors'
           >
             Esperienze
           </Link>
           <Link
             to='/categories'
-            className='font-medium hover:text-[#19AEFF] transition-colors'
+            className='font-medium hover:text-primary transition-colors'
           >
             Categorie
           </Link>
           <Link
             to='/about'
-            className='font-medium hover:text-[#19AEFF] transition-colors'
+            className='font-medium hover:text-primary transition-colors'
           >
             Chi siamo
           </Link>
         </nav>
 
         <div className='flex items-center space-x-4'>
-          <Link to='/cart' className='relative'>
-            <ShoppingCart className='h-6 w-6' />
-            {/* {totalItems > 0 && (
-              <span className="absolute -top-2 -right-2 bg-secondary text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
-                {totalItems}
+          <Link to='/cart' className='relative flex items-center gap-1'>
+            {cart.experiences != undefined && cart.experiences.length > 0 && (
+              <span className='text-lg font-semibold'>
+                {cart.experiences.length}
               </span>
-            )} */}
+            )}
+            <ShoppingCart className='h-6 w-6' />
           </Link>
 
-          {/* {isAuthenticated ? (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="icon" className="rounded-full">
-                  <User className="h-5 w-5" />
+          {profile?.email ? (
+            // dropdown opzioni profilo
+            <Dropdown
+              trigger={
+                <Button variant='icon' size='icon'>
+                  <User className='h-5 w-5' />
                 </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56">
-                <DropdownMenuLabel>
-                  {user?.name}
-                  <p className="text-xs text-muted-foreground mt-1">{user?.email}</p>
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                {getProfileMenuItems().map((item, index) => (
-                  <DropdownMenuItem key={index} asChild>
-                    <Link to={item.href}>{item.label}</Link>
-                  </DropdownMenuItem>
-                ))}
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={logout} className="text-destructive">
-                  Logout
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          ) : ( */}
-
-          <Dropdown
-            trigger={
-              <Button variant='outline' size='icon' className='rounded-full'>
-                <User className='h-5 w-5' />
+              }
+              align='right'
+            >
+              <DropdownHeader>Il tuo account</DropdownHeader>
+              <p className='text-gray-500 text-xs px-4 mb-2'>{profile.email}</p>
+              <DropdownItem
+                onClick={() => {
+                  navigate('/dashboard');
+                }}
+              >
+                {/* <Link
+                  to='/dashboard'
+                  className='w-full flex items-center justify-start gap-2'
+                >
+                  <User size={16} />
+                  Dashbord
+                </Link> */}
+                <span className='w-full flex items-center justify-start gap-2'>
+                  <User size={16} />
+                  Dashbord
+                </span>
+              </DropdownItem>
+              <DropdownItem
+                onClick={() => {
+                  navigate('/dashboard/orders');
+                }}
+              >
+                {/* <Link
+                  to='/dashboard/orders'
+                  className='w-full flex items-center justify-start gap-2'
+                >
+                  <ShoppingBag size={16} />I miei ordini
+                </Link> */}
+                <span className='w-full flex items-center justify-start gap-2'>
+                  <ShoppingBag size={16} />I miei ordini
+                </span>
+              </DropdownItem>
+              <DropdownItem
+                onClick={() => {
+                  navigate('/dashboard/settings');
+                }}
+              >
+                {/* <Link
+                  to='/dashboard/settings'
+                  className='w-full flex items-center justify-start gap-2'
+                >
+                  <Settings size={16} />
+                  Impostazioni
+                </Link> */}
+                <span className='w-full flex items-center justify-start gap-2'>
+                  <Settings size={16} />
+                  Impostazioni
+                </span>
+              </DropdownItem>
+              <DropdownItem divider />
+              <DropdownItem icon={<LogOut size={16} />} onClick={logout} danger>
+                Disconnetti
+              </DropdownItem>
+            </Dropdown>
+          ) : (
+            <div className='hidden md:flex items-center space-x-2'>
+              <Button
+                variant='outline'
+                size='md'
+                onClick={() => {
+                  navigate('login');
+                }}
+              >
+                {/* <Link to='/login'>Accedi</Link> */}
+                Accedi
               </Button>
-            }
-            align='right'
-          >
-            <DropdownHeader>Il tuo account</DropdownHeader>
-            <DropdownItem
-              icon={<User size={16} />}
-              onClick={() => console.log('Profilo')}
-            >
-              Profilo
-            </DropdownItem>
-            <DropdownItem
-              icon={<Settings size={16} />}
-              onClick={() => console.log('Impostazioni')}
-            >
-              Impostazioni
-            </DropdownItem>
-            <DropdownItem divider />
-            <DropdownItem
-              icon={<LogOut size={16} />}
-              onClick={() => console.log('Logout')}
-              danger
-            >
-              Disconnetti
-            </DropdownItem>
-          </Dropdown>
-
-          <div className='hidden md:flex items-center space-x-2'>
-            <Button variant='outline' size='md'>
-              <Link to='/login'>Accedi</Link>
-            </Button>
-            <Button variant='primary'>
-              <Link to='/register'>Registrati</Link>
-            </Button>
-          </div>
-          {/* )} */}
+              <Button
+                variant='primary'
+                onClick={() => {
+                  navigate('/register');
+                }}
+              >
+                {/* <Link to='/register'>Registrati</Link> */}
+                Registrati
+              </Button>
+            </div>
+          )}
 
           <button className='md:hidden' onClick={toggleMobileMenu}>
             {mobileMenuOpen ? (
-              <X className='h-6 w-6' />
+              <X className='h-6 w-6 cursor-pointer' />
             ) : (
-              <Menu className='h-6 w-6' />
+              <Menu className='h-6 w-6 cursor-pointer' />
             )}
           </button>
         </div>
@@ -154,43 +251,45 @@ const Navbar = () => {
           <div className='container mx-auto py-4 space-y-3'>
             <Link
               to='/experiences'
-              className='block px-4 py-2 hover:bg-muted rounded-md hover:text-[#19AEFF]'
+              className='block px-4 py-2 hover:bg-muted rounded-md hover:text-primary'
               onClick={toggleMobileMenu}
             >
               Esperienze
             </Link>
             <Link
               to='/categories'
-              className='block px-4 py-2 hover:bg-muted rounded-md hover:text-[#19AEFF]'
+              className='block px-4 py-2 hover:bg-muted rounded-md hover:text-primary'
               onClick={toggleMobileMenu}
             >
               Categorie
             </Link>
             <Link
               to='/about'
-              className='block px-4 py-2 hover:bg-muted rounded-md hover:text-[#19AEFF]'
+              className='block px-4 py-2 hover:bg-muted rounded-md hover:text-primary'
               onClick={toggleMobileMenu}
             >
               Chi siamo
             </Link>
 
-            {/* {!isAuthenticated && (
-              <div className="flex flex-col space-y-2 pt-3 border-t">
-                <Button variant="outline" asChild>
-                  <Link to="/login" onClick={toggleMobileMenu}>Accedi</Link>
-                </Button>
-                <Button asChild>
-                  <Link to="/register" onClick={toggleMobileMenu}>Registrati</Link>
-                </Button>
-              </div>
-            )} */}
-
             <div className='flex flex-col space-y-2 pt-3 border-t'>
-              <Button variant='outline' size='md' className='mx-4'>
-                <Link to='/login'>Accedi</Link>
+              <Button
+                variant='outline'
+                size='md'
+                className='mx-4'
+                onClick={() => {
+                  navigate('/login');
+                }}
+              >
+                Accedi
               </Button>
-              <Button variant='primary' className='mx-4'>
-                <Link to='/register'>Registrati</Link>
+              <Button
+                variant='primary'
+                className='mx-4'
+                onClick={() => {
+                  navigate('/register');
+                }}
+              >
+                Registrati
               </Button>
             </div>
           </div>

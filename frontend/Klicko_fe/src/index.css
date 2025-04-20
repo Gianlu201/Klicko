@@ -1,9 +1,27 @@
 @import 'tailwindcss';
 
-/* .mx-auto {
-  margin: 0 auto;
-} */
+/* azzurro => #19aeff */
+/* arancione => #F97415 */
+
+@theme {
+  --color-primary: #19aeff;
+  --color-secondary: #f97415;
+  --color-background: #f8fafc;
+}
 
 * {
   font-family: 'Inter', sans-serif;
+}
+
+body {
+  background-color: var(--color-background);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Playfair Display', serif;
 }

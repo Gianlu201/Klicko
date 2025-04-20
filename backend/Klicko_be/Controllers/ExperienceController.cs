@@ -1,10 +1,12 @@
-﻿using Klicko_be.DTOs.Account;
+﻿using System.Security.Claims;
+using Klicko_be.DTOs.Account;
 using Klicko_be.DTOs.CarryWith;
 using Klicko_be.DTOs.Category;
 using Klicko_be.DTOs.Experience;
 using Klicko_be.DTOs.Image;
 using Klicko_be.Models;
 using Klicko_be.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,11 +24,11 @@ namespace Klicko_be.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllExperiences()
+        public async Task<IActionResult> GetAllExperiencesAsAdmin()
         {
             try
             {
-                var experiences = await _experienceService.GetAllExperienceAsync();
+                var experiences = await _experienceService.GetAllExperienceAsAdminAsync();
 
                 if (experiences == null)
                 {
@@ -102,7 +104,6 @@ namespace Klicko_be.Controllers
                                     {
                                         ImageId = img.ImageId,
                                         Url = img.Url,
-                                        AltText = img.AltText,
                                     })
                                     .ToList()
                                 : null,
@@ -141,14 +142,401 @@ namespace Klicko_be.Controllers
             }
         }
 
+        [HttpGet("getExperiences")]
+        public async Task<IActionResult> GetAllExperiencesAsUser()
+        {
+            try
+            {
+                var experiences = await _experienceService.GetAllExperienceAsync();
+
+                if (experiences == null)
+                {
+                    return NotFound(
+                        new GetExperiencesListResponseDto()
+                        {
+                            Message = "No experiences found",
+                            Experiences = null,
+                        }
+                    );
+                }
+
+                var experiencesDto = experiences
+                    .Select(exp => new ExperienceDto()
+                    {
+                        ExperienceId = exp.ExperienceId,
+                        Title = exp.Title,
+                        CategoryId = exp.CategoryId,
+                        Duration = exp.Duration,
+                        Place = exp.Place,
+                        Price = exp.Price,
+                        DescriptionShort = exp.DescriptionShort,
+                        Description = exp.Description,
+                        MaxParticipants = exp.MaxParticipants,
+                        Organiser = exp.Organiser,
+                        LoadingDate = exp.LoadingDate,
+                        LastEditDate = exp.LastEditDate,
+                        UserCreatorId = exp.UserCreatorId,
+                        UserLastModifyId = exp.UserLastModifyId,
+                        IsFreeCancellable = exp.IsFreeCancellable,
+                        IncludedDescription = exp.IncludedDescription,
+                        Sale = exp.Sale,
+                        IsInEvidence = exp.IsInEvidence,
+                        IsPopular = exp.IsPopular,
+                        IsDeleted = exp.IsDeleted,
+                        ValidityInMonths = exp.ValidityInMonths,
+                        CoverImage = exp.CoverImage,
+                        Category =
+                            exp.Category != null
+                                ? new CategorySimpleDto()
+                                {
+                                    CategoryId = exp.Category.CategoryId,
+                                    Name = exp.Category.Name,
+                                    Description = exp.Category.Description,
+                                    Image = exp.Category.Image,
+                                    Icon = exp.Category.Icon,
+                                }
+                                : null,
+                        UserCreator = null,
+                        UserLastModify = null,
+                        Images =
+                            (exp.Images != null && exp.Images.Count > 0)
+                                ? exp
+                                    .Images.Select(img => new ImageSimpleDto()
+                                    {
+                                        ImageId = img.ImageId,
+                                        Url = img.Url,
+                                    })
+                                    .ToList()
+                                : null,
+                        CarryWiths =
+                            (exp.CarryWiths != null && exp.CarryWiths.Count > 0)
+                                ? exp
+                                    .CarryWiths.Select(carry => new CarryWithSimpleDto()
+                                    {
+                                        CarryWithId = carry.CarryWithId,
+                                        Name = carry.Name,
+                                    })
+                                    .ToList()
+                                : null,
+                    })
+                    .ToList();
+
+                return experiencesDto != null
+                    ? Ok(
+                        new GetExperiencesListResponseDto()
+                        {
+                            Message = $"{experiencesDto.Count} experiences found!",
+                            Experiences = experiencesDto,
+                        }
+                    )
+                    : BadRequest(
+                        new GetExperiencesListResponseDto()
+                        {
+                            Message = "Something went wrong!",
+                            Experiences = null,
+                        }
+                    );
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpGet("Highlighted")]
+        public async Task<IActionResult> GetAllHighlightedExperiences()
+        {
+            try
+            {
+                var experiences = await _experienceService.GetAllHighlightedExperienceAsync();
+
+                if (experiences == null)
+                {
+                    return NotFound(
+                        new GetExperiencesListResponseDto()
+                        {
+                            Message = "No experiences found",
+                            Experiences = null,
+                        }
+                    );
+                }
+
+                var experiencesDto = experiences
+                    .Select(exp => new ExperienceDto()
+                    {
+                        ExperienceId = exp.ExperienceId,
+                        Title = exp.Title,
+                        CategoryId = exp.CategoryId,
+                        Duration = exp.Duration,
+                        Place = exp.Place,
+                        Price = exp.Price,
+                        DescriptionShort = exp.DescriptionShort,
+                        Description = exp.Description,
+                        MaxParticipants = exp.MaxParticipants,
+                        Organiser = exp.Organiser,
+                        LoadingDate = exp.LoadingDate,
+                        LastEditDate = exp.LastEditDate,
+                        UserCreatorId = exp.UserCreatorId,
+                        UserLastModifyId = exp.UserLastModifyId,
+                        IsFreeCancellable = exp.IsFreeCancellable,
+                        IncludedDescription = exp.IncludedDescription,
+                        Sale = exp.Sale,
+                        IsInEvidence = exp.IsInEvidence,
+                        IsPopular = exp.IsPopular,
+                        IsDeleted = exp.IsDeleted,
+                        ValidityInMonths = exp.ValidityInMonths,
+                        CoverImage = exp.CoverImage,
+                        Category =
+                            exp.Category != null
+                                ? new CategorySimpleDto()
+                                {
+                                    CategoryId = exp.Category.CategoryId,
+                                    Name = exp.Category.Name,
+                                    Description = exp.Category.Description,
+                                    Image = exp.Category.Image,
+                                    Icon = exp.Category.Icon,
+                                }
+                                : null,
+                        UserCreator = null,
+                        UserLastModify = null,
+                        Images = null,
+                        CarryWiths = null,
+                    })
+                    .ToList();
+
+                return experiencesDto != null
+                    ? Ok(
+                        new GetExperiencesListResponseDto()
+                        {
+                            Message = $"{experiencesDto.Count} experiences found!",
+                            Experiences = experiencesDto,
+                        }
+                    )
+                    : BadRequest(
+                        new GetExperiencesListResponseDto()
+                        {
+                            Message = "Something went wrong!",
+                            Experiences = null,
+                        }
+                    );
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpGet("Popular")]
+        public async Task<IActionResult> GetAllPopularExperiences()
+        {
+            try
+            {
+                var experiences = await _experienceService.GetAllPopularExperienceAsync();
+
+                if (experiences == null)
+                {
+                    return NotFound(
+                        new GetExperiencesListResponseDto()
+                        {
+                            Message = "No experiences found",
+                            Experiences = null,
+                        }
+                    );
+                }
+
+                var experiencesDto = experiences
+                    .Select(exp => new ExperienceDto()
+                    {
+                        ExperienceId = exp.ExperienceId,
+                        Title = exp.Title,
+                        CategoryId = exp.CategoryId,
+                        Duration = exp.Duration,
+                        Place = exp.Place,
+                        Price = exp.Price,
+                        DescriptionShort = exp.DescriptionShort,
+                        Description = exp.Description,
+                        MaxParticipants = exp.MaxParticipants,
+                        Organiser = exp.Organiser,
+                        LoadingDate = exp.LoadingDate,
+                        LastEditDate = exp.LastEditDate,
+                        UserCreatorId = exp.UserCreatorId,
+                        UserLastModifyId = exp.UserLastModifyId,
+                        IsFreeCancellable = exp.IsFreeCancellable,
+                        IncludedDescription = exp.IncludedDescription,
+                        Sale = exp.Sale,
+                        IsInEvidence = exp.IsInEvidence,
+                        IsPopular = exp.IsPopular,
+                        IsDeleted = exp.IsDeleted,
+                        ValidityInMonths = exp.ValidityInMonths,
+                        CoverImage = exp.CoverImage,
+                        Category =
+                            exp.Category != null
+                                ? new CategorySimpleDto()
+                                {
+                                    CategoryId = exp.Category.CategoryId,
+                                    Name = exp.Category.Name,
+                                    Description = exp.Category.Description,
+                                    Image = exp.Category.Image,
+                                    Icon = exp.Category.Icon,
+                                }
+                                : null,
+                        UserCreator = null,
+                        UserLastModify = null,
+                        Images = null,
+                        CarryWiths = null,
+                    })
+                    .ToList();
+
+                return experiencesDto != null
+                    ? Ok(
+                        new GetExperiencesListResponseDto()
+                        {
+                            Message = $"{experiencesDto.Count} experiences found!",
+                            Experiences = experiencesDto,
+                        }
+                    )
+                    : BadRequest(
+                        new GetExperiencesListResponseDto()
+                        {
+                            Message = "Something went wrong!",
+                            Experiences = null,
+                        }
+                    );
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpGet("Experience/{experienceId:guid}")]
+        public async Task<IActionResult> GetSingleExperience(Guid experienceId)
+        {
+            try
+            {
+                var experience = await _experienceService.GetExperienceByIdAsync(experienceId);
+
+                if (experience == null)
+                {
+                    return NotFound(
+                        new GetExperienceResponseDto()
+                        {
+                            Message = "Experience not found!",
+                            Experience = null,
+                        }
+                    );
+                }
+
+                var experienceDto = new ExperienceDto()
+                {
+                    ExperienceId = experience.ExperienceId,
+                    Title = experience.Title,
+                    CategoryId = experience.CategoryId,
+                    Duration = experience.Duration,
+                    Place = experience.Place,
+                    Price = experience.Price,
+                    DescriptionShort = experience.DescriptionShort,
+                    Description = experience.Description,
+                    MaxParticipants = experience.MaxParticipants,
+                    Organiser = experience.Organiser,
+                    LoadingDate = experience.LoadingDate,
+                    LastEditDate = experience.LastEditDate,
+                    UserCreatorId = experience.UserCreatorId,
+                    UserLastModifyId = experience.UserLastModifyId,
+                    IsFreeCancellable = experience.IsFreeCancellable,
+                    IncludedDescription = experience.IncludedDescription,
+                    Sale = experience.Sale,
+                    IsInEvidence = experience.IsInEvidence,
+                    IsPopular = experience.IsPopular,
+                    IsDeleted = experience.IsDeleted,
+                    ValidityInMonths = experience.ValidityInMonths,
+                    CoverImage = experience.CoverImage,
+                    Category =
+                        experience.Category != null
+                            ? new CategorySimpleDto()
+                            {
+                                CategoryId = experience.Category.CategoryId,
+                                Name = experience.Category.Name,
+                                Description = experience.Category.Description,
+                                Image = experience.Category.Image,
+                                Icon = experience.Category.Icon,
+                            }
+                            : null,
+                    UserCreator =
+                        experience.UserCreator != null
+                            ? new UserSimpleDto()
+                            {
+                                UserId = experience.UserCreator.Id,
+                                FirstName = experience.UserCreator.FirstName,
+                                LastName = experience.UserCreator.LastName,
+                                Email = experience.UserCreator.Email,
+                            }
+                            : null,
+                    UserLastModify =
+                        experience.UserLastModify != null
+                            ? new UserSimpleDto()
+                            {
+                                UserId = experience.UserLastModify.Id,
+                                FirstName = experience.UserLastModify.FirstName,
+                                LastName = experience.UserLastModify.LastName,
+                                Email = experience.UserLastModify.Email,
+                            }
+                            : null,
+                    Images =
+                        (experience.Images != null && experience.Images.Count > 0)
+                            ? experience
+                                .Images.Select(img => new ImageSimpleDto()
+                                {
+                                    ImageId = img.ImageId,
+                                    Url = img.Url,
+                                })
+                                .ToList()
+                            : null,
+                    CarryWiths =
+                        (experience.CarryWiths != null && experience.CarryWiths.Count > 0)
+                            ? experience
+                                .CarryWiths.Select(carry => new CarryWithSimpleDto()
+                                {
+                                    CarryWithId = carry.CarryWithId,
+                                    Name = carry.Name,
+                                })
+                                .ToList()
+                            : null,
+                };
+
+                return experienceDto != null
+                    ? Ok(
+                        new GetExperienceResponseDto()
+                        {
+                            Message = "Experience found!",
+                            Experience = experienceDto,
+                        }
+                    )
+                    : BadRequest(
+                        new GetExperienceResponseDto()
+                        {
+                            Message = "Something went wrong!",
+                            Experience = null,
+                        }
+                    );
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> CreateExperience(
-            [FromBody] CreateExperienceRequestDto createExperience
+            [FromForm] CreateExperienceRequestDto createExperience
         )
         {
             try
             {
-                // TODO: aggiungere UserId automatico tramite riconoscimento token
+                var user = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+                var userId = user!.Value;
+
                 var newExperience = new Experience()
                 {
                     ExperienceId = Guid.NewGuid(),
@@ -168,33 +556,79 @@ namespace Klicko_be.Controllers
                     Sale = createExperience.Sale,
                     IsInEvidence = createExperience.IsInEvidence,
                     IsPopular = createExperience.IsPopular,
-                    IsDeleted = createExperience.IsDeleted,
-                    CoverImage = createExperience.CoverImage,
                     ValidityInMonths = createExperience.ValidityInMonths,
-                    UserCreatorId = "70b579dd-c6a0-4075-8d7d-1326f2353c7b",
-                    UserLastModifyId = "70b579dd-c6a0-4075-8d7d-1326f2353c7b",
+                    UserCreatorId = userId,
+                    UserLastModifyId = userId,
                 };
 
-                if (createExperience.Images != null && createExperience.Images.Count > 0)
+                // Salvataggio immagine
+                if (createExperience.CoverImage != null && createExperience.CoverImage.Length > 0)
                 {
-                    newExperience.Images = createExperience
-                        .Images.Select(img => new Image()
-                        {
-                            ImageId = Guid.NewGuid(),
-                            Url = img.Url,
-                            AltText = img.AltText,
-                            ExperienceId = newExperience.ExperienceId,
-                        })
-                        .ToList();
+                    var fileName =
+                        Guid.NewGuid().ToString()
+                        + Path.GetExtension(createExperience.CoverImage.FileName);
+                    var uploadsPath = Path.Combine(
+                        Directory.GetCurrentDirectory(),
+                        "wwwroot",
+                        "uploads"
+                    );
+
+                    if (!Directory.Exists(uploadsPath))
+                        Directory.CreateDirectory(uploadsPath);
+
+                    var filePath = Path.Combine(uploadsPath, fileName);
+
+                    await using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await createExperience.CoverImage.CopyToAsync(stream);
+                    }
+
+                    newExperience.CoverImage = fileName;
                 }
 
-                if (createExperience.CarryWiths != null && createExperience.CarryWiths.Count > 0)
+                // Immagini aggiuntive
+                if (createExperience.Images != null && createExperience.Images.Count > 0)
                 {
-                    newExperience.CarryWiths = createExperience
-                        .CarryWiths.Select(carry => new CarryWith()
+                    var imagesList = new List<Image>();
+
+                    foreach (var img in createExperience.Images)
+                    {
+                        var fileName = Guid.NewGuid() + Path.GetExtension(img.FileName);
+                        var filePath = Path.Combine(
+                            Directory.GetCurrentDirectory(),
+                            "wwwroot",
+                            "uploads",
+                            fileName
+                        );
+
+                        await using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await img.CopyToAsync(stream);
+                        }
+
+                        imagesList.Add(
+                            new Image
+                            {
+                                ImageId = Guid.NewGuid(),
+                                Url = fileName,
+                                ExperienceId = newExperience.ExperienceId,
+                                IsCover = false,
+                            }
+                        );
+                    }
+
+                    newExperience.Images = imagesList;
+                }
+
+                if (createExperience.CarryWiths != null && createExperience.CarryWiths.Length > 0)
+                {
+                    var carryList = createExperience.CarryWiths.Split(",").ToList();
+
+                    newExperience.CarryWiths = carryList
+                        .Select(carry => new CarryWith()
                         {
                             CarryWithId = Guid.NewGuid(),
-                            Name = carry.Name,
+                            Name = carry,
                             ExperienceId = newExperience.ExperienceId,
                         })
                         .ToList();
@@ -220,16 +654,21 @@ namespace Klicko_be.Controllers
         }
 
         [HttpPut("{experienceId:guid}")]
+        [Authorize]
         public async Task<IActionResult> Edit(
-            [FromBody] EditExperienceRequestDto experienceEdit,
+            [FromForm] EditExperienceRequestDto experienceEdit,
             Guid experienceId
         )
         {
             try
             {
-                var result = await _experienceService.EditEcperienceByIdAsync(
+                var user = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+                var userId = user!.Value;
+
+                var result = await _experienceService.EditExperienceByIdAsync(
                     experienceId,
-                    experienceEdit
+                    experienceEdit,
+                    userId
                 );
 
                 return result
@@ -258,6 +697,22 @@ namespace Klicko_be.Controllers
                     new DeleteExperienceResponseDto()
                     {
                         Message = "Experience soft deleted successfully!",
+                    }
+                )
+                : BadRequest(
+                    new DeleteExperienceResponseDto() { Message = "Something went wrong!" }
+                );
+        }
+
+        [HttpPut("restoreExperience/{experienceId:guid}")]
+        public async Task<IActionResult> Restore(Guid experienceId)
+        {
+            var result = await _experienceService.RestoreExperienceByIdAsync(experienceId);
+            return result
+                ? Ok(
+                    new DeleteExperienceResponseDto()
+                    {
+                        Message = "Experience restored successfully!",
                     }
                 )
                 : BadRequest(

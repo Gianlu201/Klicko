@@ -4,6 +4,5 @@
     {
         public Guid ImageId { get; set; }
         public required string Url { get; set; }
-        public required string AltText { get; set; }
     }
 }

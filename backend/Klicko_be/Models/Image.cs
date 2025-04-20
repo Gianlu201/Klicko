@@ -11,11 +11,9 @@ namespace Klicko_be.Models
         [Required]
         public required string Url { get; set; }
 
-        [Required]
-        public required string AltText { get; set; }
-
-        [Required]
         public required Guid ExperienceId { get; set; }
+
+        public bool IsCover { get; set; }
 
         // navigazione
         [ForeignKey(nameof(ExperienceId))]
