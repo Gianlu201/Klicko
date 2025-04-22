@@ -64,12 +64,12 @@ const CouponCard = ({ coupon }) => {
             icon={<ClipboardCheck className='me-3' />}
             onClick={() => {
               navigator.clipboard.writeText(coupon.code);
-              toast.success((t) => (
+              toast.success(
                 <>
                   <p className='font-bold'>Codice copiato!</p>
                   <p>Hai copiato il codice {coupon.code} negli appunti.</p>
                 </>
-              ));
+              );
             }}
           >
             Copia il codice

@@ -17,6 +17,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import AboutPage from './pages/AboutPage';
 import OrderConfirmationPage from './pages/OrderConfirmationPage';
 import CouponPage from './pages/CouponPage';
+import VouchersPage from './pages/VouchersPage';
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
                 element={<OrderConfirmationPage />}
               />
               <Route path='/coupons' element={<CouponPage />} />
+              <Route path='/redeemVoucher' element={<VouchersPage />} />
 
               <Route path='*' element={<NotFoundPage />} />
             </Routes>
