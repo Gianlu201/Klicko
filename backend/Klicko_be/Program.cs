@@ -130,6 +130,7 @@ builder.Services.AddScoped<ExperienceService>();
 builder.Services.AddScoped<CategoryService>();
 builder.Services.AddScoped<OrderService>();
 builder.Services.AddScoped<CartService>();
+builder.Services.AddScoped<CouponService>();
 
 var app = builder.Build();
 

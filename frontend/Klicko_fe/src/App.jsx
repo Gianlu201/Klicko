@@ -16,6 +16,7 @@ import CheckOutPage from './pages/CheckOutPage';
 import NotFoundPage from './pages/NotFoundPage';
 import AboutPage from './pages/AboutPage';
 import OrderConfirmationPage from './pages/OrderConfirmationPage';
+import CouponPage from './pages/CouponPage';
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
                 path='/orderConfirmation/:orderId'
                 element={<OrderConfirmationPage />}
               />
+              <Route path='/coupons' element={<CouponPage />} />
 
               <Route path='*' element={<NotFoundPage />} />
             </Routes>
