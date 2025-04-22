@@ -294,9 +294,26 @@ const DetailPage = () => {
             <div>
               <div className='bg-white rounded-2xl shadow-lg px-6 py-6 -translate-y-10 sticky top-32'>
                 <h4 className='text-lg text-gray-500 mb-1'>Prezzo totale</h4>
-                <p className='text-3xl font-bold mb-3'>
-                  {experience.price.toFixed(2).replace('.', ',')}€
-                </p>
+                <div className='mb-3'>
+                  {experience.sale > 0 && (
+                    <span className={`font-bold text-3xl me-2`}>
+                      {((experience.price * (100 - experience.sale)) / 100)
+                        .toFixed(2)
+                        .replace('.', ',')}{' '}
+                      €
+                    </span>
+                  )}
+                  <span
+                    className={`font-bold ${
+                      experience.sale > 0
+                        ? 'line-through text-gray-500 me-2 text-xl'
+                        : 'text-secondary text-3xl'
+                    }`}
+                  >
+                    {experience.price.toFixed(2).replace('.', ',')}€
+                  </span>
+                </div>
+
                 <Button
                   variant='primary'
                   fullWidth={true}

@@ -36,6 +36,9 @@ namespace Klicko_be.Data
         public DbSet<CarryWith> CarryWiths { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderExperience> OrderExperiences { get; set; }
+        public DbSet<Voucher> Vouchers { get; set; }
+        public DbSet<FidelityCard> FidelityCards { get; set; }
+        public DbSet<Coupon> Coupons { get; set; }
         public DbSet<Cart> Carts { get; set; }
         public DbSet<CartExperience> CartExperiences { get; set; }
 
@@ -77,13 +80,6 @@ namespace Klicko_be.Data
                 .HasOne(cw => cw.Experience)
                 .WithMany(e => e.CarryWiths)
                 .HasForeignKey(c => c.ExperienceId);
-
-            // correlazione Experience a OrderExperience
-            builder
-                .Entity<OrderExperience>()
-                .HasOne(oe => oe.Experience)
-                .WithMany(e => e.OrderExperiences)
-                .HasForeignKey(oe => oe.ExperienceId);
 
             // correlazione Experience a ApplicationUser (UserCreator)
             builder
@@ -135,6 +131,49 @@ namespace Klicko_be.Data
                 .HasForeignKey(ce => ce.ExperienceId)
                 .OnDelete(DeleteBehavior.NoAction);
 
+            // correlazione Vaucher a Category
+            builder
+                .Entity<Voucher>()
+                .HasOne(v => v.Category)
+                .WithMany(c => c.Vouchers)
+                .HasForeignKey(v => v.CategoryId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            // correlazione Voucher a ApplicationUser
+            builder
+                .Entity<Voucher>()
+                .HasOne(v => v.User)
+                .WithMany(u => u.Vouchers)
+                .HasForeignKey(v => v.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            // correlazione Voucher a Order
+            builder
+                .Entity<Voucher>()
+                .HasOne(v => v.Order)
+                .WithMany(o => o.Vouchers)
+                .HasForeignKey(v => v.OrderId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            // correlazione User a Fidelitycard
+            builder.Entity<FidelityCard>().HasOne(c => c.User).WithOne(u => u.FidelityCard);
+
+            // correlazione Voucher a ApplicationUser
+            builder
+                .Entity<Voucher>()
+                .HasOne(v => v.User)
+                .WithMany(u => u.Vouchers)
+                .HasForeignKey(v => v.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            // correlazione Coupon a ApplicationUser
+            builder
+                .Entity<Coupon>()
+                .HasOne(c => c.User)
+                .WithMany(u => u.Coupons)
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
             // Tabella ApplicationUser
             builder
                 .Entity<ApplicationUser>()
@@ -170,6 +209,10 @@ namespace Klicko_be.Data
                 .Property(o => o.OrderNumber)
                 .HasDefaultValueSql("NEXT VALUE FOR OrderNumber_seq");
 
+            builder.Entity<Order>().Property(o => o.TotalDiscount).HasDefaultValue(0);
+
+            builder.Entity<Order>().Property(o => o.ShippingPrice).HasDefaultValue(4.99);
+
             // Tabella Cart
             builder.Entity<Cart>().Property(c => c.CreatedAt).HasDefaultValue(DateTime.UtcNow);
 
@@ -185,6 +228,57 @@ namespace Klicko_be.Data
 
             // Tabella Image
             builder.Entity<Models.Image>().Property(i => i.IsCover).HasDefaultValue(false);
+
+            // Tabella Voucher
+            builder.Entity<Voucher>().Property(v => v.CreatedAt).HasDefaultValue(DateTime.UtcNow);
+
+            // Tabella Voucher - funzione per assegnare in modo randomico un codice per la proprietà VoucherCode
+            builder
+                .Entity<Voucher>()
+                .Property(v => v.VoucherCode)
+                .HasMaxLength(30)
+                .HasDefaultValueSql(
+                    @"
+                CONCAT(
+                    SUBSTRING(REPLACE(CONVERT(varchar(50), NEWID()), '-', ''), 1, 8), '-',
+                    SUBSTRING(REPLACE(CONVERT(varchar(50), NEWID()), '-', ''), 9, 8), '-',
+                    SUBSTRING(REPLACE(CONVERT(varchar(50), NEWID()), '-', ''), 17, 8)
+                )"
+                )
+                .ValueGeneratedOnAdd();
+
+            builder.Entity<Voucher>().HasIndex(v => v.VoucherCode).IsUnique();
+
+            // Tabella Coupon
+            builder.Entity<Coupon>().Property(c => c.PercentualSaleAmount).HasDefaultValue(0);
+
+            builder.Entity<Coupon>().Property(c => c.FixedSaleAmount).HasDefaultValue(0);
+
+            builder.Entity<Coupon>().Property(c => c.IsActive).HasDefaultValue(true);
+
+            builder.Entity<Coupon>().Property(c => c.IsUniversal).HasDefaultValue(false);
+
+            builder.Entity<Coupon>().Property(c => c.MinimumAmount).HasDefaultValue(0);
+
+            // Tabella FidelityCard
+            // inserire funzione per assegnare un numero di carta casuale
+            builder
+                .Entity<FidelityCard>()
+                .Property(fc => fc.CardNumber)
+                .HasMaxLength(12)
+                .HasDefaultValueSql(
+                    @"
+                RIGHT('000000000000' + 
+                    CAST(ABS(CAST(CAST(NEWID() AS VARBINARY) AS BIGINT)) AS VARCHAR(20))
+                , 12)"
+                )
+                .ValueGeneratedOnAdd();
+
+            builder.Entity<FidelityCard>().HasIndex(fc => fc.CardNumber).IsUnique();
+
+            builder.Entity<FidelityCard>().Property(c => c.Points).HasDefaultValue(0);
+
+            builder.Entity<FidelityCard>().Property(c => c.AvailablePoints).HasDefaultValue(0);
 
             // inserimento ruoli nella tabella ApplicationRoles
             builder
@@ -271,6 +365,7 @@ namespace Klicko_be.Data
                         PasswordHash =
                             "AQAAAAIAAYagAAAAEJ924mp2s2BX/BpdalZ6f2s1qlMl3fxdcEPcaKFV6BxA5frV73oVpuC1V9F4PHCJ2g==",
                         CartId = Guid.Parse("ad0b8ebb-3e25-4c9f-a7dd-7e07c3e7ab3f"),
+                        FidelityCardId = Guid.Parse("772e32cc-cdea-4413-8785-09312f52f33d"),
                     },
                     new ApplicationUser()
                     {
@@ -286,6 +381,7 @@ namespace Klicko_be.Data
                         PasswordHash =
                             "AQAAAAIAAYagAAAAEJP1xbBcaikPe32EBy3MLTcexMUhKB7jQsEGuRiIlRJOWuiJwUGI/v0s83m7H70okg==",
                         CartId = Guid.Parse("59a9d57e-c339-4a73-8d02-69cc186a5385"),
+                        FidelityCardId = Guid.Parse("326ddfe3-754b-4f24-8cd6-1011bc3cc37e"),
                     },
                     new ApplicationUser()
                     {
@@ -301,6 +397,7 @@ namespace Klicko_be.Data
                         PasswordHash =
                             "AQAAAAIAAYagAAAAEL6u4Tox47kxNqt9nm4+vRn+SzahthaQ55UejBFFdJvvUNNCfqIWRI246s9wJiZ43A==",
                         CartId = Guid.Parse("b64a049a-6d76-4c1c-866c-e0169c92f1d6"),
+                        FidelityCardId = Guid.Parse("12d1edf2-df86-41d9-8594-0b1859e31932"),
                     },
                     new ApplicationUser()
                     {
@@ -316,6 +413,7 @@ namespace Klicko_be.Data
                         PasswordHash =
                             "AQAAAAIAAYagAAAAEGqAB3rWtm9yNytryjcGs97J9AVY4J6GC/pnd/eL+/lSc8KXctmVoydETBEp6qnKAg==",
                         CartId = Guid.Parse("a32de9e5-58e6-4ae8-8590-204bf8677abf"),
+                        FidelityCardId = Guid.Parse("ac983a29-21fe-4d7b-822f-2de328dee367"),
                     },
                     new ApplicationUser()
                     {
@@ -331,10 +429,169 @@ namespace Klicko_be.Data
                         PasswordHash =
                             "AQAAAAIAAYagAAAAENabfBTfVAnfCT/fg0+WNYZFHUGtBkj2cdOTFH8XkxudV8ZObX5QzlvepD9DwevyLA==",
                         CartId = Guid.Parse("0b61eb1c-7294-49ea-94a2-f90273f7e5c9"),
+                        FidelityCardId = Guid.Parse("3f05415d-e413-4430-bdcd-e668d6f7aa83"),
                     }
                 );
 
-            //inserimento dati nella tabella ApplicationUserRole
+            // inserimento dati nella tabella FidelityCard
+            builder
+                .Entity<FidelityCard>()
+                .HasData(
+                    // Admin User
+                    new FidelityCard()
+                    {
+                        FidelityCardId = Guid.Parse("772e32cc-cdea-4413-8785-09312f52f33d"),
+                        CardNumber = "341020401032",
+                        Points = 0,
+                        AvailablePoints = 0,
+                        UserId = "3a8073b2-b954-428a-a4b9-6e4b3f5db051",
+                    },
+                    // Seller User
+                    new FidelityCard()
+                    {
+                        FidelityCardId = Guid.Parse("326ddfe3-754b-4f24-8cd6-1011bc3cc37e"),
+                        CardNumber = "453728123423",
+                        Points = 0,
+                        AvailablePoints = 0,
+                        UserId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                    },
+                    // User User
+                    new FidelityCard()
+                    {
+                        FidelityCardId = Guid.Parse("12d1edf2-df86-41d9-8594-0b1859e31932"),
+                        CardNumber = "454432678900",
+                        Points = 303,
+                        AvailablePoints = 303,
+                        UserId = "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2",
+                    },
+                    // Mario Rossi
+                    new FidelityCard()
+                    {
+                        FidelityCardId = Guid.Parse("ac983a29-21fe-4d7b-822f-2de328dee367"),
+                        CardNumber = "123245783911",
+                        Points = 1250,
+                        AvailablePoints = 1250,
+                        UserId = "698c347e-bb57-4cb4-b672-9940647f250d",
+                    },
+                    // Luigi Bianchi
+                    new FidelityCard()
+                    {
+                        FidelityCardId = Guid.Parse("3f05415d-e413-4430-bdcd-e668d6f7aa83"),
+                        CardNumber = "873524120039",
+                        Points = 0,
+                        AvailablePoints = 0,
+                        UserId = "e5675086-e91e-442a-9c22-27d41bee49a4",
+                    }
+                );
+
+            // inserimento dati nella tabella Coupones
+            builder
+                .Entity<Coupon>()
+                .HasData(
+                    // Admin User
+                    new Coupon()
+                    {
+                        CouponId = Guid.Parse("180392ae-03d1-4e01-8ca6-b67e038aa412"),
+                        PercentualSaleAmount = 5,
+                        FixedSaleAmount = 0,
+                        IsActive = true,
+                        IsUniversal = false,
+                        ExpireDate = null,
+                        Code = "WELCOME5",
+                        MinimumAmount = 100,
+                        UserId = "3a8073b2-b954-428a-a4b9-6e4b3f5db051",
+                    },
+                    // Seller User
+                    new Coupon()
+                    {
+                        CouponId = Guid.Parse("71a3db8e-9f8b-48d0-96a8-b6b5d6ff890e"),
+                        PercentualSaleAmount = 5,
+                        FixedSaleAmount = 0,
+                        IsActive = true,
+                        IsUniversal = false,
+                        ExpireDate = null,
+                        Code = "WELCOME5",
+                        MinimumAmount = 100,
+                        UserId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                    },
+                    // User User
+                    new Coupon()
+                    {
+                        CouponId = Guid.Parse("e05605f6-a529-4fc4-a196-4c7122c8b1e4"),
+                        PercentualSaleAmount = 5,
+                        FixedSaleAmount = 0,
+                        IsActive = true,
+                        IsUniversal = false,
+                        ExpireDate = null,
+                        Code = "WELCOME5",
+                        MinimumAmount = 100,
+                        UserId = "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2",
+                    },
+                    new Coupon()
+                    {
+                        CouponId = Guid.Parse("0d291863-71f0-45a7-862a-bf74f709757a"),
+                        PercentualSaleAmount = 0,
+                        FixedSaleAmount = 10,
+                        IsActive = true,
+                        IsUniversal = false,
+                        ExpireDate = DateTime.Parse("31/05/2025 23:59:59"),
+                        Code = "BONUS10",
+                        MinimumAmount = 200,
+                        UserId = "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2",
+                    },
+                    // Mario Rossi
+                    new Coupon()
+                    {
+                        CouponId = Guid.Parse("fa1639d8-8d3e-454e-9d91-826a285d1727"),
+                        PercentualSaleAmount = 5,
+                        FixedSaleAmount = 0,
+                        IsActive = true,
+                        IsUniversal = false,
+                        ExpireDate = null,
+                        Code = "WELCOME5",
+                        MinimumAmount = 100,
+                        UserId = "698c347e-bb57-4cb4-b672-9940647f250d",
+                    },
+                    new Coupon()
+                    {
+                        CouponId = Guid.Parse("87d2e445-1202-4d8a-a0c2-bf55228e4878"),
+                        PercentualSaleAmount = 0,
+                        FixedSaleAmount = 10,
+                        IsActive = true,
+                        IsUniversal = false,
+                        ExpireDate = DateTime.Parse("31/05/2025 23:59:59"),
+                        Code = "BONUS10",
+                        MinimumAmount = 200,
+                        UserId = "698c347e-bb57-4cb4-b672-9940647f250d",
+                    },
+                    new Coupon()
+                    {
+                        CouponId = Guid.Parse("642d9766-e5b6-4121-b7df-b49a60d612f7"),
+                        PercentualSaleAmount = 15,
+                        FixedSaleAmount = 0,
+                        IsActive = true,
+                        IsUniversal = false,
+                        ExpireDate = DateTime.Parse("31/05/2025 23:59:59"),
+                        Code = "DEMODAY15",
+                        MinimumAmount = 250,
+                        UserId = "698c347e-bb57-4cb4-b672-9940647f250d",
+                    },
+                    // Luigi Bianchi
+                    new Coupon()
+                    {
+                        CouponId = Guid.Parse("812a87bc-3758-4e35-8b7c-6dbf06775950"),
+                        PercentualSaleAmount = 5,
+                        FixedSaleAmount = 0,
+                        IsActive = true,
+                        IsUniversal = false,
+                        ExpireDate = null,
+                        Code = "WELCOME5",
+                        MinimumAmount = 100,
+                        UserId = "e5675086-e91e-442a-9c22-27d41bee49a4",
+                    }
+                );
+
+            // inserimento dati nella tabella ApplicationUserRole
             builder
                 .Entity<ApplicationUserRole>()
                 .HasData(
@@ -456,7 +713,7 @@ namespace Klicko_be.Data
                     }
                 );
 
-            // inserimento esperienze nella tabella esperienze
+            // inserimento esperienze nella tabella Experiences
             builder
                 .Entity<Experience>()
                 .HasData(
@@ -1392,7 +1649,10 @@ namespace Klicko_be.Data
                         OrderNumber = 123450,
                         UserId = "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2",
                         State = "Completato",
-                        TotalPrice = 145,
+                        SubTotalPrice = 145,
+                        TotalDiscount = 0,
+                        ShippingPrice = 4.99m,
+                        TotalPrice = 149.99m,
                         CreatedAt = DateTime.Parse("09/02/2024 11:00:56"),
                     },
                     new Order()
@@ -1401,7 +1661,10 @@ namespace Klicko_be.Data
                         OrderNumber = 123451,
                         UserId = "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2",
                         State = "Completato",
-                        TotalPrice = 150,
+                        SubTotalPrice = 300,
+                        TotalDiscount = 0,
+                        ShippingPrice = 4.99m,
+                        TotalPrice = 304.99m,
                         CreatedAt = DateTime.Parse("25/07/2024 11:00:56"),
                     },
                     // Ordini Mario Rossi
@@ -1411,7 +1674,10 @@ namespace Klicko_be.Data
                         OrderNumber = 123452,
                         UserId = "698c347e-bb57-4cb4-b672-9940647f250d",
                         State = "Completato",
-                        TotalPrice = 397.49m,
+                        SubTotalPrice = 504.99m,
+                        TotalDiscount = 12.50m,
+                        ShippingPrice = 4.99m,
+                        TotalPrice = 497.48m,
                         CreatedAt = DateTime.Parse("12/01/2025 11:00:56"),
                     },
                     new Order()
@@ -1420,7 +1686,10 @@ namespace Klicko_be.Data
                         OrderNumber = 123453,
                         UserId = "698c347e-bb57-4cb4-b672-9940647f250d",
                         State = "Completato",
-                        TotalPrice = 360,
+                        SubTotalPrice = 360,
+                        TotalDiscount = 0,
+                        ShippingPrice = 4.99m,
+                        TotalPrice = 364.99m,
                         CreatedAt = DateTime.Parse("23/02/2025 11:00:56"),
                     },
                     new Order()
@@ -1429,7 +1698,10 @@ namespace Klicko_be.Data
                         OrderNumber = 123454,
                         UserId = "698c347e-bb57-4cb4-b672-9940647f250d",
                         State = "In attesa",
-                        TotalPrice = 479.75m,
+                        SubTotalPrice = 484,
+                        TotalDiscount = 4.25m,
+                        ShippingPrice = 4.99m,
+                        TotalPrice = 484.74m,
                         CreatedAt = DateTime.Parse("28/04/2025 11:00:56"),
                     }
                 );
@@ -1442,14 +1714,20 @@ namespace Klicko_be.Data
                     new OrderExperience()
                     {
                         OrderExperienceId = Guid.Parse("39ea9347-0d41-403a-81c5-baf69a343eb9"),
-                        ExperienceId = Guid.Parse("FF3ED239-E178-4632-8385-042286991C66"),
+                        Title = "Escursione in e-bike nei borghi del Montefeltro",
+                        Price = 70,
+                        Discount = 0,
+                        TotalPrice = 70,
                         OrderId = Guid.Parse("089b2a7e-4287-4e1c-8928-693a736db304"),
                         Quantity = 1,
                     },
                     new OrderExperience()
                     {
                         OrderExperienceId = Guid.Parse("5bf549b8-f233-4be8-ba39-57377100149e"),
-                        ExperienceId = Guid.Parse("6F236570-1625-4190-9A4F-0DA2D0639386"),
+                        Title = "Degustazione di vini in cantina sotterranea",
+                        Price = 75,
+                        Discount = 0,
+                        TotalPrice = 75,
                         OrderId = Guid.Parse("089b2a7e-4287-4e1c-8928-693a736db304"),
                         Quantity = 1,
                     },
@@ -1457,7 +1735,10 @@ namespace Klicko_be.Data
                     new OrderExperience()
                     {
                         OrderExperienceId = Guid.Parse("99c4650a-29ea-4ae9-8c4c-26d86c4497ca"),
-                        ExperienceId = Guid.Parse("62947BC9-568C-4C34-A8E1-2FB6F05BCA61"),
+                        Title = "Cucina toscana nella tenuta di un castello",
+                        Price = 150,
+                        Discount = 0,
+                        TotalPrice = 300,
                         OrderId = Guid.Parse("cf854aee-04c4-43ff-bb30-445daa75478a"),
                         Quantity = 2,
                     },
@@ -1465,21 +1746,30 @@ namespace Klicko_be.Data
                     new OrderExperience()
                     {
                         OrderExperienceId = Guid.Parse("78bcc835-6806-4d4e-b6fb-1a8cbe0bc1c1"),
-                        ExperienceId = Guid.Parse("BB36C355-2C8E-4A45-9BE3-151934E2FF4C"),
+                        Title = "Trekking sul sentiero degli Dei",
+                        Price = 65,
+                        Discount = 0,
+                        TotalPrice = 65,
                         OrderId = Guid.Parse("dc2a8bdd-f6cc-4637-9104-639f0e020777"),
                         Quantity = 1,
                     },
                     new OrderExperience()
                     {
                         OrderExperienceId = Guid.Parse("471f10b0-b759-49c0-b34d-aec032d163f6"),
-                        ExperienceId = Guid.Parse("0C94EE3C-86F3-4E83-AFB2-2A753416227A"),
+                        Title = "Percorso benessere in grotta termale",
+                        Price = 95,
+                        Discount = 0,
+                        TotalPrice = 190,
                         OrderId = Guid.Parse("dc2a8bdd-f6cc-4637-9104-639f0e020777"),
                         Quantity = 2,
                     },
                     new OrderExperience()
                     {
                         OrderExperienceId = Guid.Parse("f1b25b3f-60b1-4103-a342-76ef3346f1ed"),
-                        ExperienceId = Guid.Parse("8DC3B2F9-850B-42CC-824C-7758112B9370"),
+                        Title = "Volo in mongolfiera al tramonto",
+                        Price = 249.99m,
+                        Discount = 12.5m,
+                        TotalPrice = 237.49m,
                         OrderId = Guid.Parse("dc2a8bdd-f6cc-4637-9104-639f0e020777"),
                         Quantity = 1,
                     },
@@ -1487,7 +1777,10 @@ namespace Klicko_be.Data
                     new OrderExperience()
                     {
                         OrderExperienceId = Guid.Parse("30f7aa04-aa62-41bc-99a7-9729a455d0a8"),
-                        ExperienceId = Guid.Parse("E25B1044-5049-4CA9-954C-DB76AE235862"),
+                        Title = "Escursione notturna sull'Etna",
+                        Price = 120,
+                        Discount = 0,
+                        TotalPrice = 360,
                         OrderId = Guid.Parse("1baad7eb-e2a6-45d9-bf8c-e68579cedfd6"),
                         Quantity = 3,
                     },
@@ -1495,16 +1788,267 @@ namespace Klicko_be.Data
                     new OrderExperience()
                     {
                         OrderExperienceId = Guid.Parse("f9bf51b8-0db6-4f5a-86e4-454e4bba6634"),
-                        ExperienceId = Guid.Parse("81C17E89-5BC3-42BB-9897-DDF27D111440"),
+                        Title = "Rafting nelle rapide del fiume Nera",
+                        Price = 85,
+                        Discount = 4.25m,
+                        TotalPrice = 81.75m,
                         OrderId = Guid.Parse("d1f55060-cb7a-4c66-b674-adda6099dde5"),
                         Quantity = 1,
                     },
                     new OrderExperience()
                     {
                         OrderExperienceId = Guid.Parse("ecc02f40-aeab-4b84-b4e9-308da99eaf22"),
-                        ExperienceId = Guid.Parse("589ACA9C-2B07-42D2-8920-C4406E5DA977"),
+                        Title = "Ferrari Driving Experience a Monza",
+                        Price = 399,
+                        Discount = 0,
+                        TotalPrice = 399,
                         OrderId = Guid.Parse("d1f55060-cb7a-4c66-b674-adda6099dde5"),
                         Quantity = 1,
+                    }
+                );
+
+            // inserimento dati nella tabella Vouchers
+            builder
+                .Entity<Voucher>()
+                .HasData(
+                    // primo ordine
+                    new Voucher()
+                    {
+                        VoucherId = Guid.Parse("fef8e669-b3b7-4ca7-90fd-270465381881"),
+                        Title = "Escursione in e-bike nei borghi del Montefeltro",
+                        CategoryId = Guid.Parse("A4049EF8-1E86-48BF-B514-3930469DDCBD"),
+                        Duration = "7 ore",
+                        Place = "Urbino, Marche",
+                        Price = 70,
+                        Organiser = "Marche Experience",
+                        IsFreeCancellable = true,
+                        VoucherCode = "34FR4R5T-FR56TY5I-DRIUE321",
+                        ReservationDate = DateTime.Parse("28/01/2025 11:00:56"),
+                        IsUsed = true,
+                        UserId = "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2",
+                        CreatedAt = DateTime.Parse("09/02/2024 11:00:56"),
+                        ExpirationDate = DateTime.Parse("09/02/2025 11:00:56"),
+                        OrderId = Guid.Parse("089b2a7e-4287-4e1c-8928-693a736db304"),
+                    },
+                    new Voucher()
+                    {
+                        VoucherId = Guid.Parse("af5e7042-c9c7-4535-b3f6-d1956eb25441"),
+                        Title = "Degustazione di vini in cantina sotterranea",
+                        CategoryId = Guid.Parse("5FDFFA0F-A615-43F2-AA15-88BC8DCEC27F"),
+                        Duration = "2 ore",
+                        Place = "Montepulciano, Toscana",
+                        Price = 75,
+                        Organiser = "Cantine Toscane",
+                        IsFreeCancellable = true,
+                        VoucherCode = "ER57HF75-RTIP39E8-WE3210PQ",
+                        ReservationDate = DateTime.Parse("17/04/2024 11:00:56"),
+                        IsUsed = true,
+                        UserId = "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2",
+                        CreatedAt = DateTime.Parse("09/02/2024 11:00:56"),
+                        ExpirationDate = DateTime.Parse("09/02/2025 11:00:56"),
+                        OrderId = Guid.Parse("089b2a7e-4287-4e1c-8928-693a736db304"),
+                    },
+                    // secondo ordine
+                    new Voucher()
+                    {
+                        VoucherId = Guid.Parse("e6ebc89b-fefb-43ab-a8e0-df2a48fbe369"),
+                        Title = "Cucina toscana nella tenuta di un castello",
+                        CategoryId = Guid.Parse("5FDFFA0F-A615-43F2-AA15-88BC8DCEC27F"),
+                        Duration = "5 ore",
+                        Place = "Chianti, Toscana",
+                        Price = 150,
+                        Organiser = "Sapori d'Italia",
+                        IsFreeCancellable = true,
+                        VoucherCode = "QW12EDCM-SX2091QS-1AZWE937",
+                        ReservationDate = DateTime.Parse("28/04/2025 11:00:56"),
+                        IsUsed = true,
+                        UserId = "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2",
+                        CreatedAt = DateTime.Parse("25/07/2024 11:00:56"),
+                        ExpirationDate = DateTime.Parse("25/07/2025 11:00:56"),
+                        OrderId = Guid.Parse("cf854aee-04c4-43ff-bb30-445daa75478a"),
+                    },
+                    new Voucher()
+                    {
+                        VoucherId = Guid.Parse("f1dfe658-59e3-4917-adf1-99a7aae42cd1"),
+                        Title = "Cucina toscana nella tenuta di un castello",
+                        CategoryId = Guid.Parse("5FDFFA0F-A615-43F2-AA15-88BC8DCEC27F"),
+                        Duration = "5 ore",
+                        Place = "Chianti, Toscana",
+                        Price = 150,
+                        Organiser = "Sapori d'Italia",
+                        IsFreeCancellable = true,
+                        VoucherCode = "SZMAPQ92-AXQW1200-QASW34FR",
+                        ReservationDate = DateTime.Parse("28/04/2025 11:00:56"),
+                        IsUsed = true,
+                        UserId = "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2",
+                        CreatedAt = DateTime.Parse("25/07/2024 11:00:56"),
+                        ExpirationDate = DateTime.Parse("25/07/2025 11:00:56"),
+                        OrderId = Guid.Parse("cf854aee-04c4-43ff-bb30-445daa75478a"),
+                    },
+                    // terzo ordine
+                    new Voucher()
+                    {
+                        VoucherId = Guid.Parse("5885d06b-8a41-4e7d-994a-9c87a7133a53"),
+                        Title = "Trekking sul sentiero degli Dei",
+                        CategoryId = Guid.Parse("BDA4EE71-AF9C-46C6-B1BF-95F178773A2F"),
+                        Duration = "6 ore",
+                        Place = "Costiera Amalfitana, Campania",
+                        Price = 65,
+                        Organiser = "Italia Escursioni",
+                        IsFreeCancellable = true,
+                        VoucherCode = "POET3512-DCF456WR-ASVCTE76",
+                        ReservationDate = DateTime.Parse("12/04/2025 11:00:56"),
+                        IsUsed = true,
+                        UserId = "698c347e-bb57-4cb4-b672-9940647f250d",
+                        CreatedAt = DateTime.Parse("12/01/2025 11:00:56"),
+                        ExpirationDate = DateTime.Parse("12/07/2025 11:00:56"),
+                        OrderId = Guid.Parse("dc2a8bdd-f6cc-4637-9104-639f0e020777"),
+                    },
+                    new Voucher()
+                    {
+                        VoucherId = Guid.Parse("0931cdc6-0031-40dd-ac09-6a6d6f18a744"),
+                        Title = "Percorso benessere in grotta termale",
+                        CategoryId = Guid.Parse("B70671A5-3989-4E7C-9CD5-C6343E09FCDE"),
+                        Duration = "3 ore",
+                        Place = "Saturnia, Toscana",
+                        Price = 95,
+                        Organiser = "Terme Naturali",
+                        IsFreeCancellable = true,
+                        VoucherCode = "234DJD37-CMZNXS23-SDER456P",
+                        ReservationDate = DateTime.Parse("28/08/2025 11:00:56"),
+                        IsUsed = true,
+                        UserId = "698c347e-bb57-4cb4-b672-9940647f250d",
+                        CreatedAt = DateTime.Parse("12/01/2025 11:00:56"),
+                        ExpirationDate = DateTime.Parse("12/01/2026 11:00:56"),
+                        OrderId = Guid.Parse("dc2a8bdd-f6cc-4637-9104-639f0e020777"),
+                    },
+                    new Voucher()
+                    {
+                        VoucherId = Guid.Parse("44f90443-8008-4cb5-87a6-074388ad37a6"),
+                        Title = "Percorso benessere in grotta termale",
+                        CategoryId = Guid.Parse("B70671A5-3989-4E7C-9CD5-C6343E09FCDE"),
+                        Duration = "3 ore",
+                        Place = "Saturnia, Toscana",
+                        Price = 95,
+                        Organiser = "Terme Naturali",
+                        IsFreeCancellable = true,
+                        VoucherCode = "A10CVD32-XCMZ12WE-CDC34509",
+                        ReservationDate = DateTime.Parse("28/08/2025 11:00:56"),
+                        IsUsed = true,
+                        UserId = "698c347e-bb57-4cb4-b672-9940647f250d",
+                        CreatedAt = DateTime.Parse("12/01/2025 11:00:56"),
+                        ExpirationDate = DateTime.Parse("12/01/2026 11:00:56"),
+                        OrderId = Guid.Parse("dc2a8bdd-f6cc-4637-9104-639f0e020777"),
+                    },
+                    new Voucher()
+                    {
+                        VoucherId = Guid.Parse("70168df0-0dd4-45db-933a-5edd4356865e"),
+                        Title = "Volo in mongolfiera al tramonto",
+                        CategoryId = Guid.Parse("DA780FCF-074E-4E0C-B0B8-1BD8E0C0FA6F"),
+                        Duration = "3 ore",
+                        Place = "Siena, Toscana",
+                        Price = 249.99m,
+                        Organiser = "Avventure Italiane",
+                        IsFreeCancellable = true,
+                        VoucherCode = "123POERT-45RT653M-CMPR503I",
+                        ReservationDate = DateTime.Parse("08/08/2025 11:00:56"),
+                        IsUsed = true,
+                        UserId = "698c347e-bb57-4cb4-b672-9940647f250d",
+                        CreatedAt = DateTime.Parse("12/01/2025 11:00:56"),
+                        ExpirationDate = DateTime.Parse("12/09/2025 11:00:56"),
+                        OrderId = Guid.Parse("dc2a8bdd-f6cc-4637-9104-639f0e020777"),
+                    },
+                    // quarto ordine
+                    new Voucher()
+                    {
+                        VoucherId = Guid.Parse("c5a9d186-ec49-4568-9a87-a5832ce2957f"),
+                        Title = "Escursione notturna sull'Etna",
+                        CategoryId = Guid.Parse("1652310E-B8F3-43E7-BD9D-287F73F939B5"),
+                        Duration = "6 ore",
+                        Place = "Catania, Sicilia",
+                        Price = 120,
+                        Organiser = "Sicilia Avventure",
+                        IsFreeCancellable = true,
+                        VoucherCode = "POWE3456-CMZXNCE5-CMV45012",
+                        ReservationDate = DateTime.Parse("21/06/2026 11:00:56"),
+                        IsUsed = true,
+                        UserId = "698c347e-bb57-4cb4-b672-9940647f250d",
+                        CreatedAt = DateTime.Parse("23/02/2025 11:00:56"),
+                        ExpirationDate = DateTime.Parse("23/02/2027 11:00:56"),
+                        OrderId = Guid.Parse("1baad7eb-e2a6-45d9-bf8c-e68579cedfd6"),
+                    },
+                    new Voucher()
+                    {
+                        VoucherId = Guid.Parse("6e12c524-e60d-4feb-8f49-29c9fd71fc21"),
+                        Title = "Escursione notturna sull'Etna",
+                        CategoryId = Guid.Parse("1652310E-B8F3-43E7-BD9D-287F73F939B5"),
+                        Duration = "6 ore",
+                        Place = "Catania, Sicilia",
+                        Price = 120,
+                        Organiser = "Sicilia Avventure",
+                        IsFreeCancellable = true,
+                        VoucherCode = "SPE46572-CXASWE12-CMNZGHD4",
+                        ReservationDate = DateTime.Parse("21/06/2026 11:00:56"),
+                        IsUsed = true,
+                        UserId = "698c347e-bb57-4cb4-b672-9940647f250d",
+                        CreatedAt = DateTime.Parse("23/02/2025 11:00:56"),
+                        ExpirationDate = DateTime.Parse("23/02/2027 11:00:56"),
+                        OrderId = Guid.Parse("1baad7eb-e2a6-45d9-bf8c-e68579cedfd6"),
+                    },
+                    new Voucher()
+                    {
+                        VoucherId = Guid.Parse("292c0ec5-a9a7-4484-8b6a-b42ae494a2c7"),
+                        Title = "Escursione notturna sull'Etna",
+                        CategoryId = Guid.Parse("1652310E-B8F3-43E7-BD9D-287F73F939B5"),
+                        Duration = "6 ore",
+                        Place = "Catania, Sicilia",
+                        Price = 120,
+                        Organiser = "Sicilia Avventure",
+                        IsFreeCancellable = true,
+                        VoucherCode = "MCNXVAST-234756DF-CGDETQ09",
+                        ReservationDate = DateTime.Parse("21/06/2026 11:00:56"),
+                        IsUsed = true,
+                        UserId = "698c347e-bb57-4cb4-b672-9940647f250d",
+                        CreatedAt = DateTime.Parse("23/02/2025 11:00:56"),
+                        ExpirationDate = DateTime.Parse("23/02/2027 11:00:56"),
+                        OrderId = Guid.Parse("1baad7eb-e2a6-45d9-bf8c-e68579cedfd6"),
+                    },
+                    // quinto ordine
+                    new Voucher()
+                    {
+                        VoucherId = Guid.Parse("bbc9cf87-e09b-4e31-9b82-6d7086c199d0"),
+                        Title = "Rafting nelle rapide del fiume Nera",
+                        CategoryId = Guid.Parse("6ACCF29D-8D1C-4EDD-B48A-C70251516B99"),
+                        Duration = "4 ore",
+                        Place = "Scheggino, Umbria",
+                        Price = 80.75m,
+                        Organiser = "Avventure Italiane",
+                        IsFreeCancellable = true,
+                        VoucherCode = "4563HDGR-CV6S7E34-VBXNAJEI",
+                        ReservationDate = DateTime.Parse("23/07/2025 11:00:56"),
+                        IsUsed = true,
+                        UserId = "698c347e-bb57-4cb4-b672-9940647f250d",
+                        CreatedAt = DateTime.Parse("28/04/2025 11:00:56"),
+                        ExpirationDate = DateTime.Parse("28/04/2026 11:00:56"),
+                        OrderId = Guid.Parse("d1f55060-cb7a-4c66-b674-adda6099dde5"),
+                    },
+                    new Voucher()
+                    {
+                        VoucherId = Guid.Parse("bb706e8b-7647-431d-ab27-99572fb64415"),
+                        Title = "Ferrari Driving Experience a Monza",
+                        CategoryId = Guid.Parse("6F3A957C-DF09-437C-BC37-F069173EABE2"),
+                        Duration = "2 ore",
+                        Place = "Monza, Lombardia",
+                        Price = 399,
+                        Organiser = "Motor Experience",
+                        IsFreeCancellable = true,
+                        VoucherCode = "QWE23CDT-VBHGDTWQ-ZSDE125E",
+                        ReservationDate = DateTime.Parse("15/07/2026 11:00:56"),
+                        IsUsed = true,
+                        UserId = "698c347e-bb57-4cb4-b672-9940647f250d",
+                        CreatedAt = DateTime.Parse("28/04/2025 11:00:56"),
+                        ExpirationDate = DateTime.Parse("28/04/2027 11:00:56"),
+                        OrderId = Guid.Parse("d1f55060-cb7a-4c66-b674-adda6099dde5"),
                     }
                 );
         }

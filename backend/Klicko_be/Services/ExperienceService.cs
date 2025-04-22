@@ -176,7 +176,7 @@ namespace Klicko_be.Services
 
                     var fileName =
                         Guid.NewGuid().ToString()
-                        + Path.GetExtension(experienceEdit.CoverImage.FileName);
+                        + Path.GetExtension(experienceEdit?.CoverImage?.FileName);
                     var uploadsPath = Path.Combine(
                         Directory.GetCurrentDirectory(),
                         "wwwroot",

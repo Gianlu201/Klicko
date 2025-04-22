@@ -14,6 +14,8 @@ const CartPage = () => {
 
   const navigate = useNavigate();
 
+  const shippingPrice = 4.99;
+
   const cartTotal = () => {
     let totalPrice = cart.experiences.reduce(
       (sum, element) => sum + element.price * element.quantity,
@@ -22,7 +24,17 @@ const CartPage = () => {
 
     // console.log(totalPrice);
 
-    return totalPrice.toFixed(2).replace('.', ',');
+    return totalPrice;
+  };
+
+  const cartTotalExperienceDiscount = () => {
+    let totalDiscount = cart.experiences.reduce(
+      (sum, element) =>
+        sum + element.price * (element.sale / 100) * element.quantity,
+      0
+    );
+
+    return totalDiscount;
   };
 
   const removeExperienceUnit = async (experienceId) => {
@@ -188,14 +200,19 @@ const CartPage = () => {
 
                     <td className='col-span-4'>
                       <p className='text-lg font-semibold text-center'>
-                        {(exp.price * exp.quantity)
+                        {(exp.price * (1 - exp.sale / 100) * exp.quantity)
                           .toFixed(2)
                           .replace('.', ',')}{' '}
                         €
                       </p>
-                      <p className='text-gray-500 text-sm font-normal'>
+                      <p className='text-gray-500 text-sm font-normal text-center'>
                         {exp.quantity} x{' '}
                         {exp.price.toFixed(2).replace('.', ',')} €
+                        {exp.sale > 0 && (
+                          <span className='text-gray-500 text-sm font-normal ms-2'>
+                            -{exp.sale}%
+                          </span>
+                        )}
                       </p>
                     </td>
 
@@ -218,18 +235,29 @@ const CartPage = () => {
             <h3 className='text-xl font-semibold mb-4'>Riepilogo ordine</h3>
             <div className='flex justify-between items-center text-gray-600 my-3'>
               <span>Subtotale ({cart.experiences.length} esperienze)</span>
-              <span>{cartTotal()} €</span>
+              <span>{cartTotal().toFixed(2).replace('.', ',')} €</span>
             </div>
             <div className='flex justify-between items-center text-gray-600 my-3'>
-              <span>Imposte</span>
-              <span>Incluse</span>
+              <span>Totale sconti</span>
+              <span>
+                {cartTotalExperienceDiscount().toFixed(2).replace('.', ',')} €
+              </span>
+            </div>
+            <div className='flex justify-between items-center text-gray-600 my-3'>
+              <span>Costo di spedizione</span>
+              <span>{shippingPrice.toFixed(2).replace('.', ',')} €</span>
             </div>
 
             <hr className='text-gray-400/30 my-3' />
 
             <div className='flex justify-between items-center text-gray-600 font-semibold my-5'>
               <span>Totale</span>
-              <span>{cartTotal()} €</span>
+              <span>
+                {(cartTotal() - cartTotalExperienceDiscount() + shippingPrice)
+                  .toFixed(2)
+                  .replace('.', ',')}{' '}
+                €
+              </span>
             </div>
 
             <Button

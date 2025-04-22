@@ -33,7 +33,7 @@ namespace Klicko_be.Services
                 var cart = await _context
                     .Carts.Include(c => c.CartExperiences)!
                     .ThenInclude(ce => ce.Experience)
-                    .ThenInclude(e => e.Category)
+                    .ThenInclude(e => e!.Category)
                     .FirstOrDefaultAsync(c => c.CartId == cartId);
 
                 return cart;

@@ -17,13 +17,20 @@ namespace Klicko_be.Models
         [Required]
         public required string State { get; set; }
 
-        [Required]
-        public required decimal TotalPrice { get; set; }
+        public decimal SubTotalPrice { get; set; }
 
         public DateTime CreatedAt { get; set; }
 
+        public decimal TotalDiscount { get; set; }
+
+        public decimal TotalPrice { get; set; }
+
+        public decimal ShippingPrice { get; set; }
+
         // navigazione
         public ICollection<OrderExperience>? OrderExperiences { get; set; }
+
+        public ICollection<Voucher>? Vouchers { get; set; }
 
         [ForeignKey(nameof(UserId))]
         public ApplicationUser? User { get; set; }

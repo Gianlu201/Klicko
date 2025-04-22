@@ -31,9 +31,8 @@ namespace Klicko_be.Services
             {
                 var orders = await _context
                     .Orders.Include(o => o.OrderExperiences)
-                    .ThenInclude(oe => oe.Experience)
-                    .ThenInclude(e => e.Category)
                     .Include(o => o.User)
+                    .Include(o => o.Vouchers)
                     .ToListAsync();
 
                 return orders;
@@ -50,9 +49,8 @@ namespace Klicko_be.Services
             {
                 var orders = await _context
                     .Orders.Include(o => o.OrderExperiences)
-                    .ThenInclude(oe => oe.Experience)
-                    .ThenInclude(e => e.Category)
                     .Include(o => o.User)
+                    .Include(o => o.Vouchers)
                     .Where(o => o.UserId == userId)
                     .ToListAsync();
 
@@ -70,9 +68,8 @@ namespace Klicko_be.Services
             {
                 var order = await _context
                     .Orders.Include(o => o.OrderExperiences)
-                    .ThenInclude(oe => oe.Experience)
-                    .ThenInclude(e => e.Category)
                     .Include(o => o.User)
+                    .Include(o => o.Vouchers)
                     .FirstOrDefaultAsync(o => o.OrderId == orderId);
 
                 return order;

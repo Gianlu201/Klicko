@@ -2,6 +2,7 @@
 using Klicko_be.DTOs.Category;
 using Klicko_be.DTOs.Experience;
 using Klicko_be.DTOs.Order;
+using Klicko_be.DTOs.OrderExperience;
 using Klicko_be.Models;
 using Klicko_be.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -49,6 +50,9 @@ namespace Klicko_be.Controllers
                         OrderNumber = o.OrderNumber,
                         UserId = o.UserId,
                         State = o.State,
+                        SubTotalPrice = o.SubTotalPrice,
+                        TotalDiscount = o.TotalDiscount,
+                        ShippingPrice = o.ShippingPrice,
                         TotalPrice = o.TotalPrice,
                         CreatedAt = o.CreatedAt,
                         User = new DTOs.Account.UserSimpleDto()
@@ -58,36 +62,18 @@ namespace Klicko_be.Controllers
                             LastName = o.User.LastName,
                             Email = o.User.Email,
                         },
-                        Experiences =
+                        OrderExperiences =
                             (o.OrderExperiences != null && o.OrderExperiences.Count > 0)
                                 ? o
-                                    .OrderExperiences.Select(oe => new ExperienceForOrdersDto()
+                                    .OrderExperiences.Select(oe => new OrderExperienceDto()
                                     {
-                                        ExperienceId = oe.Experience!.ExperienceId,
-                                        Title = oe.Experience.Title,
-                                        CategoryId = oe.Experience.CategoryId,
-                                        Duration = oe.Experience.Duration,
-                                        Place = oe.Experience.Place,
-                                        Price = oe.Experience.Price,
+                                        OrderExperienceId = oe.OrderExperienceId,
+                                        Title = oe.Title,
+                                        OrderId = oe.OrderId,
+                                        Price = oe.TotalPrice,
                                         Quantity = oe.Quantity,
-                                        DescriptionShort = oe.Experience.DescriptionShort,
-                                        MaxParticipants = oe.Experience.MaxParticipants,
-                                        Organiser = oe.Experience.Organiser,
-                                        CoverImage = oe.Experience.CoverImage,
-                                        ValidityInMonths = oe.Experience.ValidityInMonths,
-                                        Category =
-                                            oe.Experience.Category != null
-                                                ? new CategorySimpleDto()
-                                                {
-                                                    CategoryId = oe.Experience.Category.CategoryId,
-                                                    Name = oe.Experience.Category.Name,
-                                                    Description = oe.Experience
-                                                        .Category
-                                                        .Description,
-                                                    Image = oe.Experience.Category.Image,
-                                                    Icon = oe.Experience.Category.Icon,
-                                                }
-                                                : null,
+                                        Discount = oe.Discount,
+                                        TotalPrice = oe.TotalPrice,
                                     })
                                     .ToList()
                                 : null,
@@ -137,6 +123,9 @@ namespace Klicko_be.Controllers
                         OrderNumber = o.OrderNumber,
                         UserId = o.UserId,
                         State = o.State,
+                        SubTotalPrice = o.SubTotalPrice,
+                        TotalDiscount = o.TotalDiscount,
+                        ShippingPrice = o.ShippingPrice,
                         TotalPrice = o.TotalPrice,
                         CreatedAt = o.CreatedAt,
                         User = new DTOs.Account.UserSimpleDto()
@@ -146,36 +135,18 @@ namespace Klicko_be.Controllers
                             LastName = o.User.LastName,
                             Email = o.User.Email,
                         },
-                        Experiences =
+                        OrderExperiences =
                             (o.OrderExperiences != null && o.OrderExperiences.Count > 0)
                                 ? o
-                                    .OrderExperiences.Select(oe => new ExperienceForOrdersDto()
+                                    .OrderExperiences.Select(oe => new OrderExperienceDto()
                                     {
-                                        ExperienceId = oe.Experience!.ExperienceId,
-                                        Title = oe.Experience.Title,
-                                        CategoryId = oe.Experience.CategoryId,
-                                        Duration = oe.Experience.Duration,
-                                        Place = oe.Experience.Place,
-                                        Price = oe.Experience.Price,
+                                        OrderExperienceId = oe.OrderExperienceId,
+                                        Title = oe.Title,
+                                        OrderId = oe.OrderId,
+                                        Price = oe.TotalPrice,
                                         Quantity = oe.Quantity,
-                                        DescriptionShort = oe.Experience.DescriptionShort,
-                                        MaxParticipants = oe.Experience.MaxParticipants,
-                                        Organiser = oe.Experience.Organiser,
-                                        CoverImage = oe.Experience.CoverImage,
-                                        ValidityInMonths = oe.Experience.ValidityInMonths,
-                                        Category =
-                                            oe.Experience.Category != null
-                                                ? new CategorySimpleDto()
-                                                {
-                                                    CategoryId = oe.Experience.Category.CategoryId,
-                                                    Name = oe.Experience.Category.Name,
-                                                    Description = oe.Experience
-                                                        .Category
-                                                        .Description,
-                                                    Image = oe.Experience.Category.Image,
-                                                    Icon = oe.Experience.Category.Icon,
-                                                }
-                                                : null,
+                                        Discount = oe.Discount,
+                                        TotalPrice = oe.TotalPrice,
                                     })
                                     .ToList()
                                 : null,
@@ -217,6 +188,9 @@ namespace Klicko_be.Controllers
                     OrderNumber = order.OrderNumber,
                     UserId = order.UserId,
                     State = order.State,
+                    SubTotalPrice = order.SubTotalPrice,
+                    TotalDiscount = order.TotalDiscount,
+                    ShippingPrice = order.ShippingPrice,
                     TotalPrice = order.TotalPrice,
                     CreatedAt = order.CreatedAt,
                     User = new DTOs.Account.UserSimpleDto()
@@ -226,34 +200,18 @@ namespace Klicko_be.Controllers
                         LastName = order.User.LastName,
                         Email = order.User.Email,
                     },
-                    Experiences =
+                    OrderExperiences =
                         (order.OrderExperiences != null && order.OrderExperiences.Count > 0)
                             ? order
-                                .OrderExperiences.Select(oe => new ExperienceForOrdersDto()
+                                .OrderExperiences.Select(oe => new OrderExperienceDto()
                                 {
-                                    ExperienceId = oe.Experience!.ExperienceId,
-                                    Title = oe.Experience.Title,
-                                    CategoryId = oe.Experience.CategoryId,
-                                    Duration = oe.Experience.Duration,
-                                    Place = oe.Experience.Place,
-                                    Price = oe.Experience.Price,
+                                    OrderExperienceId = oe.OrderExperienceId,
+                                    Title = oe.Title,
+                                    OrderId = oe.OrderId,
+                                    Price = oe.TotalPrice,
                                     Quantity = oe.Quantity,
-                                    DescriptionShort = oe.Experience.DescriptionShort,
-                                    MaxParticipants = oe.Experience.MaxParticipants,
-                                    Organiser = oe.Experience.Organiser,
-                                    CoverImage = oe.Experience.CoverImage,
-                                    ValidityInMonths = oe.Experience.ValidityInMonths,
-                                    Category =
-                                        oe.Experience.Category != null
-                                            ? new CategorySimpleDto()
-                                            {
-                                                CategoryId = oe.Experience.Category.CategoryId,
-                                                Name = oe.Experience.Category.Name,
-                                                Description = oe.Experience.Category.Description,
-                                                Image = oe.Experience.Category.Image,
-                                                Icon = oe.Experience.Category.Icon,
-                                            }
-                                            : null,
+                                    Discount = oe.Discount,
+                                    TotalPrice = oe.TotalPrice,
                                 })
                                 .ToList()
                             : null,
@@ -292,30 +250,87 @@ namespace Klicko_be.Controllers
                     );
                 }
 
-                var totalPrice = createOrder.OrderExperiences.Sum(oe =>
+                var subTotalPrice = createOrder.OrderExperiences.Sum(oe =>
                     experiences.First(e => e.ExperienceId == oe.ExperienceId).Price * oe.Quantity
                 );
 
                 var newOrderId = Guid.NewGuid();
 
-                // TODO associare automaticamente l'id dell'utente che fa l'ordine
                 var newOrder = new Order()
                 {
                     OrderId = newOrderId,
                     UserId = userId,
                     State = "In attesa",
-                    TotalPrice = totalPrice,
+                    SubTotalPrice = subTotalPrice,
+                    ShippingPrice = 4.99m,
                     CreatedAt = DateTime.UtcNow,
                     OrderExperiences = createOrder
-                        .OrderExperiences.Select(oe => new OrderExperience()
+                        .OrderExperiences.Select(oe =>
                         {
-                            OrderExperienceId = Guid.NewGuid(),
-                            ExperienceId = oe.ExperienceId,
-                            OrderId = newOrderId,
-                            Quantity = oe.Quantity,
+                            var exp = experiences.FirstOrDefault(e =>
+                                e.ExperienceId == oe.ExperienceId
+                            );
+
+                            if (exp == null)
+                            {
+                                throw new Exception("Experience not found!");
+                            }
+
+                            return new OrderExperience()
+                            {
+                                OrderExperienceId = Guid.NewGuid(),
+                                Title = exp.Title,
+                                OrderId = newOrderId,
+                                Price = exp.Price,
+                                Discount = exp.Price * (exp.Sale / 100),
+                                TotalPrice = exp.Price * (1 - exp.Sale / 100) * oe.Quantity,
+                                Quantity = oe.Quantity,
+                            };
                         })
                         .ToList(),
                 };
+
+                List<Voucher> vouchersList = [];
+
+                foreach (var oe in createOrder.OrderExperiences)
+                {
+                    var exp = experiences.FirstOrDefault(e => e.ExperienceId == oe.ExperienceId);
+                    if (exp == null)
+                    {
+                        throw new Exception("Experience not found!");
+                    }
+                    for (int i = 0; i < oe.Quantity; i++)
+                    {
+                        vouchersList.Add(
+                            new Voucher()
+                            {
+                                VoucherId = Guid.NewGuid(),
+                                Title = exp.Title,
+                                CategoryId = exp.CategoryId,
+                                Duration = exp.Duration,
+                                Place = exp.Place,
+                                Price = exp.Price,
+                                Organiser = exp.Organiser,
+                                IsFreeCancellable = exp.IsFreeCancellable,
+                                ReservationDate = null,
+                                IsUsed = false,
+                                ExpirationDate = DateTime.UtcNow.AddMonths(exp.ValidityInMonths),
+                                UserId = null,
+                                CreatedAt = DateTime.UtcNow,
+                                OrderId = newOrderId,
+                            }
+                        );
+                    }
+                }
+
+                newOrder.Vouchers = vouchersList;
+
+                newOrder.TotalDiscount = newOrder.OrderExperiences.Sum(oe =>
+                    oe.Discount * oe.Quantity
+                );
+
+                newOrder.TotalPrice =
+                    newOrder.SubTotalPrice - newOrder.TotalDiscount + newOrder.ShippingPrice;
 
                 var result = await _orderService.CreateOrderAsync(newOrder);
 

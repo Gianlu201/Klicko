@@ -19,5 +19,7 @@ namespace Klicko_be.Models
 
         // navigazione
         public ICollection<Experience>? Experiences { get; set; }
+
+        public ICollection<Voucher>? Vouchers { get; set; }
     }
 }
