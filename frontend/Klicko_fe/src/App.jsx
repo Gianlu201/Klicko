@@ -18,11 +18,16 @@ import AboutPage from './pages/AboutPage';
 import OrderConfirmationPage from './pages/OrderConfirmationPage';
 import CouponPage from './pages/CouponPage';
 import VouchersPage from './pages/VouchersPage';
+import TermsAndConditionsPage from './pages/TermsAndConditionsPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import ContactPage from './pages/ContactPage';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
     <>
       <BrowserRouter>
+        <ScrollToTop />
         <div className='min-h-screen flex flex-col'>
           <Navbar />
           <div className='grow'>
@@ -55,6 +60,12 @@ function App() {
               />
               <Route path='/coupons' element={<CouponPage />} />
               <Route path='/redeemVoucher' element={<VouchersPage />} />
+              <Route
+                path='/termsAndConditions'
+                element={<TermsAndConditionsPage />}
+              />
+              <Route path='/privacyPolicy' element={<PrivacyPolicyPage />} />
+              <Route path='/contact' element={<ContactPage />} />
 
               <Route path='*' element={<NotFoundPage />} />
             </Routes>

@@ -55,17 +55,17 @@ const Footer = () => {
     {
       id: 3,
       title: 'Termini e Condizioni',
-      url: '/#',
+      url: '/termsAndConditions',
     },
     {
       id: 4,
       title: 'Privacy Policy',
-      url: '/#',
+      url: '/privacyPolicy',
     },
     {
       id: 5,
       title: 'Contattaci',
-      url: '/#',
+      url: '/contact',
     },
   ];
 
@@ -137,10 +137,10 @@ const Footer = () => {
       <div className='mx-6 flex justify-between max-w-7xl lg:mx-auto border-t border-t-gray-600 text-gray-500 pt-4'>
         <p>&copy; 2025 Klicko. Tutti i diritti riservati</p>
         <div className='flex gap-2'>
-          <Link to='/#' className='hover:text-white'>
+          <Link to='/termsAndConditions' className='hover:text-white'>
             Termini
           </Link>
-          <Link to='/#' className='hover:text-white'>
+          <Link to='/privacyPolicy' className='hover:text-white'>
             Privacy
           </Link>
           <Link to='/#' className='hover:text-white'>
