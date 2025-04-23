@@ -32,6 +32,8 @@ const OrdersComponent = () => {
       if (response.ok) {
         const data = await response.json();
 
+        console.log(data);
+
         setOrders(data.orders);
         setFilteredOrders(data.orders);
         // dispatch(emptyCart());
@@ -191,6 +193,7 @@ const OrdersComponent = () => {
             <div>
               {filteredOrders.map((order) => (
                 <Accordion
+                  key={order.orderId}
                   intestation={
                     <div className='flex justify-between items-center'>
                       <div className='grow flex gap-2'>
@@ -230,20 +233,23 @@ const OrdersComponent = () => {
                     </thead>
 
                     <tbody>
-                      {order.experiences.length > 0 &&
-                        order.experiences.map((exp) => (
-                          <tr className='grid grid-cols-12 text-sm border-b border-gray-400/40 p-3 hover:bg-gray-100'>
+                      {order.orderExperiences.length > 0 &&
+                        order.orderExperiences.map((orderExp) => (
+                          <tr
+                            key={orderExp.orderExperienceId}
+                            className='grid grid-cols-12 text-sm border-b border-gray-400/40 p-3 hover:bg-gray-100'
+                          >
                             <td className='col-span-7 text-start'>
-                              {exp.title}
+                              {orderExp.title}
                             </td>
                             <td className='col-span-1 text-center'>
-                              {exp.quantity}
+                              {orderExp.quantity}
                             </td>
                             <td className='col-span-2 text-end'>
-                              {exp.price.toFixed(2).replace('.', ',')} €
+                              {orderExp.price.toFixed(2).replace('.', ',')} €
                             </td>
                             <td className='col-span-2 text-end'>
-                              {(exp.price * exp.quantity)
+                              {(orderExp.price * orderExp.quantity)
                                 .toFixed(2)
                                 .replace('.', ',')}{' '}
                               €

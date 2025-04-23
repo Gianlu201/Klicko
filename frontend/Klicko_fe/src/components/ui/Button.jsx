@@ -17,6 +17,8 @@ const Button = ({
     secondary: 'bg-secondary hover:bg-secondary/90 text-white rounded-xl', //#F97415
     success: 'bg-green-500 hover:bg-green-600 text-white rounded-xl',
     danger: 'bg-red-500 hover:bg-red-600 text-white rounded-xl',
+    'danger-outline':
+      'bg-transparent text-red-500 border border-red-500 rounded-xl hover:bg-red-100 hover:text-black',
     warning: 'bg-yellow-500 hover:bg-yellow-600 text-white rounded-xl',
     outline:
       'bg-background border border-black/30 text-black hover:bg-primary/80 hover:border-black/0 rounded-xl',
