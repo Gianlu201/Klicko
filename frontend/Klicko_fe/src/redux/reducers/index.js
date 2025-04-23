@@ -2,17 +2,17 @@ import {
   CART_MODIFIED,
   EMPTY_CART,
   LOGOUT,
-  SET_CATEGORIES_LIST,
-  SET_EXPERIENCES_LIST,
   SET_LOGGED_USER,
+  SET_SEARCHBAR_QUERY,
+  SET_SELECTED_CATEGORY,
   SET_USER_CART,
 } from '../actions';
 
 const initialState = {
   profile: {},
   cart: {},
-  experiences: [],
-  categories: [],
+  searchBarQuery: '',
+  selectedCategoryName: '',
 };
 
 const mainReducer = (state = initialState, action) => {
@@ -54,16 +54,16 @@ const mainReducer = (state = initialState, action) => {
         },
       };
 
-    case SET_EXPERIENCES_LIST:
+    case SET_SEARCHBAR_QUERY:
       return {
         ...state,
-        experiences: action.payload,
+        searchBarQuery: action.payload,
       };
 
-    case SET_CATEGORIES_LIST:
+    case SET_SELECTED_CATEGORY:
       return {
         ...state,
-        categories: action.payload,
+        selectedCategoryName: action.payload,
       };
 
     default:

@@ -240,7 +240,7 @@ const CartPage = () => {
             <div className='flex justify-between items-center text-gray-600 my-3'>
               <span>Totale sconti</span>
               <span>
-                {cartTotalExperienceDiscount().toFixed(2).replace('.', ',')} €
+                -{cartTotalExperienceDiscount().toFixed(2).replace('.', ',')} €
               </span>
             </div>
             <div className='flex justify-between items-center text-gray-600 my-3'>

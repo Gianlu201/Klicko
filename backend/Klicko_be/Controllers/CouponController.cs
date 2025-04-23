@@ -92,6 +92,50 @@ namespace Klicko_be.Controllers
             }
         }
 
+        [HttpGet("getCouponByCode/{couponCode}")]
+        [Authorize(Roles = "Admin, Seller, User")]
+        public async Task<IActionResult> GetAllCoupons(string couponCode)
+        {
+            try
+            {
+                var user = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+                var userId = user!.Value;
+
+                var coupon = await _couponService.GetCouponByCodeAsync(userId, couponCode);
+
+                if (coupon == null)
+                {
+                    return NotFound(
+                        new GetCouponResponseDto() { Message = "No coupons found.", Coupon = null }
+                    );
+                }
+
+                var couponDto = new CouponDto()
+                {
+                    CouponId = coupon.CouponId,
+                    PercentualSaleAmount = coupon.PercentualSaleAmount,
+                    FixedSaleAmount = coupon.FixedSaleAmount,
+                    IsActive = coupon.IsActive,
+                    IsUniversal = coupon.IsUniversal,
+                    ExpireDate = coupon.ExpireDate,
+                    Code = coupon.Code,
+                    MinimumAmount = coupon.MinimumAmount,
+                    UserId = coupon.UserId,
+                };
+
+                return Ok(
+                    new GetCouponResponseDto() { Message = "Coupon found!", Coupon = couponDto }
+                );
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(
+                    StatusCodes.Status500InternalServerError,
+                    $"Internal server error: {ex.Message}"
+                );
+            }
+        }
+
         [HttpPost("createCoupon")]
         [Authorize(Roles = "Admin, Seller, User")]
         public async Task<IActionResult> CreateCoupon(CreateCouponRequestDto createCoupon)

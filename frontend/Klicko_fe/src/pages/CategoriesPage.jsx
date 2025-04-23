@@ -1,4 +1,3 @@
-// import React, { useEffect, useState } from 'react';
 import Button from '../components/ui/Button';
 import airImg from '/assets/images/categories/categoryAir.avif';
 import waterImg from '/assets/images/categories/categoryWater.avif';
@@ -13,40 +12,20 @@ import {
   UtensilsCrossed,
   Waves,
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setSelectedCategoryName } from '../redux/actions';
 
 const CategoriesPage = () => {
-  // const [categories, setCategories] = useState([]);
+  const dispatch = useDispatch();
 
-  // const getAllCategories = async () => {
-  //   try {
-  //     const response = await fetch('https://localhost:7235/api/Category', {
-  //       method: 'GET',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //     });
-  //     if (response.ok) {
-  //       const data = await response.json();
-  //       console.log(data);
-
-  //       setCategories(data.categories);
-  //     } else {
-  //       throw new Error('Errore nel recupero dei dati!');
-  //     }
-  //   } catch {
-  //     console.log('Error');
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getAllCategories();
-  // }, []);
+  const navigate = useNavigate();
 
   const categories = [
     {
       id: 1,
       title: 'Esperienze in Aria',
+      categoryName: 'Aria',
       description:
         'Vola alto e scopri la libertà con le nostre esperienze aeree. Dal paracadutismo, al volo in mongolfiera, fino ai giri in elicottero, ti offriamo prospettive uniche sul mondo.',
       image: airImg,
@@ -57,6 +36,7 @@ const CategoriesPage = () => {
     {
       id: 2,
       title: 'Esperienze in Acqua',
+      categoryName: 'Acqua',
       description:
         'Immergiti in avventure acquatiche indimenticabili. Dal rafting adrenalinico, allo snorkeling in acque cristalline, fino alle crociere di lusso, il mondo acquatico ti aspetta.',
       image: waterImg,
@@ -67,6 +47,7 @@ const CategoriesPage = () => {
     {
       id: 3,
       title: 'Trekking e Avventure',
+      categoryName: 'Trekking',
       description: `Esplora la maestosità della natura con i nostri percorsi di trekking e avventure terrestri. Dalle escursioni in montagna alle esplorazioni in grotta, vivi l'emozione della scoperta.`,
       image: mountainImg,
       icon: (
@@ -76,6 +57,7 @@ const CategoriesPage = () => {
     {
       id: 4,
       title: 'Sport Motoristici',
+      categoryName: 'Motori',
       description: `Senti l'adrenalina scorrere con le nostre esperienze motoristiche. Dai giri in pista con supercar, alle escursioni in quad, fino alle gare di kart, velocità ed emozione garantite.`,
       image: motorsImg,
       icon: (
@@ -85,6 +67,7 @@ const CategoriesPage = () => {
     {
       id: 5,
       title: 'Esperienze Gastronomiche',
+      categoryName: 'Gastronomia',
       description:
         'Delizia i tuoi sensi con viaggi culinari indimenticabili. Dalle degustazioni di vini, ai corsi di cucina con chef stellati, fino ai tour gastronomici locali, scopri sapori autentici.',
       image: gastronomyImg,
@@ -133,6 +116,10 @@ const CategoriesPage = () => {
                 variant='primary'
                 icon={<ArrowRight className='w-4 h-4' />}
                 iconPosition='right'
+                onClick={() => {
+                  dispatch(setSelectedCategoryName(category.categoryName));
+                  navigate('/experiences');
+                }}
               >
                 Scopri di più
               </Button>

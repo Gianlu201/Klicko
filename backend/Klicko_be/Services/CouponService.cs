@@ -37,6 +37,23 @@ namespace Klicko_be.Services
             }
         }
 
+        public async Task<Coupon?> GetCouponByCodeAsync(string userId, string couponCode)
+        {
+            try
+            {
+                return await _context.Coupons.FirstOrDefaultAsync(c =>
+                    c.Code == couponCode
+                    && c.UserId == userId
+                    && c.IsActive
+                    && (c.ExpireDate > DateTime.UtcNow || c.ExpireDate == null)
+                );
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         public async Task<bool> CreateCouponAsync(Coupon newCoupon)
         {
             try

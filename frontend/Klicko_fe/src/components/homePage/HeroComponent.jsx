@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '../ui/Button';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setSearchBarQuery } from '../../redux/actions';
 
 const HeroComponent = () => {
+  const [searchBar, setSearchBar] = useState('');
+
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
   return (
     <section
       className='relative h-[550px] bg-cover bg-center'
@@ -26,8 +35,20 @@ const HeroComponent = () => {
             type='text'
             placeholder='Cerca la tua prossima avventura…'
             className='flex-grow px-4 py-3 rounded-xl text-gray-800 focus:outline-none bg-white'
+            value={searchBar}
+            onChange={(e) => {
+              setSearchBar(e.target.value);
+            }}
           />
-          <Button variant='secondary'>Cerca</Button>
+          <Button
+            variant='secondary'
+            onClick={() => {
+              dispatch(setSearchBarQuery(searchBar));
+              navigate('/experiences');
+            }}
+          >
+            Cerca
+          </Button>
         </div>
       </div>
     </section>

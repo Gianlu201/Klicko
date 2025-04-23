@@ -1,7 +1,14 @@
 import { Compass, Droplet, Trophy, Wind } from 'lucide-react';
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { setSelectedCategoryName } from '../../redux/actions';
 
 const CategoriesComponent = () => {
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
   const categories = [
     {
       id: 0,
@@ -17,7 +24,7 @@ const CategoriesComponent = () => {
     },
     {
       id: 2,
-      name: 'Terra',
+      name: 'Trekking',
       description: 'Escursioni e avventure in luoghi spettacolari',
       icon: <Compass className='inline-block text-green-600' />,
     },
@@ -44,6 +51,11 @@ const CategoriesComponent = () => {
           <div
             key={category.id}
             className='text-center bg-white py-6 px-12 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-3 duration-700 ease-in-out cursor-pointer'
+            onClick={() => {
+              // setSelectedCategory(category.name);
+              dispatch(setSelectedCategoryName(category.name));
+              navigate('/experiences');
+            }}
           >
             {category.icon}
             <h4 className='text-lg font-semibold my-3'>{category.name}</h4>

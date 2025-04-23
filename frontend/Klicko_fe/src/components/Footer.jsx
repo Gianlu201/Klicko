@@ -2,33 +2,42 @@ import { Facebook, Instagram, Twitter } from 'lucide-react';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from './ui/Button';
+import { useDispatch } from 'react-redux';
+import { setSelectedCategoryName } from '../redux/actions';
 
 const Footer = () => {
+  const dispatch = useDispatch();
+
   const experienceOptions = [
     {
       id: 1,
       title: 'Esperienze in Aria',
-      url: '/#',
+      name: 'Aria',
+      url: '/experiences',
     },
     {
       id: 2,
       title: 'Esperienze in Acqua',
-      url: '/#',
+      name: 'Acqua',
+      url: '/experiences',
     },
     {
       id: 3,
       title: 'Trekking e Avventure',
-      url: '/#',
+      name: 'Trekking',
+      url: '/experiences',
     },
     {
       id: 4,
       title: 'Sport e Motori',
-      url: '/#',
+      name: 'Motori',
+      url: '/experiences',
     },
     {
       id: 5,
       title: 'Gastronomia',
-      url: '/#',
+      name: 'Gastronomia',
+      url: '/experiences',
     },
   ];
 
@@ -81,7 +90,13 @@ const Footer = () => {
           <ul>
             {experienceOptions.map((exp) => (
               <li key={exp.id} className='mb-2'>
-                <Link to={exp.url} className='hover:text-white'>
+                <Link
+                  to={exp.url}
+                  className='hover:text-white'
+                  onClick={() => {
+                    dispatch(setSelectedCategoryName(exp.name));
+                  }}
+                >
                   {exp.title}
                 </Link>
               </li>

@@ -1,8 +1,13 @@
 import React from 'react';
 import Button from '../ui/Button';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const CatComponent = () => {
+  const profile = useSelector((state) => {
+    return state.profile;
+  });
+
   return (
     <div
       className='relative h-[300px] bg-cover bg-center'
@@ -24,9 +29,12 @@ const CatComponent = () => {
           <Button variant='cat'>
             <Link to='/experiences'>Esplora le esperienze</Link>
           </Button>
-          <Button variant='secondary'>
-            <Link to='/register'>Registrati ora</Link>
-          </Button>
+
+          {profile.email === undefined && (
+            <Button variant='secondary'>
+              <Link to='/register'>Registrati ora</Link>
+            </Button>
+          )}
         </div>
       </div>
     </div>
