@@ -33,6 +33,7 @@ namespace Klicko_be.Services
                 var vouchers = await _context
                     .Vouchers.Include(v => v.Category)
                     .Include(v => v.User)
+                    .OrderByDescending(v => v.ReservationDate)
                     .Where(v => v.UserId == userId)
                     .ToListAsync();
 
@@ -71,7 +72,36 @@ namespace Klicko_be.Services
             try
             {
                 var voucher = await _context.Vouchers.FindAsync(voucherId);
+
                 if (voucher == null)
+                {
+                    return false;
+                }
+
+                // controlla se il voucher ha una data di prenotazione e se presente verifica
+                // che manchino almeno 2 giorni, altrimenti non fa modificare il voucher
+
+                // se invece il voucer non ha una data di prenotazione, allora vuol dire che
+                // deve essere riscattato e controlla che la data di prenotazione sia ad
+                // almeno 7 giorni a partire dal giorno della riscossione e che la prenotazione
+                // ricada all'interno del tempo di validità del voucer
+
+                // se la richiesta di modifica ricade nelle limitazioni imposte allora rende
+                // impossibile modificare il voucher
+
+                if (
+                    voucher.ReservationDate != null
+                    && voucher.ReservationDate <= DateTime.Today.AddDays(2)
+                )
+                {
+                    return false;
+                }
+                else if (
+                    voucher.ReservationDate == null
+                    && editVoucher.ReservationDate != null
+                    && editVoucher.ReservationDate <= DateTime.Today.AddDays(7)
+                    && editVoucher.ReservationDate > voucher.ExpirationDate
+                )
                 {
                     return false;
                 }

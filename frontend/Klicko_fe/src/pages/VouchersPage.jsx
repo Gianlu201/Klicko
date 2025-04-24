@@ -182,6 +182,10 @@ const VouchersPage = () => {
     return day !== 0 && day !== 6;
   };
 
+  const checkIsPassed = (reservationDate) => {
+    return new Date(reservationDate) - new Date() <= 0;
+  };
+
   useEffect(() => {
     getUserVouchers();
   }, []);
@@ -329,11 +333,19 @@ const VouchersPage = () => {
                   {redeemedVouchers.map((voucher) => (
                     <div
                       key={voucher.voucherId}
-                      className='border border-gray-400/40 rounded-lg p-6 mb-6 mx-1'
+                      className={`border border-gray-400/40 rounded-lg p-6 mb-6 mx-1 ${
+                        checkIsPassed(voucher.reservationDate) && 'bg-gray-100'
+                      }`}
                     >
                       <div className='flex justify-between items-center mb-1.5'>
                         <h4 className='text-xl'>{voucher.title}</h4>
-                        <span className='text-xs text-gray-600 bg-green-200 rounded-md px-2 py-1 '>
+                        <span
+                          className={`text-xs  rounded-md px-2 py-1 ${
+                            checkIsPassed(voucher.reservationDate)
+                              ? 'bg-gray-300'
+                              : 'bg-green-200 text-gray-600'
+                          }`}
+                        >
                           Prenotato
                         </span>
                       </div>
@@ -352,15 +364,18 @@ const VouchersPage = () => {
                         )}
                       </p>
 
-                      <Button
-                        variant='danger-outline'
-                        size='sm'
-                        onClick={() => {
-                          removeReservation(voucher.voucherId);
-                        }}
-                      >
-                        Cancella prenotazione
-                      </Button>
+                      {new Date(voucher.reservationDate) - Date.now() >
+                        2 * 24 * 60 * 60 * 1000 && (
+                        <Button
+                          variant='danger-outline'
+                          size='sm'
+                          onClick={() => {
+                            removeReservation(voucher.voucherId);
+                          }}
+                        >
+                          Cancella prenotazione
+                        </Button>
+                      )}
                     </div>
                   ))}
                 </div>
