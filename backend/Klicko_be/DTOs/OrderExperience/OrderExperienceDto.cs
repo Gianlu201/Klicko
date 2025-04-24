@@ -16,11 +16,9 @@ namespace Klicko_be.DTOs.OrderExperience
         public required Guid OrderId { get; set; }
 
         [Required]
-        public required decimal Price { get; set; }
+        public required decimal UnitPrice { get; set; }
 
-        public int Quantity { get; set; } = 1;
-
-        public decimal Discount { get; set; } = 0;
+        public int Quantity { get; set; }
 
         [Required]
         public decimal TotalPrice { get; set; }

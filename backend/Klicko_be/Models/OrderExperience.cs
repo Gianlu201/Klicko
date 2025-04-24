@@ -21,19 +21,14 @@ namespace Klicko_be.Models
             1000000,
             ErrorMessage = "Price must be greater than 0.01 and less than 1000000"
         )]
-        public required decimal Price { get; set; }
+        public required decimal UnitPrice { get; set; }
 
         public int Quantity { get; set; }
-
-        public decimal Discount { get; set; }
 
         public decimal TotalPrice { get; set; }
 
         // navigazione
         [ForeignKey(nameof(OrderId))]
         public Order? Order { get; set; }
-
-        //[ForeignKey(nameof(ExperienceId))]
-        //public Experience? Experience { get; set; }
     }
 }

@@ -77,9 +77,8 @@ namespace Klicko_be.Controllers
                                         OrderExperienceId = oe.OrderExperienceId,
                                         Title = oe.Title,
                                         OrderId = oe.OrderId,
-                                        Price = oe.TotalPrice,
+                                        UnitPrice = oe.TotalPrice,
                                         Quantity = oe.Quantity,
-                                        Discount = oe.Discount,
                                         TotalPrice = oe.TotalPrice,
                                     })
                                     .ToList()
@@ -150,9 +149,8 @@ namespace Klicko_be.Controllers
                                         OrderExperienceId = oe.OrderExperienceId,
                                         Title = oe.Title,
                                         OrderId = oe.OrderId,
-                                        Price = oe.TotalPrice,
+                                        UnitPrice = oe.TotalPrice,
                                         Quantity = oe.Quantity,
-                                        Discount = oe.Discount,
                                         TotalPrice = oe.TotalPrice,
                                     })
                                     .ToList()
@@ -215,9 +213,8 @@ namespace Klicko_be.Controllers
                                     OrderExperienceId = oe.OrderExperienceId,
                                     Title = oe.Title,
                                     OrderId = oe.OrderId,
-                                    Price = oe.TotalPrice,
+                                    UnitPrice = oe.TotalPrice,
                                     Quantity = oe.Quantity,
-                                    Discount = oe.Discount,
                                     TotalPrice = oe.TotalPrice,
                                 })
                                 .ToList()
@@ -316,7 +313,7 @@ namespace Klicko_be.Controllers
                                 OrderExperienceId = Guid.NewGuid(),
                                 Title = exp.Title,
                                 OrderId = newOrderId,
-                                Price = ((exp.Price * (100 - exp.Sale)) / 100),
+                                UnitPrice = ((exp.Price * (100 - exp.Sale)) / 100),
                                 TotalPrice = ((exp.Price * (100 - exp.Sale)) / 100) * oe.Quantity,
                                 Quantity = oe.Quantity,
                             };

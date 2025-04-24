@@ -246,12 +246,11 @@ const OrdersComponent = () => {
                               {orderExp.quantity}
                             </td>
                             <td className='col-span-2 text-end'>
-                              {orderExp.price.toFixed(2).replace('.', ',')} €
+                              {orderExp.unitPrice.toFixed(2).replace('.', ',')}{' '}
+                              €
                             </td>
                             <td className='col-span-2 text-end'>
-                              {(orderExp.price * orderExp.quantity)
-                                .toFixed(2)
-                                .replace('.', ',')}{' '}
+                              {orderExp.totalPrice.toFixed(2).replace('.', ',')}{' '}
                               €
                             </td>
                           </tr>

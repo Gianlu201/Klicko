@@ -139,14 +139,6 @@ namespace Klicko_be.Data
                 .HasForeignKey(v => v.CategoryId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            // correlazione Voucher a ApplicationUser
-            builder
-                .Entity<Voucher>()
-                .HasOne(v => v.User)
-                .WithMany(u => u.Vouchers)
-                .HasForeignKey(v => v.UserId)
-                .OnDelete(DeleteBehavior.NoAction);
-
             // correlazione Voucher a Order
             builder
                 .Entity<Voucher>()
@@ -460,8 +452,8 @@ namespace Klicko_be.Data
                     {
                         FidelityCardId = Guid.Parse("12d1edf2-df86-41d9-8594-0b1859e31932"),
                         CardNumber = "454432678900",
-                        Points = 303,
-                        AvailablePoints = 303,
+                        Points = 445,
+                        AvailablePoints = 445,
                         UserId = "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2",
                     },
                     // Mario Rossi
@@ -469,8 +461,8 @@ namespace Klicko_be.Data
                     {
                         FidelityCardId = Guid.Parse("ac983a29-21fe-4d7b-822f-2de328dee367"),
                         CardNumber = "123245783911",
-                        Points = 1250,
-                        AvailablePoints = 1250,
+                        Points = 1331,
+                        AvailablePoints = 1331,
                         UserId = "698c347e-bb57-4cb4-b672-9940647f250d",
                     },
                     // Luigi Bianchi
@@ -1674,8 +1666,8 @@ namespace Klicko_be.Data
                         OrderNumber = 123452,
                         UserId = "698c347e-bb57-4cb4-b672-9940647f250d",
                         State = "Completato",
-                        SubTotalPrice = 504.99m,
-                        TotalDiscount = 12.50m,
+                        SubTotalPrice = 492.49m,
+                        TotalDiscount = 0,
                         ShippingPrice = 4.99m,
                         TotalPrice = 497.48m,
                         CreatedAt = DateTime.Parse("12/01/2025 11:00:56"),
@@ -1698,8 +1690,8 @@ namespace Klicko_be.Data
                         OrderNumber = 123454,
                         UserId = "698c347e-bb57-4cb4-b672-9940647f250d",
                         State = "In attesa",
-                        SubTotalPrice = 484,
-                        TotalDiscount = 4.25m,
+                        SubTotalPrice = 479.75m,
+                        TotalDiscount = 0,
                         ShippingPrice = 4.99m,
                         TotalPrice = 484.74m,
                         CreatedAt = DateTime.Parse("28/04/2025 11:00:56"),
@@ -1715,8 +1707,7 @@ namespace Klicko_be.Data
                     {
                         OrderExperienceId = Guid.Parse("39ea9347-0d41-403a-81c5-baf69a343eb9"),
                         Title = "Escursione in e-bike nei borghi del Montefeltro",
-                        Price = 70,
-                        Discount = 0,
+                        UnitPrice = 70,
                         TotalPrice = 70,
                         OrderId = Guid.Parse("089b2a7e-4287-4e1c-8928-693a736db304"),
                         Quantity = 1,
@@ -1725,8 +1716,7 @@ namespace Klicko_be.Data
                     {
                         OrderExperienceId = Guid.Parse("5bf549b8-f233-4be8-ba39-57377100149e"),
                         Title = "Degustazione di vini in cantina sotterranea",
-                        Price = 75,
-                        Discount = 0,
+                        UnitPrice = 75,
                         TotalPrice = 75,
                         OrderId = Guid.Parse("089b2a7e-4287-4e1c-8928-693a736db304"),
                         Quantity = 1,
@@ -1736,8 +1726,7 @@ namespace Klicko_be.Data
                     {
                         OrderExperienceId = Guid.Parse("99c4650a-29ea-4ae9-8c4c-26d86c4497ca"),
                         Title = "Cucina toscana nella tenuta di un castello",
-                        Price = 150,
-                        Discount = 0,
+                        UnitPrice = 150,
                         TotalPrice = 300,
                         OrderId = Guid.Parse("cf854aee-04c4-43ff-bb30-445daa75478a"),
                         Quantity = 2,
@@ -1747,8 +1736,7 @@ namespace Klicko_be.Data
                     {
                         OrderExperienceId = Guid.Parse("78bcc835-6806-4d4e-b6fb-1a8cbe0bc1c1"),
                         Title = "Trekking sul sentiero degli Dei",
-                        Price = 65,
-                        Discount = 0,
+                        UnitPrice = 65,
                         TotalPrice = 65,
                         OrderId = Guid.Parse("dc2a8bdd-f6cc-4637-9104-639f0e020777"),
                         Quantity = 1,
@@ -1757,8 +1745,7 @@ namespace Klicko_be.Data
                     {
                         OrderExperienceId = Guid.Parse("471f10b0-b759-49c0-b34d-aec032d163f6"),
                         Title = "Percorso benessere in grotta termale",
-                        Price = 95,
-                        Discount = 0,
+                        UnitPrice = 95,
                         TotalPrice = 190,
                         OrderId = Guid.Parse("dc2a8bdd-f6cc-4637-9104-639f0e020777"),
                         Quantity = 2,
@@ -1767,8 +1754,7 @@ namespace Klicko_be.Data
                     {
                         OrderExperienceId = Guid.Parse("f1b25b3f-60b1-4103-a342-76ef3346f1ed"),
                         Title = "Volo in mongolfiera al tramonto",
-                        Price = 249.99m,
-                        Discount = 12.5m,
+                        UnitPrice = 237.49m,
                         TotalPrice = 237.49m,
                         OrderId = Guid.Parse("dc2a8bdd-f6cc-4637-9104-639f0e020777"),
                         Quantity = 1,
@@ -1778,8 +1764,7 @@ namespace Klicko_be.Data
                     {
                         OrderExperienceId = Guid.Parse("30f7aa04-aa62-41bc-99a7-9729a455d0a8"),
                         Title = "Escursione notturna sull'Etna",
-                        Price = 120,
-                        Discount = 0,
+                        UnitPrice = 120,
                         TotalPrice = 360,
                         OrderId = Guid.Parse("1baad7eb-e2a6-45d9-bf8c-e68579cedfd6"),
                         Quantity = 3,
@@ -1789,9 +1774,8 @@ namespace Klicko_be.Data
                     {
                         OrderExperienceId = Guid.Parse("f9bf51b8-0db6-4f5a-86e4-454e4bba6634"),
                         Title = "Rafting nelle rapide del fiume Nera",
-                        Price = 85,
-                        Discount = 4.25m,
-                        TotalPrice = 81.75m,
+                        UnitPrice = 80.75m,
+                        TotalPrice = 80.75m,
                         OrderId = Guid.Parse("d1f55060-cb7a-4c66-b674-adda6099dde5"),
                         Quantity = 1,
                     },
@@ -1799,8 +1783,7 @@ namespace Klicko_be.Data
                     {
                         OrderExperienceId = Guid.Parse("ecc02f40-aeab-4b84-b4e9-308da99eaf22"),
                         Title = "Ferrari Driving Experience a Monza",
-                        Price = 399,
-                        Discount = 0,
+                        UnitPrice = 399,
                         TotalPrice = 399,
                         OrderId = Guid.Parse("d1f55060-cb7a-4c66-b674-adda6099dde5"),
                         Quantity = 1,
