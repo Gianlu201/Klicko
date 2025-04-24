@@ -23,6 +23,7 @@ export const setLoggedUser = (data) => {
     surname: tokenDecoded.surname,
     id: tokenDecoded.nameidentifier,
     cartId: tokenDecoded.cartId,
+    fidelityCardId: tokenDecoded.fidelityCardId,
     iss: tokenDecoded.iss,
     expiration: data.expires,
   };

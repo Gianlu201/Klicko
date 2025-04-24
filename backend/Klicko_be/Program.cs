@@ -132,6 +132,7 @@ builder.Services.AddScoped<OrderService>();
 builder.Services.AddScoped<CartService>();
 builder.Services.AddScoped<CouponService>();
 builder.Services.AddScoped<VoucherService>();
+builder.Services.AddScoped<FidelityCardService>();
 
 var app = builder.Build();
 
