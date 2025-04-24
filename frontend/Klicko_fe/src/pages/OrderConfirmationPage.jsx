@@ -1,4 +1,4 @@
-import { CircleCheck, Clock, Package } from 'lucide-react';
+import { CircleCheck, Clock, Package, Ticket } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import Button from '../components/ui/Button';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -70,6 +70,27 @@ const OrderConfirmationPage = () => {
             Grazie per il tuo acquisto! Riceverai presto una email di conferma
             con i dettagli del tuo ordine.
           </p>
+
+          <div className='border border-gray-400/30 rounded-lg px-5 py-4 mb-8'>
+            <h3 className='flex justify-start items-center gap-2 text-primary text-xl font-semibold mb-4'>
+              <Ticket />I tuoi Voucher
+            </h3>
+
+            <p className='text-gray-500 mb-3'>
+              Ti abbiamo inviato i seguenti codici voucher che riceverai anche
+              in formato fisico a casa tua:
+            </p>
+
+            {order.vouchers.map((voucher) => (
+              <div
+                key={voucher.voucherId}
+                className='bg-gray-100 rounded-lg px-4 py-3 mb-4'
+              >
+                <p className='text-lg font-medium mb-1'>{voucher.title}</p>
+                <p className='text-sm italic'>{voucher.voucherCode}</p>
+              </div>
+            ))}
+          </div>
 
           <div className='grid grid-cols-3 items-center mb-8'>
             <div className='text-primary'>

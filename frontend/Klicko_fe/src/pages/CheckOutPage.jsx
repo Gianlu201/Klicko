@@ -23,7 +23,8 @@ const CheckOutPage = () => {
 
   const getSubTotalPrice = () => {
     return cart.experiences.reduce(
-      (sum, element) => sum + element.price * element.quantity,
+      (sum, element) =>
+        sum + element.price * (1 - element.sale / 100) * element.quantity,
       0
     );
   };
@@ -112,6 +113,10 @@ const CheckOutPage = () => {
         orderExperiences: experiencesList,
       };
 
+      if (selectedCoupon !== null) {
+        body.couponId = selectedCoupon.couponId;
+      }
+
       const response = await fetch(`https://localhost:7235/api/Order`, {
         method: 'POST',
         headers: {
@@ -158,7 +163,10 @@ const CheckOutPage = () => {
                   </div>
                   <div className='col-span-8 text-sm'>{exp.title}</div>
                   <div className='col-span-3 text-end font-semibold'>
-                    {exp.price.toFixed(2).replace('.', ',')} €
+                    {(exp.price * (1 - exp.sale / 100))
+                      .toFixed(2)
+                      .replace('.', ',')}{' '}
+                    €
                   </div>
                 </div>
               ))}

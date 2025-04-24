@@ -30,7 +30,7 @@ namespace Klicko_be.Models
         [Required]
         public required bool IsFreeCancellable { get; set; }
 
-        public string VoucherCode { get; set; }
+        public string? VoucherCode { get; set; }
 
         public DateTime? ReservationDate { get; set; }
 

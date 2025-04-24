@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Klicko_be.DTOs.Account;
 using Klicko_be.DTOs.OrderExperience;
+using Klicko_be.DTOs.Voucher;
 
 namespace Klicko_be.DTOs.Order
 {
@@ -39,5 +40,7 @@ namespace Klicko_be.DTOs.Order
 
         [ForeignKey(nameof(UserId))]
         public UserSimpleDto? User { get; set; }
+
+        public ICollection<VoucherDto>? Vouchers { get; set; }
     }
 }

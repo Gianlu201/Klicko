@@ -8,10 +8,6 @@ namespace Klicko_be.DTOs.Order
         [Required]
         public required List<ExperiencesListOrderExperienceDto>? OrderExperiences { get; set; }
 
-        [Required]
-        public int? PercentualSaleAmount { get; set; }
-
-        [Required]
-        public int? FixedSaleAmount { get; set; }
+        public Guid? CouponId { get; set; }
     }
 }

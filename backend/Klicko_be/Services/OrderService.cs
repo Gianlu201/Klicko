@@ -70,6 +70,7 @@ namespace Klicko_be.Services
                     .Orders.Include(o => o.OrderExperiences)
                     .Include(o => o.User)
                     .Include(o => o.Vouchers)
+                    .ThenInclude(v => v.Category)
                     .FirstOrDefaultAsync(o => o.OrderId == orderId);
 
                 return order;

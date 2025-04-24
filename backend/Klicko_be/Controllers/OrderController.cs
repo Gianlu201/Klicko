@@ -3,6 +3,7 @@ using Klicko_be.DTOs.Category;
 using Klicko_be.DTOs.Experience;
 using Klicko_be.DTOs.Order;
 using Klicko_be.DTOs.OrderExperience;
+using Klicko_be.DTOs.Voucher;
 using Klicko_be.Models;
 using Klicko_be.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -17,11 +18,17 @@ namespace Klicko_be.Controllers
     {
         private readonly OrderService _orderService;
         private readonly ExperienceService _experienceService;
+        private readonly CouponService _couponService;
 
-        public OrderController(OrderService orderService, ExperienceService experienceService)
+        public OrderController(
+            OrderService orderService,
+            ExperienceService experienceService,
+            CouponService couponService
+        )
         {
             _orderService = orderService;
             _experienceService = experienceService;
+            _couponService = couponService;
         }
 
         [HttpGet]
@@ -215,6 +222,37 @@ namespace Klicko_be.Controllers
                                 })
                                 .ToList()
                             : null,
+                    Vouchers =
+                        (order.Vouchers != null && order.Vouchers.Count > 0)
+                            ? order
+                                .Vouchers.Select(voucher => new VoucherDto()
+                                {
+                                    VoucherId = voucher.VoucherId,
+                                    Title = voucher.Title,
+                                    CategoryId = voucher.CategoryId,
+                                    Duration = voucher.Duration,
+                                    Place = voucher.Place,
+                                    Price = voucher.Price,
+                                    Organiser = voucher.Organiser,
+                                    IsFreeCancellable = voucher.IsFreeCancellable,
+                                    VoucherCode = voucher.VoucherCode,
+                                    ReservationDate = voucher.ReservationDate,
+                                    IsUsed = voucher.IsUsed,
+                                    CreatedAt = voucher.CreatedAt,
+                                    Category =
+                                        voucher.Category != null
+                                            ? (
+                                                new CategorySimpleDto()
+                                                {
+                                                    CategoryId = voucher.Category.CategoryId,
+                                                    Description = voucher.Category.Description,
+                                                    Name = voucher.Category.Name,
+                                                }
+                                            )
+                                            : null,
+                                })
+                                .ToList()
+                            : null,
                 };
 
                 return Ok(
@@ -233,6 +271,8 @@ namespace Klicko_be.Controllers
         {
             try
             {
+                decimal shippingPrice = 4.99m;
+
                 var user = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
                 var userId = user!.Value;
 
@@ -250,10 +290,6 @@ namespace Klicko_be.Controllers
                     );
                 }
 
-                var subTotalPrice = createOrder.OrderExperiences.Sum(oe =>
-                    experiences.First(e => e.ExperienceId == oe.ExperienceId).Price * oe.Quantity
-                );
-
                 var newOrderId = Guid.NewGuid();
 
                 var newOrder = new Order()
@@ -261,8 +297,7 @@ namespace Klicko_be.Controllers
                     OrderId = newOrderId,
                     UserId = userId,
                     State = "In attesa",
-                    SubTotalPrice = subTotalPrice,
-                    ShippingPrice = 4.99m,
+                    ShippingPrice = shippingPrice,
                     CreatedAt = DateTime.UtcNow,
                     OrderExperiences = createOrder
                         .OrderExperiences.Select(oe =>
@@ -281,9 +316,8 @@ namespace Klicko_be.Controllers
                                 OrderExperienceId = Guid.NewGuid(),
                                 Title = exp.Title,
                                 OrderId = newOrderId,
-                                Price = exp.Price,
-                                Discount = exp.Price * (exp.Sale / 100),
-                                TotalPrice = exp.Price * (1 - exp.Sale / 100) * oe.Quantity,
+                                Price = ((exp.Price * (100 - exp.Sale)) / 100),
+                                TotalPrice = ((exp.Price * (100 - exp.Sale)) / 100) * oe.Quantity,
                                 Quantity = oe.Quantity,
                             };
                         })
@@ -309,7 +343,7 @@ namespace Klicko_be.Controllers
                                 CategoryId = exp.CategoryId,
                                 Duration = exp.Duration,
                                 Place = exp.Place,
-                                Price = exp.Price,
+                                Price = exp.Price * (1 - exp.Sale / 100),
                                 Organiser = exp.Organiser,
                                 IsFreeCancellable = exp.IsFreeCancellable,
                                 ReservationDate = null,
@@ -325,14 +359,49 @@ namespace Klicko_be.Controllers
 
                 newOrder.Vouchers = vouchersList;
 
-                newOrder.TotalDiscount = newOrder.OrderExperiences.Sum(oe =>
-                    oe.Discount * oe.Quantity
-                );
+                newOrder.SubTotalPrice = newOrder.OrderExperiences.Sum(oe => oe.TotalPrice);
+
+                if (createOrder.CouponId != null)
+                {
+                    var couponUsed = await _couponService.GetCouponByIdAsync(
+                        (Guid)createOrder.CouponId
+                    );
+
+                    if (couponUsed != null)
+                    {
+                        if (couponUsed.PercentualSaleAmount > 0)
+                        {
+                            newOrder.TotalDiscount =
+                                newOrder.SubTotalPrice
+                                * (1 - couponUsed.PercentualSaleAmount / 100);
+                        }
+                        else if (couponUsed.FixedSaleAmount > 0)
+                        {
+                            newOrder.TotalDiscount = (decimal)couponUsed.FixedSaleAmount;
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("Coupon not found!");
+                    }
+                }
+                else
+                {
+                    newOrder.TotalDiscount = 0;
+                }
 
                 newOrder.TotalPrice =
                     newOrder.SubTotalPrice - newOrder.TotalDiscount + newOrder.ShippingPrice;
 
                 var result = await _orderService.CreateOrderAsync(newOrder);
+
+                if (result && createOrder.CouponId != null)
+                {
+                    await _couponService.UpdateCouponValidityByIdAsync(
+                        (Guid)createOrder.CouponId,
+                        false
+                    );
+                }
 
                 return result
                     ? Ok(

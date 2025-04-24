@@ -23,9 +23,9 @@ namespace Klicko_be.Models
         )]
         public required decimal Price { get; set; }
 
-        public int Quantity { get; set; } = 1;
+        public int Quantity { get; set; }
 
-        public decimal Discount { get; set; } = 0;
+        public decimal Discount { get; set; }
 
         public decimal TotalPrice { get; set; }
 
