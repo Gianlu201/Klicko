@@ -15,7 +15,11 @@ const CheckOutPage = () => {
     return state.cart;
   });
 
-  const shippingPrice = 4.99;
+  const fidelityCard = useSelector((state) => {
+    return state.fidelityCard;
+  });
+
+  const shippingPrice = fidelityCard?.points >= 1000 ? 0 : 4.99;
 
   const navigate = useNavigate();
 

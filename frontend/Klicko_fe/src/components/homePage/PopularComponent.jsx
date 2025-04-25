@@ -51,7 +51,7 @@ const PopularComponent = () => {
             </Button>
           </div>
 
-          <div className='columns-4 gap-8 mt-10'>
+          <div className='grid grid-cols-4 gap-8 mt-10'>
             {popularExperiences.map((experience) => {
               return (
                 <ExperienceCard

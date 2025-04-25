@@ -19,16 +19,19 @@ namespace Klicko_be.Controllers
         private readonly OrderService _orderService;
         private readonly ExperienceService _experienceService;
         private readonly CouponService _couponService;
+        private readonly FidelityCardService _fidelityCardService;
 
         public OrderController(
             OrderService orderService,
             ExperienceService experienceService,
-            CouponService couponService
+            CouponService couponService,
+            FidelityCardService fidelityCardService
         )
         {
             _orderService = orderService;
             _experienceService = experienceService;
             _couponService = couponService;
+            _fidelityCardService = fidelityCardService;
         }
 
         [HttpGet]
@@ -273,6 +276,27 @@ namespace Klicko_be.Controllers
                 var user = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
                 var userId = user!.Value;
 
+                if (userId == null)
+                {
+                    return BadRequest(
+                        new CreateOrderResponseDto() { Message = "Something went wrong!" }
+                    );
+                }
+
+                var fidelityCard = await _fidelityCardService.GetFidelityCardByUserIdAsync(userId);
+
+                if (fidelityCard == null)
+                {
+                    return BadRequest(
+                        new CreateOrderResponseDto() { Message = "Something went wrong!" }
+                    );
+                }
+
+                if (fidelityCard.Points >= 1000)
+                {
+                    shippingPrice = 0;
+                }
+
                 var experiences = await _experienceService.GetAllExperienceAsync();
 
                 if (experiences == null)
@@ -400,17 +424,23 @@ namespace Klicko_be.Controllers
                     );
                 }
 
-                return result
-                    ? Ok(
-                        new CreateOrderResponseDto()
-                        {
-                            Message = "Order created successfully!",
-                            OrderId = newOrderId,
-                        }
-                    )
-                    : BadRequest(
+                if (!result)
+                {
+                    return BadRequest(
                         new CreateOrderResponseDto() { Message = "Something went wrong!" }
                     );
+                }
+
+                fidelityCard.Points += (int)newOrder.SubTotalPrice;
+                fidelityCard.AvailablePoints += (int)newOrder.SubTotalPrice;
+
+                return Ok(
+                    new CreateOrderResponseDto()
+                    {
+                        Message = "Order created successfully!",
+                        OrderId = newOrderId,
+                    }
+                );
             }
             catch (Exception ex)
             {

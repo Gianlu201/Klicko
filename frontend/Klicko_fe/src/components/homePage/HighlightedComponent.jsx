@@ -51,7 +51,7 @@ const HighlightedComponent = () => {
             </Button>
           </div>
 
-          <div className='columns-3 gap-8 mt-10'>
+          <div className='grid grid-cols-3 gap-8 mt-10'>
             {highlightedExperiences.map((experience) => {
               return (
                 <ExperienceCard

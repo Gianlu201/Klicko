@@ -26,14 +26,14 @@ const LoyaltyPage = () => {
       id: 2,
       name: 'Argento',
       minPoints: 500,
-      benefit: 'Spedizione gratuita',
+      benefit: 'Accesso anticipato a nuove esperienze',
       mainBgColor: 'bg-slate-400',
     },
     {
       id: 3,
       name: 'Oro',
       minPoints: 1000,
-      benefit: 'Accesso anticipato a nuove esperienze',
+      benefit: 'Spedizione gratuita',
       mainBgColor: 'bg-amber-400',
     },
     {

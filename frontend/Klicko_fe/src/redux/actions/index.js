@@ -8,6 +8,7 @@ export const CART_MODIFIED = 'CART_MODIFIED';
 export const EMPTY_CART = 'EMPTY_CART';
 export const SET_SEARCHBAR_QUERY = 'SET_SEARCHBAR_QUERY';
 export const SET_SELECTED_CATEGORY = 'SET_SELECTED_CATEGORY';
+export const SET_USER_FIDELITY_CARD = 'SET_USER_FIDELITY_CARD';
 
 export const setLoggedUser = (data) => {
   const tokenDecoded = jwtDecode(data.token);
@@ -86,6 +87,20 @@ export const emptyCart = () => ({
 export const cartModified = () => ({
   type: CART_MODIFIED,
 });
+
+export const setUserFidelityCard = (fidelityCard) => {
+  const userCard = {
+    fidelityCardId: fidelityCard.fidelityCardId,
+    cardNumber: fidelityCard.cardNumber,
+    points: fidelityCard.points,
+    availablePoints: fidelityCard.availablePoints,
+  };
+
+  return {
+    type: SET_USER_FIDELITY_CARD,
+    payload: userCard,
+  };
+};
 
 export const setSearchBarQuery = (query) => ({
   type: SET_SEARCHBAR_QUERY,

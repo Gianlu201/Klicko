@@ -46,7 +46,7 @@ const CategoriesComponent = () => {
         Scopri la nostra selezione di esperienze uniche suddivise per categoria
       </p>
 
-      <div className='columns-4 gap-10 max-w-7xl mx-auto'>
+      <div className='grid grid-cols-4 gap-10 max-w-7xl mx-auto'>
         {categories.map((category) => (
           <div
             key={category.id}

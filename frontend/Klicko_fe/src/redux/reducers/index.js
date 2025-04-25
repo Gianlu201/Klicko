@@ -6,11 +6,13 @@ import {
   SET_SEARCHBAR_QUERY,
   SET_SELECTED_CATEGORY,
   SET_USER_CART,
+  SET_USER_FIDELITY_CARD,
 } from '../actions';
 
 const initialState = {
   profile: {},
   cart: {},
+  fidelityCard: {},
   searchBarQuery: '',
   selectedCategoryName: '',
 };
@@ -52,6 +54,12 @@ const mainReducer = (state = initialState, action) => {
           ...state.cart,
           modified: true,
         },
+      };
+
+    case SET_USER_FIDELITY_CARD:
+      return {
+        ...state,
+        fidelityCard: action.payload,
       };
 
     case SET_SEARCHBAR_QUERY:

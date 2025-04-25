@@ -10,11 +10,15 @@ const CartPage = () => {
     return state.cart;
   });
 
+  const fidelityCard = useSelector((state) => {
+    return state.fidelityCard;
+  });
+
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
-  const shippingPrice = 4.99;
+  const shippingPrice = fidelityCard?.points >= 1000 ? 0 : 4.99;
 
   const cartTotal = () => {
     let totalPrice = cart.experiences.reduce(
@@ -243,6 +247,7 @@ const CartPage = () => {
                 -{cartTotalExperienceDiscount().toFixed(2).replace('.', ',')} €
               </span>
             </div>
+
             <div className='flex justify-between items-center text-gray-600 my-3'>
               <span>Costo di spedizione</span>
               <span>{shippingPrice.toFixed(2).replace('.', ',')} €</span>

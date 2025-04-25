@@ -12,7 +12,12 @@ import {
 import Button from './ui/Button';
 import { Dropdown, DropdownItem, DropdownHeader } from './ui/DropdownMenu';
 import { useDispatch, useSelector } from 'react-redux';
-import { logoutUser, setLoggedUser, setUserCart } from '../redux/actions';
+import {
+  logoutUser,
+  setLoggedUser,
+  setUserCart,
+  setUserFidelityCard,
+} from '../redux/actions';
 import { jwtDecode } from 'jwt-decode';
 
 const Navbar = () => {
@@ -41,6 +46,7 @@ const Navbar = () => {
       login(data);
 
       getUserCart(data);
+      getUserFidelityCard(data);
     } else {
       console.log('Effettuo logout automatico');
       logout();
@@ -82,6 +88,35 @@ const Navbar = () => {
       }
     } catch {
       console.log('Error');
+    }
+  };
+
+  const getUserFidelityCard = async (data) => {
+    try {
+      const tokenDecoded = jwtDecode(data.token);
+
+      console.log(tokenDecoded);
+
+      const response = await fetch(
+        `https://localhost:7235/api/FidelityCard/getFidelityCardById/${tokenDecoded.fidelityCardId}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+
+        // console.log(data.cart);
+
+        dispatch(setUserFidelityCard(data.fidelityCard));
+      } else {
+        throw new Error('Errore nel recupero dei dati!');
+      }
+    } catch {
+      console.log('Errore');
     }
   };
 

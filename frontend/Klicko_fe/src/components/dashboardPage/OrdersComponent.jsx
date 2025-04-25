@@ -258,12 +258,26 @@ const OrdersComponent = () => {
                     </tbody>
 
                     <tfoot>
-                      <tr className='grid grid-cols-12 text-gray-500 font-medium p-3 hover:bg-gray-100'>
-                        <td className='col-span-10 text-end'>Spedizione:</td>
-                        <td className='col-span-2 text-end'>
-                          {order.shippingPrice.toFixed(2).replace('.', ',')} €
-                        </td>
-                      </tr>
+                      {order.shippingPrice > 0 && (
+                        <tr className='grid grid-cols-12 text-gray-500 font-medium p-3 hover:bg-gray-100'>
+                          <td className='col-span-10 text-end'>Spedizione:</td>
+                          <td className='col-span-2 text-end'>
+                            {order.shippingPrice.toFixed(2).replace('.', ',')} €
+                          </td>
+                        </tr>
+                      )}
+
+                      {order.totalDiscount > 0 && (
+                        <tr className='grid grid-cols-12 text-gray-500 font-medium p-3 hover:bg-gray-100'>
+                          <td className='col-span-10 text-end'>
+                            Sconto coupon:
+                          </td>
+                          <td className='col-span-2 text-end'>
+                            -{order.totalDiscount.toFixed(2).replace('.', ',')}{' '}
+                            €
+                          </td>
+                        </tr>
+                      )}
 
                       <tr className='grid grid-cols-12 font-bold p-3 hover:bg-gray-100'>
                         <td className='col-span-10 text-end'>Totale ordine:</td>

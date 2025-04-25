@@ -8,7 +8,7 @@ const ExperienceCard = ({ experience, className }) => {
       {experience && (
         <Link
           to={`/experiences/detail/${experience.experienceId}`}
-          className={`block relative rounded-lg overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-3 duration-700 ease-in-out cursor-pointer ${
+          className={`block relative rounded-lg overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-3 duration-700 ease-in-out cursor-pointer pb-8 ${
             className ? className : ' '
           }`}
         >
@@ -62,11 +62,14 @@ const ExperienceCard = ({ experience, className }) => {
                 )}
               </div>
             </div>
-            <h4 className='text-lg font-semibold mb-2'>{experience.title}</h4>
-            <p className='text-gray-600 text-[0.9rem]'>
+            <h4 className='text-lg font-semibold mb-2 line-clamp-2'>
+              {experience.title}
+            </h4>
+            <p className='text-gray-600 text-[0.9rem] line-clamp-2'>
               {experience.descriptionShort}
             </p>
-            <div className='flex justify-between my-2'>
+
+            <div className='absolute start-4 bottom-2 flex justify-between my-2'>
               <span className='flex items-center gap-1 text-sm text-gray-500'>
                 <MapPin className='h-4 w-4' />
                 {experience.place}

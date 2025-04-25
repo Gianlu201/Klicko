@@ -435,7 +435,7 @@ const DashboardAdmin = () => {
                       </thead>
 
                       <tbody>
-                        {selectedOrder.experiences.map((exp) => (
+                        {selectedOrder.orderExperiences.map((exp) => (
                           <tr
                             key={exp.experienceId}
                             className='grid grid-cols-12 text-sm border-b border-gray-400/40 p-3 hover:bg-gray-100'
@@ -447,19 +447,45 @@ const DashboardAdmin = () => {
                               {exp.quantity}
                             </td>
                             <td className='col-span-2 text-end'>
-                              {exp.price.toFixed(2).replace('.', ',')} €
+                              {exp.unitPrice.toFixed(2).replace('.', ',')} €
                             </td>
                             <td className='col-span-2 text-end'>
-                              {(exp.price * exp.quantity)
-                                .toFixed(2)
-                                .replace('.', ',')}{' '}
-                              €
+                              {exp.totalPrice.toFixed(2).replace('.', ',')} €
                             </td>
                           </tr>
                         ))}
                       </tbody>
 
                       <tfoot>
+                        {selectedOrder.shippingPrice > 0 && (
+                          <tr className='grid grid-cols-12 text-gray-500 font-medium p-3 hover:bg-gray-100'>
+                            <td className='col-span-10 text-end'>
+                              Spedizione:
+                            </td>
+                            <td className='col-span-2 text-end'>
+                              {selectedOrder.shippingPrice
+                                .toFixed(2)
+                                .replace('.', ',')}{' '}
+                              €
+                            </td>
+                          </tr>
+                        )}
+
+                        {selectedOrder.totalDiscount > 0 && (
+                          <tr className='grid grid-cols-12 text-gray-500 font-medium p-3 hover:bg-gray-100'>
+                            <td className='col-span-10 text-end'>
+                              Sconto coupon:
+                            </td>
+                            <td className='col-span-2 text-end'>
+                              -
+                              {selectedOrder.totalDiscount
+                                .toFixed(2)
+                                .replace('.', ',')}{' '}
+                              €
+                            </td>
+                          </tr>
+                        )}
+
                         <tr className='grid grid-cols-12 font-bold p-3 hover:bg-gray-100'>
                           <td className='col-span-10 text-end'>
                             Totale ordine

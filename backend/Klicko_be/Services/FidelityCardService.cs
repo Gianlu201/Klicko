@@ -41,6 +41,20 @@ namespace Klicko_be.Services
             }
         }
 
+        public async Task<FidelityCard?> GetFidelityCardByUserIdAsync(string userId)
+        {
+            try
+            {
+                return await _context
+                    .FidelityCards.Include(f => f.User)
+                    .FirstOrDefaultAsync(f => f.UserId == userId);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         public async Task<bool> ConvertPointsInCouponAsync(int points, Guid cardId)
         {
             try
