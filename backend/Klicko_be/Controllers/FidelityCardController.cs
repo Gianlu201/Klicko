@@ -1,6 +1,7 @@
 ﻿using Klicko_be.DTOs.Account;
 using Klicko_be.DTOs.FidelityCard;
 using Klicko_be.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -61,6 +62,40 @@ namespace Klicko_be.Controllers
                         FidelityCard = fidelityCardDto,
                     }
                 );
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(
+                    StatusCodes.Status500InternalServerError,
+                    new { Message = ex.Message }
+                );
+            }
+        }
+
+        [HttpPut("convertPointsInCoupon/{cardId:guid}")]
+        [Authorize(Roles = "Admin, Seller, User")]
+        public async Task<IActionResult> ConvertPointsInCoupon(
+            [FromBody] ConvertPointsRequestDto requestDto,
+            Guid cardId
+        )
+        {
+            try
+            {
+                var result = await _fidelityCardService.ConvertPointsInCouponAsync(
+                    requestDto.Points,
+                    cardId
+                );
+
+                return result
+                    ? Ok(
+                        new ConvertPointsResponseDto()
+                        {
+                            Message = "Points converted successfully!",
+                        }
+                    )
+                    : BadRequest(
+                        new ConvertPointsResponseDto() { Message = "Something went wrong!" }
+                    );
             }
             catch (Exception ex)
             {

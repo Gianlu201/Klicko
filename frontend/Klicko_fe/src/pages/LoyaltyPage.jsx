@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom';
 const LoyaltyPage = () => {
   const [fidelityCard, setFidelityCard] = useState(null);
   const [fidelityLevel, setFidelityLevel] = useState(null);
+  const [nextLevel, setNextLevel] = useState(null);
+  const [style, setStyle] = useState({});
 
   const profile = useSelector((state) => state.profile);
 
@@ -95,6 +97,46 @@ const LoyaltyPage = () => {
 
         setFidelityCard(data.fidelityCard);
         getFidelityLevel(data.fidelityCard.points);
+      } else {
+        throw new Error();
+      }
+    } catch {
+      console.log('Error');
+    }
+  };
+
+  const convertPoints = async (points) => {
+    try {
+      let tokenObj = localStorage.getItem('klicko_token');
+
+      if (!tokenObj) {
+        navigate('/login');
+      }
+
+      let token = JSON.parse(tokenObj).token;
+
+      const body = {
+        points: points,
+      };
+
+      const response = await fetch(
+        `https://localhost:7235/api/FidelityCard/convertPointsInCoupon/${profile.fidelityCardId}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(body),
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+
+        console.log(data);
+        getFidelityCard();
+      } else {
+        throw new Error();
       }
     } catch {
       console.log('Error');
@@ -116,6 +158,54 @@ const LoyaltyPage = () => {
     });
 
     setFidelityLevel(level);
+    getNextLevel(level);
+  };
+
+  const getNextLevel = (currentLevel) => {
+    var index = levels.indexOf(currentLevel);
+
+    if (index === levels.length - 1) {
+      setNextLevel(null);
+    } else {
+      setNextLevel(levels[index + 1]);
+    }
+  };
+
+  const calculateNextLevelPointsPercent = () => {
+    const gap = nextLevel.minPoints - fidelityLevel.minPoints;
+
+    const levelPoints = fidelityCard.points - fidelityLevel.minPoints;
+
+    let percentual = Math.floor((levelPoints * 100) / gap);
+
+    const result = 'w-[' + percentual + '%]';
+    console.log(result);
+    return result;
+  };
+
+  const handleMouseMove = (e) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = -(y - centerY) / 10;
+    const rotateY = (x - centerX) / 10;
+
+    setStyle({
+      transform: `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
+      transition: 'transform 0.1s ease',
+    });
+  };
+
+  const handleMouseLeave = () => {
+    setStyle({
+      transform: `perspective(600px) rotateX(0deg) rotateY(0deg)`,
+      transition: 'transform 0.3s ease',
+    });
   };
 
   useEffect(() => {
@@ -137,6 +227,9 @@ const LoyaltyPage = () => {
           {/* fidelity card */}
           <div
             className={`bg-gradient-to-br from-black/30 to-transparent text-white rounded-xl p-6 shadow-lg max-w-md w-full mx-auto mb-10 ${fidelityLevel.mainBgColor}`}
+            style={style}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
           >
             <div className='flex justify-between items-start mb-6'>
               <div>
@@ -202,12 +295,23 @@ const LoyaltyPage = () => {
                 </div>
 
                 {/* barra range livello */}
-                <div className='py-1.5 rounded-full bg-primary mb-4'></div>
+                {nextLevel !== null && (
+                  <div className='rounded-full w-full mb-4 bg-slate-300/80 overflow-hidden'>
+                    <div
+                      className={`py-1.5 bg-green-400 ${
+                        nextLevel !== null && calculateNextLevelPointsPercent()
+                      }`}
+                    ></div>
+                  </div>
+                )}
 
-                <p className='text-sm text-gray-500 font-medium'>
-                  Ti mancano 1471 punti per raggiungere il livello Platino e
-                  ottenere nuovi benefici
-                </p>
+                {nextLevel !== null && (
+                  <p className='text-sm text-gray-500 font-medium'>
+                    Ti mancano {nextLevel.minPoints - fidelityCard.points} punti
+                    per raggiungere il livello {nextLevel.name} e ottenere nuovi
+                    benefici
+                  </p>
+                )}
               </div>
 
               <div className='grid grid-cols-2 gap-6 mb-2'>
@@ -219,15 +323,20 @@ const LoyaltyPage = () => {
                     {fidelityCard.availablePoints}
                   </p>
                 </div>
-                <div className='bg-gray-100 rounded-xl p-6'>
-                  <h4 className='text-xl font-semibold mb-2'>
-                    Prossimo livello tra
-                  </h4>
-                  <p className='text-xl font-black'>1471</p>
-                </div>
+                {nextLevel !== null && (
+                  <div className='bg-gray-100 rounded-xl p-6'>
+                    <h4 className='text-xl font-semibold mb-2'>
+                      Prossimo livello tra
+                    </h4>
+                    <p className='text-xl font-black'>
+                      {nextLevel.minPoints - fidelityCard.points} punti
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
 
+            {/* converti punti */}
             <div className='col-span-4 bg-white border border-gray-400/30 rounded-2xl px-6 py-5 shadow'>
               <h2 className='flex justify-start items-center gap-2 text-3xl font-semibold mb-2'>
                 <Gift className='mt-1 text-primary' />
@@ -252,7 +361,22 @@ const LoyaltyPage = () => {
                       </p>
                     </div>
 
-                    <Button variant='primary'>Riscatta</Button>
+                    <Button
+                      variant='primary'
+                      disabled={
+                        fidelityCard.availablePoints < bonus.points
+                          ? true
+                          : false
+                      }
+                      onClick={
+                        fidelityCard.availablePoints > bonus.points &&
+                        (() => {
+                          convertPoints(bonus.points);
+                        })
+                      }
+                    >
+                      Riscatta
+                    </Button>
                   </div>
                 ))}
               </div>

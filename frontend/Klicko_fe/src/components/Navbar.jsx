@@ -134,6 +134,12 @@ const Navbar = () => {
           >
             Chi siamo
           </Link>
+          <Link
+            to='/loyalty'
+            className='font-medium hover:text-primary transition-colors'
+          >
+            Programma fedeltà
+          </Link>
         </nav>
 
         <div className='flex items-center space-x-4'>
