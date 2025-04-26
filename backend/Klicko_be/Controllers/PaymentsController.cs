@@ -9,12 +9,22 @@ namespace Klicko_be.Controllers
     [ApiController]
     public class PaymentsController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
+        private readonly string _stripeSecretKey;
+
+        //private readonly IConfiguration _configuration;
 
         public PaymentsController(IConfiguration configuration)
         {
-            _configuration = configuration;
-            StripeConfiguration.ApiKey = _configuration["Stripe:SecretKey"];
+            _stripeSecretKey = Environment.GetEnvironmentVariable("STRIPE_SECRET_KEY");
+
+            if (string.IsNullOrEmpty(_stripeSecretKey))
+            {
+                throw new Exception("Stripe secret key is not configured.");
+            }
+
+            //_configuration = configuration;
+            //StripeConfiguration.ApiKey = _configuration["Stripe:SecretKey"];
+            StripeConfiguration.ApiKey = _stripeSecretKey;
         }
 
         [HttpPost("create-payment-intent")]
