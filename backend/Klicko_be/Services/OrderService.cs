@@ -7,13 +7,15 @@ namespace Klicko_be.Services
     public class OrderService
     {
         private readonly ApplicationDbContext _context;
+        private readonly CartService _cartService;
 
-        public OrderService(ApplicationDbContext context)
+        public OrderService(ApplicationDbContext context, CartService cartService)
         {
             _context = context;
+            _cartService = cartService;
         }
 
-        private async Task<bool> TrySaveAsync()
+        public async Task<bool> TrySaveAsync()
         {
             try
             {
@@ -81,13 +83,17 @@ namespace Klicko_be.Services
             }
         }
 
-        public async Task<bool> CreateOrderAsync(Order newOrder)
+        public async Task<bool> CreateOrderAsync(Order newOrder, string userId)
         {
             try
             {
                 _context.Orders.Add(newOrder);
 
-                return await TrySaveAsync();
+                var user = await _context.ApplicationUsers.FirstOrDefaultAsync(u => u.Id == userId);
+
+                var result = await _cartService.RemoveAllExperienceFromCartAsync(user!.CartId);
+
+                return result;
             }
             catch
             {

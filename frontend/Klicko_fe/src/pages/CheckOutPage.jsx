@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { emptyCart } from '../redux/actions';
 import { toast } from 'sonner';
 import { BadgePercent, X } from 'lucide-react';
+import StripeContainer from '../components/StripeContainer';
 
 const CheckOutPage = () => {
   const [couponCode, setCouponCode] = useState('');
@@ -268,7 +269,7 @@ const CheckOutPage = () => {
         {/* modalità pagamento */}
         <div className='col-span-2 bg-white rounded-lg px-6 py-5 shadow'>
           <h2 className='text-2xl font-bold mb-2'>Pagamento</h2>
-          <form className='pb-6'>
+          {/* <form className='pb-6'>
             <div className='flex flex-col gap-2 my-5'>
               <label htmlFor='name' className='text-sm font-medium'>
                 Nome sulla carta
@@ -322,8 +323,14 @@ const CheckOutPage = () => {
             <Button variant='primary' fullWidth={true} onClick={sendOrder}>
               Paga {getFinalPrice().toFixed(2).replace('.', ',')} €
             </Button>
-          </form>
+          </form> */}
+          <StripeContainer
+            sendOrder={sendOrder}
+            orderAmount={getFinalPrice()}
+          />
         </div>
+
+        {/* Stripe Container */}
       </div>
     </div>
   );

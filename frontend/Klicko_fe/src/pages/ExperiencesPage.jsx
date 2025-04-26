@@ -163,7 +163,7 @@ const ExperiencesPage = () => {
   }, [searchBarQuery, selectedCategoryName]);
 
   return (
-    <div className='max-w-7xl mx-auto mb-8 mt-6'>
+    <div className='max-w-7xl min-h-[80vh] mx-auto mb-8 mt-6'>
       <div>
         <h1 className='text-3xl font-bold mb-3'>Esperienze</h1>
         <p className='text-gray-500 max-w-1/2'>

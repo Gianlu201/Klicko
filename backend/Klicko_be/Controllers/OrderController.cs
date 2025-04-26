@@ -393,8 +393,7 @@ namespace Klicko_be.Controllers
                         if (couponUsed.PercentualSaleAmount > 0)
                         {
                             newOrder.TotalDiscount =
-                                newOrder.SubTotalPrice
-                                * (1 - couponUsed.PercentualSaleAmount / 100);
+                                newOrder.SubTotalPrice * couponUsed.PercentualSaleAmount / 100;
                         }
                         else if (couponUsed.FixedSaleAmount > 0)
                         {
@@ -414,7 +413,7 @@ namespace Klicko_be.Controllers
                 newOrder.TotalPrice =
                     newOrder.SubTotalPrice - newOrder.TotalDiscount + newOrder.ShippingPrice;
 
-                var result = await _orderService.CreateOrderAsync(newOrder);
+                var result = await _orderService.CreateOrderAsync(newOrder, userId);
 
                 if (result && createOrder.CouponId != null)
                 {
@@ -433,6 +432,8 @@ namespace Klicko_be.Controllers
 
                 fidelityCard.Points += (int)newOrder.SubTotalPrice;
                 fidelityCard.AvailablePoints += (int)newOrder.SubTotalPrice;
+
+                await _orderService.TrySaveAsync();
 
                 return Ok(
                     new CreateOrderResponseDto()

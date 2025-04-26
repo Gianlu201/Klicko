@@ -203,8 +203,6 @@ namespace Klicko_be.Data
 
             builder.Entity<Order>().Property(o => o.TotalDiscount).HasDefaultValue(0);
 
-            builder.Entity<Order>().Property(o => o.ShippingPrice).HasDefaultValue(4.99);
-
             // Tabella Cart
             builder.Entity<Cart>().Property(c => c.CreatedAt).HasDefaultValue(DateTime.UtcNow);
 
