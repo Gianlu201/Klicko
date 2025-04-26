@@ -189,6 +189,7 @@ const CheckoutForm = ({ sendOrder, orderAmount }) => {
   };
 
   const CARD_NUMBER_OPTIONS = {
+    autoComplete: 'off',
     style: {
       base: {
         color: '#000',
@@ -283,7 +284,7 @@ const CheckoutForm = ({ sendOrder, orderAmount }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className='w-full pb-6'>
+    <form onSubmit={handleSubmit} className='w-full pb-6' autoComplete='nope'>
       {/* Nome sulla carta */}
       <div className='flex flex-col gap-2 my-5'>
         <label htmlFor='name' className='text-sm font-medium'>
