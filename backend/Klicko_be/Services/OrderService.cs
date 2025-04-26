@@ -75,6 +75,15 @@ namespace Klicko_be.Services
                     .ThenInclude(v => v.Category)
                     .FirstOrDefaultAsync(o => o.OrderId == orderId);
 
+                if (order != null)
+                {
+                    await EmailService.SendEmailOrderConfirmationAsync(
+                        "gianlucadidiego2001@gmail.com",
+                        $"Conferma ordine {order.OrderNumber}",
+                        order
+                    );
+                }
+
                 return order;
             }
             catch
@@ -91,9 +100,7 @@ namespace Klicko_be.Services
 
                 var user = await _context.ApplicationUsers.FirstOrDefaultAsync(u => u.Id == userId);
 
-                var result = await _cartService.RemoveAllExperienceFromCartAsync(user!.CartId);
-
-                return result;
+                return await _cartService.RemoveAllExperienceFromCartAsync(user!.CartId);
             }
             catch
             {
