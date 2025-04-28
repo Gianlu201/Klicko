@@ -31,7 +31,7 @@ const FAQPage = () => {
   ];
 
   return (
-    <div className='max-w-7xl min-h-[80vh] mx-auto mb-8 mt-6'>
+    <div className='max-w-7xl min-h-[80vh] mx-auto mb-8 mt-6 px-6 xl:px-0'>
       <h1 className='text-3xl font-semibold mb-6'>Domande Frequenti</h1>
 
       <div className='flex flex-col gap-4'>

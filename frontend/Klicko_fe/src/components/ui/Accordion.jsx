@@ -16,7 +16,7 @@ export default function Accordion({ intestation, children, className = '' }) {
       >
         <div className='w-full'>{intestation}</div>
         <ChevronDown
-          className={`h-4 w-4 transform transition-transform duration-300 ${
+          className={`h-4 w-4 transform transition-transform duration-300 cursor-pointer ${
             isOpen ? 'rotate-180' : ''
           }`}
         />
