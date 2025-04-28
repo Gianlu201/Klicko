@@ -50,7 +50,7 @@ const Footer = () => {
     {
       id: 2,
       title: 'FAQ',
-      url: '/#',
+      url: '/faq',
     },
     {
       id: 3,

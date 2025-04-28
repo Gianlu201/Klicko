@@ -458,7 +458,13 @@ namespace Klicko_be.Controllers
         {
             try
             {
-                var options = new List<string>() { "In attesa", "Completato", "Cancellato" };
+                var options = new List<string>()
+                {
+                    "In attesa",
+                    "Spedito",
+                    "Completato",
+                    "Cancellato",
+                };
 
                 if (!options.Contains(newOrderState.State))
                 {

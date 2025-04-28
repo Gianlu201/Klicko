@@ -97,6 +97,9 @@ const OrdersComponent = () => {
       case 'In attesa':
         return 'bg-amber-200/60 border border-amber-500/40';
 
+      case 'Spedito':
+        return 'bg-primary/40 border border-primary/30';
+
       case 'Completato':
         return 'bg-green-200/60 border border-green-500/40';
 
@@ -195,7 +198,7 @@ const OrdersComponent = () => {
                 <Accordion
                   key={order.orderId}
                   intestation={
-                    <div className='flex justify-between items-center'>
+                    <div className='flex justify-between items-center cursor-pointer'>
                       <div className='grow flex gap-2'>
                         <span>Ordine</span>
                         <h6>#{order.orderNumber}</h6>

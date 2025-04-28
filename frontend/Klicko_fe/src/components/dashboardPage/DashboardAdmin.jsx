@@ -139,6 +139,9 @@ const DashboardAdmin = () => {
       case 'In attesa':
         return 'bg-amber-200/60 border border-amber-500/40';
 
+      case 'Spedito':
+        return 'bg-primary/40 border border-primary/30';
+
       case 'Completato':
         return 'bg-green-200/60 border border-green-500/40';
 
@@ -222,10 +225,14 @@ const DashboardAdmin = () => {
     },
     {
       id: 2,
-      option: 'Completato',
+      option: 'Spedito',
     },
     {
       id: 3,
+      option: 'Completato',
+    },
+    {
+      id: 4,
       option: 'Cancellato',
     },
   ];

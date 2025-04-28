@@ -23,6 +23,7 @@ import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import ContactPage from './pages/ContactPage';
 import ScrollToTop from './components/ScrollToTop';
 import LoyaltyPage from './pages/LoyaltyPage';
+import FAQPage from './pages/FAQPage';
 
 function App() {
   return (
@@ -68,6 +69,7 @@ function App() {
               />
               <Route path='/privacyPolicy' element={<PrivacyPolicyPage />} />
               <Route path='/contact' element={<ContactPage />} />
+              <Route path='/faq' element={<FAQPage />} />
 
               <Route path='*' element={<NotFoundPage />} />
             </Routes>

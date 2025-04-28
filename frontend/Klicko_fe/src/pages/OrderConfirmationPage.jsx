@@ -1,4 +1,4 @@
-import { CircleCheck, Clock, Package, Ticket } from 'lucide-react';
+import { CircleCheck, Clock, Package, Ticket, Truck } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import Button from '../components/ui/Button';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -71,7 +71,7 @@ const OrderConfirmationPage = () => {
             con i dettagli del tuo ordine.
           </p>
 
-          <div className='border border-gray-400/30 rounded-lg px-5 py-4 mb-8'>
+          <div className='border border-gray-400/30 rounded-lg px-5 py-4 mb-12'>
             <h3 className='flex justify-start items-center gap-2 text-primary text-xl font-semibold mb-4'>
               <Ticket />I tuoi Voucher
             </h3>
@@ -92,7 +92,7 @@ const OrderConfirmationPage = () => {
             ))}
           </div>
 
-          <div className='grid grid-cols-3 items-center mb-8'>
+          <div className='grid grid-cols-4 items-start gap-6 mb-8'>
             <div className='text-primary'>
               <Clock className='w-10 h-10 mx-auto' />
               <p className='text-lg font-medium text-center'>
@@ -103,6 +103,11 @@ const OrderConfirmationPage = () => {
             <div className='text-gray-500'>
               <Package className='w-10 h-10 mx-auto' />
               <p className='text-lg font-medium text-center'>In preparazione</p>
+            </div>
+
+            <div className='text-gray-500'>
+              <Truck className='w-10 h-10 mx-auto' />
+              <p className='text-lg font-medium text-center'>Spedito</p>
             </div>
 
             <div className='text-gray-500'>
