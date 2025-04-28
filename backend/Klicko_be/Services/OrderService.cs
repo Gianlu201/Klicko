@@ -35,6 +35,7 @@ namespace Klicko_be.Services
                     .Orders.Include(o => o.OrderExperiences)
                     .Include(o => o.User)
                     .Include(o => o.Vouchers)
+                    .OrderByDescending(o => o.OrderNumber)
                     .ToListAsync();
 
                 return orders;
@@ -54,6 +55,7 @@ namespace Klicko_be.Services
                     .Include(o => o.User)
                     .Include(o => o.Vouchers)
                     .Where(o => o.UserId == userId)
+                    .OrderByDescending(o => o.OrderNumber)
                     .ToListAsync();
 
                 return orders;

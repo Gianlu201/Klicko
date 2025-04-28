@@ -68,7 +68,15 @@ const DashboardAdmin = () => {
   };
 
   const getTotalTurnover = () => {
-    return orders.reduce((sum, order) => sum + order.totalPrice, 0);
+    let totalTurnover = 0;
+
+    orders.forEach((order) => {
+      if (order.state !== 'Cancellato') {
+        totalTurnover += order.totalPrice;
+      }
+    });
+
+    return totalTurnover;
   };
 
   const getCustomersNumber = () => {
@@ -444,7 +452,7 @@ const DashboardAdmin = () => {
                       <tbody>
                         {selectedOrder.orderExperiences.map((exp) => (
                           <tr
-                            key={exp.experienceId}
+                            key={exp.orderExperienceId}
                             className='grid grid-cols-12 text-sm border-b border-gray-400/40 p-3 hover:bg-gray-100'
                           >
                             <td className='col-span-7 text-start'>
