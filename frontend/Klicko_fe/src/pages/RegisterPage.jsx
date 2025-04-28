@@ -63,15 +63,17 @@ const RegisterPage = () => {
   });
 
   return (
-    <div className='grid grid-cols-2 max-w-7xl mx-auto min-h-screen pt-14 pb-20 items-center gap-12'>
-      <div>
-        <h1 className='text-5xl font-bold mb-3'>Unisciti a Klicko</h1>
-        <p className='text-gray-500 text-lg mb-3'>
+    <div className='lg:grid lg:grid-cols-2 max-w-7xl mx-auto min-h-screen pt-14 pb-20 items-center gap-12 px-6 xl:px-0'>
+      <div className='mb-10'>
+        <h1 className='text-5xl font-bold mb-3 md:max-lg:text-center'>
+          Unisciti a Klicko
+        </h1>
+        <p className='text-gray-500 text-lg mb-3 md:max-lg:text-center md:max-lg:max-w-3/5 md:max-lg:mx-auto'>
           Crea un account per scoprire esperienze uniche e iniziare il tuo
           viaggio di avventure.
         </p>
-        <div className='flex gap-5'>
-          <div className='bg-white rounded-xl shadow-sm px-5 py-4'>
+        <div className='flex md:flex-col md:max-lg:items-center gap-5'>
+          <div className='bg-white rounded-xl shadow-sm px-5 py-4 md:max-lg:w-3/5'>
             <span className='inline-block bg-primary/20 text-primary p-2 rounded-full'>
               <SquareUserRound />
             </span>
@@ -81,13 +83,13 @@ const RegisterPage = () => {
             </p>
           </div>
 
-          <div className='bg-white rounded-xl shadow-sm px-5 py-4'>
+          <div className='bg-white rounded-xl shadow-sm px-5 py-4 md:max-lg:w-3/5'>
             <span className='inline-block bg-secondary/20 text-secondary p-2 rounded-full'>
               <Users />
             </span>
-            <h4 className='text-lg font-semibold mb-1'>Prenota esperienze</h4>
+            <h4 className='text-lg font-semibold mb-1'>Gestisci il profilo</h4>
             <p className='text-sm text-gray-500'>
-              Trova e prenota la tua prossima avventura in pochi click
+              Tieni traccia delle tue prenotazioni e preferenze
             </p>
           </div>
         </div>

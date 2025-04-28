@@ -156,12 +156,9 @@ const VouchersPage = () => {
       );
 
       if (response.ok) {
-        const data = await response.json();
+        // const data = await response.json();
 
-        console.log(data);
-        // setReservationDate(null);
-        // setSearchedVoucher(null);
-        // setVoucherCodeSearch('');
+        // console.log(data);
         getUserVouchers();
       } else {
         console.log('Error');
@@ -191,7 +188,7 @@ const VouchersPage = () => {
   }, []);
 
   return (
-    <div className='max-w-7xl mx-auto min-h-screen'>
+    <div className='max-w-7xl mx-auto min-h-screen px-6 xl:px-0'>
       <h1 className='text-4xl font-bold mt-10 mb-3'>Utilizza il tuo Voucher</h1>
       <p className='text-gray-500 font-normal mb-8'>
         Utilizza il codice del tuo voucher per riscattare o prenotare la tua
@@ -337,7 +334,7 @@ const VouchersPage = () => {
                         checkIsPassed(voucher.reservationDate) && 'bg-gray-100'
                       }`}
                     >
-                      <div className='flex justify-between items-center mb-1.5'>
+                      <div className='flex justify-between items-center gap-4 mb-2'>
                         <h4 className='text-xl'>{voucher.title}</h4>
                         <span
                           className={`text-xs  rounded-md px-2 py-1 ${

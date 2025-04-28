@@ -51,7 +51,7 @@ const OrderConfirmationPage = () => {
   }, []);
 
   return (
-    <>
+    <div className='px-6 xl-px-0'>
       {order !== null && (
         <div className='max-w-3xl mx-auto bg-white border border-gray-400/40 shadow rounded-2xl my-12 px-8 py-8'>
           <CircleCheck className='w-14 h-14 mx-auto text-green-500 mb-4' />
@@ -94,25 +94,31 @@ const OrderConfirmationPage = () => {
 
           <div className='grid grid-cols-4 items-start gap-6 mb-8'>
             <div className='text-primary'>
-              <Clock className='w-10 h-10 mx-auto' />
-              <p className='text-lg font-medium text-center'>
+              <Clock className='w-6 h-6 md:w-10 md:h-10 mx-auto mb-2' />
+              <p className='text-sm md:text-lg font-medium text-center'>
                 Ordine confermato
               </p>
             </div>
 
             <div className='text-gray-500'>
-              <Package className='w-10 h-10 mx-auto' />
-              <p className='text-lg font-medium text-center'>In preparazione</p>
+              <Package className='w-6 h-6 md:w-10 md:h-10 mx-auto mb-2' />
+              <p className='text-sm md:text-lg font-medium text-center'>
+                In preparazione
+              </p>
             </div>
 
             <div className='text-gray-500'>
-              <Truck className='w-10 h-10 mx-auto' />
-              <p className='text-lg font-medium text-center'>Spedito</p>
+              <Truck className='w-6 h-6 md:w-10 md:h-10 mx-auto mb-2' />
+              <p className='text-sm md:text-lg font-medium text-center'>
+                Spedito
+              </p>
             </div>
 
             <div className='text-gray-500'>
-              <CircleCheck className='w-10 h-10 mx-auto' />
-              <p className='text-lg font-medium text-center'>Consegnato</p>
+              <CircleCheck className='w-6 h-6 md:w-10 md:h-10 mx-auto mb-2' />
+              <p className='text-sm md:text-lg font-medium text-center'>
+                Consegnato
+              </p>
             </div>
           </div>
 
@@ -136,7 +142,7 @@ const OrderConfirmationPage = () => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

@@ -47,12 +47,12 @@ const CouponPage = () => {
   }, []);
 
   return (
-    <div className='max-w-7xl mx-auto min-h-screen'>
+    <div className='max-w-7xl mx-auto min-h-screen px-6 xl:px-0'>
       <h1 className='text-4xl font-bold mt-10 mb-8'>Coupon</h1>
 
       <h2 className='text-xl font-semibold mb-4'>I tuoi coupon disponibili</h2>
       {availableCoupon.length > 0 ? (
-        <div className='grid grid-cols-3 gap-6 mb-6'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6'>
           {availableCoupon.map((coupon) => (
             <CouponCard key={coupon.couponId} coupon={coupon} />
           ))}
@@ -70,7 +70,7 @@ const CouponPage = () => {
           <h2 className='text-xl font-semibold mb-4'>
             Coupon utilizzati o scaduti
           </h2>
-          <div className='grid grid-cols-3 gap-6 mb-6'>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6'>
             {unavailableCoupon.map((coupon) => (
               <CouponCard coupon={coupon} />
             ))}

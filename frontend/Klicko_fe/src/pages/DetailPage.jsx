@@ -93,9 +93,6 @@ const DetailPage = () => {
         }
       );
       if (response.ok) {
-        // const data = await response.json();
-        // console.log(data.cart);
-
         toast.success(`${experience.title} aggiunta al carrello!`);
         dispatch(cartModified());
       } else {
@@ -114,16 +111,18 @@ const DetailPage = () => {
     <div>
       {experience?.title != null ? (
         <div>
-          <div className='relative h-[70vh] overflow-hidden'>
+          <div className='relative h-[30vh] md:h-[50vh] lg:h-[70vh] overflow-hidden'>
             <img
               src={`https://localhost:7235/uploads/${experience.coverImage}`}
               alt={experience.title}
               className='absolute top-1/2 start-0 -translate-y-1/2  w-full'
             />
             <div className='absolute bg-black/30 w-full h-full'></div>
-            <div className='absolute bottom-0 start-40 z-20 text-white max-w-3/4'>
-              <h1 className='text-5xl font-bold mb-4'>{experience.title}</h1>
-              <div className='flex gap-8 mb-8'>
+            <div className='absolute bottom-0 start-10 lg:start-40 z-20 text-white max-w-3/4'>
+              <h1 className='text-3xl md:text-4xl lg:text-5xl font-bold mb-4'>
+                {experience.title}
+              </h1>
+              <div className='flex gap-8 mb-8 text-sm md:text-base'>
                 <span className='flex items-center gap-2'>
                   <MapPin className='w-4.5 h-4.5' />
                   {experience.place}
@@ -140,9 +139,9 @@ const DetailPage = () => {
             </div>
           </div>
 
-          <div className='grid grid-cols-3 gap-4 max-w-7xl mx-auto mb-20'>
+          <div className='grid grid-cols-3 gap-4 max-w-7xl mx-auto mb-20 px-6 xl:px-0'>
             {/* first column */}
-            <div className='bg-white col-span-2 rounded-b-2xl shadow-lg'>
+            <div className='bg-white col-span-3 lg:col-span-2 rounded-b-2xl shadow-lg mb-16'>
               {/* navigation tables */}
               <div className=' inline-block ms-6 px-2 pb-2 bg-gray-100 rounded-b-2xl'>
                 <button
@@ -180,7 +179,7 @@ const DetailPage = () => {
               {/* description table */}
               {description && (
                 <div className='px-6 mt-10 mb-8'>
-                  <p className='text-xl text-gray-600 mb-3'>
+                  <p className='lg:text-xl text-gray-600 mb-3'>
                     {experience.description}
                   </p>
 
@@ -193,14 +192,16 @@ const DetailPage = () => {
                       <Clock className='w-4 h-4' />
                       Durata:
                     </span>
-                    <span className='font-semibold'>{experience.duration}</span>
+                    <span className='font-semibold'>
+                      {experience?.duration}
+                    </span>
                   </div>
                   <div className='flex gap-2 my-2'>
                     <span className='flex items-center gap-1.5 text-gray-600'>
                       <MapPin className='w-4 h-4' />
                       Luogo:
                     </span>
-                    <span className='font-semibold'>{experience.place}</span>
+                    <span className='font-semibold'>{experience?.place}</span>
                   </div>
                   <div className='flex gap-2 my-2'>
                     <span className='flex items-center gap-1.5 text-gray-600'>
@@ -208,7 +209,7 @@ const DetailPage = () => {
                       Organizzato da:
                     </span>
                     <span className='font-semibold'>
-                      {experience.organiser}
+                      {experience?.organiser}
                     </span>
                   </div>
                   <div className='flex gap-2 my-2'>
@@ -217,7 +218,7 @@ const DetailPage = () => {
                       Aggiornato il:
                     </span>
                     <span className='font-semibold'>
-                      {new Date(experience.lastEditDate).toLocaleDateString(
+                      {new Date(experience?.lastEditDate).toLocaleDateString(
                         'it-IT',
                         {
                           year: 'numeric',
@@ -233,13 +234,15 @@ const DetailPage = () => {
               {/* fotos table */}
               {foto && (
                 <div className='px-6 mt-2 mb-8'>
-                  <Carousel
-                    items={experience.images}
-                    slidesVisible={2}
-                    autoplay={true}
-                    delay={5000}
-                    className='max-w-6xl mx-auto'
-                  />
+                  {experience?.images.length > 0 && (
+                    <Carousel
+                      items={experience.images}
+                      slidesVisible={2}
+                      autoplay={true}
+                      delay={5000}
+                      className='max-w-6xl mx-auto'
+                    />
+                  )}
                 </div>
               )}
 
@@ -251,27 +254,32 @@ const DetailPage = () => {
                       Cosa è incluso
                     </h4>
                     <p className='text-gray-600'>
-                      {experience.includedDescription}
+                      {experience?.includedDescription}
                     </p>
                   </div>
 
-                  <div className='my-3'>
-                    <h4 className='text-xl font-semibold mb-3'>Cosa portare</h4>
-                    <ul className='ps-6'>
-                      {experience.carryWiths.map((element) => (
-                        <li key={element.carryWithId} className=' list-disc'>
-                          {element.name}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  {experience?.carryWiths &&
+                    experience?.carryWiths.length > 0 && (
+                      <div className='my-3'>
+                        <h4 className='text-xl font-semibold mb-3'>
+                          Cosa portare
+                        </h4>
+                        <ul className='ps-6'>
+                          {experience.carryWiths.map((element) => (
+                            <li key={element.carryWithId} className='list-disc'>
+                              {element.name}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
 
                   <div className='my-3'>
                     <h4 className='text-xl font-semibold mb-3'>
                       Politica di cancellazione
                     </h4>
                     <p className='text-gray-600 flex gap-1.5 items-center'>
-                      {experience.isFreeCancellable ? (
+                      {experience?.isFreeCancellable ? (
                         <>
                           <Shield className='w-4 h-4 pb-0.5 text-green-600' />
                           <span>
@@ -291,7 +299,7 @@ const DetailPage = () => {
             </div>
 
             {/* second column */}
-            <div>
+            <div className='col-span-3 lg:col-span-1'>
               <div className='bg-white rounded-2xl shadow-lg px-6 py-6 -translate-y-10 sticky top-32'>
                 <h4 className='text-lg text-gray-500 mb-1'>Prezzo totale</h4>
                 <div className='mb-3'>
