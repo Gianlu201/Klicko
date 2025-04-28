@@ -54,7 +54,7 @@ const CouponPage = () => {
       {availableCoupon.length > 0 ? (
         <div className='grid grid-cols-3 gap-6 mb-6'>
           {availableCoupon.map((coupon) => (
-            <CouponCard coupon={coupon} />
+            <CouponCard key={coupon.couponId} coupon={coupon} />
           ))}
         </div>
       ) : (

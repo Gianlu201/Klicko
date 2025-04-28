@@ -102,8 +102,8 @@ const Footer = () => {
 
   return (
     <div className='bg-slate-950 py-10'>
-      <div className='px-6 lg:px-0 max-w-7xl mx-auto lg:flex gap-6 text-gray-500 mb-8'>
-        <div className='lg:w-1/4 pe-6 mb-6'>
+      <div className='px-6 xl:px-0 max-w-7xl mx-auto md:flex gap-6 text-gray-500 mb-8'>
+        <div className='md:w-1/4 pe-6 mb-6'>
           <h3 className='text-white text-2xl font-semibold mb-4'>Klicko</h3>
           <p className='mb-4'>
             Trova e prenota esperienze uniche in tutto il mondo. Rendi ogni
@@ -116,7 +116,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className='lg:w-1/4 mb-6'>
+        <div className='md:w-1/4 mb-6'>
           <h4 className='text-white text-lg font-semibold mb-4'>Esperienze</h4>
           <ul>
             {experienceOptions.map((exp) => (
@@ -135,7 +135,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        <div className='lg:w-1/4 mb-6'>
+        <div className='md:w-1/4 mb-6'>
           <h4 className='text-white text-lg font-semibold mb-4'>
             Informazioni
           </h4>
@@ -150,7 +150,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        <div className='lg:w-1/4'>
+        <div className='md:w-1/4'>
           <h4 className='text-white text-lg font-semibold mb-4'>Newsletter</h4>
           <p className='mb-4'>
             Iscriviti per ricevere offerte speciali e scoprire nuove esperienze

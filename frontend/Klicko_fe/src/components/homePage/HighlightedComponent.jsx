@@ -38,12 +38,12 @@ const HighlightedComponent = () => {
   return (
     <>
       {highlightedExperiences.length > 0 && (
-        <div className='max-w-7xl mx-auto my-18'>
-          <p className='text-secondary font-semibold mb-2'>
+        <div className='max-w-7xl mx-auto my-18 px-4 xl:px-0'>
+          <p className='text-sm md:text-base text-secondary font-semibold mb-2'>
             Esperienze in evidenza
           </p>
           <div className='flex justify-between items-center'>
-            <h2 className=' text-4xl font-bold'>
+            <h2 className='text-2xl 2xl:text-4xl font-bold'>
               Le nostre migliori avventure
             </h2>
             <Button variant='outline' size='md'>
@@ -51,7 +51,7 @@ const HighlightedComponent = () => {
             </Button>
           </div>
 
-          <div className='grid grid-cols-3 gap-8 mt-10'>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10'>
             {highlightedExperiences.map((experience) => {
               return (
                 <ExperienceCard

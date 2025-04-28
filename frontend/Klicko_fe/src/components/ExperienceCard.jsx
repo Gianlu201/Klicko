@@ -19,18 +19,18 @@ const ExperienceCard = ({ experience, className }) => {
               className='absolute top-1/2 start-1/2 -translate-y-1/2 -translate-x-1/2 z-0 w-full h-full'
             />
             {experience.isInEvidence ? (
-              <span className='absolute top-2 start-2 text-white text-xs font-semibold px-2 py-1 bg-secondary rounded-full z-10'>
+              <span className='absolute top-2 start-2 text-white md:text-xs font-semibold px-2 py-1 bg-secondary rounded-full z-10'>
                 In evidenza
               </span>
             ) : (
               experience.isPopular && (
-                <span className='absolute top-2 start-2 text-white text-xs font-semibold px-2 py-1 bg-primary rounded-full z-10'>
+                <span className='absolute top-2 start-2 text-white md:text-xs font-semibold px-2 py-1 bg-primary rounded-full z-10'>
                   Popolare
                 </span>
               )
             )}
             {experience.sale > 0 && (
-              <span className='absolute top-0 right-0 z-10 w-full transform rotate-45 translate-x-14 -translate-y-4 bg-red-600 text-white text-sm font-bold text-end py-1.5 pe-18 shadow-md'>
+              <span className='absolute top-0 right-0 z-10 w-full transform rotate-45 translate-x-24 -translate-y-18 sm:translate-x-20 sm:-translate-y-8 md:translate-x-20 md:-translate-y-10 lg:translate-x-18 lg:-translate-y-4 xl:translate-x-16 bg-red-600 text-white text-sm font-bold text-end py-1.5 pe-18 shadow-md'>
                 -{experience.sale}%
               </span>
             )}
@@ -39,21 +39,23 @@ const ExperienceCard = ({ experience, className }) => {
           {/* card bottom */}
           <div className='p-4'>
             <div className='flex justify-between items-center mb-2'>
-              <span className='text-gray-500 text-sm'>
+              <span className='text-gray-500 font-medium md:font-normal md:text-sm'>
                 {experience.category.name}
               </span>
               <div className='flex items-center'>
                 <span
-                  className={`font-semibold ${
+                  className={`font-bold md:font-semibold ${
                     experience.sale > 0
-                      ? 'line-through text-gray-500 me-2'
-                      : 'text-secondary text-xl'
+                      ? 'line-through text-gray-500 me-2 text-lg md:text-base'
+                      : 'text-secondary text-2xl md:text-lg'
                   }`}
                 >
                   {experience.price.toFixed(2).replace('.', ',')} €
                 </span>
                 {experience.sale > 0 && (
-                  <span className={`font-semibold text-secondary text-xl`}>
+                  <span
+                    className={`font-bold md:font-semibold text-secondary text-2xl md:text-lg`}
+                  >
                     {((experience.price * (100 - experience.sale)) / 100)
                       .toFixed(2)
                       .replace('.', ',')}{' '}
@@ -62,22 +64,24 @@ const ExperienceCard = ({ experience, className }) => {
                 )}
               </div>
             </div>
-            <h4 className='text-lg font-semibold mb-2 line-clamp-2'>
+            <h4 className='text-xl md:text-lg font-semibold mb-2 line-clamp-2'>
               {experience.title}
             </h4>
-            <p className='text-gray-600 text-[0.9rem] line-clamp-2'>
+            <p className='text-gray-600 md:text-[0.9rem] line-clamp-2'>
               {experience.descriptionShort}
             </p>
 
-            <div className='absolute start-4 bottom-2 flex justify-between my-2'>
-              <span className='flex items-center gap-1 text-sm text-gray-500'>
-                <MapPin className='h-4 w-4' />
-                {experience.place}
-              </span>
-              <span className='flex items-center gap-1 text-sm text-gray-500'>
-                <Clock className='h-4 w-4' />
-                {experience.duration}
-              </span>
+            <div className='absolute w-full start-4 bottom-2'>
+              <div className='flex justify-between pe-8 my-2'>
+                <span className='flex items-center gap-1 md:text-sm text-gray-500'>
+                  <MapPin className='h-4 w-4' />
+                  {experience.place}
+                </span>
+                <span className='flex items-center gap-1 md:text-sm text-gray-500'>
+                  <Clock className='h-4 w-4' />
+                  {experience.duration}
+                </span>
+              </div>
             </div>
           </div>
         </Link>
