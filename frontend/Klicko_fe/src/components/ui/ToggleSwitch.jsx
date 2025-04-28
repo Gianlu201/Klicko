@@ -7,7 +7,7 @@ export default function ToggleSwitch({ value, onClick }) {
     <button
       type='button'
       onClick={onClick}
-      className={`w-full h-6 flex items-center rounded-full p-1 transition-colors duration-300 ${
+      className={`w-[50px] h-6 flex items-center rounded-full p-1 transition-colors duration-300 cursor-pointer ${
         value ? 'bg-primary' : 'bg-gray-300'
       }`}
     >

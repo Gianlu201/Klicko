@@ -17,6 +17,7 @@ import ExperienceForm from '../components/dashboardPage/ExperienceForm';
 import DashboardAdmin from '../components/dashboardPage/DashboardAdmin';
 import DashboardUsers from '../components/dashboardPage/DashboardUsers';
 import ProfileComponent from '../components/dashboardPage/ProfileComponent';
+import SettingsComponent from '../components/dashboardPage/SettingsComponent';
 
 const DashboardPage = () => {
   const profile = useSelector((state) => {
@@ -95,6 +96,10 @@ const DashboardPage = () => {
       case 'users':
         console.log('users');
         return <DashboardUsers />;
+
+      case 'settings':
+        console.log('users');
+        return <SettingsComponent />;
 
       default:
         console.log('page 404');
