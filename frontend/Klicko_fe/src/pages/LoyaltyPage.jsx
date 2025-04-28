@@ -1,4 +1,4 @@
-import { Gift, Star, Trophy } from 'lucide-react';
+import { Gift, ShoppingCart, Star, Trophy } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import Button from '../components/ui/Button';
 import { useSelector } from 'react-redux';
@@ -93,7 +93,7 @@ const LoyaltyPage = () => {
       if (response.ok) {
         const data = await response.json();
 
-        console.log(data);
+        // console.log(data);
 
         setFidelityCard(data.fidelityCard);
         getFidelityLevel(data.fidelityCard.points);
@@ -131,9 +131,9 @@ const LoyaltyPage = () => {
         }
       );
       if (response.ok) {
-        const data = await response.json();
+        // const data = await response.json();
 
-        console.log(data);
+        // console.log(data);
         getFidelityCard();
       } else {
         throw new Error();
@@ -151,7 +151,6 @@ const LoyaltyPage = () => {
     let level = null;
 
     levels.forEach((element) => {
-      console.log(element.minPoints);
       if (points >= element.minPoints) {
         level = element;
       }
@@ -211,8 +210,8 @@ const LoyaltyPage = () => {
   }, [profile]);
 
   return (
-    <div className='max-w-7xl mx-auto min-h-screen'>
-      <h1 className='text-4xl font-bold mt-10 mb-3'>Programma Fedeltà</h1>
+    <div className='max-w-7xl mx-auto min-h-screen px-6 xl:px-0'>
+      <h1 className='text-4xl font-bold mt-10 mb-6'>Programma Fedeltà</h1>
 
       {fidelityCard === null ? (
         <div className='bg-white py-8 border border-gray-400/30 rounded-xl shadow mt-6'>
@@ -270,7 +269,7 @@ const LoyaltyPage = () => {
 
           {/* main section */}
           <div className='grid grid-cols-12 gap-8 mb-12'>
-            <div className='col-span-8 bg-white border border-gray-400/30 rounded-2xl px-6 py-5 shadow h-fit'>
+            <div className='col-span-12 lg:col-span-8 bg-white border border-gray-400/30 rounded-2xl px-6 py-5 shadow h-fit'>
               <h2 className='flex justify-start items-center gap-2 text-3xl font-semibold mb-2'>
                 <Trophy className='mt-1 text-primary' />
                 Il tuo status
@@ -334,7 +333,7 @@ const LoyaltyPage = () => {
             </div>
 
             {/* converti punti */}
-            <div className='col-span-4 bg-white border border-gray-400/30 rounded-2xl px-6 py-5 shadow'>
+            <div className='col-span-12 lg:col-span-4 bg-white border border-gray-400/30 rounded-2xl px-6 py-5 shadow'>
               <h2 className='flex justify-start items-center gap-2 text-3xl font-semibold mb-2'>
                 <Gift className='mt-1 text-primary' />
                 Riscatta punti
@@ -378,6 +377,16 @@ const LoyaltyPage = () => {
                   </div>
                 ))}
               </div>
+              <Button
+                variant='outline'
+                icon={<ShoppingCart className='w-4 h-4' />}
+                className='mx-auto md:max-lg:mx-0 md:max-lg:ms-auto'
+                onClick={() => {
+                  navigate('/experiences');
+                }}
+              >
+                Guadagna più punti
+              </Button>
             </div>
           </div>
 
