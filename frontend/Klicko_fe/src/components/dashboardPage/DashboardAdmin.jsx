@@ -257,7 +257,7 @@ const DashboardAdmin = () => {
       </p>
 
       {/* options overview */}
-      <div className='grid grid-cols-4 gap-6 mb-6'>
+      <div className='grid grid-cols-2 md:grid-cols-4 gap-6 mb-6'>
         {options.map((opt) => (
           <div
             key={opt.id}
@@ -315,11 +315,19 @@ const DashboardAdmin = () => {
             <table className='w-full'>
               <thead>
                 <tr className='grid grid-cols-12 text-gray-500 text-sm font-normal border-b border-gray-400/40 p-3 hover:bg-gray-100'>
-                  <th className='col-span-2 text-start'>Numero ordine</th>
-                  <th className='col-span-3 text-start'>Cliente</th>
-                  <th className='col-span-2 text-start'>Data</th>
-                  <th className='col-span-2 text-start'>Totale</th>
-                  <th className='col-span-2 text-start'>Stato</th>
+                  <th className='col-span-3 md:col-span-2 text-start'>
+                    Numero ordine
+                  </th>
+                  <th className='col-span-5 md:col-span-3 text-start'>
+                    Cliente
+                  </th>
+                  <th className='hidden md:block col-span-2 text-start'>
+                    Data
+                  </th>
+                  <th className='hidden md:block col-span-2 text-start'>
+                    Totale
+                  </th>
+                  <th className='col-span-3 md:col-span-2 text-start'>Stato</th>
                   <th className='col-span-1 text-center'>Azioni</th>
                 </tr>
               </thead>
@@ -330,16 +338,18 @@ const DashboardAdmin = () => {
                     key={order.orderNumber}
                     className='grid grid-cols-12 items-center text-sm border-b border-gray-400/40 p-3 hover:bg-gray-100 last-of-type:border-none'
                   >
-                    <td className='col-span-2 text-start'>
+                    <td className='col-span-3 md:col-span-2 text-start'>
                       #{order.orderNumber}
                     </td>
-                    <td className='col-span-3'>
+
+                    <td className='col-span-5 md:col-span-3 overflow-hidden me-3'>
                       <p className='font-semibold'>
                         {order.user.firstName} {order.user.lastName}
                       </p>
-                      <p>{order.user.email}</p>
+                      <p className='max-md:text-xs'>{order.user.email}</p>
                     </td>
-                    <td className='col-span-2 flex flex-col justify-center items-start gap-1'>
+
+                    <td className='hidden md:flex col-span-2 flex-col justify-center items-start gap-1'>
                       <span>
                         {new Date(order.createdAt).toLocaleDateString('it-IT', {
                           year: 'numeric',
@@ -354,19 +364,22 @@ const DashboardAdmin = () => {
                         })}
                       </span>
                     </td>
-                    <td className='col-span-2'>
+
+                    <td className='hidden md:block col-span-2'>
                       {order.totalPrice.toFixed(2).replace('.', ',')} €
                     </td>
-                    <td className='col-span-2'>
+
+                    <td className='col-span-3 md:col-span-2'>
                       <span
-                        className={`text-xs rounded-full px-3 py-0.5 ${getStateStyle(
+                        className={`text-xs rounded-full px-2 md:px-3 py-0.5 ${getStateStyle(
                           order.state
                         )}`}
                       >
                         {order.state}
                       </span>
                     </td>
-                    <td className='col-span-1 flex justify-center items-center'>
+
+                    <td className='col-span-1 flex justify-center items-center max-md:ps-1'>
                       <Cog
                         className='w-6 h-6 cursor-pointer'
                         onClick={() => {
@@ -443,9 +456,15 @@ const DashboardAdmin = () => {
                       <thead>
                         <tr className='grid grid-cols-12 text-gray-500 text-sm font-normal border-b border-gray-400/40 p-3 hover:bg-gray-100'>
                           <th className='col-span-7 text-start'>Esperienza</th>
-                          <th className='col-span-1 text-end'>Quantità</th>
-                          <th className='col-span-2 text-end'>Prezzo</th>
-                          <th className='col-span-2 text-end'>Totale</th>
+                          <th className='col-span-2 md:col-span-1 text-end'>
+                            Quantità
+                          </th>
+                          <th className='hidden md:block col-span-2 text-end'>
+                            Prezzo
+                          </th>
+                          <th className='col-span-3 md:col-span-2 text-end'>
+                            Totale
+                          </th>
                         </tr>
                       </thead>
 
@@ -458,13 +477,13 @@ const DashboardAdmin = () => {
                             <td className='col-span-7 text-start'>
                               {exp.title}
                             </td>
-                            <td className='col-span-1 text-end'>
+                            <td className='col-span-2 md:col-span-1 text-end'>
                               {exp.quantity}
                             </td>
-                            <td className='col-span-2 text-end'>
+                            <td className='hidden md:block col-span-2 text-end'>
                               {exp.unitPrice.toFixed(2).replace('.', ',')} €
                             </td>
-                            <td className='col-span-2 text-end'>
+                            <td className='col-span-3 md:col-span-2 text-end'>
                               {exp.totalPrice.toFixed(2).replace('.', ',')} €
                             </td>
                           </tr>
@@ -474,10 +493,10 @@ const DashboardAdmin = () => {
                       <tfoot>
                         {selectedOrder.shippingPrice > 0 && (
                           <tr className='grid grid-cols-12 text-gray-500 font-medium p-3 hover:bg-gray-100'>
-                            <td className='col-span-10 text-end'>
+                            <td className='col-span-9 md:col-span-10 text-end'>
                               Spedizione:
                             </td>
-                            <td className='col-span-2 text-end'>
+                            <td className='col-span-3 md:col-span-2 text-end'>
                               {selectedOrder.shippingPrice
                                 .toFixed(2)
                                 .replace('.', ',')}{' '}
@@ -488,10 +507,10 @@ const DashboardAdmin = () => {
 
                         {selectedOrder.totalDiscount > 0 && (
                           <tr className='grid grid-cols-12 text-gray-500 font-medium p-3 hover:bg-gray-100'>
-                            <td className='col-span-10 text-end'>
+                            <td className='col-span-9 md:col-span-10 text-end'>
                               Sconto coupon:
                             </td>
-                            <td className='col-span-2 text-end'>
+                            <td className='col-span-3 md:col-span-2 text-end'>
                               -
                               {selectedOrder.totalDiscount
                                 .toFixed(2)
@@ -502,10 +521,10 @@ const DashboardAdmin = () => {
                         )}
 
                         <tr className='grid grid-cols-12 font-bold p-3 hover:bg-gray-100'>
-                          <td className='col-span-10 text-end'>
+                          <td className='col-span-9 md:col-span-10 text-end'>
                             Totale ordine
                           </td>
-                          <td className='col-span-2 text-end'>
+                          <td className='col-span-3 md:col-span-2 text-end'>
                             {selectedOrder.totalPrice
                               .toFixed(2)
                               .replace('.', ',')}{' '}

@@ -61,7 +61,7 @@ export default function BottomBanner({
               <div className='w-12 h-1.5 bg-gray-400 rounded-full mt-2'></div>
             </div>
 
-            <div className='w-3xl px-4 my-4 grow overflow-y-auto'>
+            <div className='w-md md:w-xl lg:w-3xl px-4 my-4 grow overflow-y-auto'>
               {children}
               <Button
                 variant='outline'

@@ -123,16 +123,16 @@ const DashboardUsers = () => {
             <table className='w-full'>
               <thead>
                 <tr className='grid grid-cols-24 gap-4 border-b border-gray-400/30 pb-3'>
-                  <th className='col-span-6 text-gray-500 text-sm font-medium text-start ps-3'>
+                  <th className='col-span-7 md:col-span-6 text-gray-500 text-sm font-medium text-start ps-3'>
                     Nome
                   </th>
-                  <th className='col-span-8 text-gray-500 text-sm font-medium text-start ps-3'>
+                  <th className='col-span-11 md:col-span-8 text-gray-500 text-sm font-medium text-start ps-3'>
                     Email
                   </th>
-                  <th className='col-span-6 text-gray-500 text-sm font-medium text-start ps-3'>
+                  <th className='hidden md:block col-span-6 text-gray-500 text-sm font-medium text-start ps-3'>
                     Data registrazione
                   </th>
-                  <th className='col-span-4 text-gray-500 text-sm font-medium text-start ps-3'>
+                  <th className='col-span-6 md:col-span-4 text-gray-500 text-sm font-medium text-start md:text-center ps-3'>
                     Ruolo
                   </th>
                 </tr>
@@ -141,13 +141,15 @@ const DashboardUsers = () => {
                 {users.map((user) => (
                   <tr
                     key={user.userId}
-                    className='grid grid-cols-24 gap-4 items-center hover:bg-gray-100 border-b border-gray-400/30 py-3 px-2 last-of-type:border-0 text-sm'
+                    className='grid grid-cols-24 gap-4 items-center hover:bg-gray-100 border-b border-gray-400/30 py-3 last-of-type:border-0 text-sm'
                   >
-                    <td className='col-span-6'>
+                    <td className='col-span-7 md:col-span-6 overflow-hidden ps-2'>
                       {user.firstName} {user.lastName}
                     </td>
-                    <td className='col-span-6'>{user.email}</td>
-                    <td className='col-span-6 text-end'>
+                    <td className='col-span-11 md:col-span-8 overflow-hidden max-md:text-xs max-md:font-medium'>
+                      {user.email}
+                    </td>
+                    <td className='hidden md:block col-span-6 text-center'>
                       {new Date(user.registrationDate).toLocaleDateString(
                         'it-IT',
                         {
@@ -157,7 +159,7 @@ const DashboardUsers = () => {
                         }
                       )}
                     </td>
-                    <td className='col-span-6 text-center'>
+                    <td className='col-span-6 md:col-span-4 text-center pe-2'>
                       {roles.length > 0 ? (
                         <select
                           value={user.userRole.roleId}

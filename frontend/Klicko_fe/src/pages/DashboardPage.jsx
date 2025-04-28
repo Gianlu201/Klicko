@@ -108,14 +108,14 @@ const DashboardPage = () => {
   };
 
   return (
-    <div className='max-w-7xl mx-auto min-h-screen pt-10'>
+    <div className='max-w-7xl mx-auto min-h-screen pt-10 px-6 xl:px-0'>
       <h1 className='text-3xl font-bold mb-3'>Dashboard</h1>
       <p className='text-gray-500 font-normal mb-5'>
         Benvenuto, {profile.name}
       </p>
 
-      <div className='grid grid-cols-4 gap-6'>
-        <div className='col-span-1 bg-white shadow rounded-xl h-fit overflow-hidden'>
+      <div className='lg:grid lg:grid-cols-4 gap-6'>
+        <div className='hidden lg:block col-span-1 bg-white shadow rounded-xl h-fit overflow-hidden'>
           <ul>
             {options.map((opt) => (
               <li key={opt.id}>

@@ -11,6 +11,9 @@ import {
   BadgePercent,
   Tickets,
   FileSpreadsheetIcon,
+  PackageOpen,
+  Users,
+  LayoutDashboard,
 } from 'lucide-react';
 import Button from './ui/Button';
 import { Dropdown, DropdownItem, DropdownHeader } from './ui/DropdownMenu';
@@ -224,6 +227,7 @@ const Navbar = () => {
               <DropdownHeader>Il tuo account</DropdownHeader>
               <p className='text-gray-500 text-xs px-4 mb-2'>{profile.email}</p>
               <DropdownItem
+                className='hidden lg:block'
                 onClick={() => {
                   navigate('/dashboard');
                 }}
@@ -233,6 +237,31 @@ const Navbar = () => {
                   Dashbord
                 </span>
               </DropdownItem>
+
+              <DropdownItem
+                className='block lg:hidden'
+                onClick={() => {
+                  navigate('/dashboard/profile');
+                }}
+              >
+                <span className='w-full flex items-center justify-start gap-2'>
+                  <User size={16} />
+                  Profilo
+                </span>
+              </DropdownItem>
+
+              <DropdownItem
+                className='block lg:hidden'
+                onClick={() => {
+                  navigate('/dashboard/experiences');
+                }}
+              >
+                <span className='w-full flex items-center justify-start gap-2'>
+                  <PackageOpen size={16} />
+                  Gestisci esperienze
+                </span>
+              </DropdownItem>
+
               <DropdownItem
                 onClick={() => {
                   navigate('/dashboard/orders');
@@ -242,6 +271,7 @@ const Navbar = () => {
                   <ShoppingBag size={16} />I miei ordini
                 </span>
               </DropdownItem>
+
               <DropdownItem
                 onClick={() => {
                   navigate('/redeemVoucher');
@@ -252,6 +282,7 @@ const Navbar = () => {
                   Vouchers
                 </span>
               </DropdownItem>
+
               <DropdownItem
                 onClick={() => {
                   navigate('/coupons');
@@ -262,6 +293,31 @@ const Navbar = () => {
                   Coupon
                 </span>
               </DropdownItem>
+
+              <DropdownItem
+                className='block lg:hidden'
+                onClick={() => {
+                  navigate('/dashboard/admin');
+                }}
+              >
+                <span className='w-full flex items-center justify-start gap-2'>
+                  <LayoutDashboard size={16} />
+                  Dashboard admin
+                </span>
+              </DropdownItem>
+
+              <DropdownItem
+                className='block lg:hidden'
+                onClick={() => {
+                  navigate('/dashboard/users');
+                }}
+              >
+                <span className='w-full flex items-center justify-start gap-2'>
+                  <Users size={16} />
+                  Gestione utenti
+                </span>
+              </DropdownItem>
+
               <DropdownItem
                 onClick={() => {
                   navigate('/dashboard/settings');

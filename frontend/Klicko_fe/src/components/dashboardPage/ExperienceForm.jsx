@@ -260,7 +260,7 @@ const ExperienceForm = () => {
       </div>
 
       <form>
-        <div className='grid grid-cols-2 gap-8 mb-8'>
+        <div className='grid md:grid-cols-2 gap-8 mb-8'>
           {/* titolo */}
           <div className='flex flex-col justify-start items-start gap-2'>
             <label htmlFor='title' className='font-semibold text-sm'>
@@ -348,7 +348,7 @@ const ExperienceForm = () => {
           </span>
         </div>
 
-        <div className='grid grid-cols-3 gap-8 mb-8'>
+        <div className='grid md:grid-cols-3 gap-8 mb-8'>
           {/* organizzatore */}
           <div className='flex flex-col justify-start items-start gap-2'>
             <label htmlFor='organiser' className='font-semibold text-sm'>
@@ -401,7 +401,7 @@ const ExperienceForm = () => {
           </div>
         </div>
 
-        <div className='grid grid-cols-4 gap-8 mb-8'>
+        <div className='grid md:grid-cols-4 items-end gap-8 mb-8'>
           {/* prezzo */}
           <div className='flex flex-col justify-start items-start gap-2'>
             <label htmlFor='price' className='font-semibold text-sm'>
@@ -499,7 +499,7 @@ const ExperienceForm = () => {
           </span>
         </div>
 
-        <div className='grid grid-cols-2 gap-8 mb-8'>
+        <div className='grid md:grid-cols-2 gap-8 mb-8'>
           {/* in evidenza */}
           <div className='flex justify-between items-center gap-3 border border-gray-400/30 rounded-lg p-3'>
             <div className='w-[calc(100%-50px)] flex flex-col justify-center items-start gap-2'>
