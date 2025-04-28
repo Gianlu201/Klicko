@@ -178,9 +178,7 @@ const LoyaltyPage = () => {
 
     let percentual = Math.floor((levelPoints * 100) / gap);
 
-    const result = 'w-[' + percentual + '%]';
-    console.log(result);
-    return result;
+    return percentual;
   };
 
   const handleMouseMove = (e) => {
@@ -298,9 +296,8 @@ const LoyaltyPage = () => {
                 {nextLevel !== null && (
                   <div className='rounded-full w-full mb-4 bg-slate-300/80 overflow-hidden'>
                     <div
-                      className={`py-1.5 bg-green-400 ${
-                        nextLevel !== null && calculateNextLevelPointsPercent()
-                      }`}
+                      className={`py-1.5 bg-green-400`}
+                      style={{ width: `${calculateNextLevelPointsPercent()}%` }}
                     ></div>
                   </div>
                 )}
@@ -369,10 +366,11 @@ const LoyaltyPage = () => {
                           : false
                       }
                       onClick={
-                        fidelityCard.availablePoints > bonus.points &&
-                        (() => {
-                          convertPoints(bonus.points);
-                        })
+                        fidelityCard.availablePoints > bonus.points
+                          ? () => {
+                              convertPoints(bonus.points);
+                            }
+                          : () => {}
                       }
                     >
                       Riscatta
