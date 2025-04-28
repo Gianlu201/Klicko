@@ -1,4 +1,4 @@
-import { CircleCheck, Clock, Package } from 'lucide-react';
+import { CircleCheck, Clock, Package, Ticket, Truck } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import Button from '../components/ui/Button';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -51,7 +51,7 @@ const OrderConfirmationPage = () => {
   }, []);
 
   return (
-    <>
+    <div className='px-6 xl-px-0'>
       {order !== null && (
         <div className='max-w-3xl mx-auto bg-white border border-gray-400/40 shadow rounded-2xl my-12 px-8 py-8'>
           <CircleCheck className='w-14 h-14 mx-auto text-green-500 mb-4' />
@@ -71,22 +71,54 @@ const OrderConfirmationPage = () => {
             con i dettagli del tuo ordine.
           </p>
 
-          <div className='grid grid-cols-3 items-center mb-8'>
+          <div className='border border-gray-400/30 rounded-lg px-5 py-4 mb-12'>
+            <h3 className='flex justify-start items-center gap-2 text-primary text-xl font-semibold mb-4'>
+              <Ticket />I tuoi Voucher
+            </h3>
+
+            <p className='text-gray-500 mb-3'>
+              Ti abbiamo inviato i seguenti codici voucher che riceverai anche
+              in formato fisico a casa tua:
+            </p>
+
+            {order.vouchers.map((voucher) => (
+              <div
+                key={voucher.voucherId}
+                className='bg-gray-100 rounded-lg px-4 py-3 mb-4'
+              >
+                <p className='text-lg font-medium mb-1'>{voucher.title}</p>
+                <p className='text-sm italic'>{voucher.voucherCode}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className='grid grid-cols-4 items-start gap-6 mb-8'>
             <div className='text-primary'>
-              <Clock className='w-10 h-10 mx-auto' />
-              <p className='text-lg font-medium text-center'>
+              <Clock className='w-6 h-6 md:w-10 md:h-10 mx-auto mb-2' />
+              <p className='text-sm md:text-lg font-medium text-center'>
                 Ordine confermato
               </p>
             </div>
 
             <div className='text-gray-500'>
-              <Package className='w-10 h-10 mx-auto' />
-              <p className='text-lg font-medium text-center'>In preparazione</p>
+              <Package className='w-6 h-6 md:w-10 md:h-10 mx-auto mb-2' />
+              <p className='text-sm md:text-lg font-medium text-center'>
+                In preparazione
+              </p>
             </div>
 
             <div className='text-gray-500'>
-              <CircleCheck className='w-10 h-10 mx-auto' />
-              <p className='text-lg font-medium text-center'>Consegnato</p>
+              <Truck className='w-6 h-6 md:w-10 md:h-10 mx-auto mb-2' />
+              <p className='text-sm md:text-lg font-medium text-center'>
+                Spedito
+              </p>
+            </div>
+
+            <div className='text-gray-500'>
+              <CircleCheck className='w-6 h-6 md:w-10 md:h-10 mx-auto mb-2' />
+              <p className='text-sm md:text-lg font-medium text-center'>
+                Consegnato
+              </p>
             </div>
           </div>
 
@@ -110,7 +142,7 @@ const OrderConfirmationPage = () => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

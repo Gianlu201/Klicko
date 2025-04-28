@@ -35,14 +35,14 @@ const AboutPage = () => {
 
   return (
     <div>
-      <div className='flex flex-col justify-center items-center gap-4 py-20'>
+      <div className='flex flex-col justify-center items-center gap-4 py-20 px-6 xl:px-0'>
         <h1 className='text-5xl font-bold'>La nostra storia</h1>
         <p className='text-xl text-gray-500'>
           Basta un click per uscire dalla routine
         </p>
       </div>
 
-      <div className='max-w-3xl mx-auto mb-30'>
+      <div className='max-w-3xl mx-auto mb-16 lg:mb-30 px-6 xl:px-0'>
         <p className='text-lg mb-10'>
           <span className='text-primary font-bold'>Klicko</span> nasce nel 2025
           dalla passione di un gruppo di viaggiatori instancabili che
@@ -77,7 +77,7 @@ const AboutPage = () => {
         <p className='text-xl text-gray-500 mb-10'>
           Questi sono i principi che guidano ogni nostra azione e decisione
         </p>
-        <div className='max-w-6xl mx-auto grid grid-cols-4 gap-6'>
+        <div className='max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-6 xl:px-0'>
           {values.map((value) => (
             <div
               key={value.id}

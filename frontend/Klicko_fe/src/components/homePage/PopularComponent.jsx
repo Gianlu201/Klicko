@@ -38,20 +38,20 @@ const PopularComponent = () => {
   return (
     <>
       {popularExperiences.length > 0 && (
-        <div className='max-w-7xl mx-auto my-18'>
-          <p className='text-[#19aeff] font-semibold mb-2'>
+        <div className='max-w-7xl mx-auto my-18 px-4 xl:px-0'>
+          <p className='text-sm md:text-base text-[#19aeff] font-semibold mb-2'>
             Esperienze in evidenza
           </p>
           <div className='flex justify-between items-center'>
-            <h2 className=' text-4xl font-bold'>
-              Le nostre migliori avventure
+            <h2 className='text-xl 2xl:text-4xl font-bold'>
+              Le nostre avventure più popolari
             </h2>
             <Button variant='outline' size='md'>
               <Link to='/experiences'>Vedi tutte</Link>
             </Button>
           </div>
 
-          <div className='columns-4 gap-8 mt-10'>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-10'>
             {popularExperiences.map((experience) => {
               return (
                 <ExperienceCard

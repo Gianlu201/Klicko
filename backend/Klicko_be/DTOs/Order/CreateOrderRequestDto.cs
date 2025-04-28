@@ -7,5 +7,7 @@ namespace Klicko_be.DTOs.Order
     {
         [Required]
         public required List<ExperiencesListOrderExperienceDto>? OrderExperiences { get; set; }
+
+        public Guid? CouponId { get; set; }
     }
 }

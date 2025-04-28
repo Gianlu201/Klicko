@@ -1,34 +1,45 @@
 import { Facebook, Instagram, Twitter } from 'lucide-react';
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from './ui/Button';
+import { useDispatch } from 'react-redux';
+import { setSelectedCategoryName } from '../redux/actions';
 
 const Footer = () => {
+  const [newsLetterEmail, setNewsLetterEmail] = useState('');
+
+  const dispatch = useDispatch();
+
   const experienceOptions = [
     {
       id: 1,
       title: 'Esperienze in Aria',
-      url: '/#',
+      name: 'Aria',
+      url: '/experiences',
     },
     {
       id: 2,
       title: 'Esperienze in Acqua',
-      url: '/#',
+      name: 'Acqua',
+      url: '/experiences',
     },
     {
       id: 3,
       title: 'Trekking e Avventure',
-      url: '/#',
+      name: 'Trekking',
+      url: '/experiences',
     },
     {
       id: 4,
       title: 'Sport e Motori',
-      url: '/#',
+      name: 'Motori',
+      url: '/experiences',
     },
     {
       id: 5,
       title: 'Gastronomia',
-      url: '/#',
+      name: 'Gastronomia',
+      url: '/experiences',
     },
   ];
 
@@ -41,29 +52,58 @@ const Footer = () => {
     {
       id: 2,
       title: 'FAQ',
-      url: '/#',
+      url: '/faq',
     },
     {
       id: 3,
       title: 'Termini e Condizioni',
-      url: '/#',
+      url: '/termsAndConditions',
     },
     {
       id: 4,
       title: 'Privacy Policy',
-      url: '/#',
+      url: '/privacyPolicy',
     },
     {
       id: 5,
       title: 'Contattaci',
-      url: '/#',
+      url: '/contact',
+    },
+    {
+      id: 6,
+      title: 'Riscatta Voucher',
+      url: '/redeemVoucher',
     },
   ];
 
+  const sendNewsLetterEmail = async () => {
+    try {
+      const response = await fetch(
+        `https://localhost:7235/api/Email/sendNewsLetter`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newsLetterEmail),
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+
+        console.log(data);
+      } else {
+        throw new Error('Errore nel recupero dei dati!');
+      }
+    } catch {
+      console.log('Error');
+    }
+  };
+
   return (
     <div className='bg-slate-950 py-10'>
-      <div className='px-6 lg:px-0 max-w-7xl mx-auto lg:flex gap-6 text-gray-500 mb-8'>
-        <div className='lg:w-1/4 pe-6 mb-6'>
+      <div className='px-6 xl:px-0 max-w-7xl mx-auto md:flex gap-6 text-gray-500 mb-8'>
+        <div className='md:w-1/4 pe-6 mb-6'>
           <h3 className='text-white text-2xl font-semibold mb-4'>Klicko</h3>
           <p className='mb-4'>
             Trova e prenota esperienze uniche in tutto il mondo. Rendi ogni
@@ -76,12 +116,18 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className='lg:w-1/4 mb-6'>
+        <div className='md:w-1/4 mb-6'>
           <h4 className='text-white text-lg font-semibold mb-4'>Esperienze</h4>
           <ul>
             {experienceOptions.map((exp) => (
               <li key={exp.id} className='mb-2'>
-                <Link to={exp.url} className='hover:text-white'>
+                <Link
+                  to={exp.url}
+                  className='hover:text-white'
+                  onClick={() => {
+                    dispatch(setSelectedCategoryName(exp.name));
+                  }}
+                >
                   {exp.title}
                 </Link>
               </li>
@@ -89,7 +135,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        <div className='lg:w-1/4 mb-6'>
+        <div className='md:w-1/4 mb-6'>
           <h4 className='text-white text-lg font-semibold mb-4'>
             Informazioni
           </h4>
@@ -104,7 +150,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        <div className='lg:w-1/4'>
+        <div className='md:w-1/4'>
           <h4 className='text-white text-lg font-semibold mb-4'>Newsletter</h4>
           <p className='mb-4'>
             Iscriviti per ricevere offerte speciali e scoprire nuove esperienze
@@ -113,8 +159,15 @@ const Footer = () => {
             type='email'
             placeholder='La tua email'
             className='bg-gray-800 w-full text-gray-50 py-2 ps-4 rounded-lg border border-gray-700 mb-2'
+            value={newsLetterEmail}
+            onChange={(e) => setNewsLetterEmail(e.target.value)}
           />
-          <Button variant='primary' fullWidth={true}>
+          <Button
+            variant='primary'
+            fullWidth={true}
+            disabled={newsLetterEmail === '' ? true : false}
+            onClick={() => sendNewsLetterEmail()}
+          >
             Iscriviti
           </Button>
         </div>
@@ -122,10 +175,10 @@ const Footer = () => {
       <div className='mx-6 flex justify-between max-w-7xl lg:mx-auto border-t border-t-gray-600 text-gray-500 pt-4'>
         <p>&copy; 2025 Klicko. Tutti i diritti riservati</p>
         <div className='flex gap-2'>
-          <Link to='/#' className='hover:text-white'>
+          <Link to='/termsAndConditions' className='hover:text-white'>
             Termini
           </Link>
-          <Link to='/#' className='hover:text-white'>
+          <Link to='/privacyPolicy' className='hover:text-white'>
             Privacy
           </Link>
           <Link to='/#' className='hover:text-white'>

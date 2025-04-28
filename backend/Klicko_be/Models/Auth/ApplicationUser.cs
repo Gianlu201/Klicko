@@ -16,14 +16,23 @@ namespace Klicko_be.Models.Auth
 
         public Guid CartId { get; set; }
 
+        public Guid FidelityCardId { get; set; }
+
         // navigazione
         public ICollection<ApplicationUserRole>? UserRoles { get; set; }
 
-        [InverseProperty(nameof(Cart.User))]
+        [ForeignKey(nameof(CartId))]
         public Cart? Cart { get; set; }
+
+        [ForeignKey(nameof(FidelityCardId))]
+        public FidelityCard? FidelityCard { get; set; }
 
         public ICollection<Order>? Orders { get; set; }
 
         public ICollection<Experience>? ExperiencesCreated { get; set; }
+
+        public ICollection<Voucher>? Vouchers { get; set; }
+
+        public ICollection<Coupon>? Coupons { get; set; }
     }
 }

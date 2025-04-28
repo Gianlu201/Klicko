@@ -88,8 +88,8 @@ const LoginPage = () => {
   });
 
   return (
-    <div className='flex flex-col justify-center items-center gap-5 min-h-screen'>
-      <h1 className='text-5xl font-bold'>Bentornato su Klicko</h1>
+    <div className='flex flex-col justify-center items-center gap-5 min-h-screen px-6'>
+      <h1 className='text-4xl sm:text-5xl font-bold'>Bentornato su Klicko</h1>
 
       <div className='bg-white rounded-2xl shadow-xl p-6 mx-auto max-w-lg'>
         <h2 className='text-xl font-bold mb-2'>Accedi</h2>

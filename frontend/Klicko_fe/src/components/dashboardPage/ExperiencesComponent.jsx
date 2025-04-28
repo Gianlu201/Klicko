@@ -204,7 +204,7 @@ const ExperiencesComponent = () => {
           </Button>
         </div>
         {showFilters && (
-          <div className='grid grid-cols-4 justify-start items-end gap-8 mt-4'>
+          <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-start items-end gap-8 mt-4'>
             <div className='flex flex-col justify-start items-start gap-2'>
               <span className='font-medium text-sm'>Categoria</span>
               <select
@@ -273,22 +273,22 @@ const ExperiencesComponent = () => {
             <table className='w-full'>
               <thead>
                 <tr className='grid grid-cols-24 gap-4 border-b border-gray-400/30 pb-3'>
-                  <th className='col-span-8 text-gray-500 text-sm font-medium text-start ps-3'>
+                  <th className='col-span-10 md:col-span-8 text-gray-500 text-sm font-medium text-start ps-3'>
                     Esperienza
                   </th>
-                  <th className='col-span-3 text-gray-500 text-sm font-medium text-start'>
+                  <th className='col-span-5 md:col-span-3 text-gray-500 text-sm font-medium text-start'>
                     Categoria
                   </th>
-                  <th className='col-span-3 text-gray-500 text-sm font-medium text-start'>
+                  <th className='col-span-5 md:col-span-3 text-gray-500 text-sm font-medium text-start'>
                     Prezzo
                   </th>
-                  <th className='col-span-4 text-gray-500 text-sm font-medium text-start'>
+                  <th className='hidden md:block col-span-4 text-gray-500 text-sm font-medium text-start'>
                     Luogo
                   </th>
-                  <th className='col-span-3 text-gray-500 text-sm font-medium text-start'>
+                  <th className='hidden md:block col-span-3 text-gray-500 text-sm font-medium text-start'>
                     Data
                   </th>
-                  <th className='col-span-3 text-gray-500 text-sm font-medium text-end pe-3'>
+                  <th className='col-span-4 md:col-span-3 text-gray-500 text-sm font-medium text-end pe-3'>
                     Azioni
                   </th>
                 </tr>
@@ -299,8 +299,8 @@ const ExperiencesComponent = () => {
                     key={exp.experienceId}
                     className='grid grid-cols-24 gap-4 items-center hover:bg-gray-100 border-b border-gray-400/30 py-3 px-2 last-of-type:border-0'
                   >
-                    <td className='col-span-8 flex justify-start items-center gap-3'>
-                      <div>
+                    <td className='col-span-10 md:col-span-8 flex justify-start items-center gap-3'>
+                      <div className='hidden md:block'>
                         <div className='h-[40px] aspect-square rounded overflow-hidden'>
                           <img
                             src={`https://localhost:7235/uploads/${exp.coverImage}`}
@@ -315,21 +315,23 @@ const ExperiencesComponent = () => {
                       </div>
                     </td>
 
-                    <td className='col-span-3'>
-                      <p className='text-sm'>{exp.category.name}</p>
+                    <td className='col-span-5 md:col-span-3'>
+                      <p className='text-xs font-semibold lg:font-normal lg:text-sm'>
+                        {exp.category.name}
+                      </p>
                     </td>
 
-                    <td className='col-span-3'>
+                    <td className='col-span-5 md:col-span-3'>
                       <p className='text-sm'>
                         {exp.price.toFixed(2).replace('.', ',')} €
                       </p>
                     </td>
 
-                    <td className='col-span-4'>
-                      <p className='text-sm'>{exp.place}</p>
+                    <td className='hidden md:block col-span-4'>
+                      <p className='text-xs lg:text-sm'>{exp.place}</p>
                     </td>
 
-                    <td className='col-span-3'>
+                    <td className='hidden md:block col-span-3'>
                       <p className='text-sm'>
                         {new Date(exp.lastEditDate).toLocaleDateString(
                           'it-IT',
@@ -342,10 +344,10 @@ const ExperiencesComponent = () => {
                       </p>
                     </td>
 
-                    <td className='col-span-3'>
+                    <td className='col-span-4 md:col-span-3'>
                       <div className='flex justify-end items-center gap-4 pe-3'>
                         <Pencil
-                          className='w-4 h-4 text-gray-600 cursor-pointer'
+                          className='w-4 h-4 md:w-4 md:h-4 text-gray-600 cursor-pointer'
                           onClick={() => {
                             navigate(
                               `/dashboard/experiences/edit/${exp.experienceId}`
@@ -354,14 +356,14 @@ const ExperiencesComponent = () => {
                         />
                         {exp.isDeleted ? (
                           <ArchiveRestore
-                            className='w-4 h-4 text-green-600 cursor-pointer'
+                            className='w-4 h-4 md:w-4 md:h-4 text-green-600 cursor-pointer'
                             onClick={() => {
                               restoreExperience(exp.experienceId);
                             }}
                           />
                         ) : (
                           <Trash2
-                            className='w-4 h-4 text-red-600 cursor-pointer'
+                            className='w-4 h-4 md:w-4 md:h-4 text-red-600 cursor-pointer'
                             onClick={() => {
                               softDeleteExperience(exp.experienceId);
                             }}

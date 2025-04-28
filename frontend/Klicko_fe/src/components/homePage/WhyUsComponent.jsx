@@ -33,7 +33,7 @@ const WhyUsComponent = () => {
   ];
 
   return (
-    <div className='text-center py-15 bg-linear-to-r from-blue-400/20 to-orange-400/20'>
+    <div className='text-center py-15 bg-linear-to-r from-blue-400/20 to-orange-400/20 px-6 xl:px-0'>
       <p className='text-secondary font-semibold'>Perché sceglierci</p>
 
       <h2 className=' text-4xl font-bold'>Rendiamo ogni avventura speciale</h2>
@@ -46,7 +46,7 @@ const WhyUsComponent = () => {
         Basta un click per uscire dalla routine
       </p>
 
-      <div className='columns-3 gap-10 max-w-7xl mx-auto'>
+      <div className='grid grid-cols-1 md:grid-cols-3 gap-10 max-w-7xl mx-auto'>
         {motivations.map((motivation) => (
           <div
             key={motivation.id}

@@ -3,22 +3,25 @@ import React, { useEffect, useState } from 'react';
 import Button from '../components/ui/Button';
 import ExperienceCard from '../components/ExperienceCard';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCategoriesList, setExperiencesList } from '../redux/actions';
+import { setSelectedCategoryName, setSearchBarQuery } from '../redux/actions';
 
 const ExperiencesPage = () => {
   const [experiences, setExperiences] = useState([]);
-  const [searchBar, setSearchBar] = useState('');
+  const [categories, setCategories] = useState([]);
+  const [filteredExperiences, setFilteredExperiences] = useState([]);
   const [showFilters, setShowFilters] = useState(false);
+  const [searchBar, setSearchBar] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(1000);
+  const [sortOption, setSortOption] = useState('suggested');
 
-  const experiencesRedux = useSelector((state) => {
-    return state.experiences;
+  const searchBarQuery = useSelector((state) => {
+    return state.searchBarQuery;
   });
 
-  const categoriesList = useSelector((state) => {
-    return state.categories;
+  const selectedCategoryName = useSelector((state) => {
+    return state.selectedCategoryName;
   });
 
   const dispatch = useDispatch();
@@ -38,9 +41,10 @@ const ExperiencesPage = () => {
         const data = await response.json();
         // console.log(data);
 
-        dispatch(setExperiencesList(data.experiences));
-
         setExperiences(data.experiences);
+        setFilteredExperiences(data.experiences);
+
+        // searchExperiences();
       } else {
         throw new Error('Errore nel recupero dei dati!');
       }
@@ -61,7 +65,9 @@ const ExperiencesPage = () => {
         const data = await response.json();
         // console.log(data);
 
-        dispatch(setCategoriesList(data.categories));
+        // dispatch(setCategoriesList(data.categories));
+
+        setCategories(data.categories);
       } else {
         throw new Error('Errore nel recupero dei dati!');
       }
@@ -71,7 +77,10 @@ const ExperiencesPage = () => {
   };
 
   const searchExperiences = () => {
-    const filteredExperiences = experiencesRedux.filter(
+    console.log(searchBar);
+    console.log(selectedCategory);
+
+    const filtExperiences = experiences.filter(
       (exp) =>
         exp.title.toLowerCase().includes(searchBar) &&
         (exp.category.name === selectedCategory ||
@@ -80,8 +89,36 @@ const ExperiencesPage = () => {
         exp.price <= maxPrice
     );
 
-    console.log(filteredExperiences);
-    setExperiences(filteredExperiences);
+    switch (sortOption) {
+      case 'suggested':
+        break;
+
+      case 'priceUp':
+        filtExperiences.sort((a, b) => a.price - b.price);
+        break;
+
+      case 'priceDown':
+        filtExperiences.sort((a, b) => b.price - a.price);
+        break;
+
+      case 'latest':
+        filtExperiences.sort(
+          (a, b) => new Date(b.lastEditDate) - new Date(a.lastEditDate)
+        );
+        break;
+
+      case 'lessRecent':
+        filtExperiences.sort(
+          (a, b) => new Date(a.lastEditDate) - new Date(b.lastEditDate)
+        );
+        break;
+
+      default:
+        break;
+    }
+
+    console.log(filtExperiences);
+    setFilteredExperiences(filtExperiences);
   };
 
   const resetFilters = () => {
@@ -92,27 +129,44 @@ const ExperiencesPage = () => {
   };
 
   useEffect(() => {
-    if (experiencesRedux.length === 0) {
-      getAllExperiences();
-    } else {
-      setExperiences(experiencesRedux);
-    }
+    getAllExperiences();
+    getAllCategories();
 
-    if (categoriesList.length === 0) {
-      getAllCategories();
-    }
+    setSearchBar(searchBarQuery);
+    setSelectedCategory(selectedCategoryName);
+
+    dispatch(setSelectedCategoryName(''));
+    dispatch(setSearchBarQuery(''));
   }, []);
 
   useEffect(() => {
-    // search by experience title
     searchExperiences();
-  }, [searchBar, selectedCategory, minPrice, maxPrice]);
+  }, [
+    experiences,
+    searchBar,
+    selectedCategory,
+    minPrice,
+    maxPrice,
+    sortOption,
+  ]);
+
+  useEffect(() => {
+    if (searchBarQuery !== '') {
+      setSearchBar(searchBarQuery);
+      dispatch(setSearchBarQuery(''));
+    }
+
+    if (selectedCategoryName !== '') {
+      setSelectedCategory(selectedCategoryName);
+      dispatch(setSelectedCategoryName(''));
+    }
+  }, [searchBarQuery, selectedCategoryName]);
 
   return (
-    <div className='max-w-7xl mx-auto mb-8 mt-6'>
+    <div className='max-w-7xl min-h-[80vh] mx-auto mb-8 mt-6 px-6 xl:px-0'>
       <div>
         <h1 className='text-3xl font-bold mb-3'>Esperienze</h1>
-        <p className='text-gray-500 max-w-1/2'>
+        <p className='text-gray-500 max-w-md'>
           Esplora la nostra collezione di avventure incredibili. Dalle
           esperienze adrenaliniche al relax, trova l atua prossima avventura.
         </p>
@@ -147,7 +201,7 @@ const ExperiencesPage = () => {
         </div>
 
         {showFilters && (
-          <div className='grid grid-cols-4 justify-start items-end gap-8 border-t border-gray-500/30 mt-6 pt-4'>
+          <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-start items-end gap-8 border-t border-gray-500/30 mt-6 pt-4'>
             <div className='flex flex-col justify-start items-start gap-2'>
               <span className='font-medium text-sm'>Categoria</span>
               <select
@@ -160,11 +214,12 @@ const ExperiencesPage = () => {
                 }}
               >
                 <option value=''>Tutte le categorie</option>
-                {categoriesList.map((category) => (
-                  <option key={category.categoryId} value={category.name}>
-                    {category.name}
-                  </option>
-                ))}
+                {categories.length > 0 &&
+                  categories.map((category) => (
+                    <option key={category.categoryId} value={category.name}>
+                      {category.name}
+                    </option>
+                  ))}
               </select>
             </div>
             <div className='flex flex-col justify-start items-start gap-2'>
@@ -213,23 +268,29 @@ const ExperiencesPage = () => {
       <div>
         <div className='flex justify-between items-center my-6'>
           <h4 className='text-xl font-semibold'>
-            {experiences.length} esperienze trovate
+            {filteredExperiences.length} esperienze trovate
           </h4>
           <select
             name=''
             id=''
             className='bg-background border border-gray-800/30 rounded-xl py-2 px-3'
+            value={sortOption}
+            onChange={(e) => {
+              setSortOption(e.target.value);
+            }}
           >
             <option value='suggested'>Consigliati</option>
             <option value='priceUp'>Prezzo: crescente</option>
             <option value='priceDown'>Prezzo: decrescente</option>
             <option value='latest'>Più recenti</option>
+            <option value='lessRecent'>Meno recenti</option>
           </select>
         </div>
-        {experiences.length > 0 && (
-          <div className='grid grid-cols-4 gap-6'>
+
+        {filteredExperiences.length > 0 && (
+          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
             {/* elenco esperienze */}
-            {experiences.map((exp) => (
+            {filteredExperiences.map((exp) => (
               <ExperienceCard
                 key={exp.experienceId}
                 experience={exp}

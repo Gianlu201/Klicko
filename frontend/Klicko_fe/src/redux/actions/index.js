@@ -5,9 +5,10 @@ export const SET_LOGGED_USER = 'SET_LOGGED_USER';
 export const LOGOUT = 'LOGOUT';
 export const SET_USER_CART = 'SET_USER_CART';
 export const CART_MODIFIED = 'CART_MODIFIED';
-export const SET_EXPERIENCES_LIST = 'SET_EXPERIENCES_LIST';
-export const SET_CATEGORIES_LIST = 'SET_CATEGORIES_LIST';
 export const EMPTY_CART = 'EMPTY_CART';
+export const SET_SEARCHBAR_QUERY = 'SET_SEARCHBAR_QUERY';
+export const SET_SELECTED_CATEGORY = 'SET_SELECTED_CATEGORY';
+export const SET_USER_FIDELITY_CARD = 'SET_USER_FIDELITY_CARD';
 
 export const setLoggedUser = (data) => {
   const tokenDecoded = jwtDecode(data.token);
@@ -23,6 +24,7 @@ export const setLoggedUser = (data) => {
     surname: tokenDecoded.surname,
     id: tokenDecoded.nameidentifier,
     cartId: tokenDecoded.cartId,
+    fidelityCardId: tokenDecoded.fidelityCardId,
     iss: tokenDecoded.iss,
     expiration: data.expires,
   };
@@ -86,12 +88,26 @@ export const cartModified = () => ({
   type: CART_MODIFIED,
 });
 
-export const setExperiencesList = (experiencesList) => ({
-  type: SET_EXPERIENCES_LIST,
-  payload: experiencesList,
+export const setUserFidelityCard = (fidelityCard) => {
+  const userCard = {
+    fidelityCardId: fidelityCard.fidelityCardId,
+    cardNumber: fidelityCard.cardNumber,
+    points: fidelityCard.points,
+    availablePoints: fidelityCard.availablePoints,
+  };
+
+  return {
+    type: SET_USER_FIDELITY_CARD,
+    payload: userCard,
+  };
+};
+
+export const setSearchBarQuery = (query) => ({
+  type: SET_SEARCHBAR_QUERY,
+  payload: query,
 });
 
-export const setCategoriesList = (categoriesList) => ({
-  type: SET_CATEGORIES_LIST,
-  payload: categoriesList,
+export const setSelectedCategoryName = (categoryName) => ({
+  type: SET_SELECTED_CATEGORY,
+  payload: categoryName,
 });

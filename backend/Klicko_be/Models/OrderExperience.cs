@@ -8,16 +8,27 @@ namespace Klicko_be.Models
         [Key]
         public Guid OrderExperienceId { get; set; }
 
-        public required Guid ExperienceId { get; set; }
+        [Required]
+        public required string Title { get; set; }
+
+        //public required Guid ExperienceId { get; set; }
+        [Required]
         public required Guid OrderId { get; set; }
 
-        public int Quantity { get; set; } = 1;
+        [Required]
+        [Range(
+            0.01,
+            1000000,
+            ErrorMessage = "Price must be greater than 0.01 and less than 1000000"
+        )]
+        public required decimal UnitPrice { get; set; }
+
+        public int Quantity { get; set; }
+
+        public decimal TotalPrice { get; set; }
 
         // navigazione
         [ForeignKey(nameof(OrderId))]
         public Order? Order { get; set; }
-
-        [ForeignKey(nameof(ExperienceId))]
-        public Experience? Experience { get; set; }
     }
 }

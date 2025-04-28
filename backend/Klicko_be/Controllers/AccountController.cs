@@ -4,6 +4,7 @@ using System.Text;
 using Klicko_be.DTOs.Account;
 using Klicko_be.DTOs.ApplicationRole;
 using Klicko_be.DTOs.ApplicationUserRole;
+using Klicko_be.Models;
 using Klicko_be.Models.Auth;
 using Klicko_be.Settings;
 using Microsoft.AspNetCore.Http;
@@ -142,14 +143,34 @@ namespace Klicko_be.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequestDto registerRequestDto)
         {
+            var newUserId = Guid.NewGuid().ToString();
+            var newCartId = Guid.NewGuid();
+            var newFidelityId = Guid.NewGuid();
+
             var newUser = new ApplicationUser()
             {
+                Id = newUserId,
                 Email = registerRequestDto.Email,
                 UserName = registerRequestDto.Email,
                 FirstName = registerRequestDto.FirstName,
                 LastName = registerRequestDto.LastName,
                 RegistrationDate = DateTime.Now,
-                CartId = Guid.NewGuid(),
+                CartId = newCartId,
+                Cart = new Cart()
+                {
+                    CartId = newCartId,
+                    UserId = newUserId,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                },
+                FidelityCardId = newFidelityId,
+                FidelityCard = new FidelityCard()
+                {
+                    FidelityCardId = newFidelityId,
+                    Points = 0,
+                    AvailablePoints = 0,
+                    UserId = newUserId,
+                },
             };
 
             var result = await _userManager.CreateAsync(newUser, registerRequestDto.Password);
@@ -187,6 +208,7 @@ namespace Klicko_be.Controllers
             claims.Add(new Claim("name", user.FirstName));
             claims.Add(new Claim("surname", user.LastName));
             claims.Add(new Claim("cartId", user.CartId.ToString()));
+            claims.Add(new Claim("fidelityCardId", user.FidelityCardId.ToString()));
             claims.Add(new Claim("nameIdentifier", user.Id));
             claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id));
 

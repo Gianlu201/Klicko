@@ -32,6 +32,8 @@ const OrdersComponent = () => {
       if (response.ok) {
         const data = await response.json();
 
+        console.log(data);
+
         setOrders(data.orders);
         setFilteredOrders(data.orders);
         // dispatch(emptyCart());
@@ -94,6 +96,9 @@ const OrdersComponent = () => {
     switch (state) {
       case 'In attesa':
         return 'bg-amber-200/60 border border-amber-500/40';
+
+      case 'Spedito':
+        return 'bg-primary/40 border border-primary/30';
 
       case 'Completato':
         return 'bg-green-200/60 border border-green-500/40';
@@ -159,7 +164,7 @@ const OrdersComponent = () => {
       </p>
 
       {/* orders overview */}
-      <div className='grid grid-cols-4 gap-6 mb-6'>
+      <div className='grid grid-cols-2 md:grid-cols-4 gap-6 mb-6'>
         {options.map((opt) => (
           <div
             key={opt.id}
@@ -191,14 +196,15 @@ const OrdersComponent = () => {
             <div>
               {filteredOrders.map((order) => (
                 <Accordion
+                  key={order.orderId}
                   intestation={
-                    <div className='flex justify-between items-center'>
+                    <div className='flex justify-between items-center cursor-pointer'>
                       <div className='grow flex gap-2'>
                         <span>Ordine</span>
                         <h6>#{order.orderNumber}</h6>
                       </div>
                       <div className='flex justify-between items-center gap-4'>
-                        <span className='text-sm'>
+                        <span className='hidden md:block text-sm'>
                           {new Date(order.createdAt).toLocaleDateString(
                             'it-IT',
                             {
@@ -223,29 +229,37 @@ const OrdersComponent = () => {
                     <thead>
                       <tr className='grid grid-cols-12 text-gray-500 text-sm font-normal border-b border-gray-400/40 p-3 hover:bg-gray-100'>
                         <th className='col-span-7 text-start'>Esperienza</th>
-                        <th className='col-span-1 text-center'>Quantità</th>
-                        <th className='col-span-2 text-end'>Prezzo</th>
-                        <th className='col-span-2 text-end'>Totale</th>
+                        <th className='col-span-2 md:col-span-1 text-center'>
+                          Quantità
+                        </th>
+                        <th className='hidden md:block col-span-2 text-end'>
+                          Prezzo
+                        </th>
+                        <th className='col-span-3 md:col-span-2 text-end'>
+                          Totale
+                        </th>
                       </tr>
                     </thead>
 
                     <tbody>
-                      {order.experiences.length > 0 &&
-                        order.experiences.map((exp) => (
-                          <tr className='grid grid-cols-12 text-sm border-b border-gray-400/40 p-3 hover:bg-gray-100'>
+                      {order.orderExperiences.length > 0 &&
+                        order.orderExperiences.map((orderExp) => (
+                          <tr
+                            key={orderExp.orderExperienceId}
+                            className='grid grid-cols-12 text-sm border-b border-gray-400/40 p-3 hover:bg-gray-100'
+                          >
                             <td className='col-span-7 text-start'>
-                              {exp.title}
+                              {orderExp.title}
                             </td>
-                            <td className='col-span-1 text-center'>
-                              {exp.quantity}
+                            <td className='col-span-2 md:col-span-1 text-center'>
+                              {orderExp.quantity}
                             </td>
-                            <td className='col-span-2 text-end'>
-                              {exp.price.toFixed(2).replace('.', ',')} €
+                            <td className='hidden md:block col-span-2 text-end'>
+                              {orderExp.unitPrice.toFixed(2).replace('.', ',')}{' '}
+                              €
                             </td>
-                            <td className='col-span-2 text-end'>
-                              {(exp.price * exp.quantity)
-                                .toFixed(2)
-                                .replace('.', ',')}{' '}
+                            <td className='col-span-3 md:col-span-2 text-end'>
+                              {orderExp.totalPrice.toFixed(2).replace('.', ',')}{' '}
                               €
                             </td>
                           </tr>
@@ -253,9 +267,34 @@ const OrdersComponent = () => {
                     </tbody>
 
                     <tfoot>
+                      {order.shippingPrice > 0 && (
+                        <tr className='grid grid-cols-12 text-gray-500 font-medium p-3 hover:bg-gray-100'>
+                          <td className='col-span-8 md:col-span-10 text-end'>
+                            Spedizione:
+                          </td>
+                          <td className='col-span-4 md:col-span-2 text-end'>
+                            {order.shippingPrice.toFixed(2).replace('.', ',')} €
+                          </td>
+                        </tr>
+                      )}
+
+                      {order.totalDiscount > 0 && (
+                        <tr className='grid grid-cols-12 text-gray-500 font-medium p-3 hover:bg-gray-100'>
+                          <td className='col-span-8 md:col-span-10 text-end'>
+                            Sconto coupon:
+                          </td>
+                          <td className='col-span-4 md:col-span-2 text-end'>
+                            -{order.totalDiscount.toFixed(2).replace('.', ',')}{' '}
+                            €
+                          </td>
+                        </tr>
+                      )}
+
                       <tr className='grid grid-cols-12 font-bold p-3 hover:bg-gray-100'>
-                        <td className='col-span-10 text-end'>Totale ordine:</td>
-                        <td className='col-span-2 text-end'>
+                        <td className='col-span-8 md:col-span-10 text-end'>
+                          Totale ordine:
+                        </td>
+                        <td className='col-span-4 md:col-span-2 text-end'>
                           {order.totalPrice.toFixed(2).replace('.', ',')} €
                         </td>
                       </tr>

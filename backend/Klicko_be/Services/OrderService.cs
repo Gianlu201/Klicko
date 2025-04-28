@@ -7,13 +7,15 @@ namespace Klicko_be.Services
     public class OrderService
     {
         private readonly ApplicationDbContext _context;
+        private readonly CartService _cartService;
 
-        public OrderService(ApplicationDbContext context)
+        public OrderService(ApplicationDbContext context, CartService cartService)
         {
             _context = context;
+            _cartService = cartService;
         }
 
-        private async Task<bool> TrySaveAsync()
+        public async Task<bool> TrySaveAsync()
         {
             try
             {
@@ -31,9 +33,9 @@ namespace Klicko_be.Services
             {
                 var orders = await _context
                     .Orders.Include(o => o.OrderExperiences)
-                    .ThenInclude(oe => oe.Experience)
-                    .ThenInclude(e => e.Category)
                     .Include(o => o.User)
+                    .Include(o => o.Vouchers)
+                    .OrderByDescending(o => o.OrderNumber)
                     .ToListAsync();
 
                 return orders;
@@ -50,10 +52,10 @@ namespace Klicko_be.Services
             {
                 var orders = await _context
                     .Orders.Include(o => o.OrderExperiences)
-                    .ThenInclude(oe => oe.Experience)
-                    .ThenInclude(e => e.Category)
                     .Include(o => o.User)
+                    .Include(o => o.Vouchers)
                     .Where(o => o.UserId == userId)
+                    .OrderByDescending(o => o.OrderNumber)
                     .ToListAsync();
 
                 return orders;
@@ -70,10 +72,19 @@ namespace Klicko_be.Services
             {
                 var order = await _context
                     .Orders.Include(o => o.OrderExperiences)
-                    .ThenInclude(oe => oe.Experience)
-                    .ThenInclude(e => e.Category)
                     .Include(o => o.User)
+                    .Include(o => o.Vouchers)
+                    .ThenInclude(v => v.Category)
                     .FirstOrDefaultAsync(o => o.OrderId == orderId);
+
+                if (order != null)
+                {
+                    await EmailService.SendEmailOrderConfirmationAsync(
+                        order.User.Email,
+                        $"Conferma ordine {order.OrderNumber}",
+                        order
+                    );
+                }
 
                 return order;
             }
@@ -83,13 +94,15 @@ namespace Klicko_be.Services
             }
         }
 
-        public async Task<bool> CreateOrderAsync(Order newOrder)
+        public async Task<bool> CreateOrderAsync(Order newOrder, string userId)
         {
             try
             {
                 _context.Orders.Add(newOrder);
 
-                return await TrySaveAsync();
+                var user = await _context.ApplicationUsers.FirstOrDefaultAsync(u => u.Id == userId);
+
+                return await _cartService.RemoveAllExperienceFromCartAsync(user!.CartId);
             }
             catch
             {

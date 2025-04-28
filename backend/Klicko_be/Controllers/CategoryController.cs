@@ -43,7 +43,7 @@ namespace Klicko_be.Controllers
                 return Ok(
                     new GetCategoriesListResponseDto()
                     {
-                        Message = $"{categoriesDto.Count} categories found!",
+                        Message = $"{categoriesDto!.Count} categories found!",
                         Categories = categoriesDto,
                     }
                 );
