@@ -1,11 +1,13 @@
 import { Facebook, Instagram, Twitter } from 'lucide-react';
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from './ui/Button';
 import { useDispatch } from 'react-redux';
 import { setSelectedCategoryName } from '../redux/actions';
 
 const Footer = () => {
+  const [newsLetterEmail, setNewsLetterEmail] = useState('');
+
   const dispatch = useDispatch();
 
   const experienceOptions = [
@@ -67,7 +69,36 @@ const Footer = () => {
       title: 'Contattaci',
       url: '/contact',
     },
+    {
+      id: 6,
+      title: 'Riscatta Voucher',
+      url: '/redeemVoucher',
+    },
   ];
+
+  const sendNewsLetterEmail = async () => {
+    try {
+      const response = await fetch(
+        `https://localhost:7235/api/Email/sendNewsLetter`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newsLetterEmail),
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+
+        console.log(data);
+      } else {
+        throw new Error('Errore nel recupero dei dati!');
+      }
+    } catch {
+      console.log('Error');
+    }
+  };
 
   return (
     <div className='bg-slate-950 py-10'>
@@ -128,8 +159,15 @@ const Footer = () => {
             type='email'
             placeholder='La tua email'
             className='bg-gray-800 w-full text-gray-50 py-2 ps-4 rounded-lg border border-gray-700 mb-2'
+            value={newsLetterEmail}
+            onChange={(e) => setNewsLetterEmail(e.target.value)}
           />
-          <Button variant='primary' fullWidth={true}>
+          <Button
+            variant='primary'
+            fullWidth={true}
+            disabled={newsLetterEmail === '' ? true : false}
+            onClick={() => sendNewsLetterEmail()}
+          >
             Iscriviti
           </Button>
         </div>

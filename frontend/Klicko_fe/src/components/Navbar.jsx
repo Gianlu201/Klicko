@@ -8,6 +8,8 @@ import {
   Settings,
   LogOut,
   ShoppingBag,
+  BadgePercent,
+  Tickets,
 } from 'lucide-react';
 import Button from './ui/Button';
 import { Dropdown, DropdownItem, DropdownHeader } from './ui/DropdownMenu';
@@ -169,12 +171,15 @@ const Navbar = () => {
           >
             Chi siamo
           </Link>
-          <Link
-            to='/loyalty'
-            className='font-medium hover:text-primary transition-colors'
-          >
-            Programma fedeltà
-          </Link>
+
+          {profile?.email && (
+            <Link
+              to='/loyalty'
+              className='font-medium hover:text-primary transition-colors'
+            >
+              Programma fedeltà
+            </Link>
+          )}
         </nav>
 
         <div className='flex items-center space-x-4'>
@@ -204,13 +209,6 @@ const Navbar = () => {
                   navigate('/dashboard');
                 }}
               >
-                {/* <Link
-                  to='/dashboard'
-                  className='w-full flex items-center justify-start gap-2'
-                >
-                  <User size={16} />
-                  Dashbord
-                </Link> */}
                 <span className='w-full flex items-center justify-start gap-2'>
                   <User size={16} />
                   Dashbord
@@ -221,14 +219,28 @@ const Navbar = () => {
                   navigate('/dashboard/orders');
                 }}
               >
-                {/* <Link
-                  to='/dashboard/orders'
-                  className='w-full flex items-center justify-start gap-2'
-                >
-                  <ShoppingBag size={16} />I miei ordini
-                </Link> */}
                 <span className='w-full flex items-center justify-start gap-2'>
                   <ShoppingBag size={16} />I miei ordini
+                </span>
+              </DropdownItem>
+              <DropdownItem
+                onClick={() => {
+                  navigate('/redeemVoucher');
+                }}
+              >
+                <span className='w-full flex items-center justify-start gap-2'>
+                  <Tickets size={16} />
+                  Vouchers
+                </span>
+              </DropdownItem>
+              <DropdownItem
+                onClick={() => {
+                  navigate('/coupons');
+                }}
+              >
+                <span className='w-full flex items-center justify-start gap-2'>
+                  <BadgePercent size={16} />
+                  Coupon
                 </span>
               </DropdownItem>
               <DropdownItem
@@ -236,13 +248,6 @@ const Navbar = () => {
                   navigate('/dashboard/settings');
                 }}
               >
-                {/* <Link
-                  to='/dashboard/settings'
-                  className='w-full flex items-center justify-start gap-2'
-                >
-                  <Settings size={16} />
-                  Impostazioni
-                </Link> */}
                 <span className='w-full flex items-center justify-start gap-2'>
                   <Settings size={16} />
                   Impostazioni

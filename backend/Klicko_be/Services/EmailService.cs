@@ -31,7 +31,6 @@ namespace Klicko_be.Services
                 var from = new EmailAddress("noreply.gididi@gmail.com", "Klicko");
                 var to = new EmailAddress(toEmail);
 
-                // Qui inserisci l'HTML creato prima
                 var htmlContent = File.ReadAllText(
                     "../Klicko_be/EmailTemplate/OrderConfirmation.html"
                 );
@@ -46,17 +45,53 @@ namespace Klicko_be.Services
                     }
                 }
 
-                // Se vuoi sostituire dinamicamente i dati (es: ordine, voucher)
                 htmlContent = htmlContent
                     .Replace("order-number", order.OrderNumber.ToString())
                     .Replace("order-vouchers", vouchersContent);
-                //.Replace("Trekking sul sentiero degli Dei", voucherTitle)
-                //.Replace("22784355-A9364C03-B331F467", voucherCode)
 
                 var msg = MailHelper.CreateSingleEmail(
                     from,
                     to,
                     subject,
+                    plainTextContent: null,
+                    htmlContent
+                );
+                var response = await client.SendEmailAsync(msg);
+
+                return response.StatusCode == System.Net.HttpStatusCode.Accepted;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Errore invio email: {ex.Message}");
+                return false;
+            }
+        }
+
+        public static async Task<bool> SendNewsLetterAsync(string toEmail)
+        {
+            if (string.IsNullOrEmpty(ApiKey))
+            {
+                Console.WriteLine(
+                    "Errore: La variabile d'ambiente SENDGRID_API_KEY non è impostata."
+                );
+                return false;
+            }
+
+            try
+            {
+                var client = new SendGridClient(ApiKey);
+                var from = new EmailAddress("noreply.gididi@gmail.com", "Klicko");
+                var to = new EmailAddress(toEmail);
+
+                // Qui inserisci l'HTML creato prima
+                var htmlContent = File.ReadAllText(
+                    "../Klicko_be/EmailTemplate/NewsLetterSubscription.html"
+                );
+
+                var msg = MailHelper.CreateSingleEmail(
+                    from,
+                    to,
+                    "Benvenuto nella nostra NewsLetter",
                     plainTextContent: null,
                     htmlContent
                 );

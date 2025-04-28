@@ -78,7 +78,7 @@ namespace Klicko_be.Services
                 if (order != null)
                 {
                     await EmailService.SendEmailOrderConfirmationAsync(
-                        "gianlucadidiego2001@gmail.com",
+                        order.User.Email,
                         $"Conferma ordine {order.OrderNumber}",
                         order
                     );

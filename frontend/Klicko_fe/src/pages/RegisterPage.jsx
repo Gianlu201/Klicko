@@ -1,15 +1,60 @@
 import { SquareUserRound, Users } from 'lucide-react';
 import Button from '../components/ui/Button';
 import { Link, useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 const RegisterPage = () => {
+  const [name, setName] = useState('');
+  const [surname, setSurname] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
   const profile = useSelector((state) => {
     return state.profile;
   });
 
   const navigate = useNavigate();
+
+  const sendRegistrationForm = async (e) => {
+    try {
+      e.preventDefault();
+      setErrorMessage('');
+
+      if (password !== confirmPassword) {
+        setErrorMessage('Le password non coincidono!');
+      } else {
+        const body = {
+          firstName: name,
+          lastName: surname,
+          email: email,
+          password: password,
+        };
+
+        const response = await fetch(
+          `https://localhost:7235/api/Account/register`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body),
+          }
+        );
+        if (response.ok) {
+          const data = await response.json();
+
+          console.log(data);
+        } else {
+          throw new Error('Errore nel recupero dei dati!');
+        }
+      }
+    } catch {
+      console.log('Error');
+    }
+  };
 
   useEffect(() => {
     if (profile?.email) {
@@ -53,13 +98,22 @@ const RegisterPage = () => {
         <p className='text-gray-500 mb-5'>
           Inserisci i tuoi dati per registrarti
         </p>
-        <form className='mb-5'>
+        <form
+          className='mb-5'
+          onSubmit={(e) => {
+            sendRegistrationForm(e);
+          }}
+        >
           <div className='flex flex-col mb-4'>
             <label className='mb-2'>Nome</label>
             <input
               type='text'
               placeholder='Inserisci il tuo nome..'
               className='bg-background border border-gray-600/20 rounded-lg py-1.5 px-3'
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
             />
           </div>
           <div className='flex flex-col mb-4'>
@@ -68,6 +122,10 @@ const RegisterPage = () => {
               type='text'
               placeholder='Inserisci il tuo cognome..'
               className='bg-background border border-gray-600/20 rounded-lg py-1.5 px-3'
+              value={surname}
+              onChange={(e) => {
+                setSurname(e.target.value);
+              }}
             />
           </div>
           <div className='flex flex-col mb-4'>
@@ -76,6 +134,10 @@ const RegisterPage = () => {
               type='text'
               placeholder='Inserisci la tua email..'
               className='bg-background border border-gray-600/20 rounded-lg py-1.5 px-3'
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
             />
           </div>
           <div className='flex flex-col mb-4'>
@@ -84,6 +146,10 @@ const RegisterPage = () => {
               type='password'
               placeholder='Inserisci la tua password..'
               className='bg-background border border-gray-600/20 rounded-lg py-1.5 px-3'
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
             />
           </div>
           <div className='flex flex-col mb-6'>
@@ -92,9 +158,16 @@ const RegisterPage = () => {
               type='text'
               placeholder='Conferma la tua password..'
               className='bg-background border border-gray-600/20 rounded-lg py-1.5 px-3'
+              value={confirmPassword}
+              onChange={(e) => {
+                setConfirmPassword(e.target.value);
+              }}
             />
           </div>
-          <Button variant='primary' fullWidth={true}>
+
+          {errorMessage !== '' && <p>{errorMessage}</p>}
+
+          <Button type='submit' variant='primary' fullWidth={true}>
             Registrati
           </Button>
         </form>
