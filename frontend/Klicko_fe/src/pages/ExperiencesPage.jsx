@@ -163,10 +163,10 @@ const ExperiencesPage = () => {
   }, [searchBarQuery, selectedCategoryName]);
 
   return (
-    <div className='max-w-7xl min-h-[80vh] mx-auto mb-8 mt-6'>
+    <div className='max-w-7xl min-h-[80vh] mx-auto mb-8 mt-6 px-6 xl:px-0'>
       <div>
         <h1 className='text-3xl font-bold mb-3'>Esperienze</h1>
-        <p className='text-gray-500 max-w-1/2'>
+        <p className='text-gray-500 max-w-md'>
           Esplora la nostra collezione di avventure incredibili. Dalle
           esperienze adrenaliniche al relax, trova l atua prossima avventura.
         </p>
@@ -201,7 +201,7 @@ const ExperiencesPage = () => {
         </div>
 
         {showFilters && (
-          <div className='grid grid-cols-4 justify-start items-end gap-8 border-t border-gray-500/30 mt-6 pt-4'>
+          <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-start items-end gap-8 border-t border-gray-500/30 mt-6 pt-4'>
             <div className='flex flex-col justify-start items-start gap-2'>
               <span className='font-medium text-sm'>Categoria</span>
               <select
@@ -286,8 +286,9 @@ const ExperiencesPage = () => {
             <option value='lessRecent'>Meno recenti</option>
           </select>
         </div>
+
         {filteredExperiences.length > 0 && (
-          <div className='grid grid-cols-4 gap-6'>
+          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
             {/* elenco esperienze */}
             {filteredExperiences.map((exp) => (
               <ExperienceCard
