@@ -10,6 +10,7 @@ import {
   ShoppingBag,
   BadgePercent,
   Tickets,
+  FileSpreadsheetIcon,
 } from 'lucide-react';
 import Button from './ui/Button';
 import { Dropdown, DropdownItem, DropdownHeader } from './ui/DropdownMenu';
@@ -146,7 +147,13 @@ const Navbar = () => {
   return (
     <header className='bg-white shadow-sm sticky top-0 z-40'>
       <div className='max-w-7xl mx-auto px-4 py-3 flex justify-between items-center'>
-        <Link to='/' className='flex items-center space-x-2'>
+        <Link
+          to='/'
+          className='flex items-center space-x-2'
+          onClick={() => {
+            setMobileMenuOpen(false);
+          }}
+        >
           <span className='font-serif text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-blue-700'>
             Klicko
           </span>
@@ -183,7 +190,13 @@ const Navbar = () => {
         </nav>
 
         <div className='flex items-center space-x-4'>
-          <Link to='/cart' className='relative flex items-center gap-1'>
+          <Link
+            to='/cart'
+            className='relative flex items-center gap-1'
+            onClick={() => {
+              setMobileMenuOpen(false);
+            }}
+          >
             {cart.experiences != undefined && cart.experiences.length > 0 && (
               <span className='text-lg font-semibold'>
                 {cart.experiences.length}
@@ -196,7 +209,13 @@ const Navbar = () => {
             // dropdown opzioni profilo
             <Dropdown
               trigger={
-                <Button variant='icon' size='icon'>
+                <Button
+                  variant='icon'
+                  size='icon'
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                  }}
+                >
                   <User className='h-5 w-5' />
                 </Button>
               }
@@ -293,8 +312,8 @@ const Navbar = () => {
       </div>
 
       {mobileMenuOpen && (
-        <div className='md:hidden bg-white border-t'>
-          <div className='container mx-auto py-4 space-y-3'>
+        <div className='md:hidden bg-white border-t shadow-2xl'>
+          <div className='container mx-auto py-4 space-y-3 shadow-2xl'>
             <Link
               to='/experiences'
               className='block px-4 py-2 hover:bg-muted rounded-md hover:text-primary'
@@ -316,28 +335,41 @@ const Navbar = () => {
             >
               Chi siamo
             </Link>
+            {profile?.email && (
+              <Link
+                to='/loyalty'
+                className='block px-4 py-2 hover:bg-muted rounded-md hover:text-primary'
+                onClick={toggleMobileMenu}
+              >
+                Programma fedeltà
+              </Link>
+            )}
 
-            <div className='flex flex-col space-y-2 pt-3 border-t'>
-              <Button
-                variant='outline'
-                size='md'
-                className='mx-4'
-                onClick={() => {
-                  navigate('/login');
-                }}
-              >
-                Accedi
-              </Button>
-              <Button
-                variant='primary'
-                className='mx-4'
-                onClick={() => {
-                  navigate('/register');
-                }}
-              >
-                Registrati
-              </Button>
-            </div>
+            {!profile?.email && (
+              <div className='flex flex-col space-y-2 pt-3 border-t'>
+                <Button
+                  variant='outline'
+                  size='md'
+                  className='mx-4'
+                  onClick={() => {
+                    navigate('/login');
+                    toggleMobileMenu();
+                  }}
+                >
+                  Accedi
+                </Button>
+                <Button
+                  variant='primary'
+                  className='mx-4'
+                  onClick={() => {
+                    navigate('/register');
+                    toggleMobileMenu();
+                  }}
+                >
+                  Registrati
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       )}
