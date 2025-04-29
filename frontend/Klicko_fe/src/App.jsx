@@ -75,7 +75,7 @@ function App() {
             </Routes>
           </div>
           <Footer />
-          <Toaster />
+          <Toaster richColors />
         </div>
       </BrowserRouter>
     </>

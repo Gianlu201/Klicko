@@ -5,6 +5,7 @@ import ToggleSwitch from '../ui/ToggleSwitch';
 import { useNavigate, useParams } from 'react-router-dom';
 import UploadFile from '../ui/UploadFile';
 import ImagesPreview from './ImagesPreview';
+import { toast } from 'sonner';
 
 const ExperienceForm = () => {
   const [editMode, setEditMode] = useState(false);
@@ -192,8 +193,9 @@ const ExperienceForm = () => {
       });
 
       if (response.ok) {
-        const data = await response.json();
-        console.log('Upload riuscito:', data);
+        // const data = await response.json();
+
+        toast.success('Esperienza creata!');
       } else {
         throw new Error('Errore nel salvataggio!');
       }
@@ -208,8 +210,6 @@ const ExperienceForm = () => {
         for (let i = 0; i < removedImages.length; i++) {
           formData.append('RemovedImages', removedImages[i]);
         }
-
-        // formData.append('RemovedImages', removedImages);
       }
       formData.append('RemovedCoverImage', removedCoverImage);
 
@@ -227,13 +227,14 @@ const ExperienceForm = () => {
       );
 
       if (response.ok) {
-        const data = await response.json();
-        console.log('Upload riuscito:', data);
+        // const data = await response.json();
+        toast.success('Esperienza modificata!');
+        navigate('/dashboard/experiences');
       } else {
-        throw new Error('Errore nel salvataggio!');
+        throw new Error('Errore nella modifica!');
       }
-    } catch {
-      console.log('Error');
+    } catch (e) {
+      toast.error(e.message);
     }
   };
 

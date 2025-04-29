@@ -1,5 +1,12 @@
 import { useEffect, useState } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, X } from 'lucide-react';
+import {
+  Button,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+} from 'flowbite-react';
 
 export default function Carousel({
   items = [],
@@ -9,6 +16,8 @@ export default function Carousel({
   className = '',
 }) {
   const [current, setCurrent] = useState(0);
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedImgUrl, setSelectedImgUrl] = useState('');
 
   useEffect(() => {
     if (!autoplay) return;
@@ -41,7 +50,11 @@ export default function Carousel({
           <div key={index}>
             <img
               src={`https://localhost:7235/uploads/${item.url}`}
-              className='w-full h-full rounded-2xl'
+              className='w-full h-full rounded-2xl cursor-pointer'
+              onClick={() => {
+                setSelectedImgUrl(item.url);
+                setOpenModal(true);
+              }}
             />
           </div>
         ))}
@@ -59,6 +72,18 @@ export default function Carousel({
       >
         <ChevronRight className='w-5 h-5 text-gray-700' />
       </button>
+
+      {/* Modale */}
+      <Modal dismissible show={openModal} onClose={() => setOpenModal(false)}>
+        <X
+          className='absolute top-4 right-4 z-50 text-white w-6 h-6 p-1 bg-black/60 rounded-full cursor-pointer'
+          onClick={() => setOpenModal(false)}
+        />
+        <img
+          src={`https://localhost:7235/uploads/${selectedImgUrl}`}
+          className='w-full h-full rounded-2xl'
+        />
+      </Modal>
     </div>
   );
 }

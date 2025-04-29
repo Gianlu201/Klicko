@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Button from '../ui/Button';
 import {
   ArchiveRestore,
+  CircleAlert,
+  CircleFadingArrowUp,
   Funnel,
   Pencil,
   Plus,
@@ -10,6 +12,9 @@ import {
   X,
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+
+import { Modal, ModalBody, ModalHeader } from 'flowbite-react';
+import { toast } from 'sonner';
 
 const ExperiencesComponent = () => {
   const [experiences, setExperiences] = useState([]);
@@ -20,6 +25,10 @@ const ExperiencesComponent = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(1000);
+
+  const [openSoftDeleteModal, setOpenSoftDeleteModal] = useState(false);
+  const [openRestoreModal, setOpenRestoreModal] = useState(false);
+  const [selectedExperience, setSelectedExperience] = useState(null);
 
   const navigate = useNavigate();
 
@@ -111,8 +120,8 @@ const ExperiencesComponent = () => {
         }
       );
       if (response.ok) {
-        const data = await response.json();
-        console.log(data);
+        // const data = await response.json();
+        toast.success(`${selectedExperience.title} rimossa con successo!`);
         getAllExperiences();
       } else {
         throw new Error('Errore nel recupero dei dati!');
@@ -143,8 +152,8 @@ const ExperiencesComponent = () => {
         }
       );
       if (response.ok) {
-        const data = await response.json();
-        console.log(data);
+        // const data = await response.json();
+        toast.success(`${selectedExperience.title} ripristinata!`);
         getAllExperiences();
       } else {
         throw new Error('Errore nel recupero dei dati!');
@@ -358,14 +367,18 @@ const ExperiencesComponent = () => {
                           <ArchiveRestore
                             className='w-4 h-4 md:w-4 md:h-4 text-green-600 cursor-pointer'
                             onClick={() => {
-                              restoreExperience(exp.experienceId);
+                              setOpenRestoreModal(true);
+                              setSelectedExperience(exp);
+                              // restoreExperience(exp.experienceId);
                             }}
                           />
                         ) : (
                           <Trash2
                             className='w-4 h-4 md:w-4 md:h-4 text-red-600 cursor-pointer'
                             onClick={() => {
-                              softDeleteExperience(exp.experienceId);
+                              setOpenSoftDeleteModal(true);
+                              setSelectedExperience(exp);
+                              // softDeleteExperience(exp.experienceId);
                             }}
                           />
                         )}
@@ -387,6 +400,98 @@ const ExperiencesComponent = () => {
             <Button variant='primary'>Crea la tua prima esperienza</Button>
           </div>
         )}
+
+        {/* Modale SoftDelete */}
+        <Modal
+          show={openSoftDeleteModal}
+          size='md'
+          onClose={() => {
+            setSelectedExperience(null);
+            setOpenSoftDeleteModal(false);
+          }}
+          popup
+        >
+          <ModalHeader className='bg-background rounded-t-2xl' />
+          <ModalBody className='bg-background rounded-b-2xl'>
+            <div className='text-center'>
+              <CircleAlert className='mx-auto mb-4 h-14 w-14 text-red-500' />
+              <h3 className='mb-5 text-lg font-medium'>
+                Sicuro di voler eliminare questa esperienza?
+              </h3>
+              <p className='mb-8 text-gray-500'>
+                Sarà eliminata nella navigazione del sito, ma potrai
+                ripristinarla da questa area
+              </p>
+              <div className='flex justify-center gap-4'>
+                <Button
+                  variant='danger'
+                  onClick={() => {
+                    softDeleteExperience(selectedExperience.experienceId);
+                    setSelectedExperience(null);
+                    setOpenSoftDeleteModal(false);
+                  }}
+                >
+                  Elimina
+                </Button>
+                <Button
+                  color='gray'
+                  onClick={() => {
+                    setSelectedExperience(null);
+                    setOpenSoftDeleteModal(false);
+                  }}
+                >
+                  Annulla
+                </Button>
+              </div>
+            </div>
+          </ModalBody>
+        </Modal>
+
+        {/* Modale Restore */}
+        <Modal
+          show={openRestoreModal}
+          size='md'
+          onClose={() => {
+            setSelectedExperience(null);
+            setOpenRestoreModal(false);
+          }}
+          popup
+        >
+          <ModalHeader className='bg-background rounded-t-2xl' />
+          <ModalBody className='bg-background rounded-b-2xl'>
+            <div className='text-center'>
+              <CircleFadingArrowUp className='mx-auto mb-4 h-14 w-14 text-green-500' />
+              <h3 className='mb-5 text-lg font-medium'>
+                Sicuro di voler ripristinare questa esperienza?
+              </h3>
+              <p className='mb-8 text-gray-500'>
+                Sarà nuovamente visibile nella navigazione del sito e potrà
+                essere acquistata
+              </p>
+              <div className='flex justify-center gap-4'>
+                <Button
+                  variant='success'
+                  onClick={() => {
+                    restoreExperience(selectedExperience.experienceId);
+                    setSelectedExperience(null);
+                    setOpenRestoreModal(false);
+                  }}
+                >
+                  Ripristina
+                </Button>
+                <Button
+                  color='gray'
+                  onClick={() => {
+                    setSelectedExperience(null);
+                    setOpenRestoreModal(false);
+                  }}
+                >
+                  Annulla
+                </Button>
+              </div>
+            </div>
+          </ModalBody>
+        </Modal>
       </div>
     </>
   );

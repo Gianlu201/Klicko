@@ -50,8 +50,8 @@ const DetailPage = () => {
       } else {
         throw new Error('Errore nel recupero dei dati!');
       }
-    } catch {
-      console.log('Error');
+    } catch (e) {
+      console.log(e.message);
     }
   };
 
@@ -93,13 +93,23 @@ const DetailPage = () => {
         }
       );
       if (response.ok) {
-        toast.success(`${experience.title} aggiunta al carrello!`);
+        toast.success(
+          <>
+            <p className='font-bold'>Esperienza aggiunta al carrello!</p>
+            <p>{experience.title}</p>
+          </>
+        );
         dispatch(cartModified());
       } else {
-        throw new Error('Errore nel recupero dei dati!');
+        throw new Error(`Impossibile aggiungere l'esperienza al carrello`);
       }
-    } catch {
-      console.log('Error');
+    } catch (e) {
+      toast.error(
+        <>
+          <p className='font-bold'>Errore!</p>
+          <p>{e.message}</p>
+        </>
+      );
     }
   };
 
@@ -388,7 +398,9 @@ const DetailPage = () => {
           </div>
         </div>
       ) : (
-        <div>Esperienza non trovata</div>
+        <div className='w-full text-2xl text-center text-gray-500 font-semibold py-20 min-h-[60vh]'>
+          Esperienza non trovata
+        </div>
       )}
     </div>
   );

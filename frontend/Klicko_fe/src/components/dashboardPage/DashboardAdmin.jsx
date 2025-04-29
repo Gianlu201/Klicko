@@ -13,6 +13,7 @@ import Button from '../ui/Button';
 import { useNavigate } from 'react-router-dom';
 import Accordion from '../ui/Accordion';
 import BottomBanner from '../ui/BottomBanner';
+import { toast } from 'sonner';
 
 const DashboardAdmin = () => {
   const [orders, setOrders] = useState([]);
@@ -45,8 +46,6 @@ const DashboardAdmin = () => {
 
         setOrders(data.orders);
         setFilteredOrders(data.orders);
-
-        console.log(data);
       } else {
         throw new Error('Errore nel recupero dei dati!');
       }
@@ -187,15 +186,20 @@ const DashboardAdmin = () => {
         }
       );
       if (response.ok) {
-        const data = await response.json();
-        console.log(data);
+        // const data = await response.json();
+        setIsBannerOpen(false);
+        toast.success(
+          `Stato dell'ordine #${selectedOrder.orderNumber} aggiornato!`
+        );
 
         getAllOrders();
       } else {
-        throw new Error('Errore nel recupero dei dati!');
+        throw new Error(
+          `Errore nelle modifica dello stato dell'ordine #${selectedOrder.orderNumber}!`
+        );
       }
-    } catch {
-      console.log('Error');
+    } catch (e) {
+      toast.error(e.message);
     }
   };
 
