@@ -1,10 +1,11 @@
-import { Ticket, TicketCheck } from 'lucide-react';
+import { CircleAlert, Ticket, TicketCheck } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import Button from '../components/ui/Button';
 import { useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { toast } from 'sonner';
+import { Modal, ModalBody, ModalHeader } from 'flowbite-react';
 
 const VouchersPage = () => {
   const [redeemVoucherOption, setRedeemVoucherOption] = useState(true);
@@ -13,6 +14,9 @@ const VouchersPage = () => {
   const [searchedVoucher, setSearchedVoucher] = useState(null);
   const [voucherNotFound, setVoucherNotFound] = useState(false);
   const [reservationDate, setReservationDate] = useState(null);
+
+  const [openConfermeModal, setOpenConfermeModal] = useState(false);
+  const [selectedVoucher, setSelectedVoucher] = useState(null);
 
   const navigate = useNavigate();
 
@@ -83,6 +87,7 @@ const VouchersPage = () => {
         const data = await response.json();
 
         setSearchedVoucher(data.voucher);
+        setVoucherCodeSearch('');
       } else {
         setVoucherNotFound(true);
       }
@@ -280,7 +285,12 @@ const VouchersPage = () => {
               <p className='text-gray-500 font-bold text-sm mb-2'>
                 Codice Voucher
               </p>
-              <form className='flex justify-center items-center gap-2 mb-4'>
+              <form
+                className='flex justify-center items-center gap-2 mb-4'
+                onSubmit={(e) => {
+                  e.preventDefault();
+                }}
+              >
                 <input
                   type='text'
                   className='grow bg-background border border-gray-400/20 rounded-md px-3 py-2'
@@ -409,7 +419,8 @@ const VouchersPage = () => {
                           variant='danger-outline'
                           size='sm'
                           onClick={() => {
-                            removeReservation(voucher.voucherId);
+                            setSelectedVoucher(voucher);
+                            setOpenConfermeModal(true);
                           }}
                         >
                           Cancella prenotazione
@@ -428,6 +439,56 @@ const VouchersPage = () => {
                     codice ricevuto nel cofanetto regalo
                   </p>
                 </div>
+              )}
+
+              {/* Modale conferma */}
+              {selectedVoucher != null && (
+                <Modal
+                  show={openConfermeModal}
+                  size='md'
+                  onClose={() => {
+                    setSelectedVoucher(null);
+                    setOpenConfermeModal(false);
+                  }}
+                  popup
+                >
+                  <ModalHeader className='bg-background rounded-t-2xl' />
+                  <ModalBody className='bg-background rounded-b-2xl'>
+                    <div className='text-center'>
+                      <CircleAlert className='mx-auto mb-4 h-14 w-14 text-red-500' />
+                      <h3 className='mb-5 text-lg font-medium'>
+                        Sicuro di voler eliminare questa prenotazione?
+                      </h3>
+                      <p className='mb-8 text-gray-500'>
+                        La prenotazione sarà cancellata e potrai effettuarne
+                        un'altra utilizzando il codice{' '}
+                        <b>{selectedVoucher.voucherCode}</b> entro la data di
+                        validità dello stesso
+                      </p>
+                      <div className='flex justify-center gap-4'>
+                        <Button
+                          variant='danger'
+                          onClick={() => {
+                            removeReservation(selectedVoucher.voucherId);
+                            setSelectedVoucher(null);
+                            setOpenConfermeModal(false);
+                          }}
+                        >
+                          Elimina
+                        </Button>
+                        <Button
+                          color='gray'
+                          onClick={() => {
+                            setSelectedVoucher(null);
+                            setOpenConfermeModal(false);
+                          }}
+                        >
+                          Annulla
+                        </Button>
+                      </div>
+                    </div>
+                  </ModalBody>
+                </Modal>
               )}
             </div>
           )}
