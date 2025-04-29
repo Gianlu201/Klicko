@@ -4,6 +4,7 @@ import Button from '../components/ui/Button';
 import { useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { toast } from 'sonner';
 
 const VouchersPage = () => {
   const [redeemVoucherOption, setRedeemVoucherOption] = useState(true);
@@ -43,14 +44,21 @@ const VouchersPage = () => {
       } else {
         throw new Error('Errore nel salvataggio!');
       }
-    } catch {
-      console.log('Error');
+    } catch (e) {
+      toast.error(
+        <>
+          <p className='font-bold'>Errore!</p>
+          <p>Qualcosa è andato storto, riprovare</p>
+        </>
+      );
+      console.log(e.message);
     }
   };
 
   const getVoucherByCode = async () => {
     try {
       setVoucherNotFound(false);
+      setSearchedVoucher(null);
 
       let tokenObj = localStorage.getItem('klicko_token');
 
@@ -74,13 +82,18 @@ const VouchersPage = () => {
       if (response.ok) {
         const data = await response.json();
 
-        console.log(data);
         setSearchedVoucher(data.voucher);
       } else {
         setVoucherNotFound(true);
       }
-    } catch {
-      console.log('Error');
+    } catch (e) {
+      toast.error(
+        <>
+          <p className='font-bold'>Errore!</p>
+          <p>Qualcosa è andato storto, riprovare</p>
+        </>
+      );
+      console.log(e.message);
     }
   };
 
@@ -114,18 +127,33 @@ const VouchersPage = () => {
       );
 
       if (response.ok) {
-        const data = await response.json();
+        toast.success(
+          <>
+            <p className='font-bold'>Voucher riscosso!</p>
+            <p>Prenotazione avvenuta con successo</p>
+          </>
+        );
 
-        console.log(data);
         setReservationDate(null);
         setSearchedVoucher(null);
         setVoucherCodeSearch('');
         getUserVouchers();
       } else {
-        console.log('Error');
+        toast.error(
+          <>
+            <p className='font-bold'>Errore!</p>
+            <p>Qualcosa è andato storto, riprovare</p>
+          </>
+        );
       }
-    } catch {
-      console.log('Error');
+    } catch (e) {
+      toast.error(
+        <>
+          <p className='font-bold'>Errore!</p>
+          <p>Qualcosa è andato storto, riprovare</p>
+        </>
+      );
+      console.log(e.message);
     }
   };
 
@@ -156,15 +184,29 @@ const VouchersPage = () => {
       );
 
       if (response.ok) {
-        // const data = await response.json();
-
-        // console.log(data);
+        toast.success(
+          <>
+            <p className='font-bold'>Cancellazione effettuata!</p>
+            <p>La prenotazione è stata cancellata</p>
+          </>
+        );
         getUserVouchers();
       } else {
-        console.log('Error');
+        toast.error(
+          <>
+            <p className='font-bold'>Errore!</p>
+            <p>Qualcosa è andato storto, riprovare</p>
+          </>
+        );
       }
-    } catch {
-      console.log('Error');
+    } catch (e) {
+      toast.error(
+        <>
+          <p className='font-bold'>Errore!</p>
+          <p>Qualcosa è andato storto, riprovare</p>
+        </>
+      );
+      console.log(e.message);
     }
   };
 

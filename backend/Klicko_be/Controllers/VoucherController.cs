@@ -172,6 +172,13 @@ namespace Klicko_be.Controllers
                 var user = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
                 var userId = user!.Value;
 
+                var reservationDate = editVoucher.ReservationDate;
+                if (reservationDate != null)
+                {
+                    var date = (DateTime)reservationDate;
+                    editVoucher.ReservationDate = date.AddHours(6);
+                }
+
                 var result = await _voucherService.EditVoucherByIdAsync(
                     voucherId,
                     editVoucher,
