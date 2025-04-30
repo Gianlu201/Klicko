@@ -5,6 +5,7 @@ import {
   CircleAlert,
   CircleFadingArrowUp,
   Funnel,
+  OctagonXIcon,
   Pencil,
   Plus,
   Search,
@@ -28,6 +29,7 @@ const ExperiencesComponent = () => {
 
   const [openSoftDeleteModal, setOpenSoftDeleteModal] = useState(false);
   const [openRestoreModal, setOpenRestoreModal] = useState(false);
+  const [openHardDeleteModal, setOpenHardDeleteModal] = useState(false);
   const [selectedExperience, setSelectedExperience] = useState(null);
 
   const navigate = useNavigate();
@@ -163,6 +165,38 @@ const ExperiencesComponent = () => {
       if (response.ok) {
         // const data = await response.json();
         toast.success(`${selectedExperience.title} ripristinata!`);
+        getAllExperiences();
+      } else {
+        throw new Error('Errore nel recupero dei dati!');
+      }
+    } catch {
+      console.log('Error');
+    }
+  };
+
+  const hardDeleteExperience = async (experienceId) => {
+    try {
+      let tokenObj = localStorage.getItem('klicko_token');
+
+      if (!tokenObj) {
+        navigate('/login');
+      }
+
+      let token = JSON.parse(tokenObj).token;
+
+      const response = await fetch(
+        `https://localhost:7235/api/Experience/${experienceId}`,
+        {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.ok) {
+        // const data = await response.json();
+        toast.success(`${selectedExperience.title} rimossa con successo!`);
         getAllExperiences();
       } else {
         throw new Error('Errore nel recupero dei dati!');
@@ -373,21 +407,29 @@ const ExperiencesComponent = () => {
                           }}
                         />
                         {exp.isDeleted ? (
-                          <ArchiveRestore
-                            className='w-4 h-4 md:w-4 md:h-4 text-green-600 cursor-pointer'
-                            onClick={() => {
-                              setOpenRestoreModal(true);
-                              setSelectedExperience(exp);
-                              // restoreExperience(exp.experienceId);
-                            }}
-                          />
+                          <div>
+                            <ArchiveRestore
+                              className='w-4 h-4 md:w-4 md:h-4 text-green-600 cursor-pointer mb-2'
+                              onClick={() => {
+                                setOpenRestoreModal(true);
+                                setSelectedExperience(exp);
+                              }}
+                            />
+
+                            <OctagonXIcon
+                              className='w-4 h-4 md:w-4 md:h-4 text-red-600 cursor-pointer'
+                              onClick={() => {
+                                setOpenHardDeleteModal(true);
+                                setSelectedExperience(exp);
+                              }}
+                            />
+                          </div>
                         ) : (
                           <Trash2
                             className='w-4 h-4 md:w-4 md:h-4 text-red-600 cursor-pointer'
                             onClick={() => {
                               setOpenSoftDeleteModal(true);
                               setSelectedExperience(exp);
-                              // softDeleteExperience(exp.experienceId);
                             }}
                           />
                         )}
@@ -428,7 +470,7 @@ const ExperiencesComponent = () => {
                 Sicuro di voler eliminare questa esperienza?
               </h3>
               <p className='mb-8 text-gray-500'>
-                Sarà eliminata nella navigazione del sito, ma potrai
+                Sarà eliminata dalla navigazione del sito, ma potrai
                 ripristinarla da questa area
               </p>
               <div className='flex justify-center gap-4'>
@@ -493,6 +535,52 @@ const ExperiencesComponent = () => {
                   onClick={() => {
                     setSelectedExperience(null);
                     setOpenRestoreModal(false);
+                  }}
+                >
+                  Annulla
+                </Button>
+              </div>
+            </div>
+          </ModalBody>
+        </Modal>
+
+        {/* Modale HardDelete */}
+        <Modal
+          show={openHardDeleteModal}
+          size='md'
+          onClose={() => {
+            setSelectedExperience(null);
+            setOpenHardDeleteModal(false);
+          }}
+          popup
+        >
+          <ModalHeader className='bg-background rounded-t-2xl' />
+          <ModalBody className='bg-background rounded-b-2xl'>
+            <div className='text-center'>
+              <CircleAlert className='mx-auto mb-4 h-14 w-14 text-red-500' />
+              <h3 className='mb-5 text-lg font-medium'>
+                Sicuro di voler eliminare definitivamente questa esperienza?
+              </h3>
+              <p className='mb-8 text-gray-500'>
+                Questa esperienza sarà eliminata definitivamente e non sarà
+                possibile recuperarla, sicuro di voler procedere?
+              </p>
+              <div className='flex justify-center gap-4'>
+                <Button
+                  variant='danger'
+                  onClick={() => {
+                    hardDeleteExperience(selectedExperience.experienceId);
+                    setSelectedExperience(null);
+                    setOpenHardDeleteModal(false);
+                  }}
+                >
+                  Elimina
+                </Button>
+                <Button
+                  color='gray'
+                  onClick={() => {
+                    setSelectedExperience(null);
+                    setOpenHardDeleteModal(false);
                   }}
                 >
                   Annulla
