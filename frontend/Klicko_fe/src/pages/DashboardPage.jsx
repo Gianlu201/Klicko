@@ -9,7 +9,7 @@ import {
 } from 'lucide-react';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import MainComponent from '../components/dashboardPage/MainComponent';
 import OrdersComponent from '../components/dashboardPage/OrdersComponent';
 import ExperiencesComponent from '../components/dashboardPage/ExperiencesComponent';
@@ -25,6 +25,8 @@ const DashboardPage = () => {
   });
 
   const params = useParams();
+
+  const navigate = useNavigate();
 
   const options = [
     {
@@ -78,7 +80,6 @@ const DashboardPage = () => {
   ];
 
   const getContent = () => {
-    console.log(params);
     switch (params.tab) {
       case undefined:
         return <MainComponent />;
@@ -96,19 +97,16 @@ const DashboardPage = () => {
         return <ExperiencesComponent />;
 
       case 'admin':
-        console.log('admin');
         return <DashboardAdmin />;
 
       case 'users':
-        console.log('users');
         return <DashboardUsers />;
 
       case 'settings':
-        console.log('users');
         return <SettingsComponent />;
 
       default:
-        console.log('page 404');
+        navigate('/404');
         break;
     }
   };
