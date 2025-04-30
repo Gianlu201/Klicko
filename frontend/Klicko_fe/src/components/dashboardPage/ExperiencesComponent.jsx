@@ -34,10 +34,19 @@ const ExperiencesComponent = () => {
 
   const getAllExperiences = async () => {
     try {
+      let tokenObj = localStorage.getItem('klicko_token');
+
+      if (!tokenObj) {
+        navigate('/login');
+      }
+
+      let token = JSON.parse(tokenObj).token;
+
       const response = await fetch('https://localhost:7235/api/Experience', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
         },
       });
       if (response.ok) {

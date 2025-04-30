@@ -165,13 +165,16 @@ namespace Klicko_be.Services
                 Image? prevCoverImg = null;
                 if (experienceEdit.RemovedCoverImage)
                 {
-                    prevCoverImg = await _context.Images.FirstOrDefaultAsync(i =>
-                        i.Url == experience.CoverImage && i.ExperienceId == experienceId
-                    );
-
-                    if (prevCoverImg == null)
+                    if (experience.CoverImage != null)
                     {
-                        return false;
+                        prevCoverImg = await _context.Images.FirstOrDefaultAsync(i =>
+                            i.Url == experience.CoverImage && i.ExperienceId == experienceId
+                        );
+
+                        if (prevCoverImg == null)
+                        {
+                            return false;
+                        }
                     }
 
                     var fileName =
@@ -193,8 +196,6 @@ namespace Klicko_be.Services
                         await experienceEdit.CoverImage.CopyToAsync(stream);
                     }
 
-                    experience.CoverImage = fileName;
-
                     _context.Images.Add(
                         new Image
                         {
@@ -204,6 +205,8 @@ namespace Klicko_be.Services
                             IsCover = true,
                         }
                     );
+
+                    experience.CoverImage = fileName;
                 }
 
                 if (experienceEdit.Images != null)
@@ -333,7 +336,7 @@ namespace Klicko_be.Services
                         {
                             File.Delete(filePath);
                         }
-                        return await TrySaveAsync();
+                        //return await TrySaveAsync();
                     }
                     return true;
                 }

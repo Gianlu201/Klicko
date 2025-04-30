@@ -54,48 +54,54 @@ const ImagesPreview = ({
 
   return (
     <div className='w-full'>
-      <p>Immagini attualmente presenti:</p>
+      {prevImages !== null && images && images.length > 0 && (
+        <>
+          <p>Immagini attualmente presenti:</p>
 
-      {prevImages !== null && images.length > 0 && (
-        <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mt-4'>
-          {images.map((img, idx) => (
-            <div
-              key={idx}
-              className='relative w-full h-28 rounded-lg overflow-hidden border border-gray-200 shadow-sm group'
-            >
+          <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mt-4'>
+            {images.map((img, idx) => (
+              <div
+                key={idx}
+                className='relative w-full h-28 rounded-lg overflow-hidden border border-gray-200 shadow-sm group'
+              >
+                <img
+                  src={`https://localhost:7235/uploads/${img.url}`}
+                  alt={`preview-${idx}`}
+                  className='object-cover w-full h-full'
+                />
+                <button
+                  type='button'
+                  onClick={() => handleRemove(img.imageId)}
+                  className='absolute top-1 right-1 justify-center items-center bg-red-500 text-white rounded-full p-1 text-xs w-fit aspect-square cursor-pointer hover:opacity-100 hover:bg-red-600 transition'
+                >
+                  <X className='text-white font-bold w-4 h-4' />
+                </button>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+
+      {prevCoverImage !== null && (
+        <>
+          <p>Immagini attualmente presenti:</p>
+
+          <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mt-4'>
+            <div className='relative w-full h-28 rounded-lg overflow-hidden border border-gray-200 shadow-sm group'>
               <img
-                src={`https://localhost:7235/uploads/${img.url}`}
-                alt={`preview-${idx}`}
+                src={`https://localhost:7235/uploads/${prevCoverImage}`}
                 className='object-cover w-full h-full'
               />
               <button
                 type='button'
-                onClick={() => handleRemove(img.imageId)}
+                onClick={() => handleRemove(prevCoverImage)}
                 className='absolute top-1 right-1 justify-center items-center bg-red-500 text-white rounded-full p-1 text-xs w-fit aspect-square cursor-pointer hover:opacity-100 hover:bg-red-600 transition'
               >
                 <X className='text-white font-bold w-4 h-4' />
               </button>
             </div>
-          ))}
-        </div>
-      )}
-
-      {prevCoverImage !== null && (
-        <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mt-4'>
-          <div className='relative w-full h-28 rounded-lg overflow-hidden border border-gray-200 shadow-sm group'>
-            <img
-              src={`https://localhost:7235/uploads/${prevCoverImage}`}
-              className='object-cover w-full h-full'
-            />
-            <button
-              type='button'
-              onClick={() => handleRemove(prevCoverImage)}
-              className='absolute top-1 right-1 justify-center items-center bg-red-500 text-white rounded-full p-1 text-xs w-fit aspect-square cursor-pointer hover:opacity-100 hover:bg-red-600 transition'
-            >
-              <X className='text-white font-bold w-4 h-4' />
-            </button>
           </div>
-        </div>
+        </>
       )}
     </div>
   );

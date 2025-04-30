@@ -164,16 +164,19 @@ const DetailPage = () => {
                 >
                   Descrizione
                 </button>
-                <button
-                  className={`px-4 py-1 cursor-pointer ${
-                    foto ? 'bg-white rounded-b-xl' : ''
-                  }`}
-                  onClick={() => {
-                    handleTabs('foto');
-                  }}
-                >
-                  Foto
-                </button>
+                {experience.images && (
+                  <button
+                    className={`px-4 py-1 cursor-pointer ${
+                      foto ? 'bg-white rounded-b-xl' : ''
+                    }`}
+                    onClick={() => {
+                      handleTabs('foto');
+                    }}
+                  >
+                    Foto
+                  </button>
+                )}
+
                 <button
                   className={`px-4 py-1 cursor-pointer ${
                     info ? 'bg-white rounded-b-xl' : ''
@@ -244,7 +247,7 @@ const DetailPage = () => {
               {/* fotos table */}
               {foto && (
                 <div className='px-6 mt-2 mb-8'>
-                  {experience?.images.length > 0 && (
+                  {experience.images.length > 0 && (
                     <Carousel
                       items={experience.images}
                       slidesVisible={2}
