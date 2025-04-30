@@ -29,8 +29,6 @@ export const setLoggedUser = (data) => {
     expiration: data.expires,
   };
 
-  // console.log(userInfos);
-
   toast.success(`Bentornato ${userInfos.name}`);
 
   return {

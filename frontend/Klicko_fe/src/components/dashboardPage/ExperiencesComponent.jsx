@@ -16,6 +16,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { Modal, ModalBody, ModalHeader } from 'flowbite-react';
 import { toast } from 'sonner';
+import { cartModified } from '../../redux/actions';
+import { useDispatch } from 'react-redux';
 
 const ExperiencesComponent = () => {
   const [experiences, setExperiences] = useState([]);
@@ -33,6 +35,8 @@ const ExperiencesComponent = () => {
   const [selectedExperience, setSelectedExperience] = useState(null);
 
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const getAllExperiences = async () => {
     try {
@@ -134,6 +138,7 @@ const ExperiencesComponent = () => {
         // const data = await response.json();
         toast.success(`${selectedExperience.title} rimossa con successo!`);
         getAllExperiences();
+        dispatch(cartModified());
       } else {
         throw new Error('Errore nel recupero dei dati!');
       }
@@ -198,6 +203,7 @@ const ExperiencesComponent = () => {
         // const data = await response.json();
         toast.success(`${selectedExperience.title} rimossa con successo!`);
         getAllExperiences();
+        dispatch(cartModified());
       } else {
         throw new Error('Errore nel recupero dei dati!');
       }
