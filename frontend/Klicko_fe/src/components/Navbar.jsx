@@ -41,6 +41,81 @@ const Navbar = () => {
 
   const dispatch = useDispatch();
 
+  const dropDownOptions = [
+    {
+      id: 1,
+      option: 'Dashboard',
+      style: 'hidden lg:flex',
+      icon: <User size={16} />,
+      url: '/dashboard',
+      authorizedRoles: 'Admin, Seller, User',
+    },
+    {
+      id: 2,
+      option: 'Profilo',
+      style: 'block lg:hidden',
+      icon: <User size={16} />,
+      url: '/dashboard/profile',
+      authorizedRoles: 'Admin, Seller, User',
+    },
+    {
+      id: 3,
+      option: 'Gestisci esperienze',
+      style: 'block lg:hidden',
+      icon: <PackageOpen size={16} />,
+      url: '/dashboard/experiences',
+      authorizedRoles: 'Admin, Seller',
+    },
+    {
+      id: 4,
+      option: 'I miei ordini',
+      style: '',
+      icon: <ShoppingBag size={16} />,
+      url: '/dashboard/orders',
+      authorizedRoles: 'Admin, Seller, User',
+    },
+    {
+      id: 5,
+      option: 'Vouchers',
+      style: '',
+      icon: <Tickets size={16} />,
+      url: '/redeemVoucher',
+      authorizedRoles: 'Admin, Seller, User',
+    },
+    {
+      id: 6,
+      option: 'Coupon',
+      style: '',
+      icon: <BadgePercent size={16} />,
+      url: '/coupons',
+      authorizedRoles: 'Admin, Seller, User',
+    },
+    {
+      id: 7,
+      option: 'Dashboard admin',
+      style: 'block lg:hidden',
+      icon: <LayoutDashboard size={16} />,
+      url: '/dashboard/admin',
+      authorizedRoles: 'Admin',
+    },
+    {
+      id: 8,
+      option: 'Gestione utenti',
+      style: 'block lg:hidden',
+      icon: <Users size={16} />,
+      url: '/dashboard/users',
+      authorizedRoles: 'Admin',
+    },
+    {
+      id: 9,
+      option: 'Impostazioni',
+      style: '',
+      icon: <Settings size={16} />,
+      url: '/dashboard/settings',
+      authorizedRoles: 'Admin, Seller, User',
+    },
+  ];
+
   const manageProfile = async (accessData) => {
     const expiration = await JSON.parse(accessData).expires;
 
@@ -209,7 +284,6 @@ const Navbar = () => {
           </Link>
 
           {profile?.email ? (
-            // dropdown opzioni profilo
             <Dropdown
               trigger={
                 <Button
@@ -226,108 +300,23 @@ const Navbar = () => {
             >
               <DropdownHeader>Il tuo account</DropdownHeader>
               <p className='text-gray-500 text-xs px-4 mb-2'>{profile.email}</p>
-              <DropdownItem
-                className='hidden lg:block'
-                onClick={() => {
-                  navigate('/dashboard');
-                }}
-              >
-                <span className='w-full flex items-center justify-start gap-2'>
-                  <User size={16} />
-                  Dashbord
-                </span>
-              </DropdownItem>
 
-              <DropdownItem
-                className='block lg:hidden'
-                onClick={() => {
-                  navigate('/dashboard/profile');
-                }}
-              >
-                <span className='w-full flex items-center justify-start gap-2'>
-                  <User size={16} />
-                  Profilo
-                </span>
-              </DropdownItem>
+              {dropDownOptions.map(
+                (option) =>
+                  option.authorizedRoles.includes(profile.role) && (
+                    <DropdownItem
+                      key={option.id}
+                      className={option.style}
+                      onClick={() => {
+                        navigate(option.url);
+                      }}
+                      icon={option.icon}
+                    >
+                      {option.option}
+                    </DropdownItem>
+                  )
+              )}
 
-              <DropdownItem
-                className='block lg:hidden'
-                onClick={() => {
-                  navigate('/dashboard/experiences');
-                }}
-              >
-                <span className='w-full flex items-center justify-start gap-2'>
-                  <PackageOpen size={16} />
-                  Gestisci esperienze
-                </span>
-              </DropdownItem>
-
-              <DropdownItem
-                onClick={() => {
-                  navigate('/dashboard/orders');
-                }}
-              >
-                <span className='w-full flex items-center justify-start gap-2'>
-                  <ShoppingBag size={16} />I miei ordini
-                </span>
-              </DropdownItem>
-
-              <DropdownItem
-                onClick={() => {
-                  navigate('/redeemVoucher');
-                }}
-              >
-                <span className='w-full flex items-center justify-start gap-2'>
-                  <Tickets size={16} />
-                  Vouchers
-                </span>
-              </DropdownItem>
-
-              <DropdownItem
-                onClick={() => {
-                  navigate('/coupons');
-                }}
-              >
-                <span className='w-full flex items-center justify-start gap-2'>
-                  <BadgePercent size={16} />
-                  Coupon
-                </span>
-              </DropdownItem>
-
-              <DropdownItem
-                className='block lg:hidden'
-                onClick={() => {
-                  navigate('/dashboard/admin');
-                }}
-              >
-                <span className='w-full flex items-center justify-start gap-2'>
-                  <LayoutDashboard size={16} />
-                  Dashboard admin
-                </span>
-              </DropdownItem>
-
-              <DropdownItem
-                className='block lg:hidden'
-                onClick={() => {
-                  navigate('/dashboard/users');
-                }}
-              >
-                <span className='w-full flex items-center justify-start gap-2'>
-                  <Users size={16} />
-                  Gestione utenti
-                </span>
-              </DropdownItem>
-
-              <DropdownItem
-                onClick={() => {
-                  navigate('/dashboard/settings');
-                }}
-              >
-                <span className='w-full flex items-center justify-start gap-2'>
-                  <Settings size={16} />
-                  Impostazioni
-                </span>
-              </DropdownItem>
               <DropdownItem divider />
               <DropdownItem icon={<LogOut size={16} />} onClick={logout} danger>
                 Disconnetti
@@ -342,7 +331,6 @@ const Navbar = () => {
                   navigate('login');
                 }}
               >
-                {/* <Link to='/login'>Accedi</Link> */}
                 Accedi
               </Button>
               <Button
@@ -351,7 +339,6 @@ const Navbar = () => {
                   navigate('/register');
                 }}
               >
-                {/* <Link to='/register'>Registrati</Link> */}
                 Registrati
               </Button>
             </div>
