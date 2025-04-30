@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '../components/ui/Button';
 import { useNavigate } from 'react-router-dom';
-import { emptyCart } from '../redux/actions';
+import { emptyCart, setUserCart } from '../redux/actions';
 import { toast } from 'sonner';
 import { BadgePercent, X } from 'lucide-react';
 import StripeContainer from '../components/StripeContainer';
@@ -16,6 +16,10 @@ const CheckOutPage = () => {
     return state.cart;
   });
 
+  const profile = useSelector((state) => {
+    return state.profile;
+  });
+
   const fidelityCard = useSelector((state) => {
     return state.fidelityCard;
   });
@@ -25,6 +29,31 @@ const CheckOutPage = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
+
+  const getUserCart = async () => {
+    try {
+      const response = await fetch(
+        `https://localhost:7235/api/Cart/GetCart/${profile.cartId}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+
+        // console.log(data.cart);
+
+        dispatch(setUserCart(data.cart));
+      } else {
+        throw new Error('Errore nel recupero dei dati!');
+      }
+    } catch {
+      console.log('Error');
+    }
+  };
 
   const getSubTotalPrice = () => {
     return cart.experiences.reduce(
@@ -145,12 +174,17 @@ const CheckOutPage = () => {
     }
   };
 
+  useEffect(() => {
+    getUserCart();
+  }, []);
+
   return (
     <div className='max-w-7xl mx-auto min-h-screen mt-8 px-6 xl:px-0'>
       <h1 className='text-3xl font-bold mb-6'>Completa il tuo ordine</h1>
       {cart?.cartId && (
         <div className='grid grid-cols-3 justify-between items-start gap-6'>
           {/* riepilogo ordine */}
+          {cart.experiences.length === 0 && navigate('/cart')}
           <div className='col-span-3 lg:col-span-1 bg-white rounded-lg px-6 py-5 shadow'>
             <h2 className='text-2xl font-bold mb-2'>Riepilogo ordine</h2>
             <p className='text-gray-500 mb-5'>
