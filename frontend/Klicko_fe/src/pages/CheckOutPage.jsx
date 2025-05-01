@@ -30,6 +30,14 @@ const CheckOutPage = () => {
 
   const dispatch = useDispatch();
 
+  const checkAuthentication = () => {
+    let tokenObj = localStorage.getItem('klicko_token');
+
+    if (!tokenObj) {
+      navigate('/login');
+    }
+  };
+
   const getUserCart = async () => {
     try {
       const response = await fetch(
@@ -43,8 +51,6 @@ const CheckOutPage = () => {
       );
       if (response.ok) {
         const data = await response.json();
-
-        // console.log(data.cart);
 
         dispatch(setUserCart(data.cart));
       } else {
@@ -175,6 +181,7 @@ const CheckOutPage = () => {
   };
 
   useEffect(() => {
+    checkAuthentication();
     getUserCart();
   }, []);
 

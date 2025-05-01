@@ -7,7 +7,7 @@ import {
   User,
   Users,
 } from 'lucide-react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import MainComponent from '../components/dashboardPage/MainComponent';
@@ -79,6 +79,14 @@ const DashboardPage = () => {
     },
   ];
 
+  const checkAuthentication = () => {
+    let tokenObj = localStorage.getItem('klicko_token');
+
+    if (!tokenObj) {
+      navigate('/login');
+    }
+  };
+
   const getContent = () => {
     switch (params.tab) {
       case undefined:
@@ -110,6 +118,10 @@ const DashboardPage = () => {
         break;
     }
   };
+
+  useEffect(() => {
+    checkAuthentication();
+  }, []);
 
   return (
     <div className='max-w-7xl mx-auto min-h-screen pt-10 px-6 xl:px-0'>

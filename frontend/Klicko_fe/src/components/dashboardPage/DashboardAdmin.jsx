@@ -14,8 +14,11 @@ import { useNavigate } from 'react-router-dom';
 import Accordion from '../ui/Accordion';
 import BottomBanner from '../ui/BottomBanner';
 import { toast } from 'sonner';
+import { useSelector } from 'react-redux';
 
 const DashboardAdmin = () => {
+  const [isAuthorized, setIsAuthorized] = useState(false);
+
   const [orders, setOrders] = useState([]);
   const [filteredOrders, setFilteredOrders] = useState([]);
   const [isBannerOpen, setIsBannerOpen] = useState(false);
@@ -23,6 +26,18 @@ const DashboardAdmin = () => {
   const [stateFilter, setStateFilter] = useState('');
 
   const navigate = useNavigate();
+
+  const profile = useSelector((state) => {
+    return state.profile;
+  });
+
+  const checkAuthorization = () => {
+    if (profile.role.toLowerCase() === 'admin') {
+      setIsAuthorized(true);
+    } else {
+      navigate('/unauthorized');
+    }
+  };
 
   const getAllOrders = async () => {
     try {
@@ -250,307 +265,328 @@ const DashboardAdmin = () => {
   ];
 
   useEffect(() => {
-    getAllOrders();
-  }, []);
+    if (profile.role) {
+      checkAuthorization();
+
+      if (isAuthorized) {
+        getAllOrders();
+      }
+    }
+  }, [profile, isAuthorized]);
 
   return (
     <>
-      <h2 className='text-2xl font-bold mb-2'>Dashboard amministrativa</h2>
-      <p className='text-gray-500 font-normal mb-6'>
-        Panoramica di tutti gli ordini e le statistiche
-      </p>
+      {isAuthorized && (
+        <>
+          <h2 className='text-2xl font-bold mb-2'>Dashboard amministrativa</h2>
+          <p className='text-gray-500 font-normal mb-6'>
+            Panoramica di tutti gli ordini e le statistiche
+          </p>
 
-      {/* options overview */}
-      <div className='grid grid-cols-2 md:grid-cols-4 gap-6 mb-6'>
-        {options.map((opt) => (
-          <div
-            key={opt.id}
-            className='flex justify-between items-start border border-gray-400/40 shadow-xs rounded-xl px-4 py-6'
-          >
-            <div className='flex flex-col justify-center items-start gap-2'>
-              <span className='text-gray-500 font-medium text-sm'>
-                {opt.title}
-              </span>
-              <span className='text-2xl font-semibold'>{opt.value}</span>
-            </div>
-            <div>{opt.icon}</div>
-          </div>
-        ))}
-      </div>
-
-      <div className='flex justify-between items-center gap-4 mb-8'>
-        <div className='relative grow'>
-          <input
-            type='text'
-            placeholder='Cerca ordini, clienti...'
-            className='bg-background border border-gray-400/30 rounded-xl py-2 ps-10 w-full'
-            onChange={(e) => {
-              filterBy(e.target.value);
-            }}
-          />
-          <Search className='absolute top-1/2 left-3 -translate-y-1/2 w-5 h-5 pb-0.5' />
-        </div>
-
-        <select
-          className='rounded-md border border-gray-300 bg-white py-2 px-4 pr-8 shadow-sm focus:border-primary focus:ring-primary focus:outline-none focus:ring-1 text-gray-700 text-sm'
-          value={stateFilter}
-          onChange={(e) => {
-            filterBy('', e.target.value);
-          }}
-        >
-          <option value=''>Tutti gli stati</option>
-          {stateOption.map((state) => (
-            <option key={state.id} value={state.option}>
-              {state.option}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      {/* tabella storico ordini */}
-      <div className='px-6 py-5 border border-gray-400/40 rounded-xl'>
-        <h2 className='text-xl font-semibold mb-2'>Tutti gli ordini</h2>
-        <p className='text-gray-500 font-normal mb-6'>
-          {filteredOrders.length} ordini trovati
-        </p>
-
-        {filteredOrders.length > 0 ? (
-          <div>
-            <table className='w-full'>
-              <thead>
-                <tr className='grid grid-cols-12 text-gray-500 text-sm font-normal border-b border-gray-400/40 p-3 hover:bg-gray-100'>
-                  <th className='col-span-3 md:col-span-2 text-start'>
-                    Numero ordine
-                  </th>
-                  <th className='col-span-5 md:col-span-3 text-start'>
-                    Cliente
-                  </th>
-                  <th className='hidden md:block col-span-2 text-start'>
-                    Data
-                  </th>
-                  <th className='hidden md:block col-span-2 text-start'>
-                    Totale
-                  </th>
-                  <th className='col-span-3 md:col-span-2 text-start'>Stato</th>
-                  <th className='col-span-1 text-center'>Azioni</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {filteredOrders.map((order) => (
-                  <tr
-                    key={order.orderNumber}
-                    className='grid grid-cols-12 items-center text-sm border-b border-gray-400/40 p-3 hover:bg-gray-100 last-of-type:border-none'
-                  >
-                    <td className='col-span-3 md:col-span-2 text-start'>
-                      #{order.orderNumber}
-                    </td>
-
-                    <td className='col-span-5 md:col-span-3 overflow-hidden me-3'>
-                      <p className='font-semibold'>
-                        {order.user.firstName} {order.user.lastName}
-                      </p>
-                      <p className='max-md:text-xs'>{order.user.email}</p>
-                    </td>
-
-                    <td className='hidden md:flex col-span-2 flex-col justify-center items-start gap-1'>
-                      <span>
-                        {new Date(order.createdAt).toLocaleDateString('it-IT', {
-                          year: 'numeric',
-                          month: 'long',
-                          day: 'numeric',
-                        })}
-                      </span>
-                      <span>
-                        {new Date(order.createdAt).toLocaleString('it-IT', {
-                          hour: 'numeric',
-                          minute: 'numeric',
-                        })}
-                      </span>
-                    </td>
-
-                    <td className='hidden md:block col-span-2'>
-                      {order.totalPrice.toFixed(2).replace('.', ',')} €
-                    </td>
-
-                    <td className='col-span-3 md:col-span-2'>
-                      <span
-                        className={`text-xs rounded-full px-2 md:px-3 py-0.5 ${getStateStyle(
-                          order.state
-                        )}`}
-                      >
-                        {order.state}
-                      </span>
-                    </td>
-
-                    <td className='col-span-1 flex justify-center items-center max-md:ps-1'>
-                      <Cog
-                        className='w-6 h-6 cursor-pointer'
-                        onClick={() => {
-                          setSelectedOrder(order);
-                          setIsBannerOpen(true);
-                        }}
-                      />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-
-            {selectedOrder !== null && (
-              <BottomBanner
-                isOpen={isBannerOpen}
-                onClose={() => setIsBannerOpen(false)}
+          {/* options overview */}
+          <div className='grid grid-cols-2 md:grid-cols-4 gap-6 mb-6'>
+            {options.map((opt) => (
+              <div
+                key={opt.id}
+                className='flex justify-between items-start border border-gray-400/40 shadow-xs rounded-xl px-4 py-6'
               >
-                <>
-                  <h3 className='text-lg font-semibold tracking-tight'>
-                    Ordine #{selectedOrder.orderNumber}
-                  </h3>
-                  <p className='text-sm text-gray-500 mb-6'>
-                    {new Date(selectedOrder.createdAt).toLocaleDateString(
-                      'it-IT',
-                      {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                      }
-                    )}
-                  </p>
+                <div className='flex flex-col justify-center items-start gap-2'>
+                  <span className='text-gray-500 font-medium text-sm'>
+                    {opt.title}
+                  </span>
+                  <span className='text-2xl font-semibold'>{opt.value}</span>
+                </div>
+                <div>{opt.icon}</div>
+              </div>
+            ))}
+          </div>
 
-                  <div className='flex justify-between items-start mb-6'>
-                    <div>
-                      <p className='text-sm text-gray-500 font-medium tracking-tight mb-2'>
+          <div className='flex justify-between items-center gap-4 mb-8'>
+            <div className='relative grow'>
+              <input
+                type='text'
+                placeholder='Cerca ordini, clienti...'
+                className='bg-background border border-gray-400/30 rounded-xl py-2 ps-10 w-full'
+                onChange={(e) => {
+                  filterBy(e.target.value);
+                }}
+              />
+              <Search className='absolute top-1/2 left-3 -translate-y-1/2 w-5 h-5 pb-0.5' />
+            </div>
+
+            <select
+              className='rounded-md border border-gray-300 bg-white py-2 px-4 pr-8 shadow-sm focus:border-primary focus:ring-primary focus:outline-none focus:ring-1 text-gray-700 text-sm'
+              value={stateFilter}
+              onChange={(e) => {
+                filterBy('', e.target.value);
+              }}
+            >
+              <option value=''>Tutti gli stati</option>
+              {stateOption.map((state) => (
+                <option key={state.id} value={state.option}>
+                  {state.option}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* tabella storico ordini */}
+          <div className='px-6 py-5 border border-gray-400/40 rounded-xl'>
+            <h2 className='text-xl font-semibold mb-2'>Tutti gli ordini</h2>
+            <p className='text-gray-500 font-normal mb-6'>
+              {filteredOrders.length} ordini trovati
+            </p>
+
+            {filteredOrders.length > 0 ? (
+              <div>
+                <table className='w-full'>
+                  <thead>
+                    <tr className='grid grid-cols-12 text-gray-500 text-sm font-normal border-b border-gray-400/40 p-3 hover:bg-gray-100'>
+                      <th className='col-span-3 md:col-span-2 text-start'>
+                        Numero ordine
+                      </th>
+                      <th className='col-span-5 md:col-span-3 text-start'>
                         Cliente
-                      </p>
-                      <p className='font-semibold'>
-                        {selectedOrder.user.firstName}{' '}
-                        {selectedOrder.user.lastName}
-                      </p>
-                      <p className='text-sm font-medium'>
-                        {selectedOrder.user.email}
-                      </p>
-                    </div>
-                    <div>
-                      <p className='text-sm text-gray-500 font-medium tracking-tight mb-2 text-end'>
+                      </th>
+                      <th className='hidden md:block col-span-2 text-start'>
+                        Data
+                      </th>
+                      <th className='hidden md:block col-span-2 text-start'>
+                        Totale
+                      </th>
+                      <th className='col-span-3 md:col-span-2 text-start'>
                         Stato
-                      </p>
-                      <select
-                        className='rounded-md border border-gray-300 bg-white py-2 px-4 pr-8 shadow-sm focus:border-primary focus:ring-primary focus:outline-none focus:ring-1 text-gray-700 text-sm'
-                        value={selectedOrder.state}
-                        onChange={(e) => {
-                          editOrderState(selectedOrder.orderId, e.target.value);
-                          setSelectedOrder({
-                            ...selectedOrder,
-                            state: e.target.value,
-                          });
-                        }}
+                      </th>
+                      <th className='col-span-1 text-center'>Azioni</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    {filteredOrders.map((order) => (
+                      <tr
+                        key={order.orderNumber}
+                        className='grid grid-cols-12 items-center text-sm border-b border-gray-400/40 p-3 hover:bg-gray-100 last-of-type:border-none'
                       >
-                        {stateOption.map((state) => (
-                          <option value={state.option} key={state.id}>
-                            {state.option}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
+                        <td className='col-span-3 md:col-span-2 text-start'>
+                          #{order.orderNumber}
+                        </td>
 
-                  <div className='w-full'>
-                    <h4 className='font-medium'>Dettagli ordine</h4>
-                    <table className='w-full'>
-                      <thead>
-                        <tr className='grid grid-cols-12 text-gray-500 text-sm font-normal border-b border-gray-400/40 p-3 hover:bg-gray-100'>
-                          <th className='col-span-7 text-start'>Esperienza</th>
-                          <th className='col-span-2 md:col-span-1 text-end'>
-                            Quantità
-                          </th>
-                          <th className='hidden md:block col-span-2 text-end'>
-                            Prezzo
-                          </th>
-                          <th className='col-span-3 md:col-span-2 text-end'>
-                            Totale
-                          </th>
-                        </tr>
-                      </thead>
+                        <td className='col-span-5 md:col-span-3 overflow-hidden me-3'>
+                          <p className='font-semibold'>
+                            {order.user.firstName} {order.user.lastName}
+                          </p>
+                          <p className='max-md:text-xs'>{order.user.email}</p>
+                        </td>
 
-                      <tbody>
-                        {selectedOrder.orderExperiences.map((exp) => (
-                          <tr
-                            key={exp.orderExperienceId}
-                            className='grid grid-cols-12 text-sm border-b border-gray-400/40 p-3 hover:bg-gray-100'
+                        <td className='hidden md:flex col-span-2 flex-col justify-center items-start gap-1'>
+                          <span>
+                            {new Date(order.createdAt).toLocaleDateString(
+                              'it-IT',
+                              {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric',
+                              }
+                            )}
+                          </span>
+                          <span>
+                            {new Date(order.createdAt).toLocaleString('it-IT', {
+                              hour: 'numeric',
+                              minute: 'numeric',
+                            })}
+                          </span>
+                        </td>
+
+                        <td className='hidden md:block col-span-2'>
+                          {order.totalPrice.toFixed(2).replace('.', ',')} €
+                        </td>
+
+                        <td className='col-span-3 md:col-span-2'>
+                          <span
+                            className={`text-xs rounded-full px-2 md:px-3 py-0.5 ${getStateStyle(
+                              order.state
+                            )}`}
                           >
-                            <td className='col-span-7 text-start'>
-                              {exp.title}
-                            </td>
-                            <td className='col-span-2 md:col-span-1 text-end'>
-                              {exp.quantity}
-                            </td>
-                            <td className='hidden md:block col-span-2 text-end'>
-                              {exp.unitPrice.toFixed(2).replace('.', ',')} €
-                            </td>
-                            <td className='col-span-3 md:col-span-2 text-end'>
-                              {exp.totalPrice.toFixed(2).replace('.', ',')} €
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
+                            {order.state}
+                          </span>
+                        </td>
 
-                      <tfoot>
-                        {selectedOrder.shippingPrice > 0 && (
-                          <tr className='grid grid-cols-12 text-gray-500 font-medium p-3 hover:bg-gray-100'>
-                            <td className='col-span-9 md:col-span-10 text-end'>
-                              Spedizione:
-                            </td>
-                            <td className='col-span-3 md:col-span-2 text-end'>
-                              {selectedOrder.shippingPrice
-                                .toFixed(2)
-                                .replace('.', ',')}{' '}
-                              €
-                            </td>
-                          </tr>
+                        <td className='col-span-1 flex justify-center items-center max-md:ps-1'>
+                          <Cog
+                            className='w-6 h-6 cursor-pointer'
+                            onClick={() => {
+                              setSelectedOrder(order);
+                              setIsBannerOpen(true);
+                            }}
+                          />
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+
+                {selectedOrder !== null && (
+                  <BottomBanner
+                    isOpen={isBannerOpen}
+                    onClose={() => setIsBannerOpen(false)}
+                  >
+                    <>
+                      <h3 className='text-lg font-semibold tracking-tight'>
+                        Ordine #{selectedOrder.orderNumber}
+                      </h3>
+                      <p className='text-sm text-gray-500 mb-6'>
+                        {new Date(selectedOrder.createdAt).toLocaleDateString(
+                          'it-IT',
+                          {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                          }
                         )}
+                      </p>
 
-                        {selectedOrder.totalDiscount > 0 && (
-                          <tr className='grid grid-cols-12 text-gray-500 font-medium p-3 hover:bg-gray-100'>
-                            <td className='col-span-9 md:col-span-10 text-end'>
-                              Sconto coupon:
-                            </td>
-                            <td className='col-span-3 md:col-span-2 text-end'>
-                              -
-                              {selectedOrder.totalDiscount
-                                .toFixed(2)
-                                .replace('.', ',')}{' '}
-                              €
-                            </td>
-                          </tr>
-                        )}
+                      <div className='flex justify-between items-start mb-6'>
+                        <div>
+                          <p className='text-sm text-gray-500 font-medium tracking-tight mb-2'>
+                            Cliente
+                          </p>
+                          <p className='font-semibold'>
+                            {selectedOrder.user.firstName}{' '}
+                            {selectedOrder.user.lastName}
+                          </p>
+                          <p className='text-sm font-medium'>
+                            {selectedOrder.user.email}
+                          </p>
+                        </div>
+                        <div>
+                          <p className='text-sm text-gray-500 font-medium tracking-tight mb-2 text-end'>
+                            Stato
+                          </p>
+                          <select
+                            className='rounded-md border border-gray-300 bg-white py-2 px-4 pr-8 shadow-sm focus:border-primary focus:ring-primary focus:outline-none focus:ring-1 text-gray-700 text-sm'
+                            value={selectedOrder.state}
+                            onChange={(e) => {
+                              editOrderState(
+                                selectedOrder.orderId,
+                                e.target.value
+                              );
+                              setSelectedOrder({
+                                ...selectedOrder,
+                                state: e.target.value,
+                              });
+                            }}
+                          >
+                            {stateOption.map((state) => (
+                              <option value={state.option} key={state.id}>
+                                {state.option}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                      </div>
 
-                        <tr className='grid grid-cols-12 font-bold p-3 hover:bg-gray-100'>
-                          <td className='col-span-9 md:col-span-10 text-end'>
-                            Totale ordine
-                          </td>
-                          <td className='col-span-3 md:col-span-2 text-end'>
-                            {selectedOrder.totalPrice
-                              .toFixed(2)
-                              .replace('.', ',')}{' '}
-                            €
-                          </td>
-                        </tr>
-                      </tfoot>
-                    </table>
-                  </div>
-                </>
-              </BottomBanner>
+                      <div className='w-full'>
+                        <h4 className='font-medium'>Dettagli ordine</h4>
+                        <table className='w-full'>
+                          <thead>
+                            <tr className='grid grid-cols-12 text-gray-500 text-sm font-normal border-b border-gray-400/40 p-3 hover:bg-gray-100'>
+                              <th className='col-span-7 text-start'>
+                                Esperienza
+                              </th>
+                              <th className='col-span-2 md:col-span-1 text-end'>
+                                Quantità
+                              </th>
+                              <th className='hidden md:block col-span-2 text-end'>
+                                Prezzo
+                              </th>
+                              <th className='col-span-3 md:col-span-2 text-end'>
+                                Totale
+                              </th>
+                            </tr>
+                          </thead>
+
+                          <tbody>
+                            {selectedOrder.orderExperiences.map((exp) => (
+                              <tr
+                                key={exp.orderExperienceId}
+                                className='grid grid-cols-12 text-sm border-b border-gray-400/40 p-3 hover:bg-gray-100'
+                              >
+                                <td className='col-span-7 text-start'>
+                                  {exp.title}
+                                </td>
+                                <td className='col-span-2 md:col-span-1 text-end'>
+                                  {exp.quantity}
+                                </td>
+                                <td className='hidden md:block col-span-2 text-end'>
+                                  {exp.unitPrice.toFixed(2).replace('.', ',')} €
+                                </td>
+                                <td className='col-span-3 md:col-span-2 text-end'>
+                                  {exp.totalPrice.toFixed(2).replace('.', ',')}{' '}
+                                  €
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+
+                          <tfoot>
+                            {selectedOrder.shippingPrice > 0 && (
+                              <tr className='grid grid-cols-12 text-gray-500 font-medium p-3 hover:bg-gray-100'>
+                                <td className='col-span-9 md:col-span-10 text-end'>
+                                  Spedizione:
+                                </td>
+                                <td className='col-span-3 md:col-span-2 text-end'>
+                                  {selectedOrder.shippingPrice
+                                    .toFixed(2)
+                                    .replace('.', ',')}{' '}
+                                  €
+                                </td>
+                              </tr>
+                            )}
+
+                            {selectedOrder.totalDiscount > 0 && (
+                              <tr className='grid grid-cols-12 text-gray-500 font-medium p-3 hover:bg-gray-100'>
+                                <td className='col-span-9 md:col-span-10 text-end'>
+                                  Sconto coupon:
+                                </td>
+                                <td className='col-span-3 md:col-span-2 text-end'>
+                                  -
+                                  {selectedOrder.totalDiscount
+                                    .toFixed(2)
+                                    .replace('.', ',')}{' '}
+                                  €
+                                </td>
+                              </tr>
+                            )}
+
+                            <tr className='grid grid-cols-12 font-bold p-3 hover:bg-gray-100'>
+                              <td className='col-span-9 md:col-span-10 text-end'>
+                                Totale ordine
+                              </td>
+                              <td className='col-span-3 md:col-span-2 text-end'>
+                                {selectedOrder.totalPrice
+                                  .toFixed(2)
+                                  .replace('.', ',')}{' '}
+                                €
+                              </td>
+                            </tr>
+                          </tfoot>
+                        </table>
+                      </div>
+                    </>
+                  </BottomBanner>
+                )}
+              </div>
+            ) : (
+              <div className='flex flex-col justify-center items-center gap-2 py-10'>
+                <h3 className='text-xl font-semibold'>Nessun ordine trovato</h3>
+                <p className='text-gray-500 font-normal'>
+                  Non è stato effettuato ancora nessun ordine.
+                </p>
+              </div>
             )}
           </div>
-        ) : (
-          <div className='flex flex-col justify-center items-center gap-2 py-10'>
-            <h3 className='text-xl font-semibold'>Nessun ordine trovato</h3>
-            <p className='text-gray-500 font-normal'>
-              Non è stato effettuato ancora nessun ordine.
-            </p>
-          </div>
-        )}
-      </div>
+        </>
+      )}
     </>
   );
 };

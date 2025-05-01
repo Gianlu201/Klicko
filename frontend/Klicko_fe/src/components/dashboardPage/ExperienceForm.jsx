@@ -6,8 +6,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import UploadFile from '../ui/UploadFile';
 import ImagesPreview from './ImagesPreview';
 import { toast } from 'sonner';
+import { useSelector } from 'react-redux';
 
 const ExperienceForm = () => {
+  const [isAuthorized, setIsAuthorized] = useState(false);
+
   const [editMode, setEditMode] = useState(false);
 
   const [title, setTitle] = useState('');
@@ -40,7 +43,19 @@ const ExperienceForm = () => {
 
   const params = useParams();
 
+  const profile = useSelector((state) => {
+    return state.profile;
+  });
+
   const navigate = useNavigate();
+
+  const checkAuthorization = () => {
+    if ('admin, seller'.includes(profile.role.toLowerCase())) {
+      setIsAuthorized(true);
+    } else {
+      navigate('/unauthorized');
+    }
+  };
 
   const getExperience = async (expId) => {
     try {
@@ -228,9 +243,7 @@ const ExperienceForm = () => {
         }
       }
 
-      // if (coverImage) {
-      formData.append('CoverImage', coverImage); // file immagine
-      // }
+      formData.append('CoverImage', coverImage); // file immagine cover
 
       if (images && images.length > 0) {
         for (let i = 0; i < images.length; i++) {
@@ -330,13 +343,19 @@ const ExperienceForm = () => {
   };
 
   useEffect(() => {
-    if (params.expId !== undefined && experience === null) {
-      getExperience(params.expId);
-      setEditMode(true);
-    }
+    if (profile.role) {
+      checkAuthorization();
 
-    getAllCategories();
-  }, []);
+      if (isAuthorized) {
+        if (params.expId !== undefined && experience === null) {
+          getExperience(params.expId);
+          setEditMode(true);
+        }
+
+        getAllCategories();
+      }
+    }
+  }, [profile, isAuthorized]);
 
   useEffect(() => {
     if (coverImage !== null) {

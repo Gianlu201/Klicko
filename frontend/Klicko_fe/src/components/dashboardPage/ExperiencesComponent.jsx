@@ -17,9 +17,11 @@ import { useNavigate } from 'react-router-dom';
 import { Modal, ModalBody, ModalHeader } from 'flowbite-react';
 import { toast } from 'sonner';
 import { cartModified } from '../../redux/actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const ExperiencesComponent = () => {
+  const [isAuthorized, setIsAuthorized] = useState(false);
+
   const [experiences, setExperiences] = useState([]);
   const [categories, setCategories] = useState([]);
   const [filteredExperiences, setFilteredExperiences] = useState([]);
@@ -37,6 +39,18 @@ const ExperiencesComponent = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
+
+  const profile = useSelector((state) => {
+    return state.profile;
+  });
+
+  const checkAuthorization = () => {
+    if (profile.role.toLowerCase() === 'admin') {
+      setIsAuthorized(true);
+    } else {
+      navigate('/unauthorized');
+    }
+  };
 
   const getAllExperiences = async () => {
     try {
@@ -213,9 +227,15 @@ const ExperiencesComponent = () => {
   };
 
   useEffect(() => {
-    getAllExperiences();
-    getAllCategories();
-  }, []);
+    if (profile.role) {
+      checkAuthorization();
+
+      if (isAuthorized) {
+        getAllExperiences();
+        getAllCategories();
+      }
+    }
+  }, [profile, isAuthorized]);
 
   useEffect(() => {
     searchExperiences();
