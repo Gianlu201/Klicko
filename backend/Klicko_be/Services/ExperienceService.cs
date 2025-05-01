@@ -28,20 +28,36 @@ namespace Klicko_be.Services
             }
         }
 
-        public async Task<List<Experience>?> GetAllExperienceAsAdminAsync()
+        public async Task<List<Experience>?> GetAllExperienceAsEmployeeAsync(
+            bool isAdmin,
+            string? userId
+        )
         {
             try
             {
-                var experiences = await _context
-                    .Experiences.Include(e => e.Category)
-                    .Include(e => e.Images)
-                    .Include(e => e.CarryWiths)
-                    .Include(e => e.UserCreator)
-                    .Include(e => e.UserLastModify)
-                    .OrderBy(e => e.IsDeleted)
-                    .ToListAsync();
-
-                return experiences;
+                if (isAdmin)
+                {
+                    return await _context
+                        .Experiences.Include(e => e.Category)
+                        .Include(e => e.Images)
+                        .Include(e => e.CarryWiths)
+                        .Include(e => e.UserCreator)
+                        .Include(e => e.UserLastModify)
+                        .OrderBy(e => e.IsDeleted)
+                        .ToListAsync();
+                }
+                else
+                {
+                    return await _context
+                        .Experiences.Include(e => e.Category)
+                        .Include(e => e.Images)
+                        .Include(e => e.CarryWiths)
+                        .Include(e => e.UserCreator)
+                        .Include(e => e.UserLastModify)
+                        .OrderBy(e => e.IsDeleted)
+                        .Where(e => e.UserCreatorId == userId)
+                        .ToListAsync();
+                }
             }
             catch
             {

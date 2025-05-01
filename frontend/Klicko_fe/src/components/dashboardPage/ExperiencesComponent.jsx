@@ -45,7 +45,7 @@ const ExperiencesComponent = () => {
   });
 
   const checkAuthorization = () => {
-    if (profile.role.toLowerCase() === 'admin') {
+    if ('admin, seller'.includes(profile.role.toLowerCase())) {
       setIsAuthorized(true);
     } else {
       navigate('/unauthorized');
@@ -474,7 +474,14 @@ const ExperiencesComponent = () => {
             <p className='text-gray-500 font-normal'>
               Nessuna esperienza corrispondente ai criteri di ricerca.
             </p>
-            <Button variant='primary'>Crea la tua prima esperienza</Button>
+            <Button
+              variant='primary'
+              onClick={() => {
+                navigate('/dashboard/experiences/add');
+              }}
+            >
+              Crea la tua prima esperienza
+            </Button>
           </div>
         )}
 

@@ -25,11 +25,30 @@ namespace Klicko_be.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin, Seller")]
-        public async Task<IActionResult> GetAllExperiencesAsAdmin()
+        public async Task<IActionResult> GetAllExperiencesAsEmployee()
         {
             try
             {
-                var experiences = await _experienceService.GetAllExperienceAsAdminAsync();
+                var user = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+                var userRole = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role);
+                var userId = user!.Value;
+
+                List<Experience>? experiences;
+
+                if (userRole.ToString().ToLower() == "admin")
+                {
+                    experiences = await _experienceService.GetAllExperienceAsEmployeeAsync(
+                        true,
+                        null
+                    );
+                }
+                else
+                {
+                    experiences = await _experienceService.GetAllExperienceAsEmployeeAsync(
+                        false,
+                        userId
+                    );
+                }
 
                 if (experiences == null)
                 {
