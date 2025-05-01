@@ -1,14 +1,26 @@
-import { Gift, ShoppingCart, Star, Trophy } from 'lucide-react';
+import {
+  BadgePercent,
+  CircleFadingArrowUp,
+  Gift,
+  ShoppingCart,
+  Star,
+  Trophy,
+} from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import Button from '../components/ui/Button';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { Modal, ModalBody, ModalHeader } from 'flowbite-react';
+import { toast } from 'sonner';
 
 const LoyaltyPage = () => {
   const [fidelityCard, setFidelityCard] = useState(null);
   const [fidelityLevel, setFidelityLevel] = useState(null);
   const [nextLevel, setNextLevel] = useState(null);
   const [style, setStyle] = useState({});
+
+  const [openConfermeModal, setOpenConfermeModal] = useState(false);
+  const [selectedBonus, setSelectedBonus] = useState(null);
 
   const profile = useSelector((state) => state.profile);
 
@@ -133,7 +145,7 @@ const LoyaltyPage = () => {
       if (response.ok) {
         // const data = await response.json();
 
-        // console.log(data);
+        toast.success(`Coupon generato con successo!`);
         getFidelityCard();
       } else {
         throw new Error();
@@ -367,7 +379,9 @@ const LoyaltyPage = () => {
                       onClick={
                         fidelityCard.availablePoints > bonus.points
                           ? () => {
-                              convertPoints(bonus.points);
+                              setOpenConfermeModal(true);
+                              setSelectedBonus(bonus);
+                              // convertPoints(bonus.points);
                             }
                           : () => {}
                       }
@@ -434,6 +448,54 @@ const LoyaltyPage = () => {
               </tbody>
             </table>
           </div>
+
+          {/* Modale conferma conversione punti */}
+          {selectedBonus !== null && (
+            <Modal
+              show={openConfermeModal}
+              size='md'
+              onClose={() => {
+                setSelectedBonus(null);
+                setOpenConfermeModal(false);
+              }}
+              popup
+            >
+              <ModalHeader className='bg-background rounded-t-2xl' />
+              <ModalBody className='bg-background rounded-b-2xl'>
+                <div className='text-center'>
+                  <BadgePercent className='mx-auto mb-4 h-14 w-14 text-green-500' />
+                  <h3 className='mb-5 text-lg font-medium'>
+                    Sicuro di voler convertire {selectedBonus.points} punti?
+                  </h3>
+                  <p className='mb-8 text-gray-500'>
+                    Sarà generato un nuovo coupon da poter utilizzare entro 7
+                    giorni
+                  </p>
+                  <div className='flex justify-center gap-4'>
+                    <Button
+                      variant='success'
+                      onClick={() => {
+                        convertPoints(selectedBonus.points);
+                        setSelectedBonus(null);
+                        setOpenConfermeModal(false);
+                      }}
+                    >
+                      Conferma
+                    </Button>
+                    <Button
+                      color='gray'
+                      onClick={() => {
+                        setSelectedBonus(null);
+                        setOpenConfermeModal(false);
+                      }}
+                    >
+                      Annulla
+                    </Button>
+                  </div>
+                </div>
+              </ModalBody>
+            </Modal>
+          )}
         </>
       )}
     </div>

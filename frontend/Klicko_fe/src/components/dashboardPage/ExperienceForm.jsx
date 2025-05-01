@@ -5,8 +5,12 @@ import ToggleSwitch from '../ui/ToggleSwitch';
 import { useNavigate, useParams } from 'react-router-dom';
 import UploadFile from '../ui/UploadFile';
 import ImagesPreview from './ImagesPreview';
+import { toast } from 'sonner';
+import { useSelector } from 'react-redux';
 
 const ExperienceForm = () => {
+  const [isAuthorized, setIsAuthorized] = useState(false);
+
   const [editMode, setEditMode] = useState(false);
 
   const [title, setTitle] = useState('');
@@ -35,9 +39,23 @@ const ExperienceForm = () => {
 
   const [experience, setExperience] = useState(null);
 
+  const [checkFormValidity, setCheckFormValidity] = useState(false);
+
   const params = useParams();
 
+  const profile = useSelector((state) => {
+    return state.profile;
+  });
+
   const navigate = useNavigate();
+
+  const checkAuthorization = () => {
+    if ('admin, seller'.includes(profile.role.toLowerCase())) {
+      setIsAuthorized(true);
+    } else {
+      navigate('/unauthorized');
+    }
+  };
 
   const getExperience = async (expId) => {
     try {
@@ -116,8 +134,75 @@ const ExperienceForm = () => {
     }
   };
 
+  const checkValidity = () => {
+    let result = true;
+
+    switch (true) {
+      case title.trim() === '':
+        result = false;
+        break;
+
+      case categoryId.trim() === '':
+        result = false;
+        break;
+
+      case descriptionShort.trim() === '':
+        result = false;
+        break;
+
+      case description.trim() === '':
+        result = false;
+        break;
+
+      case price <= 0:
+        result = false;
+        break;
+
+      case price.toString().trim() === '':
+        result = false;
+        break;
+
+      case maxParticipants.toString().trim() === '':
+        result = false;
+        break;
+
+      case sale.toString().trim() === '':
+        result = false;
+        break;
+
+      case validityInMonths.toString().trim() === '':
+        result = false;
+        break;
+
+      case place.trim() === '':
+        result = false;
+        break;
+
+      case duration.trim() === '':
+        result = false;
+        break;
+
+      case organiser.trim() === '':
+        result = false;
+        break;
+
+      default:
+        break;
+    }
+
+    if (!result) {
+      setCheckFormValidity(true);
+    }
+
+    return result;
+  };
+
   const sendForm = async () => {
     try {
+      if (!checkValidity()) {
+        return;
+      }
+
       let tokenObj = localStorage.getItem('klicko_token');
 
       if (!tokenObj) {
@@ -158,9 +243,7 @@ const ExperienceForm = () => {
         }
       }
 
-      // if (coverImage) {
-      formData.append('CoverImage', coverImage); // file immagine
-      // }
+      formData.append('CoverImage', coverImage); // file immagine cover
 
       if (images && images.length > 0) {
         for (let i = 0; i < images.length; i++) {
@@ -192,13 +275,23 @@ const ExperienceForm = () => {
       });
 
       if (response.ok) {
-        const data = await response.json();
-        console.log('Upload riuscito:', data);
+        toast.success(
+          <>
+            <p className='font-bold'>Nuova esperienza creata!</p>
+            <p>{title}</p>
+          </>
+        );
+        navigate('/dashboard/experiences');
       } else {
-        throw new Error('Errore nel salvataggio!');
+        throw new Error('Qualcosa è andato storto!');
       }
-    } catch {
-      console.log('Error');
+    } catch (e) {
+      toast.error(
+        <>
+          <p className='font-bold'>Errore!</p>
+          <p>{e.message}</p>
+        </>
+      );
     }
   };
 
@@ -208,12 +301,14 @@ const ExperienceForm = () => {
         for (let i = 0; i < removedImages.length; i++) {
           formData.append('RemovedImages', removedImages[i]);
         }
-
-        // formData.append('RemovedImages', removedImages);
       }
-      formData.append('RemovedCoverImage', removedCoverImage);
 
-      console.log(formData);
+      if (coverImage) {
+        formData.append('RemovedCoverImage', true);
+      } else {
+        formData.append('RemovedCoverImage', removedCoverImage);
+      }
+
       const response = await fetch(
         `https://localhost:7235/api/Experience/${params.expId}`,
         {
@@ -227,24 +322,46 @@ const ExperienceForm = () => {
       );
 
       if (response.ok) {
-        const data = await response.json();
-        console.log('Upload riuscito:', data);
+        toast.success(
+          <>
+            <p className='font-bold'>Esperienza modificata!</p>
+            <p>{experience.title}</p>
+          </>
+        );
+        navigate('/dashboard/experiences');
       } else {
-        throw new Error('Errore nel salvataggio!');
+        throw new Error(`Errore nella modifica dell'esperienza!`);
       }
-    } catch {
-      console.log('Error');
+    } catch (e) {
+      toast.error(
+        <>
+          <p className='font-bold'>Errore!</p>
+          <p>{e.message}</p>
+        </>
+      );
     }
   };
 
   useEffect(() => {
-    if (params.expId !== undefined && experience === null) {
-      getExperience(params.expId);
-      setEditMode(true);
-    }
+    if (profile.role) {
+      checkAuthorization();
 
-    getAllCategories();
-  }, []);
+      if (isAuthorized) {
+        if (params.expId !== undefined && experience === null) {
+          getExperience(params.expId);
+          setEditMode(true);
+        }
+
+        getAllCategories();
+      }
+    }
+  }, [profile, isAuthorized]);
+
+  useEffect(() => {
+    if (coverImage !== null) {
+      setRemovedCoverImage(true);
+    }
+  }, [coverImage]);
 
   return (
     <>
@@ -276,6 +393,13 @@ const ExperienceForm = () => {
                 setTitle(e.target.value);
               }}
             />
+
+            {checkFormValidity && title.trim() === '' && (
+              <span className='text-red-500 text-sm font-medium'>
+                Questo campo è obligatorio!
+              </span>
+            )}
+
             <span className='text-gray-500 text-sm'>
               Questo sarà il titolo principale dell'esperienza
             </span>
@@ -301,6 +425,13 @@ const ExperienceForm = () => {
                 </option>
               ))}
             </select>
+
+            {checkFormValidity && categoryId.trim() === '' && (
+              <span className='text-red-500 text-sm font-medium'>
+                Questo campo è obligatorio!
+              </span>
+            )}
+
             <span className='text-gray-500 text-sm'>
               La categoria aiuta i clienti a trovare la tua esperienza
             </span>
@@ -322,6 +453,13 @@ const ExperienceForm = () => {
               setDescriptionShort(e.target.value);
             }}
           ></textarea>
+
+          {checkFormValidity && descriptionShort.trim() === '' && (
+            <span className='text-red-500 text-sm font-medium'>
+              Questo campo è obligatorio!
+            </span>
+          )}
+
           <span className='text-gray-500 text-sm'>
             Questa verrà mostrata nelle anteprime delle card
           </span>
@@ -342,6 +480,13 @@ const ExperienceForm = () => {
               setDescription(e.target.value);
             }}
           ></textarea>
+
+          {checkFormValidity && description.trim() === '' && (
+            <span className='text-red-500 text-sm font-medium'>
+              Questo campo è obligatorio!
+            </span>
+          )}
+
           <span className='text-gray-500 text-sm'>
             Descrivi ogni aspetto dell'esperienza: cosa include, cosa
             aspettarsi, ecc.
@@ -364,6 +509,12 @@ const ExperienceForm = () => {
                 setOrganiser(e.target.value);
               }}
             />
+
+            {checkFormValidity && organiser.trim() === '' && (
+              <span className='text-red-500 text-sm font-medium'>
+                Questo campo è obligatorio!
+              </span>
+            )}
           </div>
 
           {/* località */}
@@ -381,6 +532,12 @@ const ExperienceForm = () => {
                 setPlace(e.target.value);
               }}
             />
+
+            {checkFormValidity && place.trim() === '' && (
+              <span className='text-red-500 text-sm font-medium'>
+                Questo campo è obligatorio!
+              </span>
+            )}
           </div>
 
           {/* durata */}
@@ -398,10 +555,16 @@ const ExperienceForm = () => {
                 setDuration(e.target.value);
               }}
             />
+
+            {checkFormValidity && duration.trim() === '' && (
+              <span className='text-red-500 text-sm font-medium'>
+                Questo campo è obligatorio!
+              </span>
+            )}
           </div>
         </div>
 
-        <div className='grid md:grid-cols-4 items-end gap-8 mb-8'>
+        <div className='grid md:grid-cols-4 items-start gap-8 mb-8'>
           {/* prezzo */}
           <div className='flex flex-col justify-start items-start gap-2'>
             <label htmlFor='price' className='font-semibold text-sm'>
@@ -419,6 +582,12 @@ const ExperienceForm = () => {
                 setPrice(e.target.value);
               }}
             />
+
+            {checkFormValidity && price.toString().trim() === '' && (
+              <span className='text-red-500 text-sm font-medium'>
+                Questo campo è obligatorio!
+              </span>
+            )}
           </div>
 
           {/* massimo di partecipanti */}
@@ -438,6 +607,19 @@ const ExperienceForm = () => {
                 setMaxParticipants(e.target.value);
               }}
             />
+
+            {checkFormValidity && maxParticipants.toString().trim() === '' && (
+              <span className='text-red-500 text-sm font-medium'>
+                Questo campo è obligatorio!
+              </span>
+            )}
+
+            {maxParticipants.toString().trim() !== '' &&
+              maxParticipants < 1 && (
+                <span className='text-red-500 text-sm font-medium'>
+                  Il numero di partecipanti deve essere almeno 1!
+                </span>
+              )}
           </div>
 
           {/* sconto */}
@@ -457,6 +639,18 @@ const ExperienceForm = () => {
                 setSale(e.target.value);
               }}
             />
+
+            {checkFormValidity && sale.toString().trim() === '' && (
+              <span className='text-red-500 text-sm font-medium'>
+                Questo campo è obligatorio!
+              </span>
+            )}
+
+            {sale.length > 0 && sale < 0 && (
+              <span className='text-red-500 text-sm font-medium'>
+                Il valore minimo è 0!
+              </span>
+            )}
           </div>
 
           {/* validità in mesi */}
@@ -476,6 +670,18 @@ const ExperienceForm = () => {
                 setValidityInMonths(e.target.value);
               }}
             />
+
+            {checkFormValidity && validityInMonths.toString().trim() === '' && (
+              <span className='text-red-500 text-sm font-medium'>
+                Questo campo è obligatorio!
+              </span>
+            )}
+
+            {validityInMonths && validityInMonths < 1 && (
+              <span className='text-red-500 text-sm font-medium'>
+                Il valore minimo è 1!
+              </span>
+            )}
           </div>
         </div>
 
@@ -566,23 +772,16 @@ const ExperienceForm = () => {
             multiple={false}
             onFilesSelected={(files) => setCoverImage(files)}
           />
-          {/* <input
-            type='file'
-            accept='image/*'
-            id='coverImg'
-            className='text-sm bg-background border border-gray-400/30 rounded-lg py-2 px-3'
-            onChange={(e) => {
-              setCoverImage(e.target.files[0]);
-            }}
-          /> */}
 
-          {experience !== null && experience.images !== null && (
-            <ImagesPreview
-              coverImage={experience.coverImage}
-              onItemRemove={(items) => setRemovedCoverImage(items)}
-              initialState={removedCoverImage}
-            />
-          )}
+          {experience !== null &&
+            experience.coverImage !== null &&
+            !removedCoverImage && (
+              <ImagesPreview
+                coverImage={experience.coverImage}
+                onItemRemove={(items) => setRemovedCoverImage(items)}
+                initialState={removedCoverImage}
+              />
+            )}
 
           <span className='text-gray-500 text-sm'>
             Questa immagine verrà mostrata nell'anteprima dell'esperienza

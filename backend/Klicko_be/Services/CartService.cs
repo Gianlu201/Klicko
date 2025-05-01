@@ -238,5 +238,51 @@ namespace Klicko_be.Services
                 return false;
             }
         }
+
+        public async Task<bool> CheckCartIntegrityAsync(Guid experienceId)
+        {
+            // viene richiamata quando un'esperienza viene eliminata (softDelete o hardDelete)
+            // ha il compito di verificare se nei carrelli esiste l'esperienza eliminata e se
+            // presente la elimina
+            try
+            {
+                var carts = await _context
+                    .Carts.Include(c => c.CartExperiences)
+                    .ThenInclude(ce => ce.Experience)
+                    .Where(c => c.CartExperiences!.Any(ce => ce.ExperienceId == experienceId))
+                    .ToListAsync();
+
+                if (carts == null || carts.Count == 0)
+                {
+                    return false;
+                }
+
+                foreach (var cart in carts)
+                {
+                    var cartExperience = await _context.CartExperiences.FirstOrDefaultAsync(ce =>
+                        ce.ExperienceId == experienceId && ce.CartId == cart.CartId
+                    );
+                    if (cartExperience != null)
+                    {
+                        _context.CartExperiences.Remove(cartExperience);
+                    }
+                }
+                var result = await TrySaveAsync();
+
+                if (result)
+                {
+                    foreach (var cart in carts)
+                    {
+                        await UpdateCartDateByIdAsync(cart.CartId);
+                    }
+                }
+
+                return result;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

@@ -24,6 +24,7 @@ import ContactPage from './pages/ContactPage';
 import ScrollToTop from './components/ScrollToTop';
 import LoyaltyPage from './pages/LoyaltyPage';
 import FAQPage from './pages/FAQPage';
+import UnauthorizedPage from './pages/UnauthorizedPage';
 
 function App() {
   return (
@@ -71,11 +72,12 @@ function App() {
               <Route path='/contact' element={<ContactPage />} />
               <Route path='/faq' element={<FAQPage />} />
 
+              <Route path='/unauthorized' element={<UnauthorizedPage />} />
               <Route path='*' element={<NotFoundPage />} />
             </Routes>
           </div>
           <Footer />
-          <Toaster />
+          <Toaster richColors />
         </div>
       </BrowserRouter>
     </>

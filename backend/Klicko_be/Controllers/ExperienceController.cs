@@ -24,11 +24,31 @@ namespace Klicko_be.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllExperiencesAsAdmin()
+        [Authorize(Roles = "Admin, Seller")]
+        public async Task<IActionResult> GetAllExperiencesAsEmployee()
         {
             try
             {
-                var experiences = await _experienceService.GetAllExperienceAsAdminAsync();
+                var user = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+                var userRole = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role);
+                var userId = user!.Value;
+
+                List<Experience>? experiences;
+
+                if (userRole.ToString().ToLower() == "admin")
+                {
+                    experiences = await _experienceService.GetAllExperienceAsEmployeeAsync(
+                        true,
+                        null
+                    );
+                }
+                else
+                {
+                    experiences = await _experienceService.GetAllExperienceAsEmployeeAsync(
+                        false,
+                        userId
+                    );
+                }
 
                 if (experiences == null)
                 {
@@ -527,7 +547,7 @@ namespace Klicko_be.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Admin, Seller")]
         public async Task<IActionResult> CreateExperience(
             [FromForm] CreateExperienceRequestDto createExperience
         )
@@ -654,7 +674,7 @@ namespace Klicko_be.Controllers
         }
 
         [HttpPut("{experienceId:guid}")]
-        [Authorize]
+        [Authorize(Roles = "Admin, Seller")]
         public async Task<IActionResult> Edit(
             [FromForm] EditExperienceRequestDto experienceEdit,
             Guid experienceId
@@ -689,6 +709,7 @@ namespace Klicko_be.Controllers
         }
 
         [HttpPut("softDelete/{experienceId:guid}")]
+        [Authorize(Roles = "Admin, Seller")]
         public async Task<IActionResult> SoftDelete(Guid experienceId)
         {
             var result = await _experienceService.SoftDeleteExperienceByIdAsync(experienceId);
@@ -705,6 +726,7 @@ namespace Klicko_be.Controllers
         }
 
         [HttpPut("restoreExperience/{experienceId:guid}")]
+        [Authorize(Roles = "Admin, Seller")]
         public async Task<IActionResult> Restore(Guid experienceId)
         {
             var result = await _experienceService.RestoreExperienceByIdAsync(experienceId);
@@ -721,6 +743,7 @@ namespace Klicko_be.Controllers
         }
 
         [HttpDelete("{experienceId:guid}")]
+        [Authorize(Roles = "Admin, Seller")]
         public async Task<IActionResult> Delete(Guid experienceId)
         {
             var result = await _experienceService.DeleteExperienceByIdAsync(experienceId);

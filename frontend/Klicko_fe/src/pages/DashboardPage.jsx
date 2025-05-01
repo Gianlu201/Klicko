@@ -7,9 +7,9 @@ import {
   User,
   Users,
 } from 'lucide-react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import MainComponent from '../components/dashboardPage/MainComponent';
 import OrdersComponent from '../components/dashboardPage/OrdersComponent';
 import ExperiencesComponent from '../components/dashboardPage/ExperiencesComponent';
@@ -26,6 +26,8 @@ const DashboardPage = () => {
 
   const params = useParams();
 
+  const navigate = useNavigate();
+
   const options = [
     {
       id: 1,
@@ -33,6 +35,7 @@ const DashboardPage = () => {
       title: 'I miei ordini',
       partialUrl: 'orders',
       icon: <ShoppingBag className='w-4.5 h-4.5' />,
+      authorizedRoles: 'Admin, Seller, User',
     },
     {
       id: 2,
@@ -40,6 +43,7 @@ const DashboardPage = () => {
       title: 'Profilo',
       partialUrl: 'profile',
       icon: <User className='w-4.5 h-4.5' />,
+      authorizedRoles: 'Admin, Seller, User',
     },
     {
       id: 3,
@@ -47,6 +51,7 @@ const DashboardPage = () => {
       title: 'Esperienze',
       partialUrl: 'experiences',
       icon: <PackageOpen className='w-4.5 h-4.5' />,
+      authorizedRoles: 'Admin, Seller',
     },
     {
       id: 4,
@@ -54,6 +59,7 @@ const DashboardPage = () => {
       title: 'Dashboard admin',
       partialUrl: 'admin',
       icon: <LayoutDashboard className='w-4.5 h-4.5' />,
+      authorizedRoles: 'Admin',
     },
     {
       id: 5,
@@ -61,6 +67,7 @@ const DashboardPage = () => {
       title: 'Gestione utenti',
       partialUrl: 'users',
       icon: <Users className='w-4.5 h-4.5' />,
+      authorizedRoles: 'Admin',
     },
     {
       id: 6,
@@ -68,11 +75,19 @@ const DashboardPage = () => {
       title: 'Impostazioni',
       partialUrl: 'settings',
       icon: <Settings className='w-4.5 h-4.5' />,
+      authorizedRoles: 'Admin, Seller, User',
     },
   ];
 
+  const checkAuthentication = () => {
+    let tokenObj = localStorage.getItem('klicko_token');
+
+    if (!tokenObj) {
+      navigate('/login');
+    }
+  };
+
   const getContent = () => {
-    console.log(params);
     switch (params.tab) {
       case undefined:
         return <MainComponent />;
@@ -90,22 +105,23 @@ const DashboardPage = () => {
         return <ExperiencesComponent />;
 
       case 'admin':
-        console.log('admin');
         return <DashboardAdmin />;
 
       case 'users':
-        console.log('users');
         return <DashboardUsers />;
 
       case 'settings':
-        console.log('users');
         return <SettingsComponent />;
 
       default:
-        console.log('page 404');
+        navigate('/404');
         break;
     }
   };
+
+  useEffect(() => {
+    checkAuthentication();
+  }, []);
 
   return (
     <div className='max-w-7xl mx-auto min-h-screen pt-10 px-6 xl:px-0'>
@@ -115,26 +131,30 @@ const DashboardPage = () => {
       </p>
 
       <div className='lg:grid lg:grid-cols-4 gap-6'>
+        {console.log(profile)}
         <div className='hidden lg:block col-span-1 bg-white shadow rounded-xl h-fit overflow-hidden'>
           <ul>
-            {options.map((opt) => (
-              <li key={opt.id}>
-                <Link
-                  to={opt.url}
-                  className={`flex justify-between items-center border-b border-gray-400/30 cursor-pointer px-5 py-4 ${
-                    params.tab === opt.partialUrl
-                      ? 'bg-primary/15 text-primary font-medium'
-                      : 'hover:bg-gray-100'
-                  } ${opt.id === options.length ? 'border-0' : ''}`}
-                >
-                  <span className='flex items-center gap-2'>
-                    {opt.icon}
-                    {opt.title}
-                  </span>
-                  <ChevronRight className='w-4.5 h-4.5' />
-                </Link>
-              </li>
-            ))}
+            {options.map(
+              (opt) =>
+                opt.authorizedRoles.includes(profile.role) && (
+                  <li key={opt.id}>
+                    <Link
+                      to={opt.url}
+                      className={`flex justify-between items-center border-b border-gray-400/30 cursor-pointer px-5 py-4 ${
+                        params.tab === opt.partialUrl
+                          ? 'bg-primary/15 text-primary font-medium'
+                          : 'hover:bg-gray-100'
+                      } ${opt.id === options.length ? 'border-0' : ''}`}
+                    >
+                      <span className='flex items-center gap-2'>
+                        {opt.icon}
+                        {opt.title}
+                      </span>
+                      <ChevronRight className='w-4.5 h-4.5' />
+                    </Link>
+                  </li>
+                )
+            )}
           </ul>
         </div>
 

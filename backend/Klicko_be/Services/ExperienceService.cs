@@ -8,10 +8,12 @@ namespace Klicko_be.Services
     public class ExperienceService
     {
         private readonly ApplicationDbContext _context;
+        private readonly CartService _cartService;
 
-        public ExperienceService(ApplicationDbContext context)
+        public ExperienceService(ApplicationDbContext context, CartService cartService)
         {
             _context = context;
+            _cartService = cartService;
         }
 
         public async Task<bool> TrySaveAsync()
@@ -26,20 +28,36 @@ namespace Klicko_be.Services
             }
         }
 
-        public async Task<List<Experience>?> GetAllExperienceAsAdminAsync()
+        public async Task<List<Experience>?> GetAllExperienceAsEmployeeAsync(
+            bool isAdmin,
+            string? userId
+        )
         {
             try
             {
-                var experiences = await _context
-                    .Experiences.Include(e => e.Category)
-                    .Include(e => e.Images)
-                    .Include(e => e.CarryWiths)
-                    .Include(e => e.UserCreator)
-                    .Include(e => e.UserLastModify)
-                    .OrderBy(e => e.IsDeleted)
-                    .ToListAsync();
-
-                return experiences;
+                if (isAdmin)
+                {
+                    return await _context
+                        .Experiences.Include(e => e.Category)
+                        .Include(e => e.Images)
+                        .Include(e => e.CarryWiths)
+                        .Include(e => e.UserCreator)
+                        .Include(e => e.UserLastModify)
+                        .OrderBy(e => e.IsDeleted)
+                        .ToListAsync();
+                }
+                else
+                {
+                    return await _context
+                        .Experiences.Include(e => e.Category)
+                        .Include(e => e.Images)
+                        .Include(e => e.CarryWiths)
+                        .Include(e => e.UserCreator)
+                        .Include(e => e.UserLastModify)
+                        .OrderBy(e => e.IsDeleted)
+                        .Where(e => e.UserCreatorId == userId)
+                        .ToListAsync();
+                }
             }
             catch
             {
@@ -165,13 +183,16 @@ namespace Klicko_be.Services
                 Image? prevCoverImg = null;
                 if (experienceEdit.RemovedCoverImage)
                 {
-                    prevCoverImg = await _context.Images.FirstOrDefaultAsync(i =>
-                        i.Url == experience.CoverImage && i.ExperienceId == experienceId
-                    );
-
-                    if (prevCoverImg == null)
+                    if (experience.CoverImage != null)
                     {
-                        return false;
+                        prevCoverImg = await _context.Images.FirstOrDefaultAsync(i =>
+                            i.Url == experience.CoverImage && i.ExperienceId == experienceId
+                        );
+
+                        if (prevCoverImg == null)
+                        {
+                            return false;
+                        }
                     }
 
                     var fileName =
@@ -193,8 +214,6 @@ namespace Klicko_be.Services
                         await experienceEdit.CoverImage.CopyToAsync(stream);
                     }
 
-                    experience.CoverImage = fileName;
-
                     _context.Images.Add(
                         new Image
                         {
@@ -204,6 +223,15 @@ namespace Klicko_be.Services
                             IsCover = true,
                         }
                     );
+
+                    experience.CoverImage = fileName;
+
+                    var result = await TrySaveAsync();
+
+                    if (!result)
+                    {
+                        return false;
+                    }
                 }
 
                 if (experienceEdit.Images != null)
@@ -240,6 +268,13 @@ namespace Klicko_be.Services
                     {
                         _context.Images.Add(img);
                     }
+
+                    var result = await TrySaveAsync();
+
+                    if (!result)
+                    {
+                        return false;
+                    }
                 }
 
                 if (experienceEdit.RemovedImages != null)
@@ -261,13 +296,6 @@ namespace Klicko_be.Services
                                 File.Delete(filePath);
                             }
                         }
-                    }
-
-                    var result2 = await TrySaveAsync();
-
-                    if (!result2)
-                    {
-                        return false;
                     }
 
                     foreach (var imgId in experienceEdit.RemovedImages)
@@ -313,31 +341,32 @@ namespace Klicko_be.Services
                         })
                         .ToList();
                     _context.CarryWiths.AddRange(carryWithsToAdd);
-                }
+                    var result = await TrySaveAsync();
 
-                var result = await TrySaveAsync();
-                if (result)
-                {
-                    if (prevCoverImg != null)
+                    if (!result)
                     {
-                        _context.Images.Remove(prevCoverImg);
-
-                        // rimuovere anche il file fisico
-                        var filePath = Path.Combine(
-                            Directory.GetCurrentDirectory(),
-                            "wwwroot",
-                            "uploads",
-                            prevCoverImg.Url
-                        );
-                        if (File.Exists(filePath))
-                        {
-                            File.Delete(filePath);
-                        }
-                        return await TrySaveAsync();
+                        return false;
                     }
-                    return true;
                 }
-                return false;
+
+                if (prevCoverImg != null)
+                {
+                    _context.Images.Remove(prevCoverImg);
+
+                    // rimuovere anche il file fisico
+                    var filePath = Path.Combine(
+                        Directory.GetCurrentDirectory(),
+                        "wwwroot",
+                        "uploads",
+                        prevCoverImg.Url
+                    );
+                    if (File.Exists(filePath))
+                    {
+                        File.Delete(filePath);
+                    }
+                    //return await TrySaveAsync();
+                }
+                return true;
             }
             catch
             {
@@ -383,6 +412,8 @@ namespace Klicko_be.Services
                     return false;
                 }
 
+                await _cartService.CheckCartIntegrityAsync(experienceId);
+
                 experience.IsDeleted = true;
 
                 return await TrySaveAsync();
@@ -425,6 +456,30 @@ namespace Klicko_be.Services
                     return false;
                 }
 
+                await _cartService.CheckCartIntegrityAsync(experienceId);
+
+                // rimuovo tutte le immagini associate all'esperienza
+                var images = await _context
+                    .Images.Where(i => i.ExperienceId == experienceId)
+                    .ToListAsync();
+
+                foreach (var img in images)
+                {
+                    var filePath = Path.Combine(
+                        Directory.GetCurrentDirectory(),
+                        "wwwroot",
+                        "uploads",
+                        img.Url
+                    );
+                    if (File.Exists(filePath))
+                    {
+                        File.Delete(filePath);
+                    }
+
+                    _context.Images.Remove(img);
+                }
+
+                // rimuovo l'esperienza indicata tramite id
                 _context.Experiences.Remove(experience);
 
                 return await TrySaveAsync();

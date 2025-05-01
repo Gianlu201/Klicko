@@ -96,7 +96,7 @@ const UploadFile = ({ onFilesSelected, multiple = false }) => {
     if (multiple) {
       handleFiles(e.target.files);
     } else {
-      console.log(e.target.files[0]);
+      // console.log(e.target.files[0]);
       handleFiles(e.target.files[0]);
     }
   };

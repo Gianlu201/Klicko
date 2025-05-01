@@ -36,14 +36,6 @@ const OrdersComponent = () => {
 
         setOrders(data.orders);
         setFilteredOrders(data.orders);
-        // dispatch(emptyCart());
-        // navigate('/');
-        // toast.success('Acquisto effettuato con successo!');
-
-        // dispatch(cartModified());
-        // console.log(data.cart);
-
-        console.log(data);
       } else {
         throw new Error('Errore nel recupero dei dati!');
       }

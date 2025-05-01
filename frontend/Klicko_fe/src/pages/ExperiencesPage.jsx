@@ -4,8 +4,10 @@ import Button from '../components/ui/Button';
 import ExperienceCard from '../components/ExperienceCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedCategoryName, setSearchBarQuery } from '../redux/actions';
+import Spinner from '../components/ui/Spinner';
 
 const ExperiencesPage = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [experiences, setExperiences] = useState([]);
   const [categories, setCategories] = useState([]);
   const [filteredExperiences, setFilteredExperiences] = useState([]);
@@ -28,6 +30,8 @@ const ExperiencesPage = () => {
 
   const getAllExperiences = async () => {
     try {
+      setIsLoading(true);
+
       const response = await fetch(
         'https://localhost:7235/api/Experience/getExperiences',
         {
@@ -41,6 +45,7 @@ const ExperiencesPage = () => {
         const data = await response.json();
         // console.log(data);
 
+        setIsLoading(false);
         setExperiences(data.experiences);
         setFilteredExperiences(data.experiences);
 
@@ -77,9 +82,6 @@ const ExperiencesPage = () => {
   };
 
   const searchExperiences = () => {
-    console.log(searchBar);
-    console.log(selectedCategory);
-
     const filtExperiences = experiences.filter(
       (exp) =>
         exp.title.toLowerCase().includes(searchBar) &&
@@ -117,7 +119,7 @@ const ExperiencesPage = () => {
         break;
     }
 
-    console.log(filtExperiences);
+    // setIsLoading(false);
     setFilteredExperiences(filtExperiences);
   };
 
@@ -270,6 +272,7 @@ const ExperiencesPage = () => {
           <h4 className='text-xl font-semibold'>
             {filteredExperiences.length} esperienze trovate
           </h4>
+
           <select
             name=''
             id=''
@@ -286,6 +289,8 @@ const ExperiencesPage = () => {
             <option value='lessRecent'>Meno recenti</option>
           </select>
         </div>
+
+        {isLoading && <Spinner />}
 
         {filteredExperiences.length > 0 && (
           <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>

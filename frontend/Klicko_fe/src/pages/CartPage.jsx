@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ShoppingCart, Trash2 } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { cartModified } from '../redux/actions';
+import { toast } from 'sonner';
 
 const CartPage = () => {
   const cart = useSelector((state) => {
@@ -25,8 +26,6 @@ const CartPage = () => {
       (sum, element) => sum + element.price * element.quantity,
       0
     );
-
-    // console.log(totalPrice);
 
     return totalPrice;
   };
@@ -54,16 +53,12 @@ const CartPage = () => {
         }
       );
       if (response.ok) {
-        const data = await response.json();
         dispatch(cartModified());
-        // console.log(data.cart);
-
-        console.log(data);
       } else {
         throw new Error('Errore nel recupero dei dati!');
       }
-    } catch {
-      console.log('Error');
+    } catch (e) {
+      console.log(e.message);
     }
   };
 
@@ -80,16 +75,12 @@ const CartPage = () => {
         }
       );
       if (response.ok) {
-        const data = await response.json();
         dispatch(cartModified());
-        // console.log(data.cart);
-
-        console.log(data);
       } else {
         throw new Error('Errore nel recupero dei dati!');
       }
-    } catch {
-      console.log('Error');
+    } catch (e) {
+      console.log(e.message);
     }
   };
 
@@ -106,16 +97,18 @@ const CartPage = () => {
         }
       );
       if (response.ok) {
-        const data = await response.json();
         dispatch(cartModified());
-        // console.log(data.cart);
 
-        console.log(data);
+        toast.success(
+          <>
+            <p className='font-bold'>Esperienza rimossa dal carrello!</p>
+          </>
+        );
       } else {
         throw new Error('Errore nel recupero dei dati!');
       }
-    } catch {
-      console.log('Error');
+    } catch (e) {
+      console.log(e.message);
     }
   };
 

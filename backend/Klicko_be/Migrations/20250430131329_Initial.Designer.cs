@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Klicko_be.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250424133115_Initial")]
+    [Migration("20250430131329_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -134,7 +134,7 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("RegistrationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 24, 13, 31, 13, 429, DateTimeKind.Utc).AddTicks(5389));
+                        .HasDefaultValue(new DateTime(2025, 4, 30, 13, 13, 27, 189, DateTimeKind.Utc).AddTicks(9991));
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -164,7 +164,7 @@ namespace Klicko_be.Migrations
                             Id = "3a8073b2-b954-428a-a4b9-6e4b3f5db051",
                             AccessFailedCount = 0,
                             CartId = new Guid("ad0b8ebb-3e25-4c9f-a7dd-7e07c3e7ab3f"),
-                            ConcurrencyStamp = "1b981089-b7b3-433d-a4b9-4dd63d2255a0",
+                            ConcurrencyStamp = "124e550a-71b5-42c8-aafa-955e219c69f9",
                             Email = "admin@example.com",
                             EmailConfirmed = false,
                             FidelityCardId = new Guid("772e32cc-cdea-4413-8785-09312f52f33d"),
@@ -176,7 +176,7 @@ namespace Klicko_be.Migrations
                             PasswordHash = "AQAAAAIAAYagAAAAEJ924mp2s2BX/BpdalZ6f2s1qlMl3fxdcEPcaKFV6BxA5frV73oVpuC1V9F4PHCJ2g==",
                             PhoneNumberConfirmed = false,
                             RegistrationDate = new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified),
-                            SecurityStamp = "81c71fe5-8cce-490b-8d9d-9791ff228384",
+                            SecurityStamp = "8e7ffcc6-719b-432b-8a01-dbb15c283c84",
                             TwoFactorEnabled = false,
                             UserName = "admin@example.com"
                         },
@@ -185,7 +185,7 @@ namespace Klicko_be.Migrations
                             Id = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
                             AccessFailedCount = 0,
                             CartId = new Guid("59a9d57e-c339-4a73-8d02-69cc186a5385"),
-                            ConcurrencyStamp = "b1cad54f-1ee5-483f-bcbb-0815733a3e60",
+                            ConcurrencyStamp = "e31db4e8-879c-48ec-9d49-26433b814c58",
                             Email = "seller@example.com",
                             EmailConfirmed = false,
                             FidelityCardId = new Guid("326ddfe3-754b-4f24-8cd6-1011bc3cc37e"),
@@ -197,7 +197,7 @@ namespace Klicko_be.Migrations
                             PasswordHash = "AQAAAAIAAYagAAAAEJP1xbBcaikPe32EBy3MLTcexMUhKB7jQsEGuRiIlRJOWuiJwUGI/v0s83m7H70okg==",
                             PhoneNumberConfirmed = false,
                             RegistrationDate = new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified),
-                            SecurityStamp = "dfde6ebd-025b-48e7-8332-6b606940d867",
+                            SecurityStamp = "c21f3dff-879d-40cb-a6af-8dc5c0502295",
                             TwoFactorEnabled = false,
                             UserName = "seller@example.com"
                         },
@@ -206,7 +206,7 @@ namespace Klicko_be.Migrations
                             Id = "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2",
                             AccessFailedCount = 0,
                             CartId = new Guid("b64a049a-6d76-4c1c-866c-e0169c92f1d6"),
-                            ConcurrencyStamp = "5ff0b323-e84d-44e5-b10a-807b718212a9",
+                            ConcurrencyStamp = "d84b9bd6-baab-40b1-a8a0-d9bf0e4531de",
                             Email = "user@example.com",
                             EmailConfirmed = false,
                             FidelityCardId = new Guid("12d1edf2-df86-41d9-8594-0b1859e31932"),
@@ -218,7 +218,7 @@ namespace Klicko_be.Migrations
                             PasswordHash = "AQAAAAIAAYagAAAAEL6u4Tox47kxNqt9nm4+vRn+SzahthaQ55UejBFFdJvvUNNCfqIWRI246s9wJiZ43A==",
                             PhoneNumberConfirmed = false,
                             RegistrationDate = new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified),
-                            SecurityStamp = "4e530558-af95-4e45-9b2c-50fa48b88b27",
+                            SecurityStamp = "d756552c-3878-49a4-ab77-e213b97274fd",
                             TwoFactorEnabled = false,
                             UserName = "user@example.com"
                         },
@@ -227,7 +227,7 @@ namespace Klicko_be.Migrations
                             Id = "698c347e-bb57-4cb4-b672-9940647f250d",
                             AccessFailedCount = 0,
                             CartId = new Guid("a32de9e5-58e6-4ae8-8590-204bf8677abf"),
-                            ConcurrencyStamp = "114620ea-1514-4afe-8b69-1291b51d1811",
+                            ConcurrencyStamp = "497f9590-b9da-4f6f-81db-f5c11658b360",
                             Email = "mario.rossi@example.com",
                             EmailConfirmed = false,
                             FidelityCardId = new Guid("ac983a29-21fe-4d7b-822f-2de328dee367"),
@@ -239,7 +239,7 @@ namespace Klicko_be.Migrations
                             PasswordHash = "AQAAAAIAAYagAAAAEGqAB3rWtm9yNytryjcGs97J9AVY4J6GC/pnd/eL+/lSc8KXctmVoydETBEp6qnKAg==",
                             PhoneNumberConfirmed = false,
                             RegistrationDate = new DateTime(2025, 4, 19, 11, 0, 56, 0, DateTimeKind.Unspecified),
-                            SecurityStamp = "df126a22-d719-4d32-98cc-e3c1da051815",
+                            SecurityStamp = "3b59f388-3e63-4bd9-a786-e83f78f674fe",
                             TwoFactorEnabled = false,
                             UserName = "mario.rossi@example.com"
                         },
@@ -248,7 +248,7 @@ namespace Klicko_be.Migrations
                             Id = "e5675086-e91e-442a-9c22-27d41bee49a4",
                             AccessFailedCount = 0,
                             CartId = new Guid("0b61eb1c-7294-49ea-94a2-f90273f7e5c9"),
-                            ConcurrencyStamp = "bab4ff83-a848-48f2-9d8c-dbcd1eee705f",
+                            ConcurrencyStamp = "df921db3-7bbd-4e90-9e42-01a04ade4bf5",
                             Email = "luigi.bianchi@example.com",
                             EmailConfirmed = false,
                             FidelityCardId = new Guid("3f05415d-e413-4430-bdcd-e668d6f7aa83"),
@@ -260,7 +260,7 @@ namespace Klicko_be.Migrations
                             PasswordHash = "AQAAAAIAAYagAAAAENabfBTfVAnfCT/fg0+WNYZFHUGtBkj2cdOTFH8XkxudV8ZObX5QzlvepD9DwevyLA==",
                             PhoneNumberConfirmed = false,
                             RegistrationDate = new DateTime(2025, 4, 19, 11, 0, 56, 0, DateTimeKind.Unspecified),
-                            SecurityStamp = "7d62170a-6944-461c-811c-ffe5a8d57f68",
+                            SecurityStamp = "2e470b56-5e57-47b8-a239-752706f406c7",
                             TwoFactorEnabled = false,
                             UserName = "luigi.bianchi@example.com"
                         });
@@ -647,12 +647,12 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 24, 13, 31, 13, 430, DateTimeKind.Utc).AddTicks(1132));
+                        .HasDefaultValue(new DateTime(2025, 4, 30, 13, 13, 27, 190, DateTimeKind.Utc).AddTicks(6953));
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 24, 13, 31, 13, 430, DateTimeKind.Utc).AddTicks(1507));
+                        .HasDefaultValue(new DateTime(2025, 4, 30, 13, 13, 27, 190, DateTimeKind.Utc).AddTicks(7406));
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -715,7 +715,7 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 24, 13, 31, 13, 430, DateTimeKind.Utc).AddTicks(1926));
+                        .HasDefaultValue(new DateTime(2025, 4, 30, 13, 13, 27, 190, DateTimeKind.Utc).AddTicks(7952));
 
                     b.Property<Guid>("ExperienceId")
                         .HasColumnType("uniqueidentifier");
@@ -1031,12 +1031,12 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("LastEditDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 24, 13, 31, 13, 429, DateTimeKind.Utc).AddTicks(6386));
+                        .HasDefaultValue(new DateTime(2025, 4, 30, 13, 13, 27, 190, DateTimeKind.Utc).AddTicks(1679));
 
                     b.Property<DateTime>("LoadingDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 24, 13, 31, 13, 429, DateTimeKind.Utc).AddTicks(5872));
+                        .HasDefaultValue(new DateTime(2025, 4, 30, 13, 13, 27, 190, DateTimeKind.Utc).AddTicks(750));
 
                     b.Property<int>("MaxParticipants")
                         .HasColumnType("int");
@@ -1801,7 +1801,7 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 24, 13, 31, 13, 429, DateTimeKind.Utc).AddTicks(8752));
+                        .HasDefaultValue(new DateTime(2025, 4, 30, 13, 13, 27, 190, DateTimeKind.Utc).AddTicks(4945));
 
                     b.Property<int>("OrderNumber")
                         .ValueGeneratedOnAdd()
@@ -1809,9 +1809,7 @@ namespace Klicko_be.Migrations
                         .HasDefaultValueSql("NEXT VALUE FOR OrderNumber_seq");
 
                     b.Property<decimal>("ShippingPrice")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("decimal(18,2)")
-                        .HasDefaultValue(4.99m);
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("State")
                         .IsRequired()
@@ -2030,7 +2028,7 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 24, 13, 31, 13, 430, DateTimeKind.Utc).AddTicks(3194));
+                        .HasDefaultValue(new DateTime(2025, 4, 30, 13, 13, 27, 191, DateTimeKind.Utc).AddTicks(849));
 
                     b.Property<string>("Duration")
                         .IsRequired()
