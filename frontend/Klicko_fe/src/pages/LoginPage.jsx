@@ -3,6 +3,7 @@ import Button from '../components/ui/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { jwtDecode } from 'jwt-decode';
+import { toast } from 'sonner';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -32,7 +33,6 @@ const LoginPage = () => {
       });
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
 
         if (data.token !== null) {
           localStorage.setItem('klicko_token', JSON.stringify(data));
@@ -42,10 +42,15 @@ const LoginPage = () => {
           throw new Error();
         }
       } else {
-        throw new Error('Errore nel recupero dei dati!');
+        throw new Error();
       }
     } catch {
-      console.log('Error');
+      toast.error(
+        <>
+          <p className='font-bold'>Errore nel login!</p>
+          <p>Qualcosa è andato storto, riprova!</p>
+        </>
+      );
     }
   };
 
@@ -72,8 +77,6 @@ const LoginPage = () => {
       iss: tokenDecoded.iss,
       expiration: loginData.expires,
     };
-
-    console.log(userInfos);
 
     dispatch({
       type: 'SET_LOGGED_USER',

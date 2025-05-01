@@ -59,7 +59,6 @@ const ExperienceForm = () => {
 
   const getExperience = async (expId) => {
     try {
-      console.log(expId);
       const response = await fetch(
         `https://localhost:7235/api/Experience/Experience/${expId}`,
         {
@@ -72,16 +71,20 @@ const ExperienceForm = () => {
       if (response.ok) {
         const data = await response.json();
 
-        console.log(data);
-
         setExperience(data.experience);
 
         updateFields(data.experience);
       } else {
         throw new Error('Errore nel recupero dei dati!');
       }
-    } catch {
-      console.log('Error');
+    } catch (e) {
+      toast.error(
+        <>
+          <p className='font-bold'>Errore!</p>
+          <p>{e.message}</p>
+        </>
+      );
+      navigate('/dashboard/experiences');
     }
   };
 
@@ -123,14 +126,18 @@ const ExperienceForm = () => {
       if (response.ok) {
         const data = await response.json();
 
-        // console.log(data);
-
         setCategories(data.categories);
       } else {
         throw new Error('Errore nel recupero dei dati!');
       }
-    } catch {
-      console.log('Error');
+    } catch (e) {
+      toast.error(
+        <>
+          <p className='font-bold'>Errore!</p>
+          <p>{e.message}</p>
+        </>
+      );
+      navigate('/dashboard/experiences');
     }
   };
 
@@ -238,7 +245,6 @@ const ExperienceForm = () => {
         });
 
         if (carryList.length > 0) {
-          console.log(carryList);
           formData.append('CarryWiths', carryList);
         }
       }

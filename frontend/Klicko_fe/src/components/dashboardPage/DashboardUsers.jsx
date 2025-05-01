@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Button from '../ui/Button';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
 
 const DashboardUsers = () => {
   const [isAuthorized, setIsAuthorized] = useState(false);
@@ -34,16 +35,18 @@ const DashboardUsers = () => {
       });
       if (response.ok) {
         const data = await response.json();
-        // console.log(data);
-
-        console.log(data.accounts);
 
         setUsers(data.accounts);
       } else {
         throw new Error('Errore nel recupero dei dati!');
       }
-    } catch {
-      console.log('Error');
+    } catch (e) {
+      toast.error(
+        <>
+          <p className='font-bold'>Errore!</p>
+          <p>{e.message}</p>
+        </>
+      );
     }
   };
 
@@ -65,8 +68,13 @@ const DashboardUsers = () => {
       } else {
         throw new Error('Errore nel recupero dei dati!');
       }
-    } catch {
-      console.log('Error');
+    } catch (e) {
+      toast.error(
+        <>
+          <p className='font-bold'>Errore!</p>
+          <p>{e.message}</p>
+        </>
+      );
     }
   };
 
@@ -83,12 +91,23 @@ const DashboardUsers = () => {
         }
       );
       if (response.ok) {
+        toast.success(
+          <>
+            <p className='font-bold'>Modifica effettuata!</p>
+            <p>Utente aggiornato con successo</p>
+          </>
+        );
         getAllUsers();
       } else {
-        throw new Error('Errore nel recupero dei dati!');
+        throw new Error(`Errore nella modifica dell'utente`);
       }
-    } catch {
-      console.log('Error');
+    } catch (e) {
+      toast.error(
+        <>
+          <p className='font-bold'>Errore!</p>
+          <p>{e.message}</p>
+        </>
+      );
     }
   };
 

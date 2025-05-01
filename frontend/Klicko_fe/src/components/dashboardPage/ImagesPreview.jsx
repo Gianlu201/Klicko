@@ -23,8 +23,6 @@ const ImagesPreview = ({
         }
       });
 
-      console.log(index);
-
       nextImages.splice(index, 1);
       setPrevImages(nextImages);
 

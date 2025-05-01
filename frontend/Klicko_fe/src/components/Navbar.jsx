@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   ShoppingCart,
   Menu,
@@ -10,7 +10,6 @@ import {
   ShoppingBag,
   BadgePercent,
   Tickets,
-  FileSpreadsheetIcon,
   PackageOpen,
   Users,
   LayoutDashboard,
@@ -25,6 +24,7 @@ import {
   setUserFidelityCard,
 } from '../redux/actions';
 import { jwtDecode } from 'jwt-decode';
+import { toast } from 'sonner';
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -122,14 +122,12 @@ const Navbar = () => {
     const exp = new Date(expiration);
 
     if (exp - Date.now() > 0) {
-      console.log('Effettuo login automatico');
       const data = await JSON.parse(accessData);
       login(data);
 
       getUserCart(data);
       getUserFidelityCard(data);
     } else {
-      console.log('Effettuo logout automatico');
       logout();
     }
   };
@@ -161,22 +159,23 @@ const Navbar = () => {
       if (response.ok) {
         const data = await response.json();
 
-        // console.log(data.cart);
-
         dispatch(setUserCart(data.cart));
       } else {
-        throw new Error('Errore nel recupero dei dati!');
+        throw new Error('Errore nel recupero del carrello!');
       }
-    } catch {
-      console.log('Error');
+    } catch (e) {
+      toast.error(
+        <>
+          <p className='font-bold'>Errore!</p>
+          <p>{e.message}</p>
+        </>
+      );
     }
   };
 
   const getUserFidelityCard = async (data) => {
     try {
       const tokenDecoded = jwtDecode(data.token);
-
-      console.log(tokenDecoded);
 
       const response = await fetch(
         `https://localhost:7235/api/FidelityCard/getFidelityCardById/${tokenDecoded.fidelityCardId}`,
@@ -190,14 +189,17 @@ const Navbar = () => {
       if (response.ok) {
         const data = await response.json();
 
-        // console.log(data.cart);
-
         dispatch(setUserFidelityCard(data.fidelityCard));
       } else {
         throw new Error('Errore nel recupero dei dati!');
       }
-    } catch {
-      console.log('Errore');
+    } catch (e) {
+      toast.error(
+        <>
+          <p className='font-bold'>Errore!</p>
+          <p>{e.message}</p>
+        </>
+      );
     }
   };
 

@@ -72,15 +72,18 @@ const ExperiencesComponent = () => {
       if (response.ok) {
         const data = await response.json();
 
-        console.log(data);
-
         setExperiences(data.experiences);
         setFilteredExperiences(data.experiences);
       } else {
         throw new Error('Errore nel recupero dei dati!');
       }
-    } catch {
-      console.log('Error');
+    } catch (e) {
+      toast.error(
+        <>
+          <p className='font-bold'>Errore!</p>
+          <p>{e.message}</p>
+        </>
+      );
     }
   };
 
@@ -95,14 +98,17 @@ const ExperiencesComponent = () => {
       if (response.ok) {
         const data = await response.json();
 
-        console.log(data);
-
         setCategories(data.categories);
       } else {
         throw new Error('Errore nel recupero dei dati!');
       }
-    } catch {
-      console.log('Error');
+    } catch (e) {
+      toast.error(
+        <>
+          <p className='font-bold'>Errore!</p>
+          <p>{e.message}</p>
+        </>
+      );
     }
   };
 
@@ -117,7 +123,6 @@ const ExperiencesComponent = () => {
         exp.price <= maxPrice
     );
 
-    console.log(experiencesList);
     setFilteredExperiences(experiencesList);
   };
 
@@ -149,15 +154,25 @@ const ExperiencesComponent = () => {
         }
       );
       if (response.ok) {
-        // const data = await response.json();
-        toast.success(`${selectedExperience.title} rimossa con successo!`);
+        toast.success(
+          <>
+            <p className='font-bold'>Modifica effettuata!</p>
+            <p>{selectedExperience.title} rimossa con successo!</p>
+          </>
+        );
+
         getAllExperiences();
         dispatch(cartModified());
       } else {
-        throw new Error('Errore nel recupero dei dati!');
+        throw new Error(`Errore nella modifica dell'esperienza!`);
       }
-    } catch {
-      console.log('Error');
+    } catch (e) {
+      toast.error(
+        <>
+          <p className='font-bold'>Errore!</p>
+          <p>{e.message}</p>
+        </>
+      );
     }
   };
 
@@ -182,14 +197,23 @@ const ExperiencesComponent = () => {
         }
       );
       if (response.ok) {
-        // const data = await response.json();
-        toast.success(`${selectedExperience.title} ripristinata!`);
+        toast.success(
+          <>
+            <p className='font-bold'>Modifica effettuata!</p>
+            <p>{selectedExperience.title} ripristinata!</p>
+          </>
+        );
         getAllExperiences();
       } else {
-        throw new Error('Errore nel recupero dei dati!');
+        throw new Error(`Errore nella modifica dell'esperienza!`);
       }
-    } catch {
-      console.log('Error');
+    } catch (e) {
+      toast.error(
+        <>
+          <p className='font-bold'>Errore!</p>
+          <p>{e.message}</p>
+        </>
+      );
     }
   };
 
@@ -214,15 +238,24 @@ const ExperiencesComponent = () => {
         }
       );
       if (response.ok) {
-        // const data = await response.json();
-        toast.success(`${selectedExperience.title} rimossa con successo!`);
+        toast.success(
+          <>
+            <p className='font-bold'>Modifica effettuata!</p>
+            <p>{selectedExperience.title} rimossa con successo!</p>
+          </>
+        );
         getAllExperiences();
         dispatch(cartModified());
       } else {
-        throw new Error('Errore nel recupero dei dati!');
+        throw new Error(`Errore nella modifica dell'esperienza!`);
       }
-    } catch {
-      console.log('Error');
+    } catch (e) {
+      toast.error(
+        <>
+          <p className='font-bold'>Errore!</p>
+          <p>{e.message}</p>
+        </>
+      );
     }
   };
 

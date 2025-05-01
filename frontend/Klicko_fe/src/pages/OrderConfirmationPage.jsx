@@ -2,6 +2,9 @@ import { CircleCheck, Clock, Package, Ticket, Truck } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import Button from '../components/ui/Button';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { emptyCart } from '../redux/actions';
+import { toast } from 'sonner';
 
 const OrderConfirmationPage = () => {
   const [order, setOrder] = useState(null);
@@ -9,6 +12,8 @@ const OrderConfirmationPage = () => {
   const params = useParams();
 
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const getOrder = async (orderId) => {
     try {
@@ -33,21 +38,24 @@ const OrderConfirmationPage = () => {
       if (response.ok) {
         const data = await response.json();
 
-        console.log(data);
-
         setOrder(data.order);
-
-        // navigate(`/orderConfirmation/${data.orderId}`);
       } else {
         throw new Error('Errore nel recupero dei dati!');
       }
-    } catch {
-      console.log('Error');
+    } catch (e) {
+      toast.error(
+        <>
+          <p className='font-bold'>Errore!</p>
+          <p>{e.message}</p>
+        </>
+      );
+      navigate('/');
     }
   };
 
   useEffect(() => {
     getOrder(params.orderId);
+    dispatch(emptyCart());
   }, []);
 
   return (

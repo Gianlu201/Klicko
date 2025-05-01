@@ -131,7 +131,6 @@ const DashboardPage = () => {
       </p>
 
       <div className='lg:grid lg:grid-cols-4 gap-6'>
-        {console.log(profile)}
         <div className='hidden lg:block col-span-1 bg-white shadow rounded-xl h-fit overflow-hidden'>
           <ul>
             {options.map(

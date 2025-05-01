@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Button from '../ui/Button';
 import ExperienceCard from '../ExperienceCard';
 import { Link } from 'react-router-dom';
+import { toast } from 'sonner';
 
 const HighlightedComponent = () => {
   const [highlightedExperiences, setHighlightedExperiences] = useState([]);
@@ -23,8 +24,13 @@ const HighlightedComponent = () => {
       } else {
         throw new Error('Errore nel recupero dei dati!');
       }
-    } catch {
-      console.log('Errore');
+    } catch (e) {
+      toast.error(
+        <>
+          <p className='font-bold'>Errore!</p>
+          <p>{e.message}</p>
+        </>
+      );
     }
   };
 

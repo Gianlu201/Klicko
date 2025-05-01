@@ -64,8 +64,13 @@ const DashboardAdmin = () => {
       } else {
         throw new Error('Errore nel recupero dei dati!');
       }
-    } catch {
-      console.log('Error');
+    } catch (e) {
+      toast.error(
+        <>
+          <p className='font-bold'>Errore!</p>
+          <p>{e.message}</p>
+        </>
+      );
     }
   };
 
@@ -109,12 +114,9 @@ const DashboardAdmin = () => {
   };
 
   const filterBy = (search, state) => {
-    console.log(stateFilter);
-
     let orderList = [];
 
     if (state !== null && state !== undefined) {
-      console.log('Sto per settare lo stato a ' + state);
       setStateFilter(state);
 
       if (state === '') {
@@ -134,7 +136,6 @@ const DashboardAdmin = () => {
       const filteredList = [];
 
       orderList.forEach((order) => {
-        console.log(order.orderNumber.toString());
         if (
           order.orderNumber.toString().includes(search.toLowerCase()) ||
           order.totalPrice.toString().includes(search.toLowerCase()) ||
@@ -146,12 +147,8 @@ const DashboardAdmin = () => {
         }
       });
 
-      console.log(filteredList);
-
       return setFilteredOrders(filteredList);
     }
-
-    console.log(orderList);
 
     return setFilteredOrders(orderList);
   };
@@ -201,10 +198,13 @@ const DashboardAdmin = () => {
         }
       );
       if (response.ok) {
-        // const data = await response.json();
         setIsBannerOpen(false);
+
         toast.success(
-          `Stato dell'ordine #${selectedOrder.orderNumber} aggiornato!`
+          <>
+            <p className='font-bold'>Ordine aggiornato!</p>
+            <p>Stato dell'ordine #{selectedOrder.orderNumber} aggiornato!</p>
+          </>
         );
 
         getAllOrders();
@@ -214,7 +214,12 @@ const DashboardAdmin = () => {
         );
       }
     } catch (e) {
-      toast.error(e.message);
+      toast.error(
+        <>
+          <p className='font-bold'>Errore!</p>
+          <p>{e.message}</p>
+        </>
+      );
     }
   };
 

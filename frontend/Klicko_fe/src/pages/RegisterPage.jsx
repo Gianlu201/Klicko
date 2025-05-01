@@ -3,6 +3,7 @@ import Button from '../components/ui/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { toast } from 'sonner';
 
 const RegisterPage = () => {
   const [name, setName] = useState('');
@@ -44,15 +45,24 @@ const RegisterPage = () => {
           }
         );
         if (response.ok) {
-          const data = await response.json();
-
-          console.log(data);
+          toast.success(
+            <>
+              <p className='font-bold'>Registrazione completata!</p>
+              <p>Registrazione avvenuta con successo</p>
+            </>
+          );
+          navigate('/login');
         } else {
-          throw new Error('Errore nel recupero dei dati!');
+          throw new Error('Qualcosa è andato storto, riprova!');
         }
       }
     } catch {
-      console.log('Error');
+      toast.error(
+        <>
+          <p className='font-bold'>Errore nella registrazione!</p>
+          <p>{e.message}</p>
+        </>
+      );
     }
   };
 

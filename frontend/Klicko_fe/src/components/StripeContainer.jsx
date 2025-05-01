@@ -7,7 +7,6 @@ import CheckoutForm from './CheckoutForm';
 const stripePublicKey = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
 const StripeContainer = ({ sendOrder, orderAmount }) => {
-  console.log(stripePublicKey);
   return (
     <Elements stripe={stripePublicKey}>
       <CheckoutForm sendOrder={sendOrder} orderAmount={orderAmount} />
