@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Button from '../ui/Button';
-import { Clock, MapPin } from 'lucide-react';
 import ExperienceCard from '../ExperienceCard';
 import { Link } from 'react-router-dom';
 
@@ -20,8 +19,6 @@ const HighlightedComponent = () => {
       );
       if (response.ok) {
         const data = await response.json();
-        // console.log(data);
-
         setHighlightedExperiences(data.experiences);
       } else {
         throw new Error('Errore nel recupero dei dati!');
