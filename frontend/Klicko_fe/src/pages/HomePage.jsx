@@ -1,6 +1,6 @@
 import React from 'react';
 import HeroComponent from '../components/homePage/HeroComponent';
-import HighlightedComponent from '../components/homePage/highlightedComponent';
+import HighlightedComponent from '../components/homePage/HighlightedComponent';
 import CategoriesComponent from '../components/homePage/CategoriesComponent';
 import PopularComponent from '../components/homePage/PopularComponent';
 import WhyUsComponent from '../components/homePage/WhyUsComponent';
