@@ -5,6 +5,7 @@ import ExperienceCard from '../components/ExperienceCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedCategoryName, setSearchBarQuery } from '../redux/actions';
 import Spinner from '../components/ui/Spinner';
+import { toast } from 'sonner';
 
 const ExperiencesPage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -43,18 +44,20 @@ const ExperiencesPage = () => {
       );
       if (response.ok) {
         const data = await response.json();
-        // console.log(data);
 
         setIsLoading(false);
         setExperiences(data.experiences);
         setFilteredExperiences(data.experiences);
-
-        // searchExperiences();
       } else {
         throw new Error('Errore nel recupero dei dati!');
       }
-    } catch {
-      console.log('Error');
+    } catch (e) {
+      toast.error(
+        <>
+          <p className='font-bold'>Errore!</p>
+          <p>{e.message}</p>
+        </>
+      );
     }
   };
 
@@ -68,16 +71,18 @@ const ExperiencesPage = () => {
       });
       if (response.ok) {
         const data = await response.json();
-        // console.log(data);
-
-        // dispatch(setCategoriesList(data.categories));
 
         setCategories(data.categories);
       } else {
         throw new Error('Errore nel recupero dei dati!');
       }
-    } catch {
-      console.log('Error');
+    } catch (e) {
+      toast.error(
+        <>
+          <p className='font-bold'>Errore!</p>
+          <p>{e.message}</p>
+        </>
+      );
     }
   };
 
@@ -119,7 +124,6 @@ const ExperiencesPage = () => {
         break;
     }
 
-    // setIsLoading(false);
     setFilteredExperiences(filtExperiences);
   };
 

@@ -1,11 +1,4 @@
-import {
-  BadgePercent,
-  CircleFadingArrowUp,
-  Gift,
-  ShoppingCart,
-  Star,
-  Trophy,
-} from 'lucide-react';
+import { BadgePercent, Gift, ShoppingCart, Star, Trophy } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import Button from '../components/ui/Button';
 import { useSelector } from 'react-redux';
@@ -105,15 +98,19 @@ const LoyaltyPage = () => {
       if (response.ok) {
         const data = await response.json();
 
-        // console.log(data);
-
         setFidelityCard(data.fidelityCard);
         getFidelityLevel(data.fidelityCard.points);
       } else {
-        throw new Error();
+        throw new Error('Errore nel recupero dei dati!');
       }
-    } catch {
-      console.log('Error');
+    } catch (e) {
+      toast.error(
+        <>
+          <p className='font-bold'>Errore!</p>
+          <p>{e.message}</p>
+        </>
+      );
+      navigate('/');
     }
   };
 
@@ -143,15 +140,24 @@ const LoyaltyPage = () => {
         }
       );
       if (response.ok) {
-        // const data = await response.json();
+        toast.success(
+          <>
+            <p className='font-bold'>Coupon generato con successo!</p>
+            <p>Il coupon è disponibile nella pagina dedicata</p>
+          </>
+        );
 
-        toast.success(`Coupon generato con successo!`);
         getFidelityCard();
       } else {
-        throw new Error();
+        throw new Error('Errore nella generazione del coupon');
       }
-    } catch {
-      console.log('Error');
+    } catch (e) {
+      toast.error(
+        <>
+          <p className='font-bold'>Errore!</p>
+          <p>{e.message}</p>
+        </>
+      );
     }
   };
 
@@ -187,9 +193,7 @@ const LoyaltyPage = () => {
 
     const levelPoints = fidelityCard.points - fidelityLevel.minPoints;
 
-    let percentual = Math.floor((levelPoints * 100) / gap);
-
-    return percentual;
+    return Math.floor((levelPoints * 100) / gap);
   };
 
   const handleMouseMove = (e) => {

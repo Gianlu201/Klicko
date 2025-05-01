@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '../components/ui/Button';
 import { useNavigate } from 'react-router-dom';
-import { emptyCart, setUserCart } from '../redux/actions';
+import { setUserCart } from '../redux/actions';
 import { toast } from 'sonner';
 import { BadgePercent, X } from 'lucide-react';
 import StripeContainer from '../components/StripeContainer';
@@ -56,8 +56,14 @@ const CheckOutPage = () => {
       } else {
         throw new Error('Errore nel recupero dei dati!');
       }
-    } catch {
-      console.log('Error');
+    } catch (e) {
+      toast.error(
+        <>
+          <p className='font-bold'>Esperienza aggiunta al carrello!</p>
+          <p>{e.message}</p>
+        </>
+      );
+      navigate('/cart');
     }
   };
 
@@ -107,12 +113,9 @@ const CheckOutPage = () => {
       if (response.ok) {
         const data = await response.json();
 
-        console.log(data);
-
         if (data.coupon.minimumAmount <= getSubTotalPrice()) {
           setSelectedCoupon(data.coupon);
           setCouponCode('');
-          // toast.success('Acquisto effettuato con successo!');
         } else {
           setCouponError(
             `È richiesto un importo minimo di ${data.coupon.minimumAmount
@@ -168,15 +171,23 @@ const CheckOutPage = () => {
       if (response.ok) {
         const data = await response.json();
 
-        dispatch(emptyCart());
-        console.log(data);
-        toast.success('Acquisto effettuato con successo!');
+        toast.success(
+          <>
+            <p className='font-bold'>Acquisto confermato!</p>
+            <p>Acquisto effettuato con successo!</p>
+          </>
+        );
         navigate(`/orderConfirmation/${data.orderId}`);
       } else {
-        throw new Error('Errore nel recupero dei dati!');
+        throw new Error(`Errore nella conferma dell'ordine!`);
       }
-    } catch {
-      console.log('Error');
+    } catch (e) {
+      toast.error(
+        <>
+          <p className='font-bold'>Errore!</p>
+          <p>{e.message}</p>
+        </>
+      );
     }
   };
 

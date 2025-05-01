@@ -10,7 +10,7 @@ import {
   UsersRound,
 } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Carousel from '../components/ui/Corousel';
 import Button from '../components/ui/Button';
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,6 +26,8 @@ const DetailPage = () => {
   const cart = useSelector((state) => {
     return state.cart;
   });
+
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -44,14 +46,19 @@ const DetailPage = () => {
       );
       if (response.ok) {
         const data = await response.json();
-        // console.log(data);
 
         setExperience(data.experience);
       } else {
         throw new Error('Errore nel recupero dei dati!');
       }
     } catch (e) {
-      console.log(e.message);
+      toast.error(
+        <>
+          <p className='font-bold'>Errore!</p>
+          <p>{e.message}</p>
+        </>
+      );
+      navigate('/experiences');
     }
   };
 

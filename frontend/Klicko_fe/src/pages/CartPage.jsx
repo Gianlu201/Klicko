@@ -55,10 +55,15 @@ const CartPage = () => {
       if (response.ok) {
         dispatch(cartModified());
       } else {
-        throw new Error('Errore nel recupero dei dati!');
+        throw new Error('Errore nella modifica del carrello!');
       }
     } catch (e) {
-      console.log(e.message);
+      toast.error(
+        <>
+          <p className='font-bold'>Errore!</p>
+          <p>{e.message}</p>
+        </>
+      );
     }
   };
 
@@ -77,10 +82,15 @@ const CartPage = () => {
       if (response.ok) {
         dispatch(cartModified());
       } else {
-        throw new Error('Errore nel recupero dei dati!');
+        throw new Error('Errore nella modifica del carrello!');
       }
     } catch (e) {
-      console.log(e.message);
+      toast.error(
+        <>
+          <p className='font-bold'>Errore!</p>
+          <p>{e.message}</p>
+        </>
+      );
     }
   };
 
@@ -101,14 +111,20 @@ const CartPage = () => {
 
         toast.success(
           <>
-            <p className='font-bold'>Esperienza rimossa dal carrello!</p>
+            <p className='font-bold'>Carrello modificato!</p>
+            <p>Esperienza rimossa dal carrello!</p>
           </>
         );
       } else {
-        throw new Error('Errore nel recupero dei dati!');
+        throw new Error('Errore nella modifica del carrello!');
       }
     } catch (e) {
-      console.log(e.message);
+      toast.error(
+        <>
+          <p className='font-bold'>Errore!</p>
+          <p>{e.message}</p>
+        </>
+      );
     }
   };
 

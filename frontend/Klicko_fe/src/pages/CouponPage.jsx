@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CouponCard from '../components/CouponCard';
+import { toast } from 'sonner';
 
 const CouponPage = () => {
   const [availableCoupon, setAvailableCoupon] = useState([]);
@@ -31,14 +32,20 @@ const CouponPage = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
+
         setAvailableCoupon(data.availableCoupons);
         setUnavailableCoupon(data.unavailableCoupons);
       } else {
-        throw new Error('Errore nel salvataggio!');
+        throw new Error('Errore nel recupero dei dati!');
       }
-    } catch {
-      console.log('Error');
+    } catch (e) {
+      toast.error(
+        <>
+          <p className='font-bold'>Errore!</p>
+          <p>{e.message}</p>
+        </>
+      );
+      navigate('/');
     }
   };
 

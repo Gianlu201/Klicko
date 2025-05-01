@@ -3,6 +3,7 @@ import Button from '../ui/Button';
 import { Clock, MapPin } from 'lucide-react';
 import ExperienceCard from '../ExperienceCard';
 import { Link } from 'react-router-dom';
+import { toast } from 'sonner';
 
 const PopularComponent = () => {
   const [popularExperiences, setPopularExperiences] = useState([]);
@@ -20,14 +21,18 @@ const PopularComponent = () => {
       );
       if (response.ok) {
         const data = await response.json();
-        // console.log(data);
 
         setPopularExperiences(data.experiences);
       } else {
         throw new Error('Errore nel recupero dei dati!');
       }
-    } catch {
-      console.log('Errore');
+    } catch (e) {
+      toast.error(
+        <>
+          <p className='font-bold'>Errore!</p>
+          <p>{e.message}</p>
+        </>
+      );
     }
   };
 

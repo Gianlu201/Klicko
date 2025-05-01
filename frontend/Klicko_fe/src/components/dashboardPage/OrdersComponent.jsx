@@ -2,6 +2,7 @@ import { Calendar, Package, ShoppingBag, TicketX } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Accordion from '../ui/Accordion';
+import { toast } from 'sonner';
 
 const OrdersComponent = () => {
   const [orders, setOrders] = useState([]);
@@ -32,15 +33,18 @@ const OrdersComponent = () => {
       if (response.ok) {
         const data = await response.json();
 
-        console.log(data);
-
         setOrders(data.orders);
         setFilteredOrders(data.orders);
       } else {
         throw new Error('Errore nel recupero dei dati!');
       }
-    } catch {
-      console.log('Error');
+    } catch (e) {
+      toast.error(
+        <>
+          <p className='font-bold'>Errore!</p>
+          <p>{e.message}</p>
+        </>
+      );
     }
   };
 

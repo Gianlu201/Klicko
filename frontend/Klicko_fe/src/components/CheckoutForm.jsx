@@ -115,14 +115,24 @@ const CheckoutForm = ({ sendOrder, orderAmount }) => {
       if (paymentIntent.status === 'succeeded') {
         setSuccessMessage('Pagamento riuscito!');
         setIsProcessing(false);
-        toast.success('Pagamento effettuato con successo!');
+        toast.success(
+          <>
+            <p className='font-bold'>Pagamento riuscito!</p>
+            <p>Pagamento effettuato con successo!</p>
+          </>
+        );
         sendOrder();
       } else {
         setErrorMessage('Pagamento non riuscito. Riprovare.');
         setIsProcessing(false);
       }
     } catch (e) {
-      console.log(e.Message);
+      toast.error(
+        <>
+          <p className='font-bold'>Errore nel pagamento!</p>
+          <p>{e.message}</p>
+        </>
+      );
     }
   };
 

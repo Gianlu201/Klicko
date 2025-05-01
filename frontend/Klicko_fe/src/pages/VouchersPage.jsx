@@ -46,16 +46,17 @@ const VouchersPage = () => {
 
         setRedeemedVouchers(data.vouchers);
       } else {
-        throw new Error('Errore nel salvataggio!');
+        throw new Error('Errore nel recupero dei dati!');
       }
     } catch (e) {
       toast.error(
         <>
           <p className='font-bold'>Errore!</p>
-          <p>Qualcosa è andato storto, riprovare</p>
+          <p>{e.message}</p>
         </>
       );
-      console.log(e.message);
+
+      navigate('/');
     }
   };
 
@@ -91,14 +92,13 @@ const VouchersPage = () => {
       } else {
         setVoucherNotFound(true);
       }
-    } catch (e) {
+    } catch {
       toast.error(
         <>
           <p className='font-bold'>Errore!</p>
           <p>Qualcosa è andato storto, riprovare</p>
         </>
       );
-      console.log(e.message);
     }
   };
 
@@ -144,21 +144,15 @@ const VouchersPage = () => {
         setVoucherCodeSearch('');
         getUserVouchers();
       } else {
-        toast.error(
-          <>
-            <p className='font-bold'>Errore!</p>
-            <p>Qualcosa è andato storto, riprovare</p>
-          </>
-        );
+        throw new Error();
       }
-    } catch (e) {
+    } catch {
       toast.error(
         <>
           <p className='font-bold'>Errore!</p>
           <p>Qualcosa è andato storto, riprovare</p>
         </>
       );
-      console.log(e.message);
     }
   };
 
@@ -197,21 +191,15 @@ const VouchersPage = () => {
         );
         getUserVouchers();
       } else {
-        toast.error(
-          <>
-            <p className='font-bold'>Errore!</p>
-            <p>Qualcosa è andato storto, riprovare</p>
-          </>
-        );
+        throw new Error();
       }
-    } catch (e) {
+    } catch {
       toast.error(
         <>
           <p className='font-bold'>Errore!</p>
           <p>Qualcosa è andato storto, riprovare</p>
         </>
       );
-      console.log(e.message);
     }
   };
 

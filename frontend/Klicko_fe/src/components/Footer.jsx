@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Button from './ui/Button';
 import { useDispatch } from 'react-redux';
 import { setSelectedCategoryName } from '../redux/actions';
+import { toast } from 'sonner';
 
 const Footer = () => {
   const [newsLetterEmail, setNewsLetterEmail] = useState('');
@@ -89,14 +90,24 @@ const Footer = () => {
         }
       );
       if (response.ok) {
-        const data = await response.json();
-
-        console.log(data);
+        toast.success(
+          <>
+            <p className='font-bold'>Iscrizione confermata!</p>
+            <p>Benvenuto nella nostra newsletter!</p>
+          </>
+        );
+        setNewsLetterEmail('');
       } else {
-        throw new Error('Errore nel recupero dei dati!');
+        throw new Error(`Errore nell'iscrizione alla newsletter`);
       }
-    } catch {
-      console.log('Error');
+    } catch (e) {
+      toast.error(
+        <>
+          <p className='font-bold'>Errore!</p>
+          <p>{e.message}</p>
+        </>
+      );
+      setNewsLetterEmail('');
     }
   };
 
