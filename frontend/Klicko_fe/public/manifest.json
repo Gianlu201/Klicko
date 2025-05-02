@@ -1,0 +1,13 @@
+{
+  "name": "Klicko",
+  "short_name": "Klicko",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone"
+}
