@@ -223,7 +223,7 @@ const OrdersComponent = () => {
                   }
                 >
                   <div className='overflow-x-auto'>
-                    <table className='min-w-[300px] mb-10'>
+                    <table className='min-w-[300px] w-full mb-10'>
                       <thead>
                         <tr className='grid grid-cols-12 text-gray-500 text-sm font-normal border-b border-gray-400/40 p-3 hover:bg-gray-100'>
                           <th className='col-span-7 text-start'>Esperienza</th>

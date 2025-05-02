@@ -113,8 +113,6 @@ const DashboardUsers = () => {
   const findUsers = () => {
     const findUsers = [];
 
-    console.log(users);
-
     users.forEach((user) => {
       if (
         user.firstName.toLowerCase().includes(userSearch.toLowerCase()) ||

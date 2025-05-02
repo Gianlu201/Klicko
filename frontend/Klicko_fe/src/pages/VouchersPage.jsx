@@ -86,8 +86,6 @@ const VouchersPage = () => {
       if (response.ok) {
         const data = await response.json();
 
-        console.log(data);
-
         setSearchedVoucher(data.voucher);
         setVoucherCodeSearch('');
       } else {

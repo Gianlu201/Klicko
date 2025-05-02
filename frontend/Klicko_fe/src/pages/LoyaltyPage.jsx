@@ -330,7 +330,7 @@ const LoyaltyPage = () => {
                 )}
               </div>
 
-              <div className='grid grid-cols-1 xs:grid-cols-2 gap-6 mb-2'>
+              <div className='grid grid-cols-1 min-[480px]:grid-cols-2 gap-6 mb-2'>
                 <div className='bg-gray-100 rounded-xl p-6'>
                   <h4 className='min-[480px]:text-xl font-semibold mb-2'>
                     Punti disponibili
