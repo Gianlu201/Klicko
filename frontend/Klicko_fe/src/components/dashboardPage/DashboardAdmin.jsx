@@ -346,7 +346,7 @@ const DashboardAdmin = () => {
 
             {filteredOrders.length > 0 ? (
               <div className='overflow-x-auto'>
-                <table className='min-w-sm'>
+                <table className='min-w-sm w-full'>
                   <thead>
                     <tr className='grid grid-cols-12 text-gray-500 text-sm font-normal border-b border-gray-400/40 p-3 hover:bg-gray-100'>
                       <th className='col-span-3 md:col-span-2 text-start'>

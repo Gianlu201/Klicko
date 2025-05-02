@@ -104,7 +104,7 @@ const RegisterPage = () => {
         </div>
       </div>
 
-      <div className='bg-white rounded-2xl shadow-xl p-6 mx-auto max-w-md'>
+      <div className='bg-white rounded-2xl shadow-xl p-6 mx-auto w-full max-w-md'>
         <h2 className='text-xl font-bold mb-2'>Crea un account</h2>
         <p className='text-gray-500 mb-5'>
           Inserisci i tuoi dati per registrarti
