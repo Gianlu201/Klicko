@@ -6,6 +6,8 @@ import { useSelector } from 'react-redux';
 import { toast } from 'sonner';
 
 const RegisterPage = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
@@ -34,16 +36,13 @@ const RegisterPage = () => {
           password: password,
         };
 
-        const response = await fetch(
-          `https://localhost:7235/api/Account/register`,
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(body),
-          }
-        );
+        const response = await fetch(`${backendUrl}/Account/register`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(body),
+        });
         if (response.ok) {
           toast.success(
             <>
@@ -82,8 +81,8 @@ const RegisterPage = () => {
           Crea un account per scoprire esperienze uniche e iniziare il tuo
           viaggio di avventure.
         </p>
-        <div className='flex md:flex-col md:max-lg:items-center gap-5'>
-          <div className='bg-white rounded-xl shadow-sm px-5 py-4 md:max-lg:w-3/5'>
+        <div className='sm:flex md:flex-col md:max-lg:items-center gap-5'>
+          <div className='bg-white rounded-xl shadow-sm px-5 py-4 md:max-lg:w-3/5 mb-4 sm:mb-0'>
             <span className='inline-block bg-primary/20 text-primary p-2 rounded-full'>
               <SquareUserRound />
             </span>
@@ -105,7 +104,7 @@ const RegisterPage = () => {
         </div>
       </div>
 
-      <div className='bg-white rounded-2xl shadow-xl p-6 mx-auto w-md'>
+      <div className='bg-white rounded-2xl shadow-xl p-6 mx-auto max-w-md'>
         <h2 className='text-xl font-bold mb-2'>Crea un account</h2>
         <p className='text-gray-500 mb-5'>
           Inserisci i tuoi dati per registrarti
@@ -121,7 +120,7 @@ const RegisterPage = () => {
             <input
               type='text'
               placeholder='Inserisci il tuo nome..'
-              className='bg-background border border-gray-600/20 rounded-lg py-1.5 px-3'
+              className='text-sm sm:text-base bg-background border border-gray-600/20 rounded-lg py-1.5 px-3'
               value={name}
               onChange={(e) => {
                 setName(e.target.value);
@@ -133,7 +132,7 @@ const RegisterPage = () => {
             <input
               type='text'
               placeholder='Inserisci il tuo cognome..'
-              className='bg-background border border-gray-600/20 rounded-lg py-1.5 px-3'
+              className='text-sm sm:text-base bg-background border border-gray-600/20 rounded-lg py-1.5 px-3'
               value={surname}
               onChange={(e) => {
                 setSurname(e.target.value);
@@ -145,7 +144,7 @@ const RegisterPage = () => {
             <input
               type='text'
               placeholder='Inserisci la tua email..'
-              className='bg-background border border-gray-600/20 rounded-lg py-1.5 px-3'
+              className='text-sm sm:text-base bg-background border border-gray-600/20 rounded-lg py-1.5 px-3'
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
@@ -157,7 +156,7 @@ const RegisterPage = () => {
             <input
               type='password'
               placeholder='Inserisci la tua password..'
-              className='bg-background border border-gray-600/20 rounded-lg py-1.5 px-3'
+              className='text-sm sm:text-base bg-background border border-gray-600/20 rounded-lg py-1.5 px-3'
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
@@ -169,7 +168,7 @@ const RegisterPage = () => {
             <input
               type='text'
               placeholder='Conferma la tua password..'
-              className='bg-background border border-gray-600/20 rounded-lg py-1.5 px-3'
+              className='text-sm sm:text-base bg-background border border-gray-600/20 rounded-lg py-1.5 px-3'
               value={confirmPassword}
               onChange={(e) => {
                 setConfirmPassword(e.target.value);

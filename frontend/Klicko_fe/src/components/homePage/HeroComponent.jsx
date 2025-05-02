@@ -21,7 +21,7 @@ const HeroComponent = () => {
       <div className='absolute inset-0 bg-gradient-to-b from-black/0 to-black/60'></div>
 
       <div className='relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4'>
-        <h1 className='text-5xl md:text-6xl font-bold leading-12 md:leading-15 mb-4'>
+        <h1 className='text-4xl xs:text-5xl md:text-6xl font-bold leading-12 md:leading-15 mb-4'>
           Scopri Avventure
           <br />
           Indimenticabili
@@ -34,7 +34,7 @@ const HeroComponent = () => {
           <input
             type='text'
             placeholder='Cerca la tua prossima avventura…'
-            className='flex-grow px-4 py-3 rounded-xl text-gray-800 focus:outline-none bg-white'
+            className='flex-grow px-4 py-3 rounded-xl text-gray-800 focus:outline-none bg-white text-xs xs:text-sm md:text-base'
             value={searchBar}
             onChange={(e) => {
               setSearchBar(e.target.value);

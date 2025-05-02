@@ -5,6 +5,8 @@ import Accordion from '../ui/Accordion';
 import { toast } from 'sonner';
 
 const OrdersComponent = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const [orders, setOrders] = useState([]);
   const [filteredOrders, setFilteredOrders] = useState([]);
 
@@ -20,16 +22,13 @@ const OrdersComponent = () => {
 
       let token = JSON.parse(tokenObj).token;
 
-      const response = await fetch(
-        `https://localhost:7235/api/Order/getAllUserOrders`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${backendUrl}/Order/getAllUserOrders`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
       if (response.ok) {
         const data = await response.json();
 
@@ -122,28 +121,28 @@ const OrdersComponent = () => {
       id: 1,
       title: 'Totale ordini',
       value: orders.length,
-      icon: <ShoppingBag className='text-primary/40 w-8 h-8' />,
+      icon: <ShoppingBag className='max-xs:hidden text-primary/40 w-8 h-8' />,
       filter: 'getAll',
     },
     {
       id: 2,
       title: 'In attesa',
       value: getNumberOfPending(),
-      icon: <Calendar className='text-amber-500/40 w-8 h-8' />,
+      icon: <Calendar className='max-xs:hidden text-amber-500/40 w-8 h-8' />,
       filter: 'In attesa',
     },
     {
       id: 3,
       title: 'Completati',
       value: getNumberOfCompleted(),
-      icon: <Package className='text-green-500/40 w-8 h-8' />,
+      icon: <Package className='max-xs:hidden text-green-500/40 w-8 h-8' />,
       filter: 'Completato',
     },
     {
       id: 4,
       title: 'Cancellati',
       value: getNumberOfDeleted(),
-      icon: <TicketX className='text-red-500/40 w-8 h-8' />,
+      icon: <TicketX className='max-xs:hidden text-red-500/40 w-8 h-8' />,
       filter: 'Cancellato',
     },
   ];
@@ -164,7 +163,7 @@ const OrdersComponent = () => {
         {options.map((opt) => (
           <div
             key={opt.id}
-            className='flex justify-between items-start border border-gray-400/40 shadow-xs rounded-xl px-4 py-6 cursor-pointer hover:bg-background/80'
+            className='flex justify-between items-start border border-gray-400/40 shadow-xs rounded-xl px-2 min-[480px]:px-4 py-6 cursor-pointer hover:bg-background/80'
             onClick={() => {
               filterBy(opt.filter);
             }}
@@ -196,8 +195,10 @@ const OrdersComponent = () => {
                   intestation={
                     <div className='flex justify-between items-center cursor-pointer'>
                       <div className='grow flex gap-2'>
-                        <span>Ordine</span>
-                        <h6>#{order.orderNumber}</h6>
+                        <span className='max-[480px]:hidden'>Ordine</span>
+                        <h6 className='max-[480px]:text-xs'>
+                          #{order.orderNumber}
+                        </h6>
                       </div>
                       <div className='flex justify-between items-center gap-4'>
                         <span className='hidden md:block text-sm'>
@@ -211,7 +212,7 @@ const OrdersComponent = () => {
                           )}
                         </span>
                         <span
-                          className={`text-xs rounded-full px-3 py-0.5 ${getStateStyle(
+                          className={`text-xs rounded-full px-1.5 min-[480px]:px-3 py-0.5 ${getStateStyle(
                             order.state
                           )}`}
                         >
@@ -221,81 +222,89 @@ const OrdersComponent = () => {
                     </div>
                   }
                 >
-                  <table className='w-full mb-10'>
-                    <thead>
-                      <tr className='grid grid-cols-12 text-gray-500 text-sm font-normal border-b border-gray-400/40 p-3 hover:bg-gray-100'>
-                        <th className='col-span-7 text-start'>Esperienza</th>
-                        <th className='col-span-2 md:col-span-1 text-center'>
-                          Quantità
-                        </th>
-                        <th className='hidden md:block col-span-2 text-end'>
-                          Prezzo
-                        </th>
-                        <th className='col-span-3 md:col-span-2 text-end'>
-                          Totale
-                        </th>
-                      </tr>
-                    </thead>
+                  <div className='overflow-x-auto'>
+                    <table className='min-w-[300px] w-full mb-10'>
+                      <thead>
+                        <tr className='grid grid-cols-12 text-gray-500 text-sm font-normal border-b border-gray-400/40 p-3 hover:bg-gray-100'>
+                          <th className='col-span-7 text-start'>Esperienza</th>
+                          <th className='col-span-2 md:col-span-1 text-center'>
+                            Quantità
+                          </th>
+                          <th className='hidden md:block col-span-2 text-end'>
+                            Prezzo
+                          </th>
+                          <th className='col-span-3 md:col-span-2 text-end'>
+                            Totale
+                          </th>
+                        </tr>
+                      </thead>
 
-                    <tbody>
-                      {order.orderExperiences.length > 0 &&
-                        order.orderExperiences.map((orderExp) => (
-                          <tr
-                            key={orderExp.orderExperienceId}
-                            className='grid grid-cols-12 text-sm border-b border-gray-400/40 p-3 hover:bg-gray-100'
-                          >
-                            <td className='col-span-7 text-start'>
-                              {orderExp.title}
+                      <tbody>
+                        {order.orderExperiences.length > 0 &&
+                          order.orderExperiences.map((orderExp) => (
+                            <tr
+                              key={orderExp.orderExperienceId}
+                              className='grid grid-cols-12 text-sm border-b border-gray-400/40 p-3 hover:bg-gray-100'
+                            >
+                              <td className='col-span-7 text-start'>
+                                {orderExp.title}
+                              </td>
+                              <td className='col-span-2 md:col-span-1 text-center'>
+                                {orderExp.quantity}
+                              </td>
+                              <td className='hidden md:block col-span-2 text-end'>
+                                {orderExp.unitPrice
+                                  .toFixed(2)
+                                  .replace('.', ',')}{' '}
+                                €
+                              </td>
+                              <td className='col-span-3 md:col-span-2 text-end'>
+                                {orderExp.totalPrice
+                                  .toFixed(2)
+                                  .replace('.', ',')}{' '}
+                                €
+                              </td>
+                            </tr>
+                          ))}
+                      </tbody>
+
+                      <tfoot>
+                        {order.shippingPrice > 0 && (
+                          <tr className='grid grid-cols-12 text-gray-500 font-medium p-3 hover:bg-gray-100'>
+                            <td className='col-span-8 md:col-span-10 text-end'>
+                              Spedizione:
                             </td>
-                            <td className='col-span-2 md:col-span-1 text-center'>
-                              {orderExp.quantity}
-                            </td>
-                            <td className='hidden md:block col-span-2 text-end'>
-                              {orderExp.unitPrice.toFixed(2).replace('.', ',')}{' '}
-                              €
-                            </td>
-                            <td className='col-span-3 md:col-span-2 text-end'>
-                              {orderExp.totalPrice.toFixed(2).replace('.', ',')}{' '}
+                            <td className='col-span-4 md:col-span-2 text-end'>
+                              {order.shippingPrice.toFixed(2).replace('.', ',')}{' '}
                               €
                             </td>
                           </tr>
-                        ))}
-                    </tbody>
+                        )}
 
-                    <tfoot>
-                      {order.shippingPrice > 0 && (
-                        <tr className='grid grid-cols-12 text-gray-500 font-medium p-3 hover:bg-gray-100'>
+                        {order.totalDiscount > 0 && (
+                          <tr className='grid grid-cols-12 text-gray-500 font-medium p-3 hover:bg-gray-100'>
+                            <td className='col-span-8 md:col-span-10 text-end'>
+                              Sconto coupon:
+                            </td>
+                            <td className='col-span-4 md:col-span-2 text-end'>
+                              -
+                              {order.totalDiscount.toFixed(2).replace('.', ',')}{' '}
+                              €
+                            </td>
+                          </tr>
+                        )}
+
+                        <tr className='grid grid-cols-12 font-bold p-3 hover:bg-gray-100'>
                           <td className='col-span-8 md:col-span-10 text-end'>
-                            Spedizione:
+                            Totale ordine:
                           </td>
                           <td className='col-span-4 md:col-span-2 text-end'>
-                            {order.shippingPrice.toFixed(2).replace('.', ',')} €
+                            {order.totalPrice.toFixed(2).replace('.', ',')} €
                           </td>
                         </tr>
-                      )}
-
-                      {order.totalDiscount > 0 && (
-                        <tr className='grid grid-cols-12 text-gray-500 font-medium p-3 hover:bg-gray-100'>
-                          <td className='col-span-8 md:col-span-10 text-end'>
-                            Sconto coupon:
-                          </td>
-                          <td className='col-span-4 md:col-span-2 text-end'>
-                            -{order.totalDiscount.toFixed(2).replace('.', ',')}{' '}
-                            €
-                          </td>
-                        </tr>
-                      )}
-
-                      <tr className='grid grid-cols-12 font-bold p-3 hover:bg-gray-100'>
-                        <td className='col-span-8 md:col-span-10 text-end'>
-                          Totale ordine:
-                        </td>
-                        <td className='col-span-4 md:col-span-2 text-end'>
-                          {order.totalPrice.toFixed(2).replace('.', ',')} €
-                        </td>
-                      </tr>
-                    </tfoot>
-                  </table>
+                      </tfoot>
+                    </table>
+                  </div>
                 </Accordion>
               ))}
             </div>

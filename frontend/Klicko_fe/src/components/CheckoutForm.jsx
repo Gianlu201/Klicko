@@ -11,6 +11,8 @@ import { X } from 'lucide-react';
 import { toast } from 'sonner';
 
 const CheckoutForm = ({ sendOrder, orderAmount }) => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const stripe = useStripe();
   const elements = useElements();
   const [errorMessage, setErrorMessage] = useState('');
@@ -91,7 +93,7 @@ const CheckoutForm = ({ sendOrder, orderAmount }) => {
       }
 
       const response = await fetch(
-        'https://localhost:7235/api/Payments/create-payment-intent',
+        `${backendUrl}/Payments/create-payment-intent`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

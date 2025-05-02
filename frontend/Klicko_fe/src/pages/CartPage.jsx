@@ -7,6 +7,8 @@ import { cartModified } from '../redux/actions';
 import { toast } from 'sonner';
 
 const CartPage = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const cart = useSelector((state) => {
     return state.cart;
   });
@@ -43,7 +45,7 @@ const CartPage = () => {
   const removeExperienceUnit = async (experienceId) => {
     try {
       const response = await fetch(
-        `https://localhost:7235/api/Cart/RemoveExperienceUnit/${cart.cartId}`,
+        `${backendUrl}/Cart/RemoveExperienceUnit/${cart.cartId}`,
         {
           method: 'POST',
           headers: {
@@ -70,7 +72,7 @@ const CartPage = () => {
   const addExperienceUnit = async (experienceId) => {
     try {
       const response = await fetch(
-        `https://localhost:7235/api/Cart/AddExperienceUnit/${cart.cartId}`,
+        `${backendUrl}/Cart/AddExperienceUnit/${cart.cartId}`,
         {
           method: 'POST',
           headers: {
@@ -97,7 +99,7 @@ const CartPage = () => {
   const removeExperienceFromCart = async (experienceId) => {
     try {
       const response = await fetch(
-        `https://localhost:7235/api/Cart/RemoveExperience/${cart.cartId}`,
+        `${backendUrl}/Cart/RemoveExperience/${cart.cartId}`,
         {
           method: 'POST',
           headers: {
@@ -134,7 +136,7 @@ const CartPage = () => {
       {cart.experiences != undefined && cart.experiences.length > 0 ? (
         <div className='grid grid-cols-3 gap-10 mb-10'>
           {/* colonna tabella esperienze */}
-          <div className='col-span-3 lg:col-span-2 bg-white rounded-2xl shadow-lg px-4 py-6'>
+          <div className='col-span-3 lg:col-span-2 bg-white rounded-2xl shadow-lg px-4 py-6 overflow-x-auto'>
             <table className='w-full'>
               <thead>
                 <tr className='grid grid-cols-24 gap-4 border-b border-gray-400/30 pb-3'>
@@ -246,13 +248,17 @@ const CartPage = () => {
           {/* colonna resoconto */}
           <div className='col-span-3 lg:col-span-1 bg-white rounded-2xl shadow-lg px-4 py-6 h-fit'>
             <h3 className='text-xl font-semibold mb-4'>Riepilogo ordine</h3>
-            <div className='flex justify-between items-center text-gray-600 my-3'>
-              <span>Subtotale ({cart.experiences.length} esperienze)</span>
-              <span>{cartTotal().toFixed(2).replace('.', ',')} €</span>
+            <div className='xs:flex justify-between items-center text-gray-600 my-3'>
+              <span className='block mb-1 sm:mb-0'>
+                Subtotale ({cart.experiences.length} esperienze)
+              </span>
+              <span className='block'>
+                {cartTotal().toFixed(2).replace('.', ',')} €
+              </span>
             </div>
             {cartTotalExperienceDiscount() > 0 && (
-              <div className='flex justify-between items-center text-gray-600 my-3'>
-                <span>Totale sconti</span>
+              <div className='sm:flex justify-between items-center text-gray-600 my-3'>
+                <span className='block mb-1 sm:mb-0'>Totale sconti</span>
                 <span>
                   -{cartTotalExperienceDiscount().toFixed(2).replace('.', ',')}{' '}
                   €

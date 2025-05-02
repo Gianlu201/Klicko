@@ -7,6 +7,8 @@ import { Modal, ModalBody, ModalHeader } from 'flowbite-react';
 import { toast } from 'sonner';
 
 const LoyaltyPage = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const [fidelityCard, setFidelityCard] = useState(null);
   const [fidelityLevel, setFidelityLevel] = useState(null);
   const [nextLevel, setNextLevel] = useState(null);
@@ -86,7 +88,7 @@ const LoyaltyPage = () => {
       let token = JSON.parse(tokenObj).token;
 
       const response = await fetch(
-        `https://localhost:7235/api/FidelityCard/getFidelityCardById/${profile.fidelityCardId}`,
+        `${backendUrl}/FidelityCard/getFidelityCardById/${profile.fidelityCardId}`,
         {
           method: 'GET',
           headers: {
@@ -129,7 +131,7 @@ const LoyaltyPage = () => {
       };
 
       const response = await fetch(
-        `https://localhost:7235/api/FidelityCard/convertPointsInCoupon/${profile.fidelityCardId}`,
+        `${backendUrl}/FidelityCard/convertPointsInCoupon/${profile.fidelityCardId}`,
         {
           method: 'PUT',
           headers: {
@@ -249,7 +251,9 @@ const LoyaltyPage = () => {
                 <h3 className='text-xs uppercase tracking-wider opacity-80'>
                   Klicko
                 </h3>
-                <h2 className='text-2xl font-semibold'>Carta Fedeltà</h2>
+                <h2 className='text-xl sm:text-2xl font-semibold'>
+                  Carta Fedeltà
+                </h2>
               </div>
               <div className='inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors border-transparent text-primary-foreground bg-white/20 hover:bg-white/30'>
                 {fidelityLevel.name || 'unknown'}
@@ -284,8 +288,8 @@ const LoyaltyPage = () => {
           </div>
 
           {/* main section */}
-          <div className='grid grid-cols-12 gap-8 mb-12'>
-            <div className='col-span-12 lg:col-span-8 bg-white border border-gray-400/30 rounded-2xl px-6 py-5 shadow h-fit'>
+          <div className='grid grid-cols-12 lg:gap-8 mb-12'>
+            <div className='col-span-12 lg:col-span-8 bg-white border border-gray-400/30 rounded-2xl px-6 py-5 shadow h-fit mb-8'>
               <h2 className='flex justify-start items-center gap-2 text-3xl font-semibold mb-2'>
                 <Trophy className='mt-1 text-primary' />
                 Il tuo status
@@ -326,9 +330,9 @@ const LoyaltyPage = () => {
                 )}
               </div>
 
-              <div className='grid grid-cols-2 gap-6 mb-2'>
+              <div className='grid grid-cols-1 min-[480px]:grid-cols-2 gap-6 mb-2'>
                 <div className='bg-gray-100 rounded-xl p-6'>
-                  <h4 className='text-xl font-semibold mb-2'>
+                  <h4 className='min-[480px]:text-xl font-semibold mb-2'>
                     Punti disponibili
                   </h4>
                   <p className='text-xl font-black'>
@@ -337,7 +341,7 @@ const LoyaltyPage = () => {
                 </div>
                 {nextLevel !== null && (
                   <div className='bg-gray-100 rounded-xl p-6'>
-                    <h4 className='text-xl font-semibold mb-2'>
+                    <h4 className='min-[480px]:text-xl font-semibold mb-2'>
                       Prossimo livello tra
                     </h4>
                     <p className='text-xl font-black'>
@@ -418,39 +422,41 @@ const LoyaltyPage = () => {
               Scopri i vantaggi di ogni livello
             </p>
 
-            <table className='w-full'>
-              <thead>
-                <tr className='grid grid-cols-24 gap-4 border-b border-gray-400/30 pb-3'>
-                  <th className='col-span-8 font-semibold text-start'>
-                    Livello
-                  </th>
-                  <th className='col-span-8 font-semibold text-start'>
-                    Punti richiesti
-                  </th>
-                  <th className='col-span-8 font-semibold text-start'>
-                    Benefici speciali
-                  </th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {levels.map((level) => (
-                  <tr
-                    key={level.id}
-                    className='grid grid-cols-24 gap-4 items-center hover:bg-gray-100 border-b border-gray-400/30 py-3 px-2 last-of-type:border-0'
-                  >
-                    <td className='col-span-8 flex justify-start items-center gap-2'>
-                      <div
-                        className={`rounded-full p-2 ${level.mainBgColor}`}
-                      ></div>
-                      {level.name}
-                    </td>
-                    <td className='col-span-8'>{level.minPoints}</td>
-                    <td className='col-span-8'>{level.benefit}</td>
+            <div className='overflow-x-auto'>
+              <table className='w-full min-w-sm'>
+                <thead>
+                  <tr className='grid grid-cols-24 gap-4 border-b border-gray-400/30 pb-3'>
+                    <th className='col-span-8 font-semibold text-start'>
+                      Livello
+                    </th>
+                    <th className='col-span-8 font-semibold text-start'>
+                      Punti richiesti
+                    </th>
+                    <th className='col-span-8 font-semibold text-start'>
+                      Benefici speciali
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+
+                <tbody>
+                  {levels.map((level) => (
+                    <tr
+                      key={level.id}
+                      className='grid grid-cols-24 gap-4 items-center hover:bg-gray-100 border-b border-gray-400/30 py-3 px-2 last-of-type:border-0'
+                    >
+                      <td className='col-span-8 flex justify-start items-center gap-2'>
+                        <div
+                          className={`rounded-full p-2 ${level.mainBgColor}`}
+                        ></div>
+                        {level.name}
+                      </td>
+                      <td className='col-span-8'>{level.minPoints}</td>
+                      <td className='col-span-8'>{level.benefit}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
 
           {/* Modale conferma conversione punti */}

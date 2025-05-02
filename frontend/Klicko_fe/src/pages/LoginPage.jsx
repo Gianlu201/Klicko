@@ -6,6 +6,8 @@ import { jwtDecode } from 'jwt-decode';
 import { toast } from 'sonner';
 
 const LoginPage = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -24,7 +26,7 @@ const LoginPage = () => {
         password: password,
       };
 
-      const response = await fetch('https://localhost:7235/api/Account/login', {
+      const response = await fetch(`${backendUrl}/Account/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -92,9 +94,11 @@ const LoginPage = () => {
 
   return (
     <div className='flex flex-col justify-center items-center gap-5 min-h-screen px-6'>
-      <h1 className='text-4xl sm:text-5xl font-bold'>Bentornato su Klicko</h1>
+      <h1 className='relative -translate-y-10 text-4xl sm:text-5xl font-bold'>
+        Bentornato su Klicko
+      </h1>
 
-      <div className='bg-white rounded-2xl shadow-xl p-6 mx-auto max-w-lg'>
+      <div className='relative -translate-y-10 bg-white rounded-2xl shadow-xl p-4 sm:p-6 mx-auto max-w-lg'>
         <h2 className='text-xl font-bold mb-2'>Accedi</h2>
         <p className='text-gray-500 mb-5'>
           Inserisci le tue credenziali per accedere al tuo account
@@ -105,7 +109,7 @@ const LoginPage = () => {
             <input
               type='text'
               placeholder='Inserisci la tua email..'
-              className='bg-background border border-gray-600/20 rounded-lg py-1.5 px-3'
+              className='text-sm sm:text-base bg-background border border-gray-600/20 rounded-lg py-1.5 px-3'
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
@@ -117,7 +121,7 @@ const LoginPage = () => {
             <input
               type='password'
               placeholder='Inserisci la tua password..'
-              className='bg-background border border-gray-600/20 rounded-lg py-1.5 px-3'
+              className='text-sm sm:text-base bg-background border border-gray-600/20 rounded-lg py-1.5 px-3'
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
