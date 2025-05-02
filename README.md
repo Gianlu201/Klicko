@@ -122,6 +122,6 @@ dotnet run
 
 ## 📬 Contatti
 
-Per ulteriori informazioni o domande, contatta [@Gianlu201](https://github.com/Gianlu201)
+Per ulteriori informazioni o domande, contattami [@Gianlu201](https://github.com/Gianlu201)
 
 ---
