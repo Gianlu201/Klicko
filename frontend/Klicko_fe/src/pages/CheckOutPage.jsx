@@ -8,6 +8,8 @@ import { BadgePercent, X } from 'lucide-react';
 import StripeContainer from '../components/StripeContainer';
 
 const CheckOutPage = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const [couponCode, setCouponCode] = useState('');
   const [selectedCoupon, setSelectedCoupon] = useState(null);
   const [couponError, setCouponError] = useState('');
@@ -41,7 +43,7 @@ const CheckOutPage = () => {
   const getUserCart = async () => {
     try {
       const response = await fetch(
-        `https://localhost:7235/api/Cart/GetCart/${profile.cartId}`,
+        `${backendUrl}/Cart/GetCart/${profile.cartId}`,
         {
           method: 'GET',
           headers: {
@@ -101,7 +103,7 @@ const CheckOutPage = () => {
       let token = JSON.parse(tokenObj).token;
 
       const response = await fetch(
-        `https://localhost:7235/api/Coupon/getCouponByCode/${couponCode.toUpperCase()}`,
+        `${backendUrl}/Coupon/getCouponByCode/${couponCode.toUpperCase()}`,
         {
           method: 'GET',
           headers: {
@@ -160,7 +162,7 @@ const CheckOutPage = () => {
         body.couponId = selectedCoupon.couponId;
       }
 
-      const response = await fetch(`https://localhost:7235/api/Order`, {
+      const response = await fetch(`${backendUrl}/Order`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -219,8 +221,10 @@ const CheckOutPage = () => {
                     <div className='col-span-1 font-semibold text-end'>
                       {exp.quantity}x
                     </div>
-                    <div className='col-span-8 text-sm'>{exp.title}</div>
-                    <div className='col-span-3 text-end font-semibold'>
+                    <div className='col-span-7 xs:col-span-8 sm:text-sm ps-1'>
+                      {exp.title}
+                    </div>
+                    <div className='col-span-4 xs:col-span-3 text-end font-semibold'>
                       {(exp.price * (1 - exp.sale / 100))
                         .toFixed(2)
                         .replace('.', ',')}{' '}
@@ -241,7 +245,7 @@ const CheckOutPage = () => {
               >
                 <input
                   type='text'
-                  className='grow bg-background border border-gray-400/30 rounded-lg px-3 py-1.5'
+                  className='grow max-w-3/4 bg-background border border-gray-400/30 rounded-lg px-3 py-1.5 text-sm xs:text-base'
                   placeholder='Inserisci il codice'
                   value={couponCode}
                   onChange={(e) => {
@@ -322,15 +326,14 @@ const CheckOutPage = () => {
           </div>
 
           {/* modalità pagamento */}
-          <div className='col-span-3 lg:col-span-2 bg-white rounded-lg px-6 py-5 shadow'>
+          <div className='col-span-3 lg:col-span-2 bg-white rounded-lg px-6 py-5 shadow mb-10'>
             <h2 className='text-2xl font-bold mb-2'>Pagamento</h2>
+            {/* Stripe Container */}
             <StripeContainer
               sendOrder={sendOrder}
               orderAmount={getFinalPrice()}
             />
           </div>
-
-          {/* Stripe Container */}
         </div>
       )}
     </div>

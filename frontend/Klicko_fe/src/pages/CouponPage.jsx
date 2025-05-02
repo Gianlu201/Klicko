@@ -4,6 +4,8 @@ import CouponCard from '../components/CouponCard';
 import { toast } from 'sonner';
 
 const CouponPage = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const [availableCoupon, setAvailableCoupon] = useState([]);
   const [unavailableCoupon, setUnavailableCoupon] = useState([]);
 
@@ -19,16 +21,13 @@ const CouponPage = () => {
 
       let token = JSON.parse(tokenObj).token;
 
-      const response = await fetch(
-        'https://localhost:7235/api/Coupon/getAllUserCoupons',
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${backendUrl}/Coupon/getAllUserCoupons`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (response.ok) {
         const data = await response.json();

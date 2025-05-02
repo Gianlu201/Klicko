@@ -17,6 +17,8 @@ import { toast } from 'sonner';
 import { useSelector } from 'react-redux';
 
 const DashboardAdmin = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const [isAuthorized, setIsAuthorized] = useState(false);
 
   const [orders, setOrders] = useState([]);
@@ -49,7 +51,7 @@ const DashboardAdmin = () => {
 
       let token = JSON.parse(tokenObj).token;
 
-      const response = await fetch(`https://localhost:7235/api/Order`, {
+      const response = await fetch(`${backendUrl}/Order`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -187,7 +189,7 @@ const DashboardAdmin = () => {
       };
 
       const response = await fetch(
-        `https://localhost:7235/api/Order/editOrderState/${orderId}`,
+        `${backendUrl}/Order/editOrderState/${orderId}`,
         {
           method: 'PUT',
           headers: {
@@ -289,7 +291,7 @@ const DashboardAdmin = () => {
           </p>
 
           {/* options overview */}
-          <div className='grid grid-cols-2 md:grid-cols-4 gap-6 mb-6'>
+          <div className='grid grid-cols-1 min-[480px]:grid-cols-2 md:grid-cols-4 gap-6 mb-6'>
             {options.map((opt) => (
               <div
                 key={opt.id}
@@ -306,12 +308,12 @@ const DashboardAdmin = () => {
             ))}
           </div>
 
-          <div className='flex justify-between items-center gap-4 mb-8'>
-            <div className='relative grow'>
+          <div className='xs:flex justify-between items-center gap-4 mb-8'>
+            <div className='relative grow max-[480px]:mb-4'>
               <input
                 type='text'
                 placeholder='Cerca ordini, clienti...'
-                className='bg-background border border-gray-400/30 rounded-xl py-2 ps-10 w-full'
+                className='max-[480px]:text-sm bg-background border border-gray-400/30 rounded-xl py-2 ps-10 w-full'
                 onChange={(e) => {
                   filterBy(e.target.value);
                 }}
@@ -343,8 +345,8 @@ const DashboardAdmin = () => {
             </p>
 
             {filteredOrders.length > 0 ? (
-              <div>
-                <table className='w-full'>
+              <div className='overflow-x-auto'>
+                <table className='min-w-sm'>
                   <thead>
                     <tr className='grid grid-cols-12 text-gray-500 text-sm font-normal border-b border-gray-400/40 p-3 hover:bg-gray-100'>
                       <th className='col-span-3 md:col-span-2 text-start'>

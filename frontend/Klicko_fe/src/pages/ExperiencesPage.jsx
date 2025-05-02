@@ -8,6 +8,8 @@ import Spinner from '../components/ui/Spinner';
 import { toast } from 'sonner';
 
 const ExperiencesPage = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const [isLoading, setIsLoading] = useState(true);
   const [experiences, setExperiences] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -33,15 +35,12 @@ const ExperiencesPage = () => {
     try {
       setIsLoading(true);
 
-      const response = await fetch(
-        'https://localhost:7235/api/Experience/getExperiences',
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+      const response = await fetch(`${backendUrl}/Experience/getExperiences`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       if (response.ok) {
         const data = await response.json();
 
@@ -63,7 +62,7 @@ const ExperiencesPage = () => {
 
   const getAllCategories = async () => {
     try {
-      const response = await fetch('https://localhost:7235/api/Category', {
+      const response = await fetch(`${backendUrl}/Category`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -180,10 +179,10 @@ const ExperiencesPage = () => {
 
       {/* search area */}
       <div className='bg-white p-4 rounded-2xl my-6 shadow-xs'>
-        <div className=' flex justify-between items-center gap-2'>
-          <div className='relative grow flex items-center me-3'>
+        <div className='xs:flex justify-between items-center gap-2'>
+          <div className='relative grow flex items-center me-3 max-xs:mb-4'>
             <input
-              className='bg-background border border-gray-800/30 rounded-xl py-2 ps-10 w-full'
+              className='bg-background border border-gray-800/30 rounded-xl py-2 ps-10 w-full text-sm xs:text-base'
               placeholder='Cerca esperienze...'
               value={searchBar}
               onChange={(e) => {
@@ -192,22 +191,28 @@ const ExperiencesPage = () => {
             />
             <Search className='absolute start-2 top-1/2 -translate-y-1/2' />
           </div>
-          <Button
-            variant='outline'
-            icon={<Funnel className='w-3.5 h-3.5 text-gray-700' />}
-            onClick={() => {
-              setShowFilters(!showFilters);
-            }}
-          >
-            Filtri
-          </Button>
-          <Button variant='primary' onClick={searchExperiences}>
-            Cerca
-          </Button>
+
+          <div className='inline-block me-3 xs:me-0'>
+            <Button
+              variant='outline'
+              icon={<Funnel className='w-3.5 h-3.5 text-gray-700' />}
+              onClick={() => {
+                setShowFilters(!showFilters);
+              }}
+            >
+              Filtri
+            </Button>
+          </div>
+
+          <div className='inline-block'>
+            <Button variant='primary' onClick={searchExperiences}>
+              Cerca
+            </Button>
+          </div>
         </div>
 
         {showFilters && (
-          <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-start items-end gap-8 border-t border-gray-500/30 mt-6 pt-4'>
+          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-start items-end gap-8 border-t border-gray-500/30 mt-6 pt-4'>
             <div className='flex flex-col justify-start items-start gap-2'>
               <span className='font-medium text-sm'>Categoria</span>
               <select
@@ -272,8 +277,8 @@ const ExperiencesPage = () => {
       </div>
 
       <div>
-        <div className='flex justify-between items-center my-6'>
-          <h4 className='text-xl font-semibold'>
+        <div className='sm:flex justify-between items-center my-6'>
+          <h4 className='text-xl font-semibold mb-4'>
             {filteredExperiences.length} esperienze trovate
           </h4>
 
@@ -285,6 +290,7 @@ const ExperiencesPage = () => {
             onChange={(e) => {
               setSortOption(e.target.value);
             }}
+            hidden={filteredExperiences.length === 0 ? true : false}
           >
             <option value='suggested'>Consigliati</option>
             <option value='priceUp'>Prezzo: crescente</option>

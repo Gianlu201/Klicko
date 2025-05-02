@@ -17,10 +17,10 @@ const CatComponent = () => {
     >
       <div className='h-full w-full bg-primary/70'></div>
       <div className='absolute top-0 start-0 h-full w-full flex flex-col justify-center items-center px-6 md:px-0'>
-        <h2 className='text-center text-5xl md:text-4xl font-bold leading-10 md:leading-16 mb-8 md:mb-4 text-white'>
+        <h2 className='text-center text-3xl xs:text-5xl md:text-4xl font-bold leading-10 md:leading-16 mb-8 md:mb-4 text-white'>
           Pronto a vivere la tua prossima avventura?
         </h2>
-        <p className='md:max-w-lg lg:max-w-3xl text-center text-lg md:text-xl mb-8 text-white'>
+        <p className='md:max-w-lg lg:max-w-3xl text-center text-base xs:text-lg md:text-xl mb-8 text-white'>
           Scopri centinaia di esperienze uniche e trasforma il tuo modo di
           viaggiare. Crea ricordi indimenticabili con le nostre avventure
           selezionate.

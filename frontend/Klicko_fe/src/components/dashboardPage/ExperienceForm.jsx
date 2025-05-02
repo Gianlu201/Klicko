@@ -9,6 +9,8 @@ import { toast } from 'sonner';
 import { useSelector } from 'react-redux';
 
 const ExperienceForm = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const [isAuthorized, setIsAuthorized] = useState(false);
 
   const [editMode, setEditMode] = useState(false);
@@ -60,7 +62,7 @@ const ExperienceForm = () => {
   const getExperience = async (expId) => {
     try {
       const response = await fetch(
-        `https://localhost:7235/api/Experience/Experience/${expId}`,
+        `${backendUrl}/Experience/Experience/${expId}`,
         {
           method: 'GET',
           headers: {
@@ -117,7 +119,7 @@ const ExperienceForm = () => {
 
   const getAllCategories = async () => {
     try {
-      const response = await fetch('https://localhost:7235/api/Category', {
+      const response = await fetch(`${backendUrl}/Category`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -271,7 +273,7 @@ const ExperienceForm = () => {
 
   const createExperience = async (token, formData) => {
     try {
-      const response = await fetch('https://localhost:7235/api/Experience', {
+      const response = await fetch(`${backendUrl}/Experience`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -315,17 +317,14 @@ const ExperienceForm = () => {
         formData.append('RemovedCoverImage', removedCoverImage);
       }
 
-      const response = await fetch(
-        `https://localhost:7235/api/Experience/${params.expId}`,
-        {
-          method: 'PUT',
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      const response = await fetch(`${backendUrl}/Experience/${params.expId}`, {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
 
-          body: formData,
-        }
-      );
+        body: formData,
+      });
 
       if (response.ok) {
         toast.success(

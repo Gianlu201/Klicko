@@ -27,6 +27,8 @@ import { jwtDecode } from 'jwt-decode';
 import { toast } from 'sonner';
 
 const Navbar = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const profile = useSelector((state) => {
@@ -147,15 +149,12 @@ const Navbar = () => {
         cartId = tokenDecoded.cartId;
       }
 
-      const response = await fetch(
-        `https://localhost:7235/api/Cart/GetCart/${cartId}`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+      const response = await fetch(`${backendUrl}/Cart/GetCart/${cartId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       if (response.ok) {
         const data = await response.json();
 
@@ -178,7 +177,7 @@ const Navbar = () => {
       const tokenDecoded = jwtDecode(data.token);
 
       const response = await fetch(
-        `https://localhost:7235/api/FidelityCard/getFidelityCardById/${tokenDecoded.fidelityCardId}`,
+        `${backendUrl}/FidelityCard/getFidelityCardById/${tokenDecoded.fidelityCardId}`,
         {
           method: 'GET',
           headers: {

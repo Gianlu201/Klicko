@@ -5,19 +5,18 @@ import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
 
 const HighlightedComponent = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const [highlightedExperiences, setHighlightedExperiences] = useState([]);
 
   const getExperiences = async () => {
     try {
-      const response = await fetch(
-        'https://localhost:7235/api/Experience/Highlighted',
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+      const response = await fetch(`${backendUrl}/Experience/Highlighted`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       if (response.ok) {
         const data = await response.json();
         setHighlightedExperiences(data.experiences);
@@ -45,11 +44,11 @@ const HighlightedComponent = () => {
           <p className='text-sm md:text-base text-secondary font-semibold mb-2'>
             Esperienze in evidenza
           </p>
-          <div className='flex justify-between items-center'>
-            <h2 className='text-2xl 2xl:text-4xl font-bold'>
+          <div className='xs:flex justify-between items-center'>
+            <h2 className='text-xl xs:text-2xl 2xl:text-4xl font-bold mb-3'>
               Le nostre migliori avventure
             </h2>
-            <Button variant='outline' size='md'>
+            <Button variant='outline' size='md' className='ms-auto xs:ms-0'>
               <Link to='/experiences'>Vedi tutte</Link>
             </Button>
           </div>

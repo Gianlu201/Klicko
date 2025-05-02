@@ -79,11 +79,11 @@ const CouponCard = ({ coupon }) => {
 
       {coupon.isActive &&
         (coupon.percentualSaleAmount > 0 ? (
-          <span className='absolute top-0 right-0 z-10 w-full transform rotate-45 translate-x-24 -translate-y-18 md:translate-x-20 md:-translate-y-12 lg:translate-x-18 lg:-translate-y-12 bg-primary text-white text-sm font-extrabold text-end py-1.5 pe-18 shadow-md'>
+          <span className='absolute top-0 right-0 z-10 w-full transform rotate-45 translate-x-18 -translate-y-4 min-[480px]:translate-x-24 min-[480px]:-translate-y-18 md:translate-x-20 md:-translate-y-12 lg:translate-x-18 lg:-translate-y-12 bg-primary text-white text-sm font-extrabold text-end py-1.5 pe-18 shadow-md'>
             -{coupon.percentualSaleAmount}%
           </span>
         ) : (
-          <span className='absolute top-0 right-0 z-10 w-full transform rotate-45 translate-x-24 -translate-y-18 md:translate-x-20 md:-translate-y-12 lg:translate-x-18 lg:-translate-y-12 bg-primary text-white text-sm font-extrabold text-end py-1.5 pe-14 shadow-md'>
+          <span className='absolute top-0 right-0 z-10 w-full transform rotate-45 translate-x-18 -translate-y-4 min-[480px]:translate-x-24 min-[480px]:-translate-y-18 md:translate-x-20 md:-translate-y-12 lg:translate-x-18 lg:-translate-y-12 bg-primary text-white text-sm font-extrabold text-end py-1.5 pe-14 shadow-md'>
             -{coupon.fixedSaleAmount.toFixed(2).replace('.', ',')}€
           </span>
         ))}

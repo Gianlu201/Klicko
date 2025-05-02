@@ -7,6 +7,8 @@ import { emptyCart } from '../redux/actions';
 import { toast } from 'sonner';
 
 const OrderConfirmationPage = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const [order, setOrder] = useState(null);
 
   const params = useParams();
@@ -26,7 +28,7 @@ const OrderConfirmationPage = () => {
       let token = JSON.parse(tokenObj).token;
 
       const response = await fetch(
-        `https://localhost:7235/api/Order/getOrderById/${orderId}`,
+        `${backendUrl}/Order/getOrderById/${orderId}`,
         {
           method: 'GET',
           headers: {
@@ -100,7 +102,7 @@ const OrderConfirmationPage = () => {
             ))}
           </div>
 
-          <div className='grid grid-cols-4 items-start gap-6 mb-8'>
+          <div className='grid grid-cols-2 sm:grid-cols-4 items-start gap-6 mb-8'>
             <div className='text-primary'>
               <Clock className='w-6 h-6 md:w-10 md:h-10 mx-auto mb-2' />
               <p className='text-sm md:text-lg font-medium text-center'>
@@ -130,7 +132,7 @@ const OrderConfirmationPage = () => {
             </div>
           </div>
 
-          <div className='flex justify-center items-center gap-6'>
+          <div className='flex max-xs:flex-col justify-center items-center gap-6'>
             <Button
               variant='outline'
               onClick={() => {

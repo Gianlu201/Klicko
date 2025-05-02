@@ -18,6 +18,8 @@ import { cartModified } from '../redux/actions';
 import { toast } from 'sonner';
 
 const DetailPage = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const [experience, setExperience] = useState({});
   const [description, setDescription] = useState(true);
   const [foto, setFoto] = useState(false);
@@ -36,7 +38,7 @@ const DetailPage = () => {
   const getSelectedExperience = async () => {
     try {
       const response = await fetch(
-        `https://localhost:7235/api/Experience/Experience/${params.experienceId}`,
+        `${backendUrl}/Experience/Experience/${params.experienceId}`,
         {
           method: 'GET',
           headers: {
@@ -90,7 +92,7 @@ const DetailPage = () => {
   const addExperienceToCart = async (experienceId) => {
     try {
       const response = await fetch(
-        `https://localhost:7235/api/Cart/AddExperience/${cart.cartId}`,
+        `${backendUrl}/Cart/AddExperience/${cart.cartId}`,
         {
           method: 'POST',
           headers: {
@@ -148,7 +150,7 @@ const DetailPage = () => {
                   <Clock className='w-4.5 h-4.5' />
                   {experience.duration}
                 </span>
-                <span className='flex items-center gap-2'>
+                <span className='hidden xs:flex items-center gap-2'>
                   <Tag className='w-4.5 h-4.5' />
                   {experience.category.name}
                 </span>
@@ -160,7 +162,7 @@ const DetailPage = () => {
             {/* first column */}
             <div className='bg-white col-span-3 lg:col-span-2 rounded-b-2xl shadow-lg mb-16'>
               {/* navigation tables */}
-              <div className=' inline-block ms-6 px-2 pb-2 bg-gray-100 rounded-b-2xl'>
+              <div className='inline-block mx-6 px-2 pb-2 bg-gray-100 rounded-b-2xl'>
                 <button
                   className={`px-4 py-1 cursor-pointer ${
                     description ? 'bg-white rounded-b-xl' : ''
@@ -207,7 +209,7 @@ const DetailPage = () => {
 
                   <h4 className='text-xl font-semibold'>Dettagli</h4>
 
-                  <div className='flex gap-2 my-2'>
+                  <div className='sm:flex gap-2 my-2'>
                     <span className='flex items-center gap-1.5 text-gray-600'>
                       <Clock className='w-4 h-4' />
                       Durata:
@@ -216,14 +218,14 @@ const DetailPage = () => {
                       {experience?.duration}
                     </span>
                   </div>
-                  <div className='flex gap-2 my-2'>
+                  <div className='sm:flex gap-2 my-2'>
                     <span className='flex items-center gap-1.5 text-gray-600'>
                       <MapPin className='w-4 h-4' />
                       Luogo:
                     </span>
                     <span className='font-semibold'>{experience?.place}</span>
                   </div>
-                  <div className='flex gap-2 my-2'>
+                  <div className='sm:flex gap-2 my-2'>
                     <span className='flex items-center gap-1.5 text-gray-600'>
                       <User className='w-4 h-4' />
                       Organizzato da:
@@ -232,7 +234,7 @@ const DetailPage = () => {
                       {experience?.organiser}
                     </span>
                   </div>
-                  <div className='flex gap-2 my-2'>
+                  <div className='sm:flex gap-2 my-2'>
                     <span className='flex items-center gap-1.5 text-gray-600'>
                       <Calendar className='w-4 h-4' />
                       Aggiornato il:
@@ -356,8 +358,8 @@ const DetailPage = () => {
 
                 <h4 className='font-semibold mb-2'>Informazioni importanti</h4>
 
-                <div className='flex items-center gap-1.5 mb-2'>
-                  <UsersRound className='w-4 h-4' />
+                <div className='sm:flex items-center gap-1.5 mb-2'>
+                  <UsersRound className='w-4 h-4 inline-block me-2' />
                   <span>
                     Esperienze per{' '}
                     <span className='font-semibold'>
@@ -367,9 +369,11 @@ const DetailPage = () => {
                 </div>
 
                 {experience.maxParticipants > 1 && (
-                  <div className='flex items-center gap-1.5 mb-2'>
-                    <HandCoins className='w-4 h-4' />
-                    Costo per persona:
+                  <div className='sm:flex items-center gap-1.5 mb-2'>
+                    <span className='flex justify-start items-center gap-1.5'>
+                      <HandCoins className='w-4 h-4' />
+                      Costo per persona:
+                    </span>
                     <span className='font-semibold'>
                       {(experience.price / experience.maxParticipants)
                         .toFixed(2)
@@ -379,9 +383,11 @@ const DetailPage = () => {
                   </div>
                 )}
 
-                <div className='flex items-center gap-1.5 mb-2'>
-                  <Clock className='w-4 h-4' />
-                  Durata complessiva:
+                <div className='sm:flex items-center gap-1.5 mb-2'>
+                  <span className='flex justify-start items-center gap-1.5'>
+                    <Clock className='w-4 h-4' />
+                    Durata complessiva:
+                  </span>
                   <span className='font-semibold'>{experience.duration}</span>
                 </div>
 
