@@ -8,6 +8,8 @@ import { toast } from 'sonner';
 import { Modal, ModalBody, ModalHeader } from 'flowbite-react';
 
 const VouchersPage = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const [redeemVoucherOption, setRedeemVoucherOption] = useState(true);
   const [redeemedVouchers, setRedeemedVouchers] = useState([]);
   const [voucherCodeSearch, setVoucherCodeSearch] = useState('');
@@ -30,16 +32,13 @@ const VouchersPage = () => {
 
       let token = JSON.parse(tokenObj).token;
 
-      const response = await fetch(
-        'https://localhost:7235/api/Voucher/getAllUserVouchers',
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${backendUrl}/Voucher/getAllUserVouchers`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (response.ok) {
         const data = await response.json();
@@ -74,7 +73,7 @@ const VouchersPage = () => {
       let token = JSON.parse(tokenObj).token;
 
       const response = await fetch(
-        `https://localhost:7235/api/Voucher/getVoucherByCode/${voucherCodeSearch.toUpperCase()}`,
+        `${backendUrl}/Voucher/getVoucherByCode/${voucherCodeSearch.toUpperCase()}`,
         {
           method: 'GET',
           headers: {
@@ -120,7 +119,7 @@ const VouchersPage = () => {
       };
 
       const response = await fetch(
-        `https://localhost:7235/api/Voucher/editVoucher/${searchedVoucher.voucherId}`,
+        `${backendUrl}/Voucher/editVoucher/${searchedVoucher.voucherId}`,
         {
           method: 'PUT',
           headers: {
@@ -171,7 +170,7 @@ const VouchersPage = () => {
       };
 
       const response = await fetch(
-        `https://localhost:7235/api/Voucher/editVoucher/${voucherId}`,
+        `${backendUrl}/Voucher/editVoucher/${voucherId}`,
         {
           method: 'PUT',
           headers: {

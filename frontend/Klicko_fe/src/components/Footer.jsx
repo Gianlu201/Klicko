@@ -7,6 +7,8 @@ import { setSelectedCategoryName } from '../redux/actions';
 import { toast } from 'sonner';
 
 const Footer = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const [newsLetterEmail, setNewsLetterEmail] = useState('');
 
   const dispatch = useDispatch();
@@ -79,16 +81,13 @@ const Footer = () => {
 
   const sendNewsLetterEmail = async () => {
     try {
-      const response = await fetch(
-        `https://localhost:7235/api/Email/sendNewsLetter`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(newsLetterEmail),
-        }
-      );
+      const response = await fetch(`${backendUrl}/Email/sendNewsLetter`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newsLetterEmail),
+      });
       if (response.ok) {
         toast.success(
           <>

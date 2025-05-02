@@ -7,6 +7,8 @@ import { Modal, ModalBody, ModalHeader } from 'flowbite-react';
 import { toast } from 'sonner';
 
 const LoyaltyPage = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const [fidelityCard, setFidelityCard] = useState(null);
   const [fidelityLevel, setFidelityLevel] = useState(null);
   const [nextLevel, setNextLevel] = useState(null);
@@ -86,7 +88,7 @@ const LoyaltyPage = () => {
       let token = JSON.parse(tokenObj).token;
 
       const response = await fetch(
-        `https://localhost:7235/api/FidelityCard/getFidelityCardById/${profile.fidelityCardId}`,
+        `${backendUrl}/FidelityCard/getFidelityCardById/${profile.fidelityCardId}`,
         {
           method: 'GET',
           headers: {
@@ -129,7 +131,7 @@ const LoyaltyPage = () => {
       };
 
       const response = await fetch(
-        `https://localhost:7235/api/FidelityCard/convertPointsInCoupon/${profile.fidelityCardId}`,
+        `${backendUrl}/FidelityCard/convertPointsInCoupon/${profile.fidelityCardId}`,
         {
           method: 'PUT',
           headers: {

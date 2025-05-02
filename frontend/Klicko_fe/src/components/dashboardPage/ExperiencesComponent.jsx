@@ -20,6 +20,8 @@ import { cartModified } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
 const ExperiencesComponent = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const [isAuthorized, setIsAuthorized] = useState(false);
 
   const [experiences, setExperiences] = useState([]);
@@ -62,7 +64,7 @@ const ExperiencesComponent = () => {
 
       let token = JSON.parse(tokenObj).token;
 
-      const response = await fetch('https://localhost:7235/api/Experience', {
+      const response = await fetch(`${backendUrl}/Experience`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -89,7 +91,7 @@ const ExperiencesComponent = () => {
 
   const getAllCategories = async () => {
     try {
-      const response = await fetch('https://localhost:7235/api/Category', {
+      const response = await fetch(`${backendUrl}/Category`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -144,7 +146,7 @@ const ExperiencesComponent = () => {
       let token = JSON.parse(tokenObj).token;
 
       const response = await fetch(
-        `https://localhost:7235/api/Experience/softDelete/${experienceId}`,
+        `${backendUrl}/Experience/softDelete/${experienceId}`,
         {
           method: 'PUT',
           headers: {
@@ -187,7 +189,7 @@ const ExperiencesComponent = () => {
       let token = JSON.parse(tokenObj).token;
 
       const response = await fetch(
-        `https://localhost:7235/api/Experience/restoreExperience/${experienceId}`,
+        `${backendUrl}/Experience/restoreExperience/${experienceId}`,
         {
           method: 'PUT',
           headers: {
@@ -227,16 +229,13 @@ const ExperiencesComponent = () => {
 
       let token = JSON.parse(tokenObj).token;
 
-      const response = await fetch(
-        `https://localhost:7235/api/Experience/${experienceId}`,
-        {
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${backendUrl}/Experience/${experienceId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
       if (response.ok) {
         toast.success(
           <>

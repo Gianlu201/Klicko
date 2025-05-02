@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 
 const DashboardUsers = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const [isAuthorized, setIsAuthorized] = useState(false);
 
   const [users, setUsers] = useState([]);
@@ -27,7 +29,7 @@ const DashboardUsers = () => {
 
   const getAllUsers = async () => {
     try {
-      const response = await fetch('https://localhost:7235/api/Account', {
+      const response = await fetch(`${backendUrl}/Account`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -52,15 +54,12 @@ const DashboardUsers = () => {
 
   const getAllRoles = async () => {
     try {
-      const response = await fetch(
-        'https://localhost:7235/api/Account/GetRoles',
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+      const response = await fetch(`${backendUrl}/Account/GetRoles`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       if (response.ok) {
         const data = await response.json();
 
@@ -80,16 +79,13 @@ const DashboardUsers = () => {
 
   const editUserRole = async (userId, newRoleId) => {
     try {
-      const response = await fetch(
-        `https://localhost:7235/api/Account/EditRole/${userId}`,
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(newRoleId),
-        }
-      );
+      const response = await fetch(`${backendUrl}/Account/EditRole/${userId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newRoleId),
+      });
       if (response.ok) {
         toast.success(
           <>

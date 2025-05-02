@@ -6,19 +6,18 @@ import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
 
 const PopularComponent = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const [popularExperiences, setPopularExperiences] = useState([]);
 
   const getExperiences = async () => {
     try {
-      const response = await fetch(
-        'https://localhost:7235/api/Experience/Popular',
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+      const response = await fetch(`${backendUrl}/Experience/Popular`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       if (response.ok) {
         const data = await response.json();
 

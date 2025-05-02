@@ -7,6 +7,8 @@ import { emptyCart } from '../redux/actions';
 import { toast } from 'sonner';
 
 const OrderConfirmationPage = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const [order, setOrder] = useState(null);
 
   const params = useParams();
@@ -26,7 +28,7 @@ const OrderConfirmationPage = () => {
       let token = JSON.parse(tokenObj).token;
 
       const response = await fetch(
-        `https://localhost:7235/api/Order/getOrderById/${orderId}`,
+        `${backendUrl}/Order/getOrderById/${orderId}`,
         {
           method: 'GET',
           headers: {

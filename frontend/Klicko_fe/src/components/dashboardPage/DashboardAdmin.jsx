@@ -17,6 +17,8 @@ import { toast } from 'sonner';
 import { useSelector } from 'react-redux';
 
 const DashboardAdmin = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const [isAuthorized, setIsAuthorized] = useState(false);
 
   const [orders, setOrders] = useState([]);
@@ -49,7 +51,7 @@ const DashboardAdmin = () => {
 
       let token = JSON.parse(tokenObj).token;
 
-      const response = await fetch(`https://localhost:7235/api/Order`, {
+      const response = await fetch(`${backendUrl}/Order`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -187,7 +189,7 @@ const DashboardAdmin = () => {
       };
 
       const response = await fetch(
-        `https://localhost:7235/api/Order/editOrderState/${orderId}`,
+        `${backendUrl}/Order/editOrderState/${orderId}`,
         {
           method: 'PUT',
           headers: {

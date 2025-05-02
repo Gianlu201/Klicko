@@ -5,6 +5,8 @@ import Accordion from '../ui/Accordion';
 import { toast } from 'sonner';
 
 const OrdersComponent = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const [orders, setOrders] = useState([]);
   const [filteredOrders, setFilteredOrders] = useState([]);
 
@@ -20,16 +22,13 @@ const OrdersComponent = () => {
 
       let token = JSON.parse(tokenObj).token;
 
-      const response = await fetch(
-        `https://localhost:7235/api/Order/getAllUserOrders`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${backendUrl}/Order/getAllUserOrders`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
       if (response.ok) {
         const data = await response.json();
 

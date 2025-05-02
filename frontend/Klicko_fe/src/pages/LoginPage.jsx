@@ -6,6 +6,8 @@ import { jwtDecode } from 'jwt-decode';
 import { toast } from 'sonner';
 
 const LoginPage = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -24,7 +26,7 @@ const LoginPage = () => {
         password: password,
       };
 
-      const response = await fetch('https://localhost:7235/api/Account/login', {
+      const response = await fetch(`${backendUrl}/Account/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

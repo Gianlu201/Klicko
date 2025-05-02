@@ -8,6 +8,8 @@ import Spinner from '../components/ui/Spinner';
 import { toast } from 'sonner';
 
 const ExperiencesPage = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const [isLoading, setIsLoading] = useState(true);
   const [experiences, setExperiences] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -33,15 +35,12 @@ const ExperiencesPage = () => {
     try {
       setIsLoading(true);
 
-      const response = await fetch(
-        'https://localhost:7235/api/Experience/getExperiences',
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+      const response = await fetch(`${backendUrl}/Experience/getExperiences`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       if (response.ok) {
         const data = await response.json();
 
@@ -63,7 +62,7 @@ const ExperiencesPage = () => {
 
   const getAllCategories = async () => {
     try {
-      const response = await fetch('https://localhost:7235/api/Category', {
+      const response = await fetch(`${backendUrl}/Category`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

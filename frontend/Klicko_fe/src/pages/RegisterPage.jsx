@@ -6,6 +6,8 @@ import { useSelector } from 'react-redux';
 import { toast } from 'sonner';
 
 const RegisterPage = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
@@ -34,16 +36,13 @@ const RegisterPage = () => {
           password: password,
         };
 
-        const response = await fetch(
-          `https://localhost:7235/api/Account/register`,
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(body),
-          }
-        );
+        const response = await fetch(`${backendUrl}/Account/register`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(body),
+        });
         if (response.ok) {
           toast.success(
             <>

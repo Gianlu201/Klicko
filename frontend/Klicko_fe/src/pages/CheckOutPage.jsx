@@ -8,6 +8,8 @@ import { BadgePercent, X } from 'lucide-react';
 import StripeContainer from '../components/StripeContainer';
 
 const CheckOutPage = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const [couponCode, setCouponCode] = useState('');
   const [selectedCoupon, setSelectedCoupon] = useState(null);
   const [couponError, setCouponError] = useState('');
@@ -41,7 +43,7 @@ const CheckOutPage = () => {
   const getUserCart = async () => {
     try {
       const response = await fetch(
-        `https://localhost:7235/api/Cart/GetCart/${profile.cartId}`,
+        `${backendUrl}/Cart/GetCart/${profile.cartId}`,
         {
           method: 'GET',
           headers: {
@@ -101,7 +103,7 @@ const CheckOutPage = () => {
       let token = JSON.parse(tokenObj).token;
 
       const response = await fetch(
-        `https://localhost:7235/api/Coupon/getCouponByCode/${couponCode.toUpperCase()}`,
+        `${backendUrl}/Coupon/getCouponByCode/${couponCode.toUpperCase()}`,
         {
           method: 'GET',
           headers: {
@@ -160,7 +162,7 @@ const CheckOutPage = () => {
         body.couponId = selectedCoupon.couponId;
       }
 
-      const response = await fetch(`https://localhost:7235/api/Order`, {
+      const response = await fetch(`${backendUrl}/Order`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

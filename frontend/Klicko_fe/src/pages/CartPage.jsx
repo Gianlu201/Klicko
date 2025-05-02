@@ -7,6 +7,8 @@ import { cartModified } from '../redux/actions';
 import { toast } from 'sonner';
 
 const CartPage = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const cart = useSelector((state) => {
     return state.cart;
   });
@@ -43,7 +45,7 @@ const CartPage = () => {
   const removeExperienceUnit = async (experienceId) => {
     try {
       const response = await fetch(
-        `https://localhost:7235/api/Cart/RemoveExperienceUnit/${cart.cartId}`,
+        `${backendUrl}/Cart/RemoveExperienceUnit/${cart.cartId}`,
         {
           method: 'POST',
           headers: {
@@ -70,7 +72,7 @@ const CartPage = () => {
   const addExperienceUnit = async (experienceId) => {
     try {
       const response = await fetch(
-        `https://localhost:7235/api/Cart/AddExperienceUnit/${cart.cartId}`,
+        `${backendUrl}/Cart/AddExperienceUnit/${cart.cartId}`,
         {
           method: 'POST',
           headers: {
@@ -97,7 +99,7 @@ const CartPage = () => {
   const removeExperienceFromCart = async (experienceId) => {
     try {
       const response = await fetch(
-        `https://localhost:7235/api/Cart/RemoveExperience/${cart.cartId}`,
+        `${backendUrl}/Cart/RemoveExperience/${cart.cartId}`,
         {
           method: 'POST',
           headers: {

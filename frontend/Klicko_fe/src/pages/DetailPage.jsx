@@ -18,6 +18,8 @@ import { cartModified } from '../redux/actions';
 import { toast } from 'sonner';
 
 const DetailPage = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const [experience, setExperience] = useState({});
   const [description, setDescription] = useState(true);
   const [foto, setFoto] = useState(false);
@@ -36,7 +38,7 @@ const DetailPage = () => {
   const getSelectedExperience = async () => {
     try {
       const response = await fetch(
-        `https://localhost:7235/api/Experience/Experience/${params.experienceId}`,
+        `${backendUrl}/Experience/Experience/${params.experienceId}`,
         {
           method: 'GET',
           headers: {
@@ -90,7 +92,7 @@ const DetailPage = () => {
   const addExperienceToCart = async (experienceId) => {
     try {
       const response = await fetch(
-        `https://localhost:7235/api/Cart/AddExperience/${cart.cartId}`,
+        `${backendUrl}/Cart/AddExperience/${cart.cartId}`,
         {
           method: 'POST',
           headers: {
