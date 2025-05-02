@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
 @import 'tailwindcss';
 @plugin 'flowbite-react/plugin/tailwindcss';
 @source '../.flowbite-react/class-list.json';
@@ -9,6 +11,7 @@
   --color-primary: #19aeff;
   --color-secondary: #f97415;
   --color-background: #f8fafc;
+  --breakpoint-xs: 480px;
 }
 
 * {

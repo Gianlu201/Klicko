@@ -221,8 +221,10 @@ const CheckOutPage = () => {
                     <div className='col-span-1 font-semibold text-end'>
                       {exp.quantity}x
                     </div>
-                    <div className='col-span-8 text-sm'>{exp.title}</div>
-                    <div className='col-span-3 text-end font-semibold'>
+                    <div className='col-span-7 xs:col-span-8 sm:text-sm ps-1'>
+                      {exp.title}
+                    </div>
+                    <div className='col-span-4 xs:col-span-3 text-end font-semibold'>
                       {(exp.price * (1 - exp.sale / 100))
                         .toFixed(2)
                         .replace('.', ',')}{' '}
@@ -243,7 +245,7 @@ const CheckOutPage = () => {
               >
                 <input
                   type='text'
-                  className='grow bg-background border border-gray-400/30 rounded-lg px-3 py-1.5'
+                  className='grow max-w-3/4 bg-background border border-gray-400/30 rounded-lg px-3 py-1.5 text-sm xs:text-base'
                   placeholder='Inserisci il codice'
                   value={couponCode}
                   onChange={(e) => {
@@ -324,15 +326,14 @@ const CheckOutPage = () => {
           </div>
 
           {/* modalità pagamento */}
-          <div className='col-span-3 lg:col-span-2 bg-white rounded-lg px-6 py-5 shadow'>
+          <div className='col-span-3 lg:col-span-2 bg-white rounded-lg px-6 py-5 shadow mb-10'>
             <h2 className='text-2xl font-bold mb-2'>Pagamento</h2>
+            {/* Stripe Container */}
             <StripeContainer
               sendOrder={sendOrder}
               orderAmount={getFinalPrice()}
             />
           </div>
-
-          {/* Stripe Container */}
         </div>
       )}
     </div>

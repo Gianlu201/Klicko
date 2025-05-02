@@ -102,7 +102,7 @@ const OrderConfirmationPage = () => {
             ))}
           </div>
 
-          <div className='grid grid-cols-4 items-start gap-6 mb-8'>
+          <div className='grid grid-cols-2 sm:grid-cols-4 items-start gap-6 mb-8'>
             <div className='text-primary'>
               <Clock className='w-6 h-6 md:w-10 md:h-10 mx-auto mb-2' />
               <p className='text-sm md:text-lg font-medium text-center'>
@@ -132,7 +132,7 @@ const OrderConfirmationPage = () => {
             </div>
           </div>
 
-          <div className='flex justify-center items-center gap-6'>
+          <div className='flex max-xs:flex-col justify-center items-center gap-6'>
             <Button
               variant='outline'
               onClick={() => {

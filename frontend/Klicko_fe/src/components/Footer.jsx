@@ -182,8 +182,10 @@ const Footer = () => {
           </Button>
         </div>
       </div>
-      <div className='mx-6 flex justify-between max-w-7xl lg:mx-auto border-t border-t-gray-600 text-gray-500 pt-4'>
-        <p>&copy; 2025 Klicko. Tutti i diritti riservati</p>
+      <div className='mx-6 md:flex justify-between max-w-7xl lg:mx-auto border-t border-t-gray-600 text-gray-500 pt-4'>
+        <p className='mb-3 md:mb-0'>
+          &copy; 2025 Klicko. Tutti i diritti riservati
+        </p>
         <div className='flex gap-2'>
           <Link to='/termsAndConditions' className='hover:text-white'>
             Termini

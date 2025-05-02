@@ -46,11 +46,11 @@ const PopularComponent = () => {
           <p className='text-sm md:text-base text-[#19aeff] font-semibold mb-2'>
             Esperienze in evidenza
           </p>
-          <div className='flex justify-between items-center'>
-            <h2 className='text-xl 2xl:text-4xl font-bold'>
+          <div className='xs:flex justify-between items-center'>
+            <h2 className='text-xl xs:text-2xl 2xl:text-4xl font-bold'>
               Le nostre avventure più popolari
             </h2>
-            <Button variant='outline' size='md'>
+            <Button variant='outline' size='md' className='ms-auto xs:ms-0'>
               <Link to='/experiences'>Vedi tutte</Link>
             </Button>
           </div>

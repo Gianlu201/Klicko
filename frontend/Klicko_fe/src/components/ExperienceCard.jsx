@@ -19,12 +19,12 @@ const ExperienceCard = ({ experience, className }) => {
               className='absolute top-1/2 start-1/2 -translate-y-1/2 -translate-x-1/2 z-0 w-full h-full'
             />
             {experience.isInEvidence ? (
-              <span className='absolute top-2 start-2 text-white md:text-xs font-semibold px-2 py-1 bg-secondary rounded-full z-10'>
+              <span className='text-xs xs:text-sm absolute top-2 start-2 text-white md:text-xs font-semibold px-2 py-1 bg-secondary rounded-full z-10'>
                 In evidenza
               </span>
             ) : (
               experience.isPopular && (
-                <span className='absolute top-2 start-2 text-white md:text-xs font-semibold px-2 py-1 bg-primary rounded-full z-10'>
+                <span className='text-xs xs:text-sm absolute top-2 start-2 text-white md:text-xs font-semibold px-2 py-1 bg-primary rounded-full z-10'>
                   Popolare
                 </span>
               )
@@ -39,22 +39,22 @@ const ExperienceCard = ({ experience, className }) => {
           {/* card bottom */}
           <div className='p-4'>
             <div className='flex justify-between items-center mb-2'>
-              <span className='text-gray-500 font-medium md:font-normal md:text-sm'>
+              <span className='text-gray-500 font-medium md:font-normal text-xs xs:text-base md:text-sm'>
                 {experience.category.name}
               </span>
               <div className='flex items-center'>
                 <span
                   className={`font-bold md:font-semibold ${
                     experience.sale > 0
-                      ? 'line-through text-gray-500 me-2 text-lg md:text-base'
-                      : 'text-secondary text-2xl md:text-lg'
+                      ? 'line-through text-gray-500 me-2 xs:text-lg md:text-base'
+                      : 'text-secondary text-xl xs:text-2xl md:text-lg'
                   }`}
                 >
                   {experience.price.toFixed(2).replace('.', ',')} €
                 </span>
                 {experience.sale > 0 && (
                   <span
-                    className={`font-bold md:font-semibold text-secondary text-2xl md:text-lg`}
+                    className={`font-bold md:font-semibold text-secondary text-xl xs:text-2xl md:text-lg`}
                   >
                     {((experience.price * (100 - experience.sale)) / 100)
                       .toFixed(2)
@@ -73,9 +73,9 @@ const ExperienceCard = ({ experience, className }) => {
 
             <div className='absolute w-full start-4 bottom-2'>
               <div className='flex justify-between pe-8 my-2'>
-                <span className='flex items-center gap-1 md:text-sm text-gray-500'>
+                <span className='flex items-center gap-1 md:text-sm text-gray-500 max-w-3/5'>
                   <MapPin className='h-4 w-4' />
-                  {experience.place}
+                  <span className='line-clamp-1'>{experience.place}</span>
                 </span>
                 <span className='flex items-center gap-1 md:text-sm text-gray-500'>
                   <Clock className='h-4 w-4' />

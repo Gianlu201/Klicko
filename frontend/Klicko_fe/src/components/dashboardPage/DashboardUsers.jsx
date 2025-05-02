@@ -11,7 +11,9 @@ const DashboardUsers = () => {
   const [isAuthorized, setIsAuthorized] = useState(false);
 
   const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
   const [roles, setRoles] = useState([]);
+  const [userSearch, setUserSearch] = useState('');
 
   const profile = useSelector((state) => {
     return state.profile;
@@ -39,6 +41,7 @@ const DashboardUsers = () => {
         const data = await response.json();
 
         setUsers(data.accounts);
+        setFilteredUsers(data.accounts);
       } else {
         throw new Error('Errore nel recupero dei dati!');
       }
@@ -107,6 +110,25 @@ const DashboardUsers = () => {
     }
   };
 
+  const findUsers = () => {
+    const findUsers = [];
+
+    console.log(users);
+
+    users.forEach((user) => {
+      if (
+        user.firstName.toLowerCase().includes(userSearch.toLowerCase()) ||
+        user.lastName.toLowerCase().includes(userSearch.toLowerCase()) ||
+        user.email.toLowerCase().includes(userSearch.toLowerCase()) ||
+        user.userRole.roleName.toLowerCase().includes(userSearch.toLowerCase())
+      ) {
+        findUsers.push(user);
+      }
+    });
+
+    setFilteredUsers(findUsers);
+  };
+
   useEffect(() => {
     if (profile.role) {
       checkAuthorization();
@@ -118,6 +140,10 @@ const DashboardUsers = () => {
     }
   }, [profile, isAuthorized]);
 
+  useEffect(() => {
+    findUsers();
+  }, [userSearch]);
+
   return (
     <>
       {isAuthorized && (
@@ -127,31 +153,29 @@ const DashboardUsers = () => {
             Visualizza e modifica i ruoli degli utenti
           </p>
 
-          <div className='flex justify-between items-center gap-4 mb-8'>
-            <div className='relative grow'>
-              <input
-                type='text'
-                placeholder='Cerca utenti...'
-                className='bg-background border border-gray-400/30 rounded-xl py-2 ps-10 w-full'
-              />
-              <Search className='absolute top-1/2 left-3 -translate-y-1/2 w-5 h-5 pb-0.5' />
-            </div>
-
-            <Button variant='outline' icon={<Funnel className='w-4 h-4' />}>
-              Filtri
-            </Button>
-          </div>
+          <form className='relative grow mb-8'>
+            <input
+              type='text'
+              placeholder='Cerca utenti...'
+              className='bg-background border border-gray-400/30 rounded-xl py-2 ps-10 w-full'
+              value={userSearch}
+              onChange={(e) => {
+                setUserSearch(e.target.value);
+              }}
+            />
+            <Search className='absolute top-1/2 left-3 -translate-y-1/2 w-5 h-5 pb-0.5' />
+          </form>
 
           {/* tabella utenti registrati */}
           <div className='border border-gray-400/40 shadow-sm rounded-xl px-4 py-5'>
-            {users.length > 0 ? (
-              <div>
+            {filteredUsers.length > 0 ? (
+              <div className='overflow-x-auto'>
                 <h3 className='text-xl font-semibold mb-2'>Utenti</h3>
                 <p className='text-gray-500 font-normal text-sm mb-5'>
-                  {users.length} utenti trovati
+                  {filteredUsers.length} utenti trovati
                 </p>
 
-                <table className='w-full'>
+                <table className='w-full min-w-sm'>
                   <thead>
                     <tr className='grid grid-cols-24 gap-4 border-b border-gray-400/30 pb-3'>
                       <th className='col-span-7 md:col-span-6 text-gray-500 text-sm font-medium text-start ps-3'>
@@ -169,7 +193,7 @@ const DashboardUsers = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {users.map((user) => (
+                    {filteredUsers.map((user) => (
                       <tr
                         key={user.userId}
                         className='grid grid-cols-24 gap-4 items-center hover:bg-gray-100 border-b border-gray-400/30 py-3 last-of-type:border-0 text-sm'

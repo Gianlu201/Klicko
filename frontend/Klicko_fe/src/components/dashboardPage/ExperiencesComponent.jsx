@@ -275,8 +275,10 @@ const ExperiencesComponent = () => {
 
   return (
     <>
-      <div className='flex justify-between items-center mb-6'>
-        <h2 className='text-2xl font-bold mb-2'>Gestione esperienze</h2>
+      <div className='xs:flex justify-between items-center mb-6'>
+        <h2 className='text-xl xs:text-2xl font-bold mb-2'>
+          Gestione esperienze
+        </h2>
         <Button
           variant='primary'
           icon={<Plus />}
@@ -289,8 +291,8 @@ const ExperiencesComponent = () => {
       </div>
 
       <div className='mb-12'>
-        <div className='flex justify-between items-center gap-4'>
-          <div className='relative grow'>
+        <div className='xs:flex justify-between items-center gap-4'>
+          <div className='relative grow max-xs:mb-4'>
             <input
               type='text'
               placeholder='Cerca esperienze...'
@@ -314,7 +316,7 @@ const ExperiencesComponent = () => {
           </Button>
         </div>
         {showFilters && (
-          <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-start items-end gap-8 mt-4'>
+          <div className='grid grid-cols-1 min-[480px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-start items-end gap-8 mt-4'>
             <div className='flex flex-col justify-start items-start gap-2'>
               <span className='font-medium text-sm'>Categoria</span>
               <select
@@ -379,7 +381,7 @@ const ExperiencesComponent = () => {
 
       <div>
         {filteredExperiences.length > 0 && (
-          <div>
+          <div className='overflow-x-auto'>
             <table className='w-full'>
               <thead>
                 <tr className='grid grid-cols-24 gap-4 border-b border-gray-400/30 pb-3'>
@@ -455,7 +457,7 @@ const ExperiencesComponent = () => {
                     </td>
 
                     <td className='col-span-4 md:col-span-3'>
-                      <div className='flex justify-end items-center gap-4 pe-3'>
+                      <div className='flex max-sm:flex-col justify-end items-center gap-4 pe-3'>
                         <Pencil
                           className='w-4 h-4 md:w-4 md:h-4 text-gray-600 cursor-pointer'
                           onClick={() => {

@@ -86,6 +86,8 @@ const VouchersPage = () => {
       if (response.ok) {
         const data = await response.json();
 
+        console.log(data);
+
         setSearchedVoucher(data.voucher);
         setVoucherCodeSearch('');
       } else {
@@ -208,6 +210,10 @@ const VouchersPage = () => {
     return today;
   };
 
+  const getMaxDate = () => {
+    return new Date(searchedVoucher.expirationDate);
+  };
+
   const isWeekday = (date) => {
     const day = date.getDay();
     return day !== 0 && day !== 6;
@@ -273,14 +279,14 @@ const VouchersPage = () => {
                 Codice Voucher
               </p>
               <form
-                className='flex justify-center items-center gap-2 mb-4'
+                className='xs:flex justify-center items-center gap-2 mb-4'
                 onSubmit={(e) => {
                   e.preventDefault();
                 }}
               >
                 <input
                   type='text'
-                  className='grow bg-background border border-gray-400/20 rounded-md px-3 py-2'
+                  className='text-xs xs:text-sm sm:text-base max-[480px]:w-full grow bg-background border border-gray-400/20 rounded-md px-3 py-2 max-[480px]:mb-4'
                   placeholder='Es. ABCD1234-EFGH5678-IJKL1234'
                   value={voucherCodeSearch}
                   onChange={(e) => {
@@ -310,6 +316,18 @@ const VouchersPage = () => {
               {searchedVoucher !== null && (
                 <div className='border border-gray-400/30 rounded-lg px-5 py-6'>
                   <h4 className='text-xl mb-2'>{searchedVoucher.title}</h4>
+
+                  <p className='text-sm text-gray-600 mb-4'>
+                    È possibile riscuotere il Voucher entro il{' '}
+                    {new Date(
+                      searchedVoucher.expirationDate
+                    ).toLocaleDateString('it-IT', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    })}
+                  </p>
+
                   <p className='text-sm text-gray-500 mb-4'>
                     Scegli una data per prenotare la tua esperienza
                   </p>
@@ -328,6 +346,7 @@ const VouchersPage = () => {
                       selected={reservationDate}
                       onChange={(date) => setReservationDate(date)}
                       minDate={getMinDate()}
+                      maxDate={getMaxDate()}
                       filterDate={isWeekday}
                       placeholderText='Seleziona una data (solo lun-ven)'
                       dateFormat='dd/MM/yyyy'
@@ -376,7 +395,7 @@ const VouchersPage = () => {
                       <div className='flex justify-between items-center gap-4 mb-2'>
                         <h4 className='text-xl'>{voucher.title}</h4>
                         <span
-                          className={`text-xs  rounded-md px-2 py-1 ${
+                          className={`max-[480px]:hidden text-xs  rounded-md px-2 py-1 ${
                             checkIsPassed(voucher.reservationDate)
                               ? 'bg-gray-300'
                               : 'bg-green-200 text-gray-600'
