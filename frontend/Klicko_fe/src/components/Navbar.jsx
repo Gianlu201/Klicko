@@ -333,11 +333,11 @@ const Navbar = () => {
             }}
           >
             {cart.experiences != undefined && cart.experiences.length > 0 && (
-              <span className='text-lg font-semibold'>
+              <span className='absolute -top-2 -end-2 bg-secondary rounded-full flex justify-center items-center w-5 h-5 text-xs text-white font-semibold'>
                 {cart.experiences.length}
               </span>
             )}
-            <ShoppingCart className='h-6 w-6' />
+            <ShoppingCart className='w-full h-full' />
           </Link>
 
           {profile?.email ? (
