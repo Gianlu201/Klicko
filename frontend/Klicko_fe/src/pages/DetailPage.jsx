@@ -14,7 +14,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Carousel from '../components/ui/Corousel';
 import Button from '../components/ui/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { cartModified } from '../redux/actions';
+import { cartModified, addExperienceToLocalCart } from '../redux/actions';
 import { toast } from 'sonner';
 
 const DetailPage = () => {
@@ -60,7 +60,7 @@ const DetailPage = () => {
           <p>{e.message}</p>
         </>
       );
-      navigate('/experiences');
+      navigate('/pageNotFound');
     }
   };
 
@@ -85,6 +85,27 @@ const DetailPage = () => {
         break;
 
       default:
+        break;
+    }
+  };
+
+  const handleAddToCart = (exp) => {
+    switch (cart.cartId !== '') {
+      case true:
+        addExperienceToCart(exp.experienceId);
+        break;
+
+      case false:
+        addExperienceToLocalCartFunction(exp);
+        break;
+
+      default:
+        toast.error(
+          <>
+            <p className='font-bold'>Errore!</p>
+            <p>Errore nell'aggiunta al carrello</p>
+          </>
+        );
         break;
     }
   };
@@ -120,6 +141,16 @@ const DetailPage = () => {
         </>
       );
     }
+  };
+
+  const addExperienceToLocalCartFunction = (experience) => {
+    dispatch(addExperienceToLocalCart(experience));
+    toast.success(
+      <>
+        <p className='font-bold'>Esperienza aggiunta al carrello!</p>
+        <p>{experience.title}</p>
+      </>
+    );
   };
 
   useEffect(() => {
@@ -348,7 +379,7 @@ const DetailPage = () => {
                   variant='primary'
                   fullWidth={true}
                   onClick={() => {
-                    addExperienceToCart(experience.experienceId);
+                    handleAddToCart(experience);
                   }}
                 >
                   Aggiungi al carrello

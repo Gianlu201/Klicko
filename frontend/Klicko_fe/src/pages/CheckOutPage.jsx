@@ -10,6 +10,7 @@ import StripeContainer from '../components/StripeContainer';
 const CheckOutPage = () => {
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [couponCode, setCouponCode] = useState('');
   const [selectedCoupon, setSelectedCoupon] = useState(null);
   const [couponError, setCouponError] = useState('');
@@ -37,6 +38,8 @@ const CheckOutPage = () => {
 
     if (!tokenObj) {
       navigate('/login');
+    } else {
+      setIsAuthenticated(true);
     }
   };
 
@@ -61,7 +64,7 @@ const CheckOutPage = () => {
     } catch (e) {
       toast.error(
         <>
-          <p className='font-bold'>Esperienza aggiunta al carrello!</p>
+          <p className='font-bold'>Errore!</p>
           <p>{e.message}</p>
         </>
       );
@@ -195,8 +198,11 @@ const CheckOutPage = () => {
 
   useEffect(() => {
     checkAuthentication();
-    getUserCart();
-  }, []);
+
+    if (isAuthenticated) {
+      getUserCart();
+    }
+  }, [isAuthenticated]);
 
   return (
     <div className='max-w-7xl mx-auto min-h-screen mt-8 px-6 xl:px-0'>
