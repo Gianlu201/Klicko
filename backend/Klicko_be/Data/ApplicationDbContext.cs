@@ -707,6 +707,7 @@ namespace Klicko_be.Data
             builder
                 .Entity<Experience>()
                 .HasData(
+                    // esperienza 1 (Ferrari Driving Experience a Monza)
                     new Experience()
                     {
                         ExperienceId = Guid.Parse("589aca9c-2b07-42d2-8920-c4406e5da977"),
@@ -734,6 +735,7 @@ namespace Klicko_be.Data
                         CoverImage = "372a18e3-7932-4ef5-8471-99ce5f3e098a.jpg",
                         ValidityInMonths = 24,
                     },
+                    // esperienza 2 (Cucina toscana nella tenuta di un castello)
                     new Experience()
                     {
                         ExperienceId = Guid.Parse("62947bc9-568c-4c34-a8e1-2fb6f05bca61"),
@@ -762,6 +764,7 @@ namespace Klicko_be.Data
                         CoverImage = "350540d5-80b9-49fa-8fb2-8a58c80d149c.jpg",
                         ValidityInMonths = 12,
                     },
+                    // esperienza 3 (Trekking sul sentiero degli Dei)
                     new Experience()
                     {
                         ExperienceId = Guid.Parse("bb36c355-2c8e-4a45-9be3-151934e2ff4c"),
@@ -790,6 +793,7 @@ namespace Klicko_be.Data
                         CoverImage = "f34f2a25-8e55-4826-8ce4-aca2a2a76c3a.jpg",
                         ValidityInMonths = 6,
                     },
+                    // esperienza 4 (Volo in mongolfiera al tramonto)
                     new Experience()
                     {
                         ExperienceId = Guid.Parse("8dc3b2f9-850b-42cc-824c-7758112b9370"),
@@ -818,6 +822,7 @@ namespace Klicko_be.Data
                         CoverImage = "b33390f8-430a-456c-b821-83a8b9406043.jpg",
                         ValidityInMonths = 8,
                     },
+                    // esperienza 5 (Tour fotografico di Venezia all'alba)
                     new Experience()
                     {
                         ExperienceId = Guid.Parse("cec8f297-d65b-485a-adc3-f015139cd0c2"),
@@ -846,6 +851,7 @@ namespace Klicko_be.Data
                         CoverImage = "280b9c0f-257e-4f05-b2db-84e704fda33d.jpg",
                         ValidityInMonths = 8,
                     },
+                    // esperienza 6 (Degustazione di vini in cantina sotterranea)
                     new Experience()
                     {
                         ExperienceId = Guid.Parse("6f236570-1625-4190-9a4f-0da2d0639386"),
@@ -873,6 +879,7 @@ namespace Klicko_be.Data
                         CoverImage = "4949849a-cc7a-4481-9c77-929fdbb71310.jpg",
                         ValidityInMonths = 12,
                     },
+                    // esperienza 7 (Rafting nelle rapide del fiume Nera)
                     new Experience()
                     {
                         ExperienceId = Guid.Parse("81c17e89-5bc3-42bb-9897-ddf27d111440"),
@@ -901,6 +908,7 @@ namespace Klicko_be.Data
                         CoverImage = "a8b9cf9c-4f8e-4e18-8413-bf5de4cb4b3c.jpg",
                         ValidityInMonths = 12,
                     },
+                    // esperienza 8 (Escursione in e-bike nei borghi del Montefeltro)
                     new Experience()
                     {
                         ExperienceId = Guid.Parse("ff3ed239-e178-4632-8385-042286991c66"),
@@ -929,6 +937,7 @@ namespace Klicko_be.Data
                         CoverImage = "5f37b647-e33d-440e-88ed-2e0d956f377a.jpg",
                         ValidityInMonths = 12,
                     },
+                    // esperienza 9 (Percorso benessere in grotta termale)
                     new Experience()
                     {
                         ExperienceId = Guid.Parse("0c94ee3c-86f3-4e83-afb2-2a753416227a"),
@@ -957,6 +966,7 @@ namespace Klicko_be.Data
                         CoverImage = "44811c06-278a-45e5-8411-717827a59107.jpg",
                         ValidityInMonths = 12,
                     },
+                    // esperienza 10 (Escursione notturna sull'Etna)
                     new Experience()
                     {
                         ExperienceId = Guid.Parse("e25b1044-5049-4ca9-954c-db76ae235862"),
@@ -982,6 +992,294 @@ namespace Klicko_be.Data
                         IsPopular = false,
                         IsDeleted = false,
                         CoverImage = "cf8e8bf0-59b5-44b2-bb5c-478b18b7f767.jpg",
+                        ValidityInMonths = 24,
+                    },
+                    // esperienza 11 (Tour in barca delle Cinque Terre)
+                    new Experience()
+                    {
+                        ExperienceId = Guid.Parse("496d119c-3629-4fba-8a34-a74d7668dd30"),
+                        Title = "Tour in barca delle Cinque Terre",
+                        CategoryId = Guid.Parse("6ACCF29D-8D1C-4EDD-B48A-C70251516B99"),
+                        Duration = "7 ore",
+                        Place = "Cinque Terre, Liguria",
+                        Price = 120,
+                        DescriptionShort = "Ammira i colorati villaggi delle Cinque Terre dal mare",
+                        Description =
+                            "Scopri la bellezza unica delle Cinque Terre dal punto di vista più suggestivo: il mare. Questo tour in barca ti porta lungo la costa della Riviera Ligure per ammirare i cinque iconici villaggi di Monterosso, Vernazza, Corniglia, Manarola e Riomaggiore, con le loro case colorate che sembrano aggrappate alle scogliere. Durante la navigazione, la guida ti racconterà la storia e le curiosità di questo territorio dichiarato Patrimonio dell'Umanità UNESCO. L'escursione include soste per fare il bagno nelle calette più belle, difficilmente raggiungibili da terra, e un pranzo a bordo con prodotti tipici locali e vino bianco delle Cinque Terre. È prevista anche una sosta in uno o due villaggi per una breve esplorazione a piedi.",
+                        MaxParticipants = 1,
+                        Organiser = "Navigazione Ligure",
+                        LoadingDate = DateTime.Parse("01/06/2023 11:00:56"),
+                        LastEditDate = DateTime.Parse("01/06/2023 11:00:56"),
+                        UserCreatorId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                        UserLastModifyId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                        IsFreeCancellable = true,
+                        IncludedDescription =
+                            "L'esperienza include tutto il necessario per goderti l'avventura in totale sicurezza e comfort.",
+                        Sale = 0,
+                        IsInEvidence = false,
+                        IsPopular = false,
+                        IsDeleted = false,
+                        CoverImage = "68233a60-a0ce-4a7c-9049-5fd6dd3981fd.jpg",
+                        ValidityInMonths = 24,
+                    },
+                    // esperienza 12 (Tour in vespa nella campagna toscana)
+                    new Experience()
+                    {
+                        ExperienceId = Guid.Parse("2d1b2f18-36ac-4cb2-acdf-354ec87a48a6"),
+                        Title = "Tour in vespa nella campagna toscana",
+                        CategoryId = Guid.Parse("6F3A957C-DF09-437C-BC37-F069173EABE2"),
+                        Duration = "8 ore",
+                        Place = "Firenze, Toscana",
+                        Price = 180,
+                        DescriptionShort =
+                            "Esplora le colline del Chianti in sella a un'icona italiana",
+                        Description =
+                            "Vivi la Toscana come nei film, guidando una Vespa d'epoca attraverso le splendide colline del Chianti. Questo tour ti offre un'esperienza autentica e indimenticabile, combinando il piacere della guida di questo iconico scooter italiano con la scoperta dei paesaggi più belli della campagna toscana. Dopo un briefing iniziale sulla guida della Vespa, partirai in un piccolo gruppo lungo strade secondarie poco trafficate, attraversando vigneti, oliveti e cipressi che caratterizzano il paesaggio. Il percorso include soste in borghi medievali caratteristici, come Greve in Chianti e Castellina, dove potrai passeggiare tra botteghe artigiane e degustare prodotti locali. A metà giornata, è previsto un pranzo in un'azienda agricola a conduzione familiare, dove gusterai piatti tradizionali toscani accompagnati dai famosi vini del Chianti. Il tour include anche una visita a una cantina storica con degustazione di vini.",
+                        MaxParticipants = 1,
+                        Organiser = "Toscana in Moto",
+                        LoadingDate = DateTime.Parse("12/06/2023 11:00:56"),
+                        LastEditDate = DateTime.Parse("12/06/2023 11:00:56"),
+                        UserCreatorId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                        UserLastModifyId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                        IsFreeCancellable = true,
+                        IncludedDescription =
+                            "L'esperienza include tutto il necessario per goderti l'avventura in totale sicurezza e comfort.",
+                        Sale = 0,
+                        IsInEvidence = false,
+                        IsPopular = false,
+                        IsDeleted = false,
+                        CoverImage = "93a1a227-6394-49fe-8ab9-b26b14cfd0e9.jpg",
+                        ValidityInMonths = 24,
+                    },
+                    // esperienza 13 (Lezione di pizza napoletana con pizzaiolo campione)
+                    new Experience()
+                    {
+                        ExperienceId = Guid.Parse("54a6579f-bfed-4f02-b30c-6bcd7931c125"),
+                        Title = "Lezione di pizza napoletana con pizzaiolo campione",
+                        CategoryId = Guid.Parse("5FDFFA0F-A615-43F2-AA15-88BC8DCEC27F"),
+                        Duration = "3 ore",
+                        Place = "Napoli, Campania",
+                        Price = 89,
+                        DescriptionShort =
+                            "Impara i segreti della vera pizza napoletana da un maestro",
+                        Description =
+                            "Diventa pizzaiolo per un giorno e apprendi l'arte della vera pizza napoletana, patrimonio UNESCO, sotto la guida di un maestro pizzaiolo campione mondiale. Questa esperienza hands-on ti permetterà di conoscere tutti i segreti di questo piatto iconico, dalla preparazione dell'impasto alla stesura, fino alla cottura nel forno a legna. La lezione inizia con una breve storia della pizza e una spiegazione degli ingredienti tradizionali, tutti di altissima qualità e a km zero. Imparerai a preparare l'impasto con la giusta idratazione, i tempi di lievitazione e la tecnica per stenderlo a mano, creando il caratteristico bordo alto della pizza napoletana. Ogni partecipante preparerà diverse pizze con vari condimenti, dalla classica Margherita alla Marinara, fino a creazioni più elaborate con ingredienti stagionali. Naturalmente, potrai gustare le pizze che preparerai, accompagnate da birra artigianale o vino locale. Al termine, riceverai un attestato di partecipazione e la ricetta originale per continuare a preparare la pizza a casa.",
+                        MaxParticipants = 1,
+                        Organiser = "Cucina Napoletana",
+                        LoadingDate = DateTime.Parse("05/07/2023 11:00:56"),
+                        LastEditDate = DateTime.Parse("05/07/2023 11:00:56"),
+                        UserCreatorId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                        UserLastModifyId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                        IsFreeCancellable = true,
+                        IncludedDescription =
+                            "L'esperienza include tutto il necessario per goderti l'avventura in totale sicurezza e comfort.",
+                        Sale = 0,
+                        IsInEvidence = false,
+                        IsPopular = false,
+                        IsDeleted = false,
+                        CoverImage = "68c11a26-bcf2-45d5-b1a4-0d230963fa9e.jpg",
+                        ValidityInMonths = 24,
+                    },
+                    // esperienza 14 (Arrampicata sulle Dolomiti)
+                    new Experience()
+                    {
+                        ExperienceId = Guid.Parse("83fe2715-9487-46b0-b5d5-eba33abd11e9"),
+                        Title = "Arrampicata sulle Dolomiti",
+                        CategoryId = Guid.Parse("1652310E-B8F3-43E7-BD9D-287F73F939B5"),
+                        Duration = "6 ore",
+                        Place = "San Martino di Castrozza, Trentino",
+                        Price = 130,
+                        DescriptionShort =
+                            "Scala le pareti verticali delle montagne più belle del mondo",
+                        Description =
+                            "Sfida te stesso con un'esperienza di arrampicata sulle Dolomiti, le spettacolari montagne dichiarate Patrimonio UNESCO. Questa avventura verticale, guidata da istruttori qualificati con anni di esperienza, ti porterà a scalare alcune delle vie più panoramiche delle Pale di San Martino. L'esperienza è personalizzata in base al tuo livello di abilità, con percorsi adatti sia ai principianti assoluti che ai climber più esperti. La giornata inizia con un briefing tecnico e la distribuzione dell'attrezzatura (imbracatura, casco, scarpette da arrampicata), seguito da una breve camminata fino alla parete. Qui l'istruttore ti insegnerà le tecniche di base o avanzate di arrampicata e sicurezza, prima di affrontare le vie selezionate. Durante l'ascensione, potrai godere di viste mozzafiato sulle valli sottostanti e sui panorami montani circostanti. L'esperienza include foto e video della tua arrampicata, che ti verranno inviate dopo l'attività.",
+                        MaxParticipants = 1,
+                        Organiser = "Alpine Guides",
+                        LoadingDate = DateTime.Parse("28/06/2023 11:00:56"),
+                        LastEditDate = DateTime.Parse("28/06/2023 11:00:56"),
+                        UserCreatorId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                        UserLastModifyId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                        IsFreeCancellable = true,
+                        IncludedDescription =
+                            "L'esperienza include tutto il necessario per goderti l'avventura in totale sicurezza e comfort.",
+                        Sale = 0,
+                        IsInEvidence = false,
+                        IsPopular = false,
+                        IsDeleted = false,
+                        CoverImage = "5523143a-02f3-44ef-abcd-5dca1aa1a42c.jpg",
+                        ValidityInMonths = 24,
+                    },
+                    // esperienza 15 (Safari fotografico in Maremma)
+                    new Experience()
+                    {
+                        ExperienceId = Guid.Parse("65a26c06-6cf5-44d0-9a14-ac8fe039fd18"),
+                        Title = "Safari fotografico in Maremma",
+                        CategoryId = Guid.Parse("1652310E-B8F3-43E7-BD9D-287F73F939B5"),
+                        Duration = "5 ore",
+                        Place = "Grosseto, Toscana",
+                        Price = 110,
+                        DescriptionShort =
+                            "Avvista e fotografa cervi, cinghiali e altri animali selvatici",
+                        Description =
+                            "Un'avventura nella natura selvaggia della Maremma toscana, alla ricerca degli animali che popolano questo territorio unico. Guidato da un esperto naturalista e fotografo professionista, esplorerai la Riserva Naturale della Maremma a bordo di un fuoristrada 4x4, addentrandoti in aree normalmente non accessibili al pubblico. Il safari inizia all'alba, quando gli animali sono più attivi, e ti porterà attraverso diversi habitat, dalle zone umide alle foreste, dalle praterie alle dune costiere. Con un po' di fortuna e pazienza, potrai avvistare e fotografare cervi maremmani, cinghiali, daini, volpi, istrici, e numerose specie di uccelli, tra cui fenicotteri e rapaci. La guida ti fornirà consigli sulla fotografia naturalistica e ti spiegherà curiosità sulla flora e fauna locali. L'esperienza include una colazione tipica toscana consumata all'aperto e un breve workshop fotografico per migliorare le tue capacità di catturare immagini di animali selvatici.",
+                        MaxParticipants = 1,
+                        Organiser = "Natura Toscana",
+                        LoadingDate = DateTime.Parse("22/04/2023 11:00:56"),
+                        LastEditDate = DateTime.Parse("22/04/2023 11:00:56"),
+                        UserCreatorId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                        UserLastModifyId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                        IsFreeCancellable = true,
+                        IncludedDescription =
+                            "L'esperienza include tutto il necessario per goderti l'avventura in totale sicurezza e comfort.",
+                        Sale = 0,
+                        IsInEvidence = false,
+                        IsPopular = false,
+                        IsDeleted = false,
+                        CoverImage = "5b23a8b9-9686-4107-b2ff-2a468167a32f.jpg",
+                        ValidityInMonths = 24,
+                    },
+                    // esperienza 16 (Teatro greco antico al tramonto)
+                    new Experience()
+                    {
+                        ExperienceId = Guid.Parse("cfa003b3-8739-415a-839f-f7ef9c86ec77"),
+                        Title = "Teatro greco antico al tramonto",
+                        CategoryId = Guid.Parse("48733FB8-DEAE-41B2-B0C6-4FAB3C45CF93"),
+                        Duration = "3 ore",
+                        Place = "Taormina, Sicilia",
+                        Price = 90,
+                        DescriptionShort =
+                            "Assisti a una tragedia greca in un teatro di 2300 anni fa",
+                        Description =
+                            "Vivi l'emozione di assistere a una rappresentazione di teatro classico greco nel maestoso Teatro Antico di Taormina, con vista sull'Etna e sul Mar Ionio. Questa esperienza culturale unica ti riporterà indietro nel tempo di 2300 anni, permettendoti di apprezzare le opere di Eschilo, Sofocle o Euripide nello stesso tipo di ambientazione per cui furono scritte. Lo spettacolo inizia al tramonto, quando le luci naturali creano un'atmosfera magica e suggestiva sul palcoscenico. Prima della rappresentazione, parteciperai a un tour guidato esclusivo del teatro, normalmente non accessibile al pubblico, in cui l'archeologo ti illustrerà la storia e i segreti di questo monumento, spiegando l'acustica perfetta e le tecniche teatrali dell'antica Grecia. Il pacchetto include posti riservati nelle prime file, un programma dettagliato con traduzione in italiano del testo originale greco, e un calice di vino dell'Etna da degustare durante l'intervallo, mentre il cielo si colora di rosso e il vulcano si staglia all'orizzonte.",
+                        MaxParticipants = 1,
+                        Organiser = "Sicilia Culturale",
+                        LoadingDate = DateTime.Parse("15/05/2023 11:00:56"),
+                        LastEditDate = DateTime.Parse("15/05/2023 11:00:56"),
+                        UserCreatorId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                        UserLastModifyId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                        IsFreeCancellable = true,
+                        IncludedDescription =
+                            "L'esperienza include tutto il necessario per goderti l'avventura in totale sicurezza e comfort.",
+                        Sale = 0,
+                        IsInEvidence = false,
+                        IsPopular = false,
+                        IsDeleted = false,
+                        CoverImage = "df4ae3d4-162f-4c80-85c9-c7fad7ff62b1.jpg",
+                        ValidityInMonths = 24,
+                    },
+                    // esperienza 17 (Visita agli scavi di Pompei con archeologo)
+                    new Experience()
+                    {
+                        ExperienceId = Guid.Parse("89735a17-1395-45a9-a05a-f7d01647c329"),
+                        Title = "Visita agli scavi di Pompei con archeologo",
+                        CategoryId = Guid.Parse("48733FB8-DEAE-41B2-B0C6-4FAB3C45CF93"),
+                        Duration = "3 ore",
+                        Place = "Pompei, Campania",
+                        Price = 120,
+                        DescriptionShort =
+                            "Esplora la città romana sepolta dall'eruzione del Vesuvio",
+                        Description =
+                            "Scopri i segreti di Pompei, la città romana perfettamente conservata sotto le ceneri dell'eruzione del Vesuvio del 79 d.C., con una visita guidata esclusiva da un archeologo che ha partecipato agli scavi. Questo tour privato ti permetterà di accedere ad aree normalmente chiuse al pubblico e di comprendere in profondità la vita quotidiana dei romani, grazie alle spiegazioni dettagliate di un esperto del settore. La visita inizia dalle terme pubbliche e prosegue attraverso il foro, i teatri, le case patrizie riccamente decorate con affreschi e mosaici, fino ai lupanari e alle botteghe, ricostruendo la vita di diverse classi sociali dell'epoca. L'archeologo ti mostrerà i calchi in gesso delle vittime, spiegando le tecniche di scavo e conservazione, e ti illustrerà le ultime scoperte avvenute nel sito. Durante il tour, potrai fare tutte le domande che desideri all'esperto, che condividerà anche aneddoti e curiosità legati al suo lavoro negli scavi. L'esperienza include l'ingresso prioritario senza attesa in coda e un libro fotografico su Pompei come ricordo.",
+                        MaxParticipants = 1,
+                        Organiser = "Archeologia Viva",
+                        LoadingDate = DateTime.Parse("28/03/2023 11:00:56"),
+                        LastEditDate = DateTime.Parse("28/03/2023 11:00:56"),
+                        UserCreatorId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                        UserLastModifyId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                        IsFreeCancellable = true,
+                        IncludedDescription =
+                            "L'esperienza include tutto il necessario per goderti l'avventura in totale sicurezza e comfort.",
+                        Sale = 0,
+                        IsInEvidence = false,
+                        IsPopular = false,
+                        IsDeleted = false,
+                        CoverImage = "9b5946b1-66a5-4e0a-89fb-0c0f026c5431.jpg",
+                        ValidityInMonths = 24,
+                    },
+                    // esperienza 18 (Tour in gondola al tramonto con serenata)
+                    new Experience()
+                    {
+                        ExperienceId = Guid.Parse("ecea3c10-0179-4127-8953-52b375cdca63"),
+                        Title = "Tour in gondola al tramonto con serenata",
+                        CategoryId = Guid.Parse("7F13B386-B8AF-4ED1-B42B-845E17F657C3"),
+                        Duration = "1 ore",
+                        Place = "Venezia, Veneto",
+                        Price = 250,
+                        DescriptionShort =
+                            "Naviga i canali di Venezia al tramonto con musica dal vivo",
+                        Description =
+                            "Lasciati trasportare dalla magia di Venezia con un romantico tour in gondola al tramonto, accompagnato da una tradizionale serenata italiana eseguita dal vivo. Questa esperienza esclusiva ti permetterà di navigare i pittoreschi canali della Serenissima, passando sotto ponti storici e ammirando palazzi aristocratici, mentre il sole cala tingendo di rosa e oro i marmi e l'acqua della laguna. La tua gondola privata sarà guidata da un gondoliere esperto in costume tradizionale, che ti racconterà aneddoti e curiosità sulla città e sulla sua professione secolare. A bordo, un musicista professionista (fisarmonica o chitarra) e un cantante lirico eseguiranno per te classiche canzoni italiane e arie d'opera famose, creando un'atmosfera indimenticabile. Il tour parte dal Canal Grande e si addentra nei canali minori, lontano dalla folla, per regalarti scorci autentici e tranquilli della città. L'esperienza include una bottiglia di prosecco da sorseggiare durante il tragitto e si conclude con una rosa per la tua accompagnatrice.",
+                        MaxParticipants = 2,
+                        Organiser = "Venezia Autentica",
+                        LoadingDate = DateTime.Parse("15/07/2023 11:00:56"),
+                        LastEditDate = DateTime.Parse("15/07/2023 11:00:56"),
+                        UserCreatorId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                        UserLastModifyId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                        IsFreeCancellable = true,
+                        IncludedDescription =
+                            "L'esperienza include tutto il necessario per goderti l'avventura in totale sicurezza e comfort.",
+                        Sale = 0,
+                        IsInEvidence = false,
+                        IsPopular = false,
+                        IsDeleted = false,
+                        CoverImage = "b3a2b770-e6b4-44e0-aa25-15d7447d1200.jpg",
+                        ValidityInMonths = 24,
+                    },
+                    // esperienza 19 (Caccia al tartufo con cani addestrati)
+                    new Experience()
+                    {
+                        ExperienceId = Guid.Parse("811c0a6f-5e99-4ad6-99b8-6b127cd8a665"),
+                        Title = "Caccia al tartufo con cani addestrati",
+                        CategoryId = Guid.Parse("5FDFFA0F-A615-43F2-AA15-88BC8DCEC27F"),
+                        Duration = "6 ore",
+                        Place = "Norcia, Umbria",
+                        Price = 125,
+                        DescriptionShort = "Cerca il prezioso fungo ipogeo nelle foreste umbre",
+                        Description =
+                            "Immergiti nell'antica tradizione della ricerca del tartufo, accompagnando un tartufaio esperto e i suoi cani addestrati in un'escursione nei boschi dell'Umbria. Questa esperienza autentica ti permetterà di scoprire i segreti di una pratica riconosciuta dall'UNESCO come patrimonio immateriale dell'umanità. L'avventura inizia all'alba, quando il tartufaio ti accoglierà nella sua casa per una colazione con prodotti locali e ti presenterà i suoi fedeli compagni a quattro zampe, spiegandoti come vengono addestrati fin da cuccioli a riconoscere il profumo del tartufo. Ti forniranno gli stivali e un vanghetto, per poi avviarti nei boschi di querce e noccioli dove crescono i preziosi tartufi neri o bianchi (a seconda della stagione). Osserverai da vicino come i cani, con il loro fiuto eccezionale, individuano il punto esatto dove scavare e come il tartufaio estrae con cura il fungo dal terreno, preservando il micelio per le future produzioni. Al termine della ricerca, verrai accompagnato in un ristorante locale dove lo chef preparerà un pranzo completo utilizzando i tartufi appena trovati, accompagnato dai migliori vini umbri. L'esperienza include un barattolo di pasta al tartufo da portare a casa come ricordo.",
+                        MaxParticipants = 1,
+                        Organiser = "Tesori dell'Umbria",
+                        LoadingDate = DateTime.Parse("05/10/2023 11:00:56"),
+                        LastEditDate = DateTime.Parse("05/10/2023 11:00:56"),
+                        UserCreatorId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                        UserLastModifyId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                        IsFreeCancellable = true,
+                        IncludedDescription =
+                            "L'esperienza include tutto il necessario per goderti l'avventura in totale sicurezza e comfort.",
+                        Sale = 0,
+                        IsInEvidence = false,
+                        IsPopular = false,
+                        IsDeleted = false,
+                        CoverImage = "ec367062-0089-4605-9646-5c52baaff96e.jpg",
+                        ValidityInMonths = 24,
+                    },
+                    // esperienza 20 (Immersione tra i relitti della Seconda Guerra Mondiale)
+                    new Experience()
+                    {
+                        ExperienceId = Guid.Parse("9b4668d9-563c-4699-9285-0ce01fa0e86a"),
+                        Title = "Immersione tra i relitti della Seconda Guerra Mondiale",
+                        CategoryId = Guid.Parse("6ACCF29D-8D1C-4EDD-B48A-C70251516B99"),
+                        Duration = "8 ore",
+                        Place = "Isola d'Elba, Toscana",
+                        Price = 180,
+                        DescriptionShort =
+                            "Esplora navi e aerei militari sommersi nel Mar Mediterraneo",
+                        Description =
+                            "Un'avventura subacquea unica per esplorare i relitti storici della Seconda Guerra Mondiale adagiati sui fondali del Mar Tirreno. Questa esperienza, guidata da istruttori specializzati in immersioni su relitti, ti porterà alla scoperta di navi militari, mercantili e aerei da guerra perfettamente conservati nelle acque cristalline al largo dell'Isola d'Elba. L'escursione inizia al mattino con un briefing dettagliato sulla storia dei relitti che visiterai, sulle loro caratteristiche e sulle tecniche di immersione in sicurezza. A bordo di un'imbarcazione attrezzata per le immersioni, raggiungerai il punto di interesse, dove potrai esplorare relitti come il mercantile KT, affondato nel 1943, o i resti di un bombardiere americano B-24, immersi in un ecosistema marino rigoglioso che ha colonizzato le strutture metalliche. Durante l'immersione, la guida ti mostrerà i dettagli più interessanti di questi reperti storici, come la sala macchine, il ponte di comando o i portelli dei siluri. L'esperienza prevede due immersioni in siti diversi, con una pausa pranzo a bordo dell'imbarcazione. Al termine, riceverai un attestato di partecipazione e un reportage fotografico dell'immersione. Requisito necessario: essere in possesso di un brevetto subacqueo Advanced Open Water o equivalente.",
+                        MaxParticipants = 1,
+                        Organiser = "Dive History",
+                        LoadingDate = DateTime.Parse("25/05/2023 11:00:56"),
+                        LastEditDate = DateTime.Parse("25/05/2023 11:00:56"),
+                        UserCreatorId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                        UserLastModifyId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                        IsFreeCancellable = true,
+                        IncludedDescription =
+                            "L'esperienza include tutto il necessario per goderti l'avventura in totale sicurezza e comfort.",
+                        Sale = 0,
+                        IsInEvidence = false,
+                        IsPopular = false,
+                        IsDeleted = false,
+                        CoverImage = "10e151bb-bcf2-4b5e-9de4-b5b27fbd1036.jpg",
                         ValidityInMonths = 24,
                     }
                 );
@@ -1299,6 +1597,316 @@ namespace Klicko_be.Data
                         CarryWithId = Guid.Parse("e90eb389-a733-4917-8c57-24bfbd072dc4"),
                         Name = "Acqua",
                         ExperienceId = Guid.Parse("e25b1044-5049-4ca9-954c-db76ae235862"),
+                    },
+                    // esperienza 11 (Tour in barca delle Cinque Terre)
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("967d6d6f-f4f5-45b6-971a-2bc96cfc970a"),
+                        Name = "Abbigliamento comodo",
+                        ExperienceId = Guid.Parse("496d119c-3629-4fba-8a34-a74d7668dd30"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("39fc5e4e-42c8-45dc-8412-7718ed2c3762"),
+                        Name = "Scarpe adatte all'attività",
+                        ExperienceId = Guid.Parse("496d119c-3629-4fba-8a34-a74d7668dd30"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("e2aa3ea4-4387-4f80-90df-c6527a217869"),
+                        Name = "Documento d'identità",
+                        ExperienceId = Guid.Parse("496d119c-3629-4fba-8a34-a74d7668dd30"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("87f70607-bfab-46f0-988b-20a7e42c55ac"),
+                        Name = "Macchina fotografica (opzionale)",
+                        ExperienceId = Guid.Parse("496d119c-3629-4fba-8a34-a74d7668dd30"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("65b2065f-34ab-4a9d-a83a-aef299fde5d5"),
+                        Name = "Acqua",
+                        ExperienceId = Guid.Parse("496d119c-3629-4fba-8a34-a74d7668dd30"),
+                    },
+                    // esperienza 12 (Tour in vespa nella campagna toscana)
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("1b761e61-ff60-4730-acc6-ce4fb3613ab4"),
+                        Name = "Abbigliamento comodo",
+                        ExperienceId = Guid.Parse("2d1b2f18-36ac-4cb2-acdf-354ec87a48a6"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("e87d8136-db50-4e14-b04e-3b0890d47b31"),
+                        Name = "Scarpe adatte all'attività",
+                        ExperienceId = Guid.Parse("2d1b2f18-36ac-4cb2-acdf-354ec87a48a6"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("d776ef24-0fa2-4bd3-a693-8468da64aac9"),
+                        Name = "Documento d'identità",
+                        ExperienceId = Guid.Parse("2d1b2f18-36ac-4cb2-acdf-354ec87a48a6"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("b242290d-8ce3-49d3-bff7-01b7f6c40b2b"),
+                        Name = "Macchina fotografica (opzionale)",
+                        ExperienceId = Guid.Parse("2d1b2f18-36ac-4cb2-acdf-354ec87a48a6"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("dd9587fd-6e3f-4a32-88e3-39291155c3c8"),
+                        Name = "Acqua",
+                        ExperienceId = Guid.Parse("2d1b2f18-36ac-4cb2-acdf-354ec87a48a6"),
+                    },
+                    // esperienza 13 (Lezione di pizza napoletana con pizzaiolo campione)
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("c7dcca56-a4f8-42a6-8091-718944a2163c"),
+                        Name = "Abbigliamento comodo",
+                        ExperienceId = Guid.Parse("54a6579f-bfed-4f02-b30c-6bcd7931c125"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("7dfb84a9-3798-4fce-ad7c-bfe60abb74b8"),
+                        Name = "Scarpe adatte all'attività",
+                        ExperienceId = Guid.Parse("54a6579f-bfed-4f02-b30c-6bcd7931c125"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("3b853054-0002-478d-a8d9-387e92a6e44c"),
+                        Name = "Documento d'identità",
+                        ExperienceId = Guid.Parse("54a6579f-bfed-4f02-b30c-6bcd7931c125"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("6c3395e2-bbeb-420b-bbfd-c22f822ed11e"),
+                        Name = "Macchina fotografica (opzionale)",
+                        ExperienceId = Guid.Parse("54a6579f-bfed-4f02-b30c-6bcd7931c125"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("ee348b02-77df-4d20-ab9f-f456c0dbb1f0"),
+                        Name = "Acqua",
+                        ExperienceId = Guid.Parse("54a6579f-bfed-4f02-b30c-6bcd7931c125"),
+                    },
+                    // esperienza 14 (Arrampicata sulle Dolomiti)
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("cc6c0540-3ad0-46a9-b75d-16d505f6e2e4"),
+                        Name = "Abbigliamento comodo",
+                        ExperienceId = Guid.Parse("83fe2715-9487-46b0-b5d5-eba33abd11e9"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("a1761613-4056-4ca9-84ed-3de05cb7827c"),
+                        Name = "Scarpe adatte all'attività",
+                        ExperienceId = Guid.Parse("83fe2715-9487-46b0-b5d5-eba33abd11e9"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("f4f28288-636e-4660-ac81-483be912d4f1"),
+                        Name = "Documento d'identità",
+                        ExperienceId = Guid.Parse("83fe2715-9487-46b0-b5d5-eba33abd11e9"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("2f553589-bac0-4a7f-a245-7a0d528c6573"),
+                        Name = "Macchina fotografica (opzionale)",
+                        ExperienceId = Guid.Parse("83fe2715-9487-46b0-b5d5-eba33abd11e9"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("9bfe1a7a-4a3a-4a17-801e-a071c5a70361"),
+                        Name = "Acqua",
+                        ExperienceId = Guid.Parse("83fe2715-9487-46b0-b5d5-eba33abd11e9"),
+                    },
+                    // esperienza 15 (Safari fotografico in Maremma)
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("9ea9e04b-9fb7-41a2-a9b1-76e23f0ef97c"),
+                        Name = "Abbigliamento comodo",
+                        ExperienceId = Guid.Parse("65a26c06-6cf5-44d0-9a14-ac8fe039fd18"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("3a0c8fb7-1794-4233-8d03-f65419d22648"),
+                        Name = "Scarpe adatte all'attività",
+                        ExperienceId = Guid.Parse("65a26c06-6cf5-44d0-9a14-ac8fe039fd18"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("41d7915f-74e1-41b8-b20b-49282d149a0a"),
+                        Name = "Documento d'identità",
+                        ExperienceId = Guid.Parse("65a26c06-6cf5-44d0-9a14-ac8fe039fd18"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("ca9314a7-aaa7-4eb9-ba96-5fb79448f763"),
+                        Name = "Macchina fotografica (opzionale)",
+                        ExperienceId = Guid.Parse("65a26c06-6cf5-44d0-9a14-ac8fe039fd18"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("4671f2cb-60e1-41fa-81da-2b4cbfa203a7"),
+                        Name = "Acqua",
+                        ExperienceId = Guid.Parse("65a26c06-6cf5-44d0-9a14-ac8fe039fd18"),
+                    },
+                    // esperienza 16 (Teatro greco antico al tramonto)
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("339a7c4f-71db-4c13-9c9d-b678b2ccaf76"),
+                        Name = "Abbigliamento comodo",
+                        ExperienceId = Guid.Parse("cfa003b3-8739-415a-839f-f7ef9c86ec77"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("112e26dc-ef17-4168-bcdf-cc6e268f9d95"),
+                        Name = "Scarpe adatte all'attività",
+                        ExperienceId = Guid.Parse("cfa003b3-8739-415a-839f-f7ef9c86ec77"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("7cf387a9-01fc-46c1-9fb3-19c09ed61884"),
+                        Name = "Documento d'identità",
+                        ExperienceId = Guid.Parse("cfa003b3-8739-415a-839f-f7ef9c86ec77"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("18994487-ba73-42ed-bd80-48fd3dfa3df0"),
+                        Name = "Macchina fotografica (opzionale)",
+                        ExperienceId = Guid.Parse("cfa003b3-8739-415a-839f-f7ef9c86ec77"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("7fc7077e-779c-4eec-ae5c-f642d9685b15"),
+                        Name = "Acqua",
+                        ExperienceId = Guid.Parse("cfa003b3-8739-415a-839f-f7ef9c86ec77"),
+                    },
+                    // esperienza 17 (Visita agli scavi di Pompei con archeologo)
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("e179f003-23b8-4714-9d3c-d911f9b19cf0"),
+                        Name = "Abbigliamento comodo",
+                        ExperienceId = Guid.Parse("89735a17-1395-45a9-a05a-f7d01647c329"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("e4cc19b6-e764-4bee-a931-ea4118a3684e"),
+                        Name = "Scarpe adatte all'attività",
+                        ExperienceId = Guid.Parse("89735a17-1395-45a9-a05a-f7d01647c329"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("3f07f4ae-d6a8-4863-ab37-2fad83952f9a"),
+                        Name = "Documento d'identità",
+                        ExperienceId = Guid.Parse("89735a17-1395-45a9-a05a-f7d01647c329"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("d2d39432-5c69-4c6c-a21b-498c55792708"),
+                        Name = "Macchina fotografica (opzionale)",
+                        ExperienceId = Guid.Parse("89735a17-1395-45a9-a05a-f7d01647c329"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("2a29efe4-a786-472c-8696-1b41c183d5cc"),
+                        Name = "Acqua",
+                        ExperienceId = Guid.Parse("89735a17-1395-45a9-a05a-f7d01647c329"),
+                    },
+                    // esperienza 18 (Tour in gondola al tramonto con serenata)
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("2a5766d0-8207-4c27-8569-b4d6fe09ea56"),
+                        Name = "Abbigliamento comodo",
+                        ExperienceId = Guid.Parse("ecea3c10-0179-4127-8953-52b375cdca63"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("08a1412a-0b48-4917-9f3a-ee1f900207f0"),
+                        Name = "Scarpe adatte all'attività",
+                        ExperienceId = Guid.Parse("ecea3c10-0179-4127-8953-52b375cdca63"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("ea349b5b-5dc5-4d56-9d9c-36f776dbe2c3"),
+                        Name = "Documento d'identità",
+                        ExperienceId = Guid.Parse("ecea3c10-0179-4127-8953-52b375cdca63"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("751a3067-da26-4bbf-8dfd-d688de8078ac"),
+                        Name = "Macchina fotografica (opzionale)",
+                        ExperienceId = Guid.Parse("ecea3c10-0179-4127-8953-52b375cdca63"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("fa647bce-8939-4618-8d99-5432d12c5bf1"),
+                        Name = "Acqua",
+                        ExperienceId = Guid.Parse("ecea3c10-0179-4127-8953-52b375cdca63"),
+                    },
+                    // esperienza 19 (Caccia al tartufo con cani addestrati)
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("bea4bfa2-3f89-42fd-9074-9aea2c4cac34"),
+                        Name = "Abbigliamento comodo",
+                        ExperienceId = Guid.Parse("811c0a6f-5e99-4ad6-99b8-6b127cd8a665"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("90df94c4-8281-46f7-97de-357044e18877"),
+                        Name = "Scarpe adatte all'attività",
+                        ExperienceId = Guid.Parse("811c0a6f-5e99-4ad6-99b8-6b127cd8a665"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("9e61d200-f670-4b5c-ba28-64a7ed1b63e4"),
+                        Name = "Documento d'identità",
+                        ExperienceId = Guid.Parse("811c0a6f-5e99-4ad6-99b8-6b127cd8a665"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("f282cc6a-1c66-4a00-8e20-0e722a954254"),
+                        Name = "Macchina fotografica (opzionale)",
+                        ExperienceId = Guid.Parse("811c0a6f-5e99-4ad6-99b8-6b127cd8a665"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("710cd42f-ed8d-4fc0-8174-addb9807dc29"),
+                        Name = "Acqua",
+                        ExperienceId = Guid.Parse("811c0a6f-5e99-4ad6-99b8-6b127cd8a665"),
+                    },
+                    // esperienza 20 (Immersione tra i relitti della Seconda Guerra Mondiale)
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("81da796b-adec-4023-b39d-017d9adfaca9"),
+                        Name = "Abbigliamento comodo",
+                        ExperienceId = Guid.Parse("9b4668d9-563c-4699-9285-0ce01fa0e86a"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("7e6b3dc0-a425-42e0-b8b7-2e9a27ddc342"),
+                        Name = "Scarpe adatte all'attività",
+                        ExperienceId = Guid.Parse("9b4668d9-563c-4699-9285-0ce01fa0e86a"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("dfc0f099-4e30-4cef-a667-7aed81f44e24"),
+                        Name = "Documento d'identità",
+                        ExperienceId = Guid.Parse("9b4668d9-563c-4699-9285-0ce01fa0e86a"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("eda27243-f2b3-449c-b0bd-21aeca92729a"),
+                        Name = "Macchina fotografica (opzionale)",
+                        ExperienceId = Guid.Parse("9b4668d9-563c-4699-9285-0ce01fa0e86a"),
+                    },
+                    new CarryWith()
+                    {
+                        CarryWithId = Guid.Parse("e4381c78-a607-4b61-8eaa-fa65559a9e2c"),
+                        Name = "Acqua",
+                        ExperienceId = Guid.Parse("9b4668d9-563c-4699-9285-0ce01fa0e86a"),
                     }
                 );
 
@@ -1625,6 +2233,326 @@ namespace Klicko_be.Data
                         ImageId = Guid.Parse("ed5a4c3e-d0b2-4f75-a1e4-825ebe7a748d"),
                         Url = "39f57bd8-d2db-4d9e-8674-16d015703285.jpg",
                         ExperienceId = Guid.Parse("e25b1044-5049-4ca9-954c-db76ae235862"),
+                    },
+                    // esperienza 11 (Tour in barca delle Cinque Terre)
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("da5a3a00-dd62-43ff-a270-7097112aa2ce"),
+                        Url = "68233a60-a0ce-4a7c-9049-5fd6dd3981fd.jpg",
+                        ExperienceId = Guid.Parse("496d119c-3629-4fba-8a34-a74d7668dd30"),
+                        IsCover = true,
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("9f54492c-1d9b-41e5-9188-b8ae001f51f8"),
+                        Url = "2d915949-80ea-418f-b0c0-9289649a23fb.jpg",
+                        ExperienceId = Guid.Parse("496d119c-3629-4fba-8a34-a74d7668dd30"),
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("de4802b6-241c-4ff0-a55f-c99f4f7f2e40"),
+                        Url = "df489691-eb03-4349-b883-2d5a4dde6a5b.jpg",
+                        ExperienceId = Guid.Parse("496d119c-3629-4fba-8a34-a74d7668dd30"),
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("02760cb8-188e-45e7-b1d3-23915bcdf8c0"),
+                        Url = "3976d87d-f989-4b01-9bb4-142ce3aeeddc.jpg",
+                        ExperienceId = Guid.Parse("496d119c-3629-4fba-8a34-a74d7668dd30"),
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("a1a38ff8-f33b-4d1d-a56a-d261a295d193"),
+                        Url = "c69fbb13-5901-41a2-99cd-7ad97aa38b71.jpg",
+                        ExperienceId = Guid.Parse("496d119c-3629-4fba-8a34-a74d7668dd30"),
+                    },
+                    // esperienza 12 (Tour in vespa nella campagna toscana)
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("d73e199a-4571-4f44-be14-0e21e974cad1"),
+                        Url = "93a1a227-6394-49fe-8ab9-b26b14cfd0e9.jpg",
+                        ExperienceId = Guid.Parse("2d1b2f18-36ac-4cb2-acdf-354ec87a48a6"),
+                        IsCover = true,
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("f9ed17d7-65c5-479a-9e5b-1920ffc15b96"),
+                        Url = "405ae9ad-45fe-4521-9848-321c8fb58d8b.jpg",
+                        ExperienceId = Guid.Parse("2d1b2f18-36ac-4cb2-acdf-354ec87a48a6"),
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("69353e06-bc49-40ec-a279-867b42d40b8c"),
+                        Url = "b5d197de-6293-4af3-9972-88549eadb931.jpg",
+                        ExperienceId = Guid.Parse("2d1b2f18-36ac-4cb2-acdf-354ec87a48a6"),
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("f1d34714-981d-47fa-8702-934af9d397fe"),
+                        Url = "3fc5eb25-7afd-4227-b1ea-730b2bb720a2.jpg",
+                        ExperienceId = Guid.Parse("2d1b2f18-36ac-4cb2-acdf-354ec87a48a6"),
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("ab5a6dbb-4967-4d68-837f-161e4a5a6cc0"),
+                        Url = "afcedc45-49e0-497f-8f64-a9f819427332.jpg",
+                        ExperienceId = Guid.Parse("2d1b2f18-36ac-4cb2-acdf-354ec87a48a6"),
+                    },
+                    // esperienza 13 (Lezione di pizza napoletana con pizzaiolo campione)
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("de492261-06bc-460b-8b28-47efcdc2a3d0"),
+                        Url = "68c11a26-bcf2-45d5-b1a4-0d230963fa9e.jpg",
+                        ExperienceId = Guid.Parse("54a6579f-bfed-4f02-b30c-6bcd7931c125"),
+                        IsCover = true,
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("d6093aca-5a60-469a-b5a8-9434d1c885b1"),
+                        Url = "a100ad0c-2ace-44c1-b62b-6d15323db7ed.jpg",
+                        ExperienceId = Guid.Parse("54a6579f-bfed-4f02-b30c-6bcd7931c125"),
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("a08032ed-af65-4e40-a2cd-867ca6eb0532"),
+                        Url = "88e11d00-53a4-4ecf-ba99-c066795d2e6d.jpg",
+                        ExperienceId = Guid.Parse("54a6579f-bfed-4f02-b30c-6bcd7931c125"),
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("3d354b63-76ab-4129-9254-4e581144e3c9"),
+                        Url = "e60def66-9d33-4c35-9592-4c862a600d4c.jpg",
+                        ExperienceId = Guid.Parse("54a6579f-bfed-4f02-b30c-6bcd7931c125"),
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("708f771a-5a0e-4269-814c-ef8eed59f552"),
+                        Url = "ffd72d54-ed4c-44aa-99fe-616d5479e28d.jpg",
+                        ExperienceId = Guid.Parse("54a6579f-bfed-4f02-b30c-6bcd7931c125"),
+                    },
+                    // esperienza 14 (Arrampicata sulle Dolomiti)
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("f97ab381-8918-426d-b957-3953c5c107c8"),
+                        Url = "5523143a-02f3-44ef-abcd-5dca1aa1a42c.jpg",
+                        ExperienceId = Guid.Parse("83fe2715-9487-46b0-b5d5-eba33abd11e9"),
+                        IsCover = true,
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("4467d7a3-de94-4811-a128-adaaca0d035e"),
+                        Url = "77153e1e-fc9b-40aa-8519-0ff9b3ed9ca0.jpg",
+                        ExperienceId = Guid.Parse("83fe2715-9487-46b0-b5d5-eba33abd11e9"),
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("14937ac5-c939-4b80-bd70-3dbb5ecaac6b"),
+                        Url = "ba97f13b-604b-456f-b0bb-4200d2dd7995.jpg",
+                        ExperienceId = Guid.Parse("83fe2715-9487-46b0-b5d5-eba33abd11e9"),
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("faebb06d-d414-4e97-80ba-c6f1fc2ab037"),
+                        Url = "7fcd07d1-4b17-43f7-843e-c72f032d3915.jpg",
+                        ExperienceId = Guid.Parse("83fe2715-9487-46b0-b5d5-eba33abd11e9"),
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("55ce80cb-319e-4be1-9089-361bb69ebb32"),
+                        Url = "9a59397d-0379-4e27-9b4d-89e2bcbbb925.jpg",
+                        ExperienceId = Guid.Parse("83fe2715-9487-46b0-b5d5-eba33abd11e9"),
+                    },
+                    // esperienza 15 (Safari fotografico in Maremma)
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("48522876-284f-40fd-a58c-9dcf12e631e2"),
+                        Url = "5b23a8b9-9686-4107-b2ff-2a468167a32f.jpg",
+                        ExperienceId = Guid.Parse("65a26c06-6cf5-44d0-9a14-ac8fe039fd18"),
+                        IsCover = true,
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("f5f47f39-7d77-4d3f-93cc-81b8893637c5"),
+                        Url = "f5ed7681-ef67-463b-b248-bd546efa2851.jpg",
+                        ExperienceId = Guid.Parse("65a26c06-6cf5-44d0-9a14-ac8fe039fd18"),
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("135cab9b-66ed-47be-864a-72c17480cc7b"),
+                        Url = "e7cbe4a6-8ad2-4c4e-8075-02fe04a2a357.jpg",
+                        ExperienceId = Guid.Parse("65a26c06-6cf5-44d0-9a14-ac8fe039fd18"),
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("ea1cd1ad-6483-46cb-8a40-b64a214b4ede"),
+                        Url = "16bc5db5-02da-4f1a-b7bb-2075bf721192.jpg",
+                        ExperienceId = Guid.Parse("65a26c06-6cf5-44d0-9a14-ac8fe039fd18"),
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("030e64db-93ff-4fab-b16b-50677f5f1723"),
+                        Url = "47613ec5-8192-4e37-acd3-c2302aa54386.jpg",
+                        ExperienceId = Guid.Parse("65a26c06-6cf5-44d0-9a14-ac8fe039fd18"),
+                    },
+                    // esperienza 16 (Teatro greco antico al tramonto)
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("4ad0d7f1-a48b-468e-9008-9739cb88628c"),
+                        Url = "df4ae3d4-162f-4c80-85c9-c7fad7ff62b1.jpg",
+                        ExperienceId = Guid.Parse("cfa003b3-8739-415a-839f-f7ef9c86ec77"),
+                        IsCover = true,
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("b076d62a-8371-4d03-8621-05885a55019f"),
+                        Url = "592aafe4-0353-4241-8c8a-174016c69eca.jpg",
+                        ExperienceId = Guid.Parse("cfa003b3-8739-415a-839f-f7ef9c86ec77"),
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("076617b2-f4bd-439e-bb57-67633ba31448"),
+                        Url = "40192c2c-1a68-4130-b243-1cf07cc48b47.jpg",
+                        ExperienceId = Guid.Parse("cfa003b3-8739-415a-839f-f7ef9c86ec77"),
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("3e3aaed4-9339-4a10-a999-df8584314cdc"),
+                        Url = "b696408f-529b-4d0b-938c-41661b206963.jpg",
+                        ExperienceId = Guid.Parse("cfa003b3-8739-415a-839f-f7ef9c86ec77"),
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("72ce9611-d5d0-4b95-98b7-cdf95c5410c9"),
+                        Url = "eff526a7-d751-49d9-b0a9-cc99abcbc08d.jpg",
+                        ExperienceId = Guid.Parse("cfa003b3-8739-415a-839f-f7ef9c86ec77"),
+                    },
+                    // esperienza 17 (Visita agli scavi di Pompei con archeologo)
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("c78ffe71-6d43-40f6-a2da-481c74714868"),
+                        Url = "9b5946b1-66a5-4e0a-89fb-0c0f026c5431.jpg",
+                        ExperienceId = Guid.Parse("89735a17-1395-45a9-a05a-f7d01647c329"),
+                        IsCover = true,
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("c507473a-9840-4fad-88bb-b7baf3a08fb4"),
+                        Url = "a1673708-5047-4d35-b6a1-1d46c4ea2efd.jpg",
+                        ExperienceId = Guid.Parse("89735a17-1395-45a9-a05a-f7d01647c329"),
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("f3d82ae3-6eed-4cfc-a9c9-180c2cb0e8d0"),
+                        Url = "3e4dca19-d4dd-437f-bc48-b6adba3f25b1.jpg",
+                        ExperienceId = Guid.Parse("89735a17-1395-45a9-a05a-f7d01647c329"),
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("86d5507a-b6e5-445f-ae5a-748b7c755461"),
+                        Url = "1d5d2358-ae0c-444b-b383-7d46a28bfa66.jpg",
+                        ExperienceId = Guid.Parse("89735a17-1395-45a9-a05a-f7d01647c329"),
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("eef6391d-67ef-4328-850b-ae4039c6097f"),
+                        Url = "07ef8733-e588-48b6-bfb9-e4258e61972d.jpg",
+                        ExperienceId = Guid.Parse("89735a17-1395-45a9-a05a-f7d01647c329"),
+                    },
+                    // esperienza 18 (Tour in gondola al tramonto con serenata)
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("6e2b4f81-65c8-43aa-923b-f140474e3fba"),
+                        Url = "b3a2b770-e6b4-44e0-aa25-15d7447d1200.jpg",
+                        ExperienceId = Guid.Parse("ecea3c10-0179-4127-8953-52b375cdca63"),
+                        IsCover = true,
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("1c559da5-69ea-450e-913a-ef0bb9a89a32"),
+                        Url = "2bd97348-3fe1-4c23-b577-bdde99af91f6.jpg",
+                        ExperienceId = Guid.Parse("ecea3c10-0179-4127-8953-52b375cdca63"),
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("736a7154-cd0e-4c5d-8edb-e7541cb656df"),
+                        Url = "53b93388-64ee-4cf7-89fd-b0af5a446239.jpg",
+                        ExperienceId = Guid.Parse("ecea3c10-0179-4127-8953-52b375cdca63"),
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("f42211a7-99ca-47eb-8404-c502bbc22a32"),
+                        Url = "0131a704-6437-4a12-90b9-c8340ff5f434.jpg",
+                        ExperienceId = Guid.Parse("ecea3c10-0179-4127-8953-52b375cdca63"),
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("a9b58e64-d69f-4c4d-91fb-4a701d0a2c21"),
+                        Url = "c3e0d551-cb43-4163-9653-fcdba91d4126.jpg",
+                        ExperienceId = Guid.Parse("ecea3c10-0179-4127-8953-52b375cdca63"),
+                    },
+                    // esperienza 19 (Caccia al tartufo con cani addestrati)
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("b6b0109e-76d9-47fd-bd1d-7c18166caf41"),
+                        Url = "ec367062-0089-4605-9646-5c52baaff96e.jpg",
+                        ExperienceId = Guid.Parse("811c0a6f-5e99-4ad6-99b8-6b127cd8a665"),
+                        IsCover = true,
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("cde39c7b-4cbb-45f9-86c7-8476925844ac"),
+                        Url = "13090d47-6004-41cc-a32a-adb54957c40f.jpg",
+                        ExperienceId = Guid.Parse("811c0a6f-5e99-4ad6-99b8-6b127cd8a665"),
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("42ed369f-5ee0-407c-bda7-8994002eb8ae"),
+                        Url = "7c3939e2-e1d3-4486-85d6-b2c98e7e4e97.jpg",
+                        ExperienceId = Guid.Parse("811c0a6f-5e99-4ad6-99b8-6b127cd8a665"),
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("00e48016-4f19-4d14-9cb0-3d2a267c21f0"),
+                        Url = "aa400ebb-16f8-4eaf-89c9-0c96e7b19b3c.jpg",
+                        ExperienceId = Guid.Parse("811c0a6f-5e99-4ad6-99b8-6b127cd8a665"),
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("4415b41a-6289-4650-8e4d-30165d61ea88"),
+                        Url = "e61529b0-e453-4e1f-8c5c-6052b261960c.jpg",
+                        ExperienceId = Guid.Parse("811c0a6f-5e99-4ad6-99b8-6b127cd8a665"),
+                    },
+                    // esperienza 20 (Immersione tra i relitti della Seconda Guerra Mondiale)
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("c971b3c2-9412-4b11-bf64-9c658365a05d"),
+                        Url = "10e151bb-bcf2-4b5e-9de4-b5b27fbd1036.jpg",
+                        ExperienceId = Guid.Parse("9b4668d9-563c-4699-9285-0ce01fa0e86a"),
+                        IsCover = true,
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("10629003-027a-4484-befb-63ab96a1635b"),
+                        Url = "b84ef14b-1138-47c8-8343-e3ee9be9b82a.jpg",
+                        ExperienceId = Guid.Parse("9b4668d9-563c-4699-9285-0ce01fa0e86a"),
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("d0fb5983-3c9a-4aea-9eca-186889cd9eb8"),
+                        Url = "f058dcbb-7dcc-4e48-8d89-ea439bab2584.jpg",
+                        ExperienceId = Guid.Parse("9b4668d9-563c-4699-9285-0ce01fa0e86a"),
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("67412086-3b10-4586-b0e4-928194372f6b"),
+                        Url = "23958beb-15a5-4ed5-a65e-6c41b9cd22fc.jpg",
+                        ExperienceId = Guid.Parse("9b4668d9-563c-4699-9285-0ce01fa0e86a"),
+                    },
+                    new Models.Image()
+                    {
+                        ImageId = Guid.Parse("63c9b536-0377-496a-83a6-3e024092d2b7"),
+                        Url = "6d1f56e5-4589-4dfc-9eb9-6e8214f94551.jpg",
+                        ExperienceId = Guid.Parse("9b4668d9-563c-4699-9285-0ce01fa0e86a"),
                     }
                 );
 

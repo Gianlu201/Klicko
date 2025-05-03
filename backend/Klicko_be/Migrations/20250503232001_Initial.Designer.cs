@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Klicko_be.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250430131329_Initial")]
+    [Migration("20250503232001_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -134,7 +134,7 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("RegistrationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 30, 13, 13, 27, 189, DateTimeKind.Utc).AddTicks(9991));
+                        .HasDefaultValue(new DateTime(2025, 5, 3, 23, 19, 59, 782, DateTimeKind.Utc).AddTicks(4008));
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -164,7 +164,7 @@ namespace Klicko_be.Migrations
                             Id = "3a8073b2-b954-428a-a4b9-6e4b3f5db051",
                             AccessFailedCount = 0,
                             CartId = new Guid("ad0b8ebb-3e25-4c9f-a7dd-7e07c3e7ab3f"),
-                            ConcurrencyStamp = "124e550a-71b5-42c8-aafa-955e219c69f9",
+                            ConcurrencyStamp = "509e3836-6764-4a7b-91c0-f31fbd2e0bd0",
                             Email = "admin@example.com",
                             EmailConfirmed = false,
                             FidelityCardId = new Guid("772e32cc-cdea-4413-8785-09312f52f33d"),
@@ -176,7 +176,7 @@ namespace Klicko_be.Migrations
                             PasswordHash = "AQAAAAIAAYagAAAAEJ924mp2s2BX/BpdalZ6f2s1qlMl3fxdcEPcaKFV6BxA5frV73oVpuC1V9F4PHCJ2g==",
                             PhoneNumberConfirmed = false,
                             RegistrationDate = new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified),
-                            SecurityStamp = "8e7ffcc6-719b-432b-8a01-dbb15c283c84",
+                            SecurityStamp = "f205b61b-2072-407f-be82-427c8cfa0802",
                             TwoFactorEnabled = false,
                             UserName = "admin@example.com"
                         },
@@ -185,7 +185,7 @@ namespace Klicko_be.Migrations
                             Id = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
                             AccessFailedCount = 0,
                             CartId = new Guid("59a9d57e-c339-4a73-8d02-69cc186a5385"),
-                            ConcurrencyStamp = "e31db4e8-879c-48ec-9d49-26433b814c58",
+                            ConcurrencyStamp = "3b4e91b2-2e55-4eee-bb4d-ba2a941de234",
                             Email = "seller@example.com",
                             EmailConfirmed = false,
                             FidelityCardId = new Guid("326ddfe3-754b-4f24-8cd6-1011bc3cc37e"),
@@ -197,7 +197,7 @@ namespace Klicko_be.Migrations
                             PasswordHash = "AQAAAAIAAYagAAAAEJP1xbBcaikPe32EBy3MLTcexMUhKB7jQsEGuRiIlRJOWuiJwUGI/v0s83m7H70okg==",
                             PhoneNumberConfirmed = false,
                             RegistrationDate = new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified),
-                            SecurityStamp = "c21f3dff-879d-40cb-a6af-8dc5c0502295",
+                            SecurityStamp = "85b24eac-eb05-444c-948b-27672303e907",
                             TwoFactorEnabled = false,
                             UserName = "seller@example.com"
                         },
@@ -206,7 +206,7 @@ namespace Klicko_be.Migrations
                             Id = "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2",
                             AccessFailedCount = 0,
                             CartId = new Guid("b64a049a-6d76-4c1c-866c-e0169c92f1d6"),
-                            ConcurrencyStamp = "d84b9bd6-baab-40b1-a8a0-d9bf0e4531de",
+                            ConcurrencyStamp = "4a2a6619-6add-48ab-89f0-f3f106ebaa99",
                             Email = "user@example.com",
                             EmailConfirmed = false,
                             FidelityCardId = new Guid("12d1edf2-df86-41d9-8594-0b1859e31932"),
@@ -218,7 +218,7 @@ namespace Klicko_be.Migrations
                             PasswordHash = "AQAAAAIAAYagAAAAEL6u4Tox47kxNqt9nm4+vRn+SzahthaQ55UejBFFdJvvUNNCfqIWRI246s9wJiZ43A==",
                             PhoneNumberConfirmed = false,
                             RegistrationDate = new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified),
-                            SecurityStamp = "d756552c-3878-49a4-ab77-e213b97274fd",
+                            SecurityStamp = "581e42f1-ad70-4a5d-805a-4fa2af55860a",
                             TwoFactorEnabled = false,
                             UserName = "user@example.com"
                         },
@@ -227,7 +227,7 @@ namespace Klicko_be.Migrations
                             Id = "698c347e-bb57-4cb4-b672-9940647f250d",
                             AccessFailedCount = 0,
                             CartId = new Guid("a32de9e5-58e6-4ae8-8590-204bf8677abf"),
-                            ConcurrencyStamp = "497f9590-b9da-4f6f-81db-f5c11658b360",
+                            ConcurrencyStamp = "1650e26a-b558-4ab3-b9d4-fde4e81bad5f",
                             Email = "mario.rossi@example.com",
                             EmailConfirmed = false,
                             FidelityCardId = new Guid("ac983a29-21fe-4d7b-822f-2de328dee367"),
@@ -239,7 +239,7 @@ namespace Klicko_be.Migrations
                             PasswordHash = "AQAAAAIAAYagAAAAEGqAB3rWtm9yNytryjcGs97J9AVY4J6GC/pnd/eL+/lSc8KXctmVoydETBEp6qnKAg==",
                             PhoneNumberConfirmed = false,
                             RegistrationDate = new DateTime(2025, 4, 19, 11, 0, 56, 0, DateTimeKind.Unspecified),
-                            SecurityStamp = "3b59f388-3e63-4bd9-a786-e83f78f674fe",
+                            SecurityStamp = "97a71588-b7c5-4075-9e0f-3916354aefdd",
                             TwoFactorEnabled = false,
                             UserName = "mario.rossi@example.com"
                         },
@@ -248,7 +248,7 @@ namespace Klicko_be.Migrations
                             Id = "e5675086-e91e-442a-9c22-27d41bee49a4",
                             AccessFailedCount = 0,
                             CartId = new Guid("0b61eb1c-7294-49ea-94a2-f90273f7e5c9"),
-                            ConcurrencyStamp = "df921db3-7bbd-4e90-9e42-01a04ade4bf5",
+                            ConcurrencyStamp = "2f5819f4-f6ab-4f08-bd9b-22aa4090ed72",
                             Email = "luigi.bianchi@example.com",
                             EmailConfirmed = false,
                             FidelityCardId = new Guid("3f05415d-e413-4430-bdcd-e668d6f7aa83"),
@@ -260,7 +260,7 @@ namespace Klicko_be.Migrations
                             PasswordHash = "AQAAAAIAAYagAAAAENabfBTfVAnfCT/fg0+WNYZFHUGtBkj2cdOTFH8XkxudV8ZObX5QzlvepD9DwevyLA==",
                             PhoneNumberConfirmed = false,
                             RegistrationDate = new DateTime(2025, 4, 19, 11, 0, 56, 0, DateTimeKind.Unspecified),
-                            SecurityStamp = "2e470b56-5e57-47b8-a239-752706f406c7",
+                            SecurityStamp = "3b7bf41d-17a8-407a-80df-24a498209eaf",
                             TwoFactorEnabled = false,
                             UserName = "luigi.bianchi@example.com"
                         });
@@ -635,6 +635,306 @@ namespace Klicko_be.Migrations
                             CarryWithId = new Guid("e90eb389-a733-4917-8c57-24bfbd072dc4"),
                             ExperienceId = new Guid("e25b1044-5049-4ca9-954c-db76ae235862"),
                             Name = "Acqua"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("967d6d6f-f4f5-45b6-971a-2bc96cfc970a"),
+                            ExperienceId = new Guid("496d119c-3629-4fba-8a34-a74d7668dd30"),
+                            Name = "Abbigliamento comodo"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("39fc5e4e-42c8-45dc-8412-7718ed2c3762"),
+                            ExperienceId = new Guid("496d119c-3629-4fba-8a34-a74d7668dd30"),
+                            Name = "Scarpe adatte all'attività"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("e2aa3ea4-4387-4f80-90df-c6527a217869"),
+                            ExperienceId = new Guid("496d119c-3629-4fba-8a34-a74d7668dd30"),
+                            Name = "Documento d'identità"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("87f70607-bfab-46f0-988b-20a7e42c55ac"),
+                            ExperienceId = new Guid("496d119c-3629-4fba-8a34-a74d7668dd30"),
+                            Name = "Macchina fotografica (opzionale)"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("65b2065f-34ab-4a9d-a83a-aef299fde5d5"),
+                            ExperienceId = new Guid("496d119c-3629-4fba-8a34-a74d7668dd30"),
+                            Name = "Acqua"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("1b761e61-ff60-4730-acc6-ce4fb3613ab4"),
+                            ExperienceId = new Guid("2d1b2f18-36ac-4cb2-acdf-354ec87a48a6"),
+                            Name = "Abbigliamento comodo"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("e87d8136-db50-4e14-b04e-3b0890d47b31"),
+                            ExperienceId = new Guid("2d1b2f18-36ac-4cb2-acdf-354ec87a48a6"),
+                            Name = "Scarpe adatte all'attività"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("d776ef24-0fa2-4bd3-a693-8468da64aac9"),
+                            ExperienceId = new Guid("2d1b2f18-36ac-4cb2-acdf-354ec87a48a6"),
+                            Name = "Documento d'identità"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("b242290d-8ce3-49d3-bff7-01b7f6c40b2b"),
+                            ExperienceId = new Guid("2d1b2f18-36ac-4cb2-acdf-354ec87a48a6"),
+                            Name = "Macchina fotografica (opzionale)"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("dd9587fd-6e3f-4a32-88e3-39291155c3c8"),
+                            ExperienceId = new Guid("2d1b2f18-36ac-4cb2-acdf-354ec87a48a6"),
+                            Name = "Acqua"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("c7dcca56-a4f8-42a6-8091-718944a2163c"),
+                            ExperienceId = new Guid("54a6579f-bfed-4f02-b30c-6bcd7931c125"),
+                            Name = "Abbigliamento comodo"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("7dfb84a9-3798-4fce-ad7c-bfe60abb74b8"),
+                            ExperienceId = new Guid("54a6579f-bfed-4f02-b30c-6bcd7931c125"),
+                            Name = "Scarpe adatte all'attività"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("3b853054-0002-478d-a8d9-387e92a6e44c"),
+                            ExperienceId = new Guid("54a6579f-bfed-4f02-b30c-6bcd7931c125"),
+                            Name = "Documento d'identità"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("6c3395e2-bbeb-420b-bbfd-c22f822ed11e"),
+                            ExperienceId = new Guid("54a6579f-bfed-4f02-b30c-6bcd7931c125"),
+                            Name = "Macchina fotografica (opzionale)"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("ee348b02-77df-4d20-ab9f-f456c0dbb1f0"),
+                            ExperienceId = new Guid("54a6579f-bfed-4f02-b30c-6bcd7931c125"),
+                            Name = "Acqua"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("cc6c0540-3ad0-46a9-b75d-16d505f6e2e4"),
+                            ExperienceId = new Guid("83fe2715-9487-46b0-b5d5-eba33abd11e9"),
+                            Name = "Abbigliamento comodo"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("a1761613-4056-4ca9-84ed-3de05cb7827c"),
+                            ExperienceId = new Guid("83fe2715-9487-46b0-b5d5-eba33abd11e9"),
+                            Name = "Scarpe adatte all'attività"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("f4f28288-636e-4660-ac81-483be912d4f1"),
+                            ExperienceId = new Guid("83fe2715-9487-46b0-b5d5-eba33abd11e9"),
+                            Name = "Documento d'identità"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("2f553589-bac0-4a7f-a245-7a0d528c6573"),
+                            ExperienceId = new Guid("83fe2715-9487-46b0-b5d5-eba33abd11e9"),
+                            Name = "Macchina fotografica (opzionale)"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("9bfe1a7a-4a3a-4a17-801e-a071c5a70361"),
+                            ExperienceId = new Guid("83fe2715-9487-46b0-b5d5-eba33abd11e9"),
+                            Name = "Acqua"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("9ea9e04b-9fb7-41a2-a9b1-76e23f0ef97c"),
+                            ExperienceId = new Guid("65a26c06-6cf5-44d0-9a14-ac8fe039fd18"),
+                            Name = "Abbigliamento comodo"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("3a0c8fb7-1794-4233-8d03-f65419d22648"),
+                            ExperienceId = new Guid("65a26c06-6cf5-44d0-9a14-ac8fe039fd18"),
+                            Name = "Scarpe adatte all'attività"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("41d7915f-74e1-41b8-b20b-49282d149a0a"),
+                            ExperienceId = new Guid("65a26c06-6cf5-44d0-9a14-ac8fe039fd18"),
+                            Name = "Documento d'identità"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("ca9314a7-aaa7-4eb9-ba96-5fb79448f763"),
+                            ExperienceId = new Guid("65a26c06-6cf5-44d0-9a14-ac8fe039fd18"),
+                            Name = "Macchina fotografica (opzionale)"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("4671f2cb-60e1-41fa-81da-2b4cbfa203a7"),
+                            ExperienceId = new Guid("65a26c06-6cf5-44d0-9a14-ac8fe039fd18"),
+                            Name = "Acqua"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("339a7c4f-71db-4c13-9c9d-b678b2ccaf76"),
+                            ExperienceId = new Guid("cfa003b3-8739-415a-839f-f7ef9c86ec77"),
+                            Name = "Abbigliamento comodo"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("112e26dc-ef17-4168-bcdf-cc6e268f9d95"),
+                            ExperienceId = new Guid("cfa003b3-8739-415a-839f-f7ef9c86ec77"),
+                            Name = "Scarpe adatte all'attività"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("7cf387a9-01fc-46c1-9fb3-19c09ed61884"),
+                            ExperienceId = new Guid("cfa003b3-8739-415a-839f-f7ef9c86ec77"),
+                            Name = "Documento d'identità"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("18994487-ba73-42ed-bd80-48fd3dfa3df0"),
+                            ExperienceId = new Guid("cfa003b3-8739-415a-839f-f7ef9c86ec77"),
+                            Name = "Macchina fotografica (opzionale)"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("7fc7077e-779c-4eec-ae5c-f642d9685b15"),
+                            ExperienceId = new Guid("cfa003b3-8739-415a-839f-f7ef9c86ec77"),
+                            Name = "Acqua"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("e179f003-23b8-4714-9d3c-d911f9b19cf0"),
+                            ExperienceId = new Guid("89735a17-1395-45a9-a05a-f7d01647c329"),
+                            Name = "Abbigliamento comodo"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("e4cc19b6-e764-4bee-a931-ea4118a3684e"),
+                            ExperienceId = new Guid("89735a17-1395-45a9-a05a-f7d01647c329"),
+                            Name = "Scarpe adatte all'attività"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("3f07f4ae-d6a8-4863-ab37-2fad83952f9a"),
+                            ExperienceId = new Guid("89735a17-1395-45a9-a05a-f7d01647c329"),
+                            Name = "Documento d'identità"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("d2d39432-5c69-4c6c-a21b-498c55792708"),
+                            ExperienceId = new Guid("89735a17-1395-45a9-a05a-f7d01647c329"),
+                            Name = "Macchina fotografica (opzionale)"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("2a29efe4-a786-472c-8696-1b41c183d5cc"),
+                            ExperienceId = new Guid("89735a17-1395-45a9-a05a-f7d01647c329"),
+                            Name = "Acqua"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("2a5766d0-8207-4c27-8569-b4d6fe09ea56"),
+                            ExperienceId = new Guid("ecea3c10-0179-4127-8953-52b375cdca63"),
+                            Name = "Abbigliamento comodo"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("08a1412a-0b48-4917-9f3a-ee1f900207f0"),
+                            ExperienceId = new Guid("ecea3c10-0179-4127-8953-52b375cdca63"),
+                            Name = "Scarpe adatte all'attività"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("ea349b5b-5dc5-4d56-9d9c-36f776dbe2c3"),
+                            ExperienceId = new Guid("ecea3c10-0179-4127-8953-52b375cdca63"),
+                            Name = "Documento d'identità"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("751a3067-da26-4bbf-8dfd-d688de8078ac"),
+                            ExperienceId = new Guid("ecea3c10-0179-4127-8953-52b375cdca63"),
+                            Name = "Macchina fotografica (opzionale)"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("fa647bce-8939-4618-8d99-5432d12c5bf1"),
+                            ExperienceId = new Guid("ecea3c10-0179-4127-8953-52b375cdca63"),
+                            Name = "Acqua"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("bea4bfa2-3f89-42fd-9074-9aea2c4cac34"),
+                            ExperienceId = new Guid("811c0a6f-5e99-4ad6-99b8-6b127cd8a665"),
+                            Name = "Abbigliamento comodo"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("90df94c4-8281-46f7-97de-357044e18877"),
+                            ExperienceId = new Guid("811c0a6f-5e99-4ad6-99b8-6b127cd8a665"),
+                            Name = "Scarpe adatte all'attività"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("9e61d200-f670-4b5c-ba28-64a7ed1b63e4"),
+                            ExperienceId = new Guid("811c0a6f-5e99-4ad6-99b8-6b127cd8a665"),
+                            Name = "Documento d'identità"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("f282cc6a-1c66-4a00-8e20-0e722a954254"),
+                            ExperienceId = new Guid("811c0a6f-5e99-4ad6-99b8-6b127cd8a665"),
+                            Name = "Macchina fotografica (opzionale)"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("710cd42f-ed8d-4fc0-8174-addb9807dc29"),
+                            ExperienceId = new Guid("811c0a6f-5e99-4ad6-99b8-6b127cd8a665"),
+                            Name = "Acqua"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("81da796b-adec-4023-b39d-017d9adfaca9"),
+                            ExperienceId = new Guid("9b4668d9-563c-4699-9285-0ce01fa0e86a"),
+                            Name = "Abbigliamento comodo"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("7e6b3dc0-a425-42e0-b8b7-2e9a27ddc342"),
+                            ExperienceId = new Guid("9b4668d9-563c-4699-9285-0ce01fa0e86a"),
+                            Name = "Scarpe adatte all'attività"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("dfc0f099-4e30-4cef-a667-7aed81f44e24"),
+                            ExperienceId = new Guid("9b4668d9-563c-4699-9285-0ce01fa0e86a"),
+                            Name = "Documento d'identità"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("eda27243-f2b3-449c-b0bd-21aeca92729a"),
+                            ExperienceId = new Guid("9b4668d9-563c-4699-9285-0ce01fa0e86a"),
+                            Name = "Macchina fotografica (opzionale)"
+                        },
+                        new
+                        {
+                            CarryWithId = new Guid("e4381c78-a607-4b61-8eaa-fa65559a9e2c"),
+                            ExperienceId = new Guid("9b4668d9-563c-4699-9285-0ce01fa0e86a"),
+                            Name = "Acqua"
                         });
                 });
 
@@ -647,12 +947,12 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 30, 13, 13, 27, 190, DateTimeKind.Utc).AddTicks(6953));
+                        .HasDefaultValue(new DateTime(2025, 5, 3, 23, 19, 59, 783, DateTimeKind.Utc).AddTicks(119));
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 30, 13, 13, 27, 190, DateTimeKind.Utc).AddTicks(7406));
+                        .HasDefaultValue(new DateTime(2025, 5, 3, 23, 19, 59, 783, DateTimeKind.Utc).AddTicks(917));
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -715,7 +1015,7 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 30, 13, 13, 27, 190, DateTimeKind.Utc).AddTicks(7952));
+                        .HasDefaultValue(new DateTime(2025, 5, 3, 23, 19, 59, 783, DateTimeKind.Utc).AddTicks(1652));
 
                     b.Property<Guid>("ExperienceId")
                         .HasColumnType("uniqueidentifier");
@@ -1031,12 +1331,12 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("LastEditDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 30, 13, 13, 27, 190, DateTimeKind.Utc).AddTicks(1679));
+                        .HasDefaultValue(new DateTime(2025, 5, 3, 23, 19, 59, 782, DateTimeKind.Utc).AddTicks(5150));
 
                     b.Property<DateTime>("LoadingDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 30, 13, 13, 27, 190, DateTimeKind.Utc).AddTicks(750));
+                        .HasDefaultValue(new DateTime(2025, 5, 3, 23, 19, 59, 782, DateTimeKind.Utc).AddTicks(4597));
 
                     b.Property<int>("MaxParticipants")
                         .HasColumnType("int");
@@ -1331,6 +1631,256 @@ namespace Klicko_be.Migrations
                             Title = "Escursione notturna sull'Etna",
                             UserCreatorId = "3a8073b2-b954-428a-a4b9-6e4b3f5db051",
                             UserLastModifyId = "3a8073b2-b954-428a-a4b9-6e4b3f5db051",
+                            ValidityInMonths = 24
+                        },
+                        new
+                        {
+                            ExperienceId = new Guid("496d119c-3629-4fba-8a34-a74d7668dd30"),
+                            CategoryId = new Guid("6accf29d-8d1c-4edd-b48a-c70251516b99"),
+                            CoverImage = "68233a60-a0ce-4a7c-9049-5fd6dd3981fd.jpg",
+                            Description = "Scopri la bellezza unica delle Cinque Terre dal punto di vista più suggestivo: il mare. Questo tour in barca ti porta lungo la costa della Riviera Ligure per ammirare i cinque iconici villaggi di Monterosso, Vernazza, Corniglia, Manarola e Riomaggiore, con le loro case colorate che sembrano aggrappate alle scogliere. Durante la navigazione, la guida ti racconterà la storia e le curiosità di questo territorio dichiarato Patrimonio dell'Umanità UNESCO. L'escursione include soste per fare il bagno nelle calette più belle, difficilmente raggiungibili da terra, e un pranzo a bordo con prodotti tipici locali e vino bianco delle Cinque Terre. È prevista anche una sosta in uno o due villaggi per una breve esplorazione a piedi.",
+                            DescriptionShort = "Ammira i colorati villaggi delle Cinque Terre dal mare",
+                            Duration = "7 ore",
+                            IncludedDescription = "L'esperienza include tutto il necessario per goderti l'avventura in totale sicurezza e comfort.",
+                            IsDeleted = false,
+                            IsFreeCancellable = true,
+                            IsInEvidence = false,
+                            IsPopular = false,
+                            LastEditDate = new DateTime(2023, 6, 1, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            LoadingDate = new DateTime(2023, 6, 1, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            MaxParticipants = 1,
+                            Organiser = "Navigazione Ligure",
+                            Place = "Cinque Terre, Liguria",
+                            Price = 120m,
+                            Sale = 0,
+                            Title = "Tour in barca delle Cinque Terre",
+                            UserCreatorId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                            UserLastModifyId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                            ValidityInMonths = 24
+                        },
+                        new
+                        {
+                            ExperienceId = new Guid("2d1b2f18-36ac-4cb2-acdf-354ec87a48a6"),
+                            CategoryId = new Guid("6f3a957c-df09-437c-bc37-f069173eabe2"),
+                            CoverImage = "93a1a227-6394-49fe-8ab9-b26b14cfd0e9.jpg",
+                            Description = "Vivi la Toscana come nei film, guidando una Vespa d'epoca attraverso le splendide colline del Chianti. Questo tour ti offre un'esperienza autentica e indimenticabile, combinando il piacere della guida di questo iconico scooter italiano con la scoperta dei paesaggi più belli della campagna toscana. Dopo un briefing iniziale sulla guida della Vespa, partirai in un piccolo gruppo lungo strade secondarie poco trafficate, attraversando vigneti, oliveti e cipressi che caratterizzano il paesaggio. Il percorso include soste in borghi medievali caratteristici, come Greve in Chianti e Castellina, dove potrai passeggiare tra botteghe artigiane e degustare prodotti locali. A metà giornata, è previsto un pranzo in un'azienda agricola a conduzione familiare, dove gusterai piatti tradizionali toscani accompagnati dai famosi vini del Chianti. Il tour include anche una visita a una cantina storica con degustazione di vini.",
+                            DescriptionShort = "Esplora le colline del Chianti in sella a un'icona italiana",
+                            Duration = "8 ore",
+                            IncludedDescription = "L'esperienza include tutto il necessario per goderti l'avventura in totale sicurezza e comfort.",
+                            IsDeleted = false,
+                            IsFreeCancellable = true,
+                            IsInEvidence = false,
+                            IsPopular = false,
+                            LastEditDate = new DateTime(2023, 6, 12, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            LoadingDate = new DateTime(2023, 6, 12, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            MaxParticipants = 1,
+                            Organiser = "Toscana in Moto",
+                            Place = "Firenze, Toscana",
+                            Price = 180m,
+                            Sale = 0,
+                            Title = "Tour in vespa nella campagna toscana",
+                            UserCreatorId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                            UserLastModifyId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                            ValidityInMonths = 24
+                        },
+                        new
+                        {
+                            ExperienceId = new Guid("54a6579f-bfed-4f02-b30c-6bcd7931c125"),
+                            CategoryId = new Guid("5fdffa0f-a615-43f2-aa15-88bc8dcec27f"),
+                            CoverImage = "68c11a26-bcf2-45d5-b1a4-0d230963fa9e.jpg",
+                            Description = "Diventa pizzaiolo per un giorno e apprendi l'arte della vera pizza napoletana, patrimonio UNESCO, sotto la guida di un maestro pizzaiolo campione mondiale. Questa esperienza hands-on ti permetterà di conoscere tutti i segreti di questo piatto iconico, dalla preparazione dell'impasto alla stesura, fino alla cottura nel forno a legna. La lezione inizia con una breve storia della pizza e una spiegazione degli ingredienti tradizionali, tutti di altissima qualità e a km zero. Imparerai a preparare l'impasto con la giusta idratazione, i tempi di lievitazione e la tecnica per stenderlo a mano, creando il caratteristico bordo alto della pizza napoletana. Ogni partecipante preparerà diverse pizze con vari condimenti, dalla classica Margherita alla Marinara, fino a creazioni più elaborate con ingredienti stagionali. Naturalmente, potrai gustare le pizze che preparerai, accompagnate da birra artigianale o vino locale. Al termine, riceverai un attestato di partecipazione e la ricetta originale per continuare a preparare la pizza a casa.",
+                            DescriptionShort = "Impara i segreti della vera pizza napoletana da un maestro",
+                            Duration = "3 ore",
+                            IncludedDescription = "L'esperienza include tutto il necessario per goderti l'avventura in totale sicurezza e comfort.",
+                            IsDeleted = false,
+                            IsFreeCancellable = true,
+                            IsInEvidence = false,
+                            IsPopular = false,
+                            LastEditDate = new DateTime(2023, 7, 5, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            LoadingDate = new DateTime(2023, 7, 5, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            MaxParticipants = 1,
+                            Organiser = "Cucina Napoletana",
+                            Place = "Napoli, Campania",
+                            Price = 89m,
+                            Sale = 0,
+                            Title = "Lezione di pizza napoletana con pizzaiolo campione",
+                            UserCreatorId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                            UserLastModifyId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                            ValidityInMonths = 24
+                        },
+                        new
+                        {
+                            ExperienceId = new Guid("83fe2715-9487-46b0-b5d5-eba33abd11e9"),
+                            CategoryId = new Guid("1652310e-b8f3-43e7-bd9d-287f73f939b5"),
+                            CoverImage = "5523143a-02f3-44ef-abcd-5dca1aa1a42c.jpg",
+                            Description = "Sfida te stesso con un'esperienza di arrampicata sulle Dolomiti, le spettacolari montagne dichiarate Patrimonio UNESCO. Questa avventura verticale, guidata da istruttori qualificati con anni di esperienza, ti porterà a scalare alcune delle vie più panoramiche delle Pale di San Martino. L'esperienza è personalizzata in base al tuo livello di abilità, con percorsi adatti sia ai principianti assoluti che ai climber più esperti. La giornata inizia con un briefing tecnico e la distribuzione dell'attrezzatura (imbracatura, casco, scarpette da arrampicata), seguito da una breve camminata fino alla parete. Qui l'istruttore ti insegnerà le tecniche di base o avanzate di arrampicata e sicurezza, prima di affrontare le vie selezionate. Durante l'ascensione, potrai godere di viste mozzafiato sulle valli sottostanti e sui panorami montani circostanti. L'esperienza include foto e video della tua arrampicata, che ti verranno inviate dopo l'attività.",
+                            DescriptionShort = "Scala le pareti verticali delle montagne più belle del mondo",
+                            Duration = "6 ore",
+                            IncludedDescription = "L'esperienza include tutto il necessario per goderti l'avventura in totale sicurezza e comfort.",
+                            IsDeleted = false,
+                            IsFreeCancellable = true,
+                            IsInEvidence = false,
+                            IsPopular = false,
+                            LastEditDate = new DateTime(2023, 6, 28, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            LoadingDate = new DateTime(2023, 6, 28, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            MaxParticipants = 1,
+                            Organiser = "Alpine Guides",
+                            Place = "San Martino di Castrozza, Trentino",
+                            Price = 130m,
+                            Sale = 0,
+                            Title = "Arrampicata sulle Dolomiti",
+                            UserCreatorId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                            UserLastModifyId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                            ValidityInMonths = 24
+                        },
+                        new
+                        {
+                            ExperienceId = new Guid("65a26c06-6cf5-44d0-9a14-ac8fe039fd18"),
+                            CategoryId = new Guid("1652310e-b8f3-43e7-bd9d-287f73f939b5"),
+                            CoverImage = "5b23a8b9-9686-4107-b2ff-2a468167a32f.jpg",
+                            Description = "Un'avventura nella natura selvaggia della Maremma toscana, alla ricerca degli animali che popolano questo territorio unico. Guidato da un esperto naturalista e fotografo professionista, esplorerai la Riserva Naturale della Maremma a bordo di un fuoristrada 4x4, addentrandoti in aree normalmente non accessibili al pubblico. Il safari inizia all'alba, quando gli animali sono più attivi, e ti porterà attraverso diversi habitat, dalle zone umide alle foreste, dalle praterie alle dune costiere. Con un po' di fortuna e pazienza, potrai avvistare e fotografare cervi maremmani, cinghiali, daini, volpi, istrici, e numerose specie di uccelli, tra cui fenicotteri e rapaci. La guida ti fornirà consigli sulla fotografia naturalistica e ti spiegherà curiosità sulla flora e fauna locali. L'esperienza include una colazione tipica toscana consumata all'aperto e un breve workshop fotografico per migliorare le tue capacità di catturare immagini di animali selvatici.",
+                            DescriptionShort = "Avvista e fotografa cervi, cinghiali e altri animali selvatici",
+                            Duration = "5 ore",
+                            IncludedDescription = "L'esperienza include tutto il necessario per goderti l'avventura in totale sicurezza e comfort.",
+                            IsDeleted = false,
+                            IsFreeCancellable = true,
+                            IsInEvidence = false,
+                            IsPopular = false,
+                            LastEditDate = new DateTime(2023, 4, 22, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            LoadingDate = new DateTime(2023, 4, 22, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            MaxParticipants = 1,
+                            Organiser = "Natura Toscana",
+                            Place = "Grosseto, Toscana",
+                            Price = 110m,
+                            Sale = 0,
+                            Title = "Safari fotografico in Maremma",
+                            UserCreatorId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                            UserLastModifyId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                            ValidityInMonths = 24
+                        },
+                        new
+                        {
+                            ExperienceId = new Guid("cfa003b3-8739-415a-839f-f7ef9c86ec77"),
+                            CategoryId = new Guid("48733fb8-deae-41b2-b0c6-4fab3c45cf93"),
+                            CoverImage = "df4ae3d4-162f-4c80-85c9-c7fad7ff62b1.jpg",
+                            Description = "Vivi l'emozione di assistere a una rappresentazione di teatro classico greco nel maestoso Teatro Antico di Taormina, con vista sull'Etna e sul Mar Ionio. Questa esperienza culturale unica ti riporterà indietro nel tempo di 2300 anni, permettendoti di apprezzare le opere di Eschilo, Sofocle o Euripide nello stesso tipo di ambientazione per cui furono scritte. Lo spettacolo inizia al tramonto, quando le luci naturali creano un'atmosfera magica e suggestiva sul palcoscenico. Prima della rappresentazione, parteciperai a un tour guidato esclusivo del teatro, normalmente non accessibile al pubblico, in cui l'archeologo ti illustrerà la storia e i segreti di questo monumento, spiegando l'acustica perfetta e le tecniche teatrali dell'antica Grecia. Il pacchetto include posti riservati nelle prime file, un programma dettagliato con traduzione in italiano del testo originale greco, e un calice di vino dell'Etna da degustare durante l'intervallo, mentre il cielo si colora di rosso e il vulcano si staglia all'orizzonte.",
+                            DescriptionShort = "Assisti a una tragedia greca in un teatro di 2300 anni fa",
+                            Duration = "3 ore",
+                            IncludedDescription = "L'esperienza include tutto il necessario per goderti l'avventura in totale sicurezza e comfort.",
+                            IsDeleted = false,
+                            IsFreeCancellable = true,
+                            IsInEvidence = false,
+                            IsPopular = false,
+                            LastEditDate = new DateTime(2023, 5, 15, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            LoadingDate = new DateTime(2023, 5, 15, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            MaxParticipants = 1,
+                            Organiser = "Sicilia Culturale",
+                            Place = "Taormina, Sicilia",
+                            Price = 90m,
+                            Sale = 0,
+                            Title = "Teatro greco antico al tramonto",
+                            UserCreatorId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                            UserLastModifyId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                            ValidityInMonths = 24
+                        },
+                        new
+                        {
+                            ExperienceId = new Guid("89735a17-1395-45a9-a05a-f7d01647c329"),
+                            CategoryId = new Guid("48733fb8-deae-41b2-b0c6-4fab3c45cf93"),
+                            CoverImage = "9b5946b1-66a5-4e0a-89fb-0c0f026c5431.jpg",
+                            Description = "Scopri i segreti di Pompei, la città romana perfettamente conservata sotto le ceneri dell'eruzione del Vesuvio del 79 d.C., con una visita guidata esclusiva da un archeologo che ha partecipato agli scavi. Questo tour privato ti permetterà di accedere ad aree normalmente chiuse al pubblico e di comprendere in profondità la vita quotidiana dei romani, grazie alle spiegazioni dettagliate di un esperto del settore. La visita inizia dalle terme pubbliche e prosegue attraverso il foro, i teatri, le case patrizie riccamente decorate con affreschi e mosaici, fino ai lupanari e alle botteghe, ricostruendo la vita di diverse classi sociali dell'epoca. L'archeologo ti mostrerà i calchi in gesso delle vittime, spiegando le tecniche di scavo e conservazione, e ti illustrerà le ultime scoperte avvenute nel sito. Durante il tour, potrai fare tutte le domande che desideri all'esperto, che condividerà anche aneddoti e curiosità legati al suo lavoro negli scavi. L'esperienza include l'ingresso prioritario senza attesa in coda e un libro fotografico su Pompei come ricordo.",
+                            DescriptionShort = "Esplora la città romana sepolta dall'eruzione del Vesuvio",
+                            Duration = "3 ore",
+                            IncludedDescription = "L'esperienza include tutto il necessario per goderti l'avventura in totale sicurezza e comfort.",
+                            IsDeleted = false,
+                            IsFreeCancellable = true,
+                            IsInEvidence = false,
+                            IsPopular = false,
+                            LastEditDate = new DateTime(2023, 3, 28, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            LoadingDate = new DateTime(2023, 3, 28, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            MaxParticipants = 1,
+                            Organiser = "Archeologia Viva",
+                            Place = "Pompei, Campania",
+                            Price = 120m,
+                            Sale = 0,
+                            Title = "Visita agli scavi di Pompei con archeologo",
+                            UserCreatorId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                            UserLastModifyId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                            ValidityInMonths = 24
+                        },
+                        new
+                        {
+                            ExperienceId = new Guid("ecea3c10-0179-4127-8953-52b375cdca63"),
+                            CategoryId = new Guid("7f13b386-b8af-4ed1-b42b-845e17f657c3"),
+                            CoverImage = "b3a2b770-e6b4-44e0-aa25-15d7447d1200.jpg",
+                            Description = "Lasciati trasportare dalla magia di Venezia con un romantico tour in gondola al tramonto, accompagnato da una tradizionale serenata italiana eseguita dal vivo. Questa esperienza esclusiva ti permetterà di navigare i pittoreschi canali della Serenissima, passando sotto ponti storici e ammirando palazzi aristocratici, mentre il sole cala tingendo di rosa e oro i marmi e l'acqua della laguna. La tua gondola privata sarà guidata da un gondoliere esperto in costume tradizionale, che ti racconterà aneddoti e curiosità sulla città e sulla sua professione secolare. A bordo, un musicista professionista (fisarmonica o chitarra) e un cantante lirico eseguiranno per te classiche canzoni italiane e arie d'opera famose, creando un'atmosfera indimenticabile. Il tour parte dal Canal Grande e si addentra nei canali minori, lontano dalla folla, per regalarti scorci autentici e tranquilli della città. L'esperienza include una bottiglia di prosecco da sorseggiare durante il tragitto e si conclude con una rosa per la tua accompagnatrice.",
+                            DescriptionShort = "Naviga i canali di Venezia al tramonto con musica dal vivo",
+                            Duration = "1 ore",
+                            IncludedDescription = "L'esperienza include tutto il necessario per goderti l'avventura in totale sicurezza e comfort.",
+                            IsDeleted = false,
+                            IsFreeCancellable = true,
+                            IsInEvidence = false,
+                            IsPopular = false,
+                            LastEditDate = new DateTime(2023, 7, 15, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            LoadingDate = new DateTime(2023, 7, 15, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            MaxParticipants = 2,
+                            Organiser = "Venezia Autentica",
+                            Place = "Venezia, Veneto",
+                            Price = 250m,
+                            Sale = 0,
+                            Title = "Tour in gondola al tramonto con serenata",
+                            UserCreatorId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                            UserLastModifyId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                            ValidityInMonths = 24
+                        },
+                        new
+                        {
+                            ExperienceId = new Guid("811c0a6f-5e99-4ad6-99b8-6b127cd8a665"),
+                            CategoryId = new Guid("5fdffa0f-a615-43f2-aa15-88bc8dcec27f"),
+                            CoverImage = "ec367062-0089-4605-9646-5c52baaff96e.jpg",
+                            Description = "Immergiti nell'antica tradizione della ricerca del tartufo, accompagnando un tartufaio esperto e i suoi cani addestrati in un'escursione nei boschi dell'Umbria. Questa esperienza autentica ti permetterà di scoprire i segreti di una pratica riconosciuta dall'UNESCO come patrimonio immateriale dell'umanità. L'avventura inizia all'alba, quando il tartufaio ti accoglierà nella sua casa per una colazione con prodotti locali e ti presenterà i suoi fedeli compagni a quattro zampe, spiegandoti come vengono addestrati fin da cuccioli a riconoscere il profumo del tartufo. Ti forniranno gli stivali e un vanghetto, per poi avviarti nei boschi di querce e noccioli dove crescono i preziosi tartufi neri o bianchi (a seconda della stagione). Osserverai da vicino come i cani, con il loro fiuto eccezionale, individuano il punto esatto dove scavare e come il tartufaio estrae con cura il fungo dal terreno, preservando il micelio per le future produzioni. Al termine della ricerca, verrai accompagnato in un ristorante locale dove lo chef preparerà un pranzo completo utilizzando i tartufi appena trovati, accompagnato dai migliori vini umbri. L'esperienza include un barattolo di pasta al tartufo da portare a casa come ricordo.",
+                            DescriptionShort = "Cerca il prezioso fungo ipogeo nelle foreste umbre",
+                            Duration = "6 ore",
+                            IncludedDescription = "L'esperienza include tutto il necessario per goderti l'avventura in totale sicurezza e comfort.",
+                            IsDeleted = false,
+                            IsFreeCancellable = true,
+                            IsInEvidence = false,
+                            IsPopular = false,
+                            LastEditDate = new DateTime(2023, 10, 5, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            LoadingDate = new DateTime(2023, 10, 5, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            MaxParticipants = 1,
+                            Organiser = "Tesori dell'Umbria",
+                            Place = "Norcia, Umbria",
+                            Price = 125m,
+                            Sale = 0,
+                            Title = "Caccia al tartufo con cani addestrati",
+                            UserCreatorId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                            UserLastModifyId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                            ValidityInMonths = 24
+                        },
+                        new
+                        {
+                            ExperienceId = new Guid("9b4668d9-563c-4699-9285-0ce01fa0e86a"),
+                            CategoryId = new Guid("6accf29d-8d1c-4edd-b48a-c70251516b99"),
+                            CoverImage = "10e151bb-bcf2-4b5e-9de4-b5b27fbd1036.jpg",
+                            Description = "Un'avventura subacquea unica per esplorare i relitti storici della Seconda Guerra Mondiale adagiati sui fondali del Mar Tirreno. Questa esperienza, guidata da istruttori specializzati in immersioni su relitti, ti porterà alla scoperta di navi militari, mercantili e aerei da guerra perfettamente conservati nelle acque cristalline al largo dell'Isola d'Elba. L'escursione inizia al mattino con un briefing dettagliato sulla storia dei relitti che visiterai, sulle loro caratteristiche e sulle tecniche di immersione in sicurezza. A bordo di un'imbarcazione attrezzata per le immersioni, raggiungerai il punto di interesse, dove potrai esplorare relitti come il mercantile KT, affondato nel 1943, o i resti di un bombardiere americano B-24, immersi in un ecosistema marino rigoglioso che ha colonizzato le strutture metalliche. Durante l'immersione, la guida ti mostrerà i dettagli più interessanti di questi reperti storici, come la sala macchine, il ponte di comando o i portelli dei siluri. L'esperienza prevede due immersioni in siti diversi, con una pausa pranzo a bordo dell'imbarcazione. Al termine, riceverai un attestato di partecipazione e un reportage fotografico dell'immersione. Requisito necessario: essere in possesso di un brevetto subacqueo Advanced Open Water o equivalente.",
+                            DescriptionShort = "Esplora navi e aerei militari sommersi nel Mar Mediterraneo",
+                            Duration = "8 ore",
+                            IncludedDescription = "L'esperienza include tutto il necessario per goderti l'avventura in totale sicurezza e comfort.",
+                            IsDeleted = false,
+                            IsFreeCancellable = true,
+                            IsInEvidence = false,
+                            IsPopular = false,
+                            LastEditDate = new DateTime(2023, 5, 25, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            LoadingDate = new DateTime(2023, 5, 25, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            MaxParticipants = 1,
+                            Organiser = "Dive History",
+                            Place = "Isola d'Elba, Toscana",
+                            Price = 180m,
+                            Sale = 0,
+                            Title = "Immersione tra i relitti della Seconda Guerra Mondiale",
+                            UserCreatorId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
+                            UserLastModifyId = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
                             ValidityInMonths = 24
                         });
                 });
@@ -1789,6 +2339,356 @@ namespace Klicko_be.Migrations
                             ExperienceId = new Guid("e25b1044-5049-4ca9-954c-db76ae235862"),
                             IsCover = false,
                             Url = "39f57bd8-d2db-4d9e-8674-16d015703285.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("da5a3a00-dd62-43ff-a270-7097112aa2ce"),
+                            ExperienceId = new Guid("496d119c-3629-4fba-8a34-a74d7668dd30"),
+                            IsCover = true,
+                            Url = "68233a60-a0ce-4a7c-9049-5fd6dd3981fd.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("9f54492c-1d9b-41e5-9188-b8ae001f51f8"),
+                            ExperienceId = new Guid("496d119c-3629-4fba-8a34-a74d7668dd30"),
+                            IsCover = false,
+                            Url = "2d915949-80ea-418f-b0c0-9289649a23fb.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("de4802b6-241c-4ff0-a55f-c99f4f7f2e40"),
+                            ExperienceId = new Guid("496d119c-3629-4fba-8a34-a74d7668dd30"),
+                            IsCover = false,
+                            Url = "df489691-eb03-4349-b883-2d5a4dde6a5b.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("02760cb8-188e-45e7-b1d3-23915bcdf8c0"),
+                            ExperienceId = new Guid("496d119c-3629-4fba-8a34-a74d7668dd30"),
+                            IsCover = false,
+                            Url = "3976d87d-f989-4b01-9bb4-142ce3aeeddc.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("a1a38ff8-f33b-4d1d-a56a-d261a295d193"),
+                            ExperienceId = new Guid("496d119c-3629-4fba-8a34-a74d7668dd30"),
+                            IsCover = false,
+                            Url = "c69fbb13-5901-41a2-99cd-7ad97aa38b71.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("d73e199a-4571-4f44-be14-0e21e974cad1"),
+                            ExperienceId = new Guid("2d1b2f18-36ac-4cb2-acdf-354ec87a48a6"),
+                            IsCover = true,
+                            Url = "93a1a227-6394-49fe-8ab9-b26b14cfd0e9.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("f9ed17d7-65c5-479a-9e5b-1920ffc15b96"),
+                            ExperienceId = new Guid("2d1b2f18-36ac-4cb2-acdf-354ec87a48a6"),
+                            IsCover = false,
+                            Url = "405ae9ad-45fe-4521-9848-321c8fb58d8b.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("69353e06-bc49-40ec-a279-867b42d40b8c"),
+                            ExperienceId = new Guid("2d1b2f18-36ac-4cb2-acdf-354ec87a48a6"),
+                            IsCover = false,
+                            Url = "b5d197de-6293-4af3-9972-88549eadb931.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("f1d34714-981d-47fa-8702-934af9d397fe"),
+                            ExperienceId = new Guid("2d1b2f18-36ac-4cb2-acdf-354ec87a48a6"),
+                            IsCover = false,
+                            Url = "3fc5eb25-7afd-4227-b1ea-730b2bb720a2.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("ab5a6dbb-4967-4d68-837f-161e4a5a6cc0"),
+                            ExperienceId = new Guid("2d1b2f18-36ac-4cb2-acdf-354ec87a48a6"),
+                            IsCover = false,
+                            Url = "afcedc45-49e0-497f-8f64-a9f819427332.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("de492261-06bc-460b-8b28-47efcdc2a3d0"),
+                            ExperienceId = new Guid("54a6579f-bfed-4f02-b30c-6bcd7931c125"),
+                            IsCover = true,
+                            Url = "68c11a26-bcf2-45d5-b1a4-0d230963fa9e.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("d6093aca-5a60-469a-b5a8-9434d1c885b1"),
+                            ExperienceId = new Guid("54a6579f-bfed-4f02-b30c-6bcd7931c125"),
+                            IsCover = false,
+                            Url = "a100ad0c-2ace-44c1-b62b-6d15323db7ed.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("a08032ed-af65-4e40-a2cd-867ca6eb0532"),
+                            ExperienceId = new Guid("54a6579f-bfed-4f02-b30c-6bcd7931c125"),
+                            IsCover = false,
+                            Url = "88e11d00-53a4-4ecf-ba99-c066795d2e6d.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("3d354b63-76ab-4129-9254-4e581144e3c9"),
+                            ExperienceId = new Guid("54a6579f-bfed-4f02-b30c-6bcd7931c125"),
+                            IsCover = false,
+                            Url = "e60def66-9d33-4c35-9592-4c862a600d4c.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("708f771a-5a0e-4269-814c-ef8eed59f552"),
+                            ExperienceId = new Guid("54a6579f-bfed-4f02-b30c-6bcd7931c125"),
+                            IsCover = false,
+                            Url = "ffd72d54-ed4c-44aa-99fe-616d5479e28d.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("f97ab381-8918-426d-b957-3953c5c107c8"),
+                            ExperienceId = new Guid("83fe2715-9487-46b0-b5d5-eba33abd11e9"),
+                            IsCover = true,
+                            Url = "5523143a-02f3-44ef-abcd-5dca1aa1a42c.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("4467d7a3-de94-4811-a128-adaaca0d035e"),
+                            ExperienceId = new Guid("83fe2715-9487-46b0-b5d5-eba33abd11e9"),
+                            IsCover = false,
+                            Url = "77153e1e-fc9b-40aa-8519-0ff9b3ed9ca0.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("14937ac5-c939-4b80-bd70-3dbb5ecaac6b"),
+                            ExperienceId = new Guid("83fe2715-9487-46b0-b5d5-eba33abd11e9"),
+                            IsCover = false,
+                            Url = "ba97f13b-604b-456f-b0bb-4200d2dd7995.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("faebb06d-d414-4e97-80ba-c6f1fc2ab037"),
+                            ExperienceId = new Guid("83fe2715-9487-46b0-b5d5-eba33abd11e9"),
+                            IsCover = false,
+                            Url = "7fcd07d1-4b17-43f7-843e-c72f032d3915.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("55ce80cb-319e-4be1-9089-361bb69ebb32"),
+                            ExperienceId = new Guid("83fe2715-9487-46b0-b5d5-eba33abd11e9"),
+                            IsCover = false,
+                            Url = "9a59397d-0379-4e27-9b4d-89e2bcbbb925.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("48522876-284f-40fd-a58c-9dcf12e631e2"),
+                            ExperienceId = new Guid("65a26c06-6cf5-44d0-9a14-ac8fe039fd18"),
+                            IsCover = true,
+                            Url = "5b23a8b9-9686-4107-b2ff-2a468167a32f.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("f5f47f39-7d77-4d3f-93cc-81b8893637c5"),
+                            ExperienceId = new Guid("65a26c06-6cf5-44d0-9a14-ac8fe039fd18"),
+                            IsCover = false,
+                            Url = "f5ed7681-ef67-463b-b248-bd546efa2851.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("135cab9b-66ed-47be-864a-72c17480cc7b"),
+                            ExperienceId = new Guid("65a26c06-6cf5-44d0-9a14-ac8fe039fd18"),
+                            IsCover = false,
+                            Url = "e7cbe4a6-8ad2-4c4e-8075-02fe04a2a357.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("ea1cd1ad-6483-46cb-8a40-b64a214b4ede"),
+                            ExperienceId = new Guid("65a26c06-6cf5-44d0-9a14-ac8fe039fd18"),
+                            IsCover = false,
+                            Url = "16bc5db5-02da-4f1a-b7bb-2075bf721192.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("030e64db-93ff-4fab-b16b-50677f5f1723"),
+                            ExperienceId = new Guid("65a26c06-6cf5-44d0-9a14-ac8fe039fd18"),
+                            IsCover = false,
+                            Url = "47613ec5-8192-4e37-acd3-c2302aa54386.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("4ad0d7f1-a48b-468e-9008-9739cb88628c"),
+                            ExperienceId = new Guid("cfa003b3-8739-415a-839f-f7ef9c86ec77"),
+                            IsCover = true,
+                            Url = "df4ae3d4-162f-4c80-85c9-c7fad7ff62b1.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("b076d62a-8371-4d03-8621-05885a55019f"),
+                            ExperienceId = new Guid("cfa003b3-8739-415a-839f-f7ef9c86ec77"),
+                            IsCover = false,
+                            Url = "592aafe4-0353-4241-8c8a-174016c69eca.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("076617b2-f4bd-439e-bb57-67633ba31448"),
+                            ExperienceId = new Guid("cfa003b3-8739-415a-839f-f7ef9c86ec77"),
+                            IsCover = false,
+                            Url = "40192c2c-1a68-4130-b243-1cf07cc48b47.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("3e3aaed4-9339-4a10-a999-df8584314cdc"),
+                            ExperienceId = new Guid("cfa003b3-8739-415a-839f-f7ef9c86ec77"),
+                            IsCover = false,
+                            Url = "b696408f-529b-4d0b-938c-41661b206963.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("72ce9611-d5d0-4b95-98b7-cdf95c5410c9"),
+                            ExperienceId = new Guid("cfa003b3-8739-415a-839f-f7ef9c86ec77"),
+                            IsCover = false,
+                            Url = "eff526a7-d751-49d9-b0a9-cc99abcbc08d.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("c78ffe71-6d43-40f6-a2da-481c74714868"),
+                            ExperienceId = new Guid("89735a17-1395-45a9-a05a-f7d01647c329"),
+                            IsCover = true,
+                            Url = "9b5946b1-66a5-4e0a-89fb-0c0f026c5431.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("c507473a-9840-4fad-88bb-b7baf3a08fb4"),
+                            ExperienceId = new Guid("89735a17-1395-45a9-a05a-f7d01647c329"),
+                            IsCover = false,
+                            Url = "a1673708-5047-4d35-b6a1-1d46c4ea2efd.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("f3d82ae3-6eed-4cfc-a9c9-180c2cb0e8d0"),
+                            ExperienceId = new Guid("89735a17-1395-45a9-a05a-f7d01647c329"),
+                            IsCover = false,
+                            Url = "3e4dca19-d4dd-437f-bc48-b6adba3f25b1.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("86d5507a-b6e5-445f-ae5a-748b7c755461"),
+                            ExperienceId = new Guid("89735a17-1395-45a9-a05a-f7d01647c329"),
+                            IsCover = false,
+                            Url = "1d5d2358-ae0c-444b-b383-7d46a28bfa66.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("eef6391d-67ef-4328-850b-ae4039c6097f"),
+                            ExperienceId = new Guid("89735a17-1395-45a9-a05a-f7d01647c329"),
+                            IsCover = false,
+                            Url = "07ef8733-e588-48b6-bfb9-e4258e61972d.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("6e2b4f81-65c8-43aa-923b-f140474e3fba"),
+                            ExperienceId = new Guid("ecea3c10-0179-4127-8953-52b375cdca63"),
+                            IsCover = true,
+                            Url = "b3a2b770-e6b4-44e0-aa25-15d7447d1200.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("1c559da5-69ea-450e-913a-ef0bb9a89a32"),
+                            ExperienceId = new Guid("ecea3c10-0179-4127-8953-52b375cdca63"),
+                            IsCover = false,
+                            Url = "2bd97348-3fe1-4c23-b577-bdde99af91f6.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("736a7154-cd0e-4c5d-8edb-e7541cb656df"),
+                            ExperienceId = new Guid("ecea3c10-0179-4127-8953-52b375cdca63"),
+                            IsCover = false,
+                            Url = "53b93388-64ee-4cf7-89fd-b0af5a446239.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("f42211a7-99ca-47eb-8404-c502bbc22a32"),
+                            ExperienceId = new Guid("ecea3c10-0179-4127-8953-52b375cdca63"),
+                            IsCover = false,
+                            Url = "0131a704-6437-4a12-90b9-c8340ff5f434.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("a9b58e64-d69f-4c4d-91fb-4a701d0a2c21"),
+                            ExperienceId = new Guid("ecea3c10-0179-4127-8953-52b375cdca63"),
+                            IsCover = false,
+                            Url = "c3e0d551-cb43-4163-9653-fcdba91d4126.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("b6b0109e-76d9-47fd-bd1d-7c18166caf41"),
+                            ExperienceId = new Guid("811c0a6f-5e99-4ad6-99b8-6b127cd8a665"),
+                            IsCover = true,
+                            Url = "ec367062-0089-4605-9646-5c52baaff96e.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("cde39c7b-4cbb-45f9-86c7-8476925844ac"),
+                            ExperienceId = new Guid("811c0a6f-5e99-4ad6-99b8-6b127cd8a665"),
+                            IsCover = false,
+                            Url = "13090d47-6004-41cc-a32a-adb54957c40f.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("42ed369f-5ee0-407c-bda7-8994002eb8ae"),
+                            ExperienceId = new Guid("811c0a6f-5e99-4ad6-99b8-6b127cd8a665"),
+                            IsCover = false,
+                            Url = "7c3939e2-e1d3-4486-85d6-b2c98e7e4e97.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("00e48016-4f19-4d14-9cb0-3d2a267c21f0"),
+                            ExperienceId = new Guid("811c0a6f-5e99-4ad6-99b8-6b127cd8a665"),
+                            IsCover = false,
+                            Url = "aa400ebb-16f8-4eaf-89c9-0c96e7b19b3c.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("4415b41a-6289-4650-8e4d-30165d61ea88"),
+                            ExperienceId = new Guid("811c0a6f-5e99-4ad6-99b8-6b127cd8a665"),
+                            IsCover = false,
+                            Url = "e61529b0-e453-4e1f-8c5c-6052b261960c.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("c971b3c2-9412-4b11-bf64-9c658365a05d"),
+                            ExperienceId = new Guid("9b4668d9-563c-4699-9285-0ce01fa0e86a"),
+                            IsCover = true,
+                            Url = "10e151bb-bcf2-4b5e-9de4-b5b27fbd1036.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("10629003-027a-4484-befb-63ab96a1635b"),
+                            ExperienceId = new Guid("9b4668d9-563c-4699-9285-0ce01fa0e86a"),
+                            IsCover = false,
+                            Url = "b84ef14b-1138-47c8-8343-e3ee9be9b82a.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("d0fb5983-3c9a-4aea-9eca-186889cd9eb8"),
+                            ExperienceId = new Guid("9b4668d9-563c-4699-9285-0ce01fa0e86a"),
+                            IsCover = false,
+                            Url = "f058dcbb-7dcc-4e48-8d89-ea439bab2584.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("67412086-3b10-4586-b0e4-928194372f6b"),
+                            ExperienceId = new Guid("9b4668d9-563c-4699-9285-0ce01fa0e86a"),
+                            IsCover = false,
+                            Url = "23958beb-15a5-4ed5-a65e-6c41b9cd22fc.jpg"
+                        },
+                        new
+                        {
+                            ImageId = new Guid("63c9b536-0377-496a-83a6-3e024092d2b7"),
+                            ExperienceId = new Guid("9b4668d9-563c-4699-9285-0ce01fa0e86a"),
+                            IsCover = false,
+                            Url = "6d1f56e5-4589-4dfc-9eb9-6e8214f94551.jpg"
                         });
                 });
 
@@ -1801,7 +2701,7 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 30, 13, 13, 27, 190, DateTimeKind.Utc).AddTicks(4945));
+                        .HasDefaultValue(new DateTime(2025, 5, 3, 23, 19, 59, 782, DateTimeKind.Utc).AddTicks(7834));
 
                     b.Property<int>("OrderNumber")
                         .ValueGeneratedOnAdd()
@@ -2028,7 +2928,7 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 4, 30, 13, 13, 27, 191, DateTimeKind.Utc).AddTicks(849));
+                        .HasDefaultValue(new DateTime(2025, 5, 3, 23, 19, 59, 783, DateTimeKind.Utc).AddTicks(2918));
 
                     b.Property<string>("Duration")
                         .IsRequired()
