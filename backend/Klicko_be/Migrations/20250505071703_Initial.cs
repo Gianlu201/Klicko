@@ -15,7 +15,7 @@ namespace Klicko_be.Migrations
         {
             migrationBuilder.CreateSequence<int>(
                 name: "OrderNumber_seq",
-                startValue: 123456L);
+                startValue: 123460L);
 
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
@@ -38,7 +38,7 @@ namespace Klicko_be.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RegistrationDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 5, 3, 23, 19, 59, 782, DateTimeKind.Utc).AddTicks(4008)),
+                    RegistrationDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 5, 5, 7, 17, 0, 634, DateTimeKind.Utc).AddTicks(9690)),
                     CartId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FidelityCardId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -189,8 +189,8 @@ namespace Klicko_be.Migrations
                 {
                     CartId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 5, 3, 23, 19, 59, 783, DateTimeKind.Utc).AddTicks(119)),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 5, 3, 23, 19, 59, 783, DateTimeKind.Utc).AddTicks(917))
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 5, 5, 7, 17, 0, 635, DateTimeKind.Utc).AddTicks(7210)),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 5, 5, 7, 17, 0, 635, DateTimeKind.Utc).AddTicks(7612))
                 },
                 constraints: table =>
                 {
@@ -257,7 +257,7 @@ namespace Klicko_be.Migrations
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     State = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SubTotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 5, 3, 23, 19, 59, 782, DateTimeKind.Utc).AddTicks(7834)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 5, 5, 7, 17, 0, 635, DateTimeKind.Utc).AddTicks(5217)),
                     TotalDiscount = table.Column<decimal>(type: "decimal(18,2)", nullable: false, defaultValue: 0m),
                     TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ShippingPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
@@ -286,8 +286,8 @@ namespace Klicko_be.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MaxParticipants = table.Column<int>(type: "int", nullable: false),
                     Organiser = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LoadingDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 5, 3, 23, 19, 59, 782, DateTimeKind.Utc).AddTicks(4597)),
-                    LastEditDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 5, 3, 23, 19, 59, 782, DateTimeKind.Utc).AddTicks(5150)),
+                    LoadingDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 5, 5, 7, 17, 0, 635, DateTimeKind.Utc).AddTicks(1050)),
+                    LastEditDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 5, 5, 7, 17, 0, 635, DateTimeKind.Utc).AddTicks(2235)),
                     UserCreatorId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     UserLastModifyId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     IsFreeCancellable = table.Column<bool>(type: "bit", nullable: false),
@@ -337,7 +337,7 @@ namespace Klicko_be.Migrations
                     IsUsed = table.Column<bool>(type: "bit", nullable: false),
                     ExpirationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 5, 3, 23, 19, 59, 783, DateTimeKind.Utc).AddTicks(2918)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 5, 5, 7, 17, 0, 635, DateTimeKind.Utc).AddTicks(9419)),
                     OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -387,7 +387,7 @@ namespace Klicko_be.Migrations
                     ExperienceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CartId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false, defaultValue: 1),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 5, 3, 23, 19, 59, 783, DateTimeKind.Utc).AddTicks(1652))
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 5, 5, 7, 17, 0, 635, DateTimeKind.Utc).AddTicks(8057))
                 },
                 constraints: table =>
                 {
@@ -467,11 +467,12 @@ namespace Klicko_be.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "CartId", "ConcurrencyStamp", "Email", "EmailConfirmed", "FidelityCardId", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RegistrationDate", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2", 0, new Guid("b64a049a-6d76-4c1c-866c-e0169c92f1d6"), "4a2a6619-6add-48ab-89f0-f3f106ebaa99", "user@example.com", false, new Guid("12d1edf2-df86-41d9-8594-0b1859e31932"), "User", "User", false, null, "USER@EXAMPLE.COM", "USER@EXAMPLE.COM", "AQAAAAIAAYagAAAAEL6u4Tox47kxNqt9nm4+vRn+SzahthaQ55UejBFFdJvvUNNCfqIWRI246s9wJiZ43A==", null, false, new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified), "581e42f1-ad70-4a5d-805a-4fa2af55860a", false, "user@example.com" },
-                    { "3a8073b2-b954-428a-a4b9-6e4b3f5db051", 0, new Guid("ad0b8ebb-3e25-4c9f-a7dd-7e07c3e7ab3f"), "509e3836-6764-4a7b-91c0-f31fbd2e0bd0", "admin@example.com", false, new Guid("772e32cc-cdea-4413-8785-09312f52f33d"), "Admin", "User", false, null, "ADMIN@EXAMPLE.COM", "ADMIN@EXAMPLE.COM", "AQAAAAIAAYagAAAAEJ924mp2s2BX/BpdalZ6f2s1qlMl3fxdcEPcaKFV6BxA5frV73oVpuC1V9F4PHCJ2g==", null, false, new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified), "f205b61b-2072-407f-be82-427c8cfa0802", false, "admin@example.com" },
-                    { "698c347e-bb57-4cb4-b672-9940647f250d", 0, new Guid("a32de9e5-58e6-4ae8-8590-204bf8677abf"), "1650e26a-b558-4ab3-b9d4-fde4e81bad5f", "mario.rossi@example.com", false, new Guid("ac983a29-21fe-4d7b-822f-2de328dee367"), "Mario", "Rossi", false, null, "MARIO.ROSSI@EXAMPLE.COM", "MARIO.ROSSI@EXAMPLE.COM", "AQAAAAIAAYagAAAAEGqAB3rWtm9yNytryjcGs97J9AVY4J6GC/pnd/eL+/lSc8KXctmVoydETBEp6qnKAg==", null, false, new DateTime(2025, 4, 19, 11, 0, 56, 0, DateTimeKind.Unspecified), "97a71588-b7c5-4075-9e0f-3916354aefdd", false, "mario.rossi@example.com" },
-                    { "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c", 0, new Guid("59a9d57e-c339-4a73-8d02-69cc186a5385"), "3b4e91b2-2e55-4eee-bb4d-ba2a941de234", "seller@example.com", false, new Guid("326ddfe3-754b-4f24-8cd6-1011bc3cc37e"), "Seller", "User", false, null, "SELLER@EXAMPLE.COM", "SELLER@EXAMPLE.COM", "AQAAAAIAAYagAAAAEJP1xbBcaikPe32EBy3MLTcexMUhKB7jQsEGuRiIlRJOWuiJwUGI/v0s83m7H70okg==", null, false, new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified), "85b24eac-eb05-444c-948b-27672303e907", false, "seller@example.com" },
-                    { "e5675086-e91e-442a-9c22-27d41bee49a4", 0, new Guid("0b61eb1c-7294-49ea-94a2-f90273f7e5c9"), "2f5819f4-f6ab-4f08-bd9b-22aa4090ed72", "luigi.bianchi@example.com", false, new Guid("3f05415d-e413-4430-bdcd-e668d6f7aa83"), "Luigi", "Bianchi", false, null, "LUIGI.BIANCHI@EXAMPLE.COM", "LUIGI.BIANCHI@EXAMPLE.COM", "AQAAAAIAAYagAAAAENabfBTfVAnfCT/fg0+WNYZFHUGtBkj2cdOTFH8XkxudV8ZObX5QzlvepD9DwevyLA==", null, false, new DateTime(2025, 4, 19, 11, 0, 56, 0, DateTimeKind.Unspecified), "3b7bf41d-17a8-407a-80df-24a498209eaf", false, "luigi.bianchi@example.com" }
+                    { "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2", 0, new Guid("b64a049a-6d76-4c1c-866c-e0169c92f1d6"), "b9bfe59f-d274-4556-a3d5-5fb85a980a25", "user@example.com", false, new Guid("12d1edf2-df86-41d9-8594-0b1859e31932"), "User", "User", false, null, "USER@EXAMPLE.COM", "USER@EXAMPLE.COM", "AQAAAAIAAYagAAAAEL6u4Tox47kxNqt9nm4+vRn+SzahthaQ55UejBFFdJvvUNNCfqIWRI246s9wJiZ43A==", null, false, new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified), "487b4cd9-6d0b-47a2-930a-c6b9a96f3025", false, "user@example.com" },
+                    { "2320d7a9-4381-4a11-a9f1-5dca5879d332", 0, new Guid("dada1f92-fc39-4db3-ba15-aacb30d5094e"), "fba10794-7297-4cc8-8de4-3f834d1e916f", "gianlu.test201@gmail.com", false, new Guid("476bab2c-8a68-42ae-a7f3-d8799feebafb"), "Gianluca", "Di Diego", false, null, "GIANLU.TEST201@GMAIL.COM", "GIANLU.TEST201@GMAIL.COM", "AQAAAAIAAYagAAAAEAhO2X2Mwom+CdQCmG/k6jVMWPCEyRDWlBhzztf58kmfYLCaBsSECR2ypEUPYIsTeA==", null, false, new DateTime(2025, 4, 19, 11, 0, 56, 0, DateTimeKind.Unspecified), "d99540f1-ff29-4090-97d9-03428acfdaf3", false, "gianlu.test201@gmail.com" },
+                    { "3a8073b2-b954-428a-a4b9-6e4b3f5db051", 0, new Guid("ad0b8ebb-3e25-4c9f-a7dd-7e07c3e7ab3f"), "1cbab858-7dcd-4cb9-92b1-54a4d10d9866", "admin@example.com", false, new Guid("772e32cc-cdea-4413-8785-09312f52f33d"), "Admin", "User", false, null, "ADMIN@EXAMPLE.COM", "ADMIN@EXAMPLE.COM", "AQAAAAIAAYagAAAAEJ924mp2s2BX/BpdalZ6f2s1qlMl3fxdcEPcaKFV6BxA5frV73oVpuC1V9F4PHCJ2g==", null, false, new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified), "dd64bd23-6831-4488-ac59-6208193049c1", false, "admin@example.com" },
+                    { "698c347e-bb57-4cb4-b672-9940647f250d", 0, new Guid("a32de9e5-58e6-4ae8-8590-204bf8677abf"), "910b3284-884c-4b2a-ad0b-647786366e2d", "mario.rossi@example.com", false, new Guid("ac983a29-21fe-4d7b-822f-2de328dee367"), "Mario", "Rossi", false, null, "MARIO.ROSSI@EXAMPLE.COM", "MARIO.ROSSI@EXAMPLE.COM", "AQAAAAIAAYagAAAAEGqAB3rWtm9yNytryjcGs97J9AVY4J6GC/pnd/eL+/lSc8KXctmVoydETBEp6qnKAg==", null, false, new DateTime(2025, 4, 19, 11, 0, 56, 0, DateTimeKind.Unspecified), "9239fa5e-987a-49f4-b0a3-88a65d6551ae", false, "mario.rossi@example.com" },
+                    { "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c", 0, new Guid("59a9d57e-c339-4a73-8d02-69cc186a5385"), "5d5266a2-0b01-472a-abfa-4a65dbd3f627", "seller@example.com", false, new Guid("326ddfe3-754b-4f24-8cd6-1011bc3cc37e"), "Seller", "User", false, null, "SELLER@EXAMPLE.COM", "SELLER@EXAMPLE.COM", "AQAAAAIAAYagAAAAEJP1xbBcaikPe32EBy3MLTcexMUhKB7jQsEGuRiIlRJOWuiJwUGI/v0s83m7H70okg==", null, false, new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified), "e0eb8004-fa5c-4143-8260-dbabdc63b7a0", false, "seller@example.com" },
+                    { "e5675086-e91e-442a-9c22-27d41bee49a4", 0, new Guid("0b61eb1c-7294-49ea-94a2-f90273f7e5c9"), "fb57737b-3614-4454-9a0f-4a2e6b3c0764", "luigi.bianchi@example.com", false, new Guid("3f05415d-e413-4430-bdcd-e668d6f7aa83"), "Luigi", "Bianchi", false, null, "LUIGI.BIANCHI@EXAMPLE.COM", "LUIGI.BIANCHI@EXAMPLE.COM", "AQAAAAIAAYagAAAAENabfBTfVAnfCT/fg0+WNYZFHUGtBkj2cdOTFH8XkxudV8ZObX5QzlvepD9DwevyLA==", null, false, new DateTime(2025, 4, 19, 11, 0, 56, 0, DateTimeKind.Unspecified), "b1fec3be-61d9-45bc-8b97-e5bcaf761014", false, "luigi.bianchi@example.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -497,6 +498,7 @@ namespace Klicko_be.Migrations
                 values: new object[,]
                 {
                     { "849b8726-44b3-434b-9b18-48a4e8d4e9dd", "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2", new Guid("16cbe3b5-128b-4e00-9fbb-4e691b00280a") },
+                    { "849b8726-44b3-434b-9b18-48a4e8d4e9dd", "2320d7a9-4381-4a11-a9f1-5dca5879d332", new Guid("420f55bd-f60f-4ad7-a873-bf6d55ed096d") },
                     { "8d64359a-fda6-4096-b40d-f1375775244d", "3a8073b2-b954-428a-a4b9-6e4b3f5db051", new Guid("6f44a915-b24b-4034-9e18-0a1775210ef3") },
                     { "849b8726-44b3-434b-9b18-48a4e8d4e9dd", "698c347e-bb57-4cb4-b672-9940647f250d", new Guid("4c4992c2-1d6e-48d5-ad2c-eccfae98c53f") },
                     { "1f00a1d7-cbb6-44bf-bdc8-a3608b1284b9", "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c", new Guid("5224a9f4-547b-4300-8788-26d085155b48") },
@@ -512,7 +514,8 @@ namespace Klicko_be.Migrations
                     { new Guid("59a9d57e-c339-4a73-8d02-69cc186a5385"), new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified), new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified), "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c" },
                     { new Guid("a32de9e5-58e6-4ae8-8590-204bf8677abf"), new DateTime(2025, 4, 19, 11, 0, 56, 0, DateTimeKind.Unspecified), new DateTime(2025, 4, 19, 11, 0, 56, 0, DateTimeKind.Unspecified), "698c347e-bb57-4cb4-b672-9940647f250d" },
                     { new Guid("ad0b8ebb-3e25-4c9f-a7dd-7e07c3e7ab3f"), new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified), new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified), "3a8073b2-b954-428a-a4b9-6e4b3f5db051" },
-                    { new Guid("b64a049a-6d76-4c1c-866c-e0169c92f1d6"), new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified), new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified), "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2" }
+                    { new Guid("b64a049a-6d76-4c1c-866c-e0169c92f1d6"), new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified), new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified), "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2" },
+                    { new Guid("dada1f92-fc39-4db3-ba15-aacb30d5094e"), new DateTime(2025, 4, 19, 11, 0, 56, 0, DateTimeKind.Unspecified), new DateTime(2025, 4, 19, 11, 0, 56, 0, DateTimeKind.Unspecified), "2320d7a9-4381-4a11-a9f1-5dca5879d332" }
                 });
 
             migrationBuilder.InsertData(
@@ -526,6 +529,7 @@ namespace Klicko_be.Migrations
                 values: new object[,]
                 {
                     { new Guid("180392ae-03d1-4e01-8ca6-b67e038aa412"), "WELCOME5", null, true, 100, 5, "3a8073b2-b954-428a-a4b9-6e4b3f5db051" },
+                    { new Guid("3e656ae8-9289-4027-8233-c6f7e1792b3b"), "WELCOME5", null, true, 100, 5, "2320d7a9-4381-4a11-a9f1-5dca5879d332" },
                     { new Guid("642d9766-e5b6-4121-b7df-b49a60d612f7"), "DEMODAY15", new DateTime(2025, 5, 31, 23, 59, 59, 0, DateTimeKind.Unspecified), true, 250, 15, "698c347e-bb57-4cb4-b672-9940647f250d" },
                     { new Guid("71a3db8e-9f8b-48d0-96a8-b6b5d6ff890e"), "WELCOME5", null, true, 100, 5, "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c" },
                     { new Guid("812a87bc-3758-4e35-8b7c-6dbf06775950"), "WELCOME5", null, true, 100, 5, "e5675086-e91e-442a-9c22-27d41bee49a4" }
@@ -541,6 +545,7 @@ namespace Klicko_be.Migrations
                 columns: new[] { "CouponId", "Code", "ExpireDate", "IsActive", "MinimumAmount", "PercentualSaleAmount", "UserId" },
                 values: new object[,]
                 {
+                    { new Guid("8c8dd85c-e3a5-4d86-b500-2896744dd2cb"), "DEMODAY15", new DateTime(2025, 5, 31, 23, 59, 59, 0, DateTimeKind.Unspecified), true, 250, 15, "2320d7a9-4381-4a11-a9f1-5dca5879d332" },
                     { new Guid("e05605f6-a529-4fc4-a196-4c7122c8b1e4"), "WELCOME5", null, true, 100, 5, "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2" },
                     { new Guid("fa1639d8-8d3e-454e-9d91-826a285d1727"), "WELCOME5", null, true, 100, 5, "698c347e-bb57-4cb4-b672-9940647f250d" }
                 });
@@ -636,9 +641,18 @@ namespace Klicko_be.Migrations
                 values: new object[,]
                 {
                     { new Guid("326ddfe3-754b-4f24-8cd6-1011bc3cc37e"), "453728123423", "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c" },
-                    { new Guid("3f05415d-e413-4430-bdcd-e668d6f7aa83"), "873524120039", "e5675086-e91e-442a-9c22-27d41bee49a4" },
-                    { new Guid("772e32cc-cdea-4413-8785-09312f52f33d"), "341020401032", "3a8073b2-b954-428a-a4b9-6e4b3f5db051" }
+                    { new Guid("3f05415d-e413-4430-bdcd-e668d6f7aa83"), "873524120039", "e5675086-e91e-442a-9c22-27d41bee49a4" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "FidelityCards",
+                columns: new[] { "FidelityCardId", "AvailablePoints", "CardNumber", "Points", "UserId" },
+                values: new object[] { new Guid("476bab2c-8a68-42ae-a7f3-d8799feebafb"), 669, "483524721629", 669, "2320d7a9-4381-4a11-a9f1-5dca5879d332" });
+
+            migrationBuilder.InsertData(
+                table: "FidelityCards",
+                columns: new[] { "FidelityCardId", "CardNumber", "UserId" },
+                values: new object[] { new Guid("772e32cc-cdea-4413-8785-09312f52f33d"), "341020401032", "3a8073b2-b954-428a-a4b9-6e4b3f5db051" });
 
             migrationBuilder.InsertData(
                 table: "FidelityCards",
@@ -651,7 +665,9 @@ namespace Klicko_be.Migrations
                 values: new object[,]
                 {
                     { new Guid("089b2a7e-4287-4e1c-8928-693a736db304"), new DateTime(2024, 2, 9, 11, 0, 56, 0, DateTimeKind.Unspecified), 123450, 4.99m, "Completato", 145m, 149.99m, "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2" },
+                    { new Guid("0e7c0a9e-09ac-44c9-af1d-b51af2f7fe15"), new DateTime(2025, 1, 12, 11, 0, 56, 0, DateTimeKind.Unspecified), 123456, 4.99m, "Completato", 270m, 274.99m, "2320d7a9-4381-4a11-a9f1-5dca5879d332" },
                     { new Guid("1baad7eb-e2a6-45d9-bf8c-e68579cedfd6"), new DateTime(2025, 2, 23, 11, 0, 56, 0, DateTimeKind.Unspecified), 123453, 4.99m, "Completato", 360m, 364.99m, "698c347e-bb57-4cb4-b672-9940647f250d" },
+                    { new Guid("3dcfb704-133f-4da2-bdae-8bab37977d81"), new DateTime(2024, 10, 28, 11, 0, 56, 0, DateTimeKind.Unspecified), 123455, 4.99m, "Completato", 399m, 403.99m, "2320d7a9-4381-4a11-a9f1-5dca5879d332" },
                     { new Guid("cf854aee-04c4-43ff-bb30-445daa75478a"), new DateTime(2024, 7, 25, 11, 0, 56, 0, DateTimeKind.Unspecified), 123451, 4.99m, "Completato", 300m, 304.99m, "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2" },
                     { new Guid("d1f55060-cb7a-4c66-b674-adda6099dde5"), new DateTime(2025, 4, 28, 11, 0, 56, 0, DateTimeKind.Unspecified), 123454, 4.99m, "In attesa", 479.75m, 484.74m, "698c347e-bb57-4cb4-b672-9940647f250d" },
                     { new Guid("dc2a8bdd-f6cc-4637-9104-639f0e020777"), new DateTime(2025, 1, 12, 11, 0, 56, 0, DateTimeKind.Unspecified), 123452, 4.99m, "Completato", 492.49m, 497.48m, "698c347e-bb57-4cb4-b672-9940647f250d" }
@@ -1049,9 +1065,12 @@ namespace Klicko_be.Migrations
                     { new Guid("471f10b0-b759-49c0-b34d-aec032d163f6"), null, new Guid("dc2a8bdd-f6cc-4637-9104-639f0e020777"), 2, "Percorso benessere in grotta termale", 190m, 95m },
                     { new Guid("5bf549b8-f233-4be8-ba39-57377100149e"), null, new Guid("089b2a7e-4287-4e1c-8928-693a736db304"), 1, "Degustazione di vini in cantina sotterranea", 75m, 75m },
                     { new Guid("78bcc835-6806-4d4e-b6fb-1a8cbe0bc1c1"), null, new Guid("dc2a8bdd-f6cc-4637-9104-639f0e020777"), 1, "Trekking sul sentiero degli Dei", 65m, 65m },
+                    { new Guid("80a838c4-5755-49ce-98fd-648ae8f96eca"), null, new Guid("3dcfb704-133f-4da2-bdae-8bab37977d81"), 1, "Ferrari Driving Experience a Monza", 399m, 399m },
                     { new Guid("99c4650a-29ea-4ae9-8c4c-26d86c4497ca"), null, new Guid("cf854aee-04c4-43ff-bb30-445daa75478a"), 2, "Cucina toscana nella tenuta di un castello", 300m, 150m },
+                    { new Guid("df1cccb6-14c7-4d69-b3a5-ebbaad8234d2"), null, new Guid("0e7c0a9e-09ac-44c9-af1d-b51af2f7fe15"), 1, "Tour in barca delle Cinque Terre", 120m, 120m },
                     { new Guid("ecc02f40-aeab-4b84-b4e9-308da99eaf22"), null, new Guid("d1f55060-cb7a-4c66-b674-adda6099dde5"), 1, "Ferrari Driving Experience a Monza", 399m, 399m },
                     { new Guid("f1b25b3f-60b1-4103-a342-76ef3346f1ed"), null, new Guid("dc2a8bdd-f6cc-4637-9104-639f0e020777"), 1, "Volo in mongolfiera al tramonto", 237.49m, 237.49m },
+                    { new Guid("f2262b58-9a0a-4134-8961-1b9a986ea613"), null, new Guid("0e7c0a9e-09ac-44c9-af1d-b51af2f7fe15"), 1, "Cucina toscana nella tenuta di un castello", 150m, 150m },
                     { new Guid("f9bf51b8-0db6-4f5a-86e4-454e4bba6634"), null, new Guid("d1f55060-cb7a-4c66-b674-adda6099dde5"), 1, "Rafting nelle rapide del fiume Nera", 80.75m, 80.75m }
                 });
 
@@ -1061,6 +1080,7 @@ namespace Klicko_be.Migrations
                 values: new object[,]
                 {
                     { new Guid("0931cdc6-0031-40dd-ac09-6a6d6f18a744"), new Guid("b70671a5-3989-4e7c-9cd5-c6343e09fcde"), new DateTime(2025, 1, 12, 11, 0, 56, 0, DateTimeKind.Unspecified), "3 ore", new DateTime(2026, 1, 12, 11, 0, 56, 0, DateTimeKind.Unspecified), true, true, new Guid("dc2a8bdd-f6cc-4637-9104-639f0e020777"), "Terme Naturali", "Saturnia, Toscana", 95m, new DateTime(2025, 8, 28, 11, 0, 56, 0, DateTimeKind.Unspecified), "Percorso benessere in grotta termale", "698c347e-bb57-4cb4-b672-9940647f250d", "234DJD37-CMZNXS23-SDER456P" },
+                    { new Guid("131c7cb3-f4a4-4d52-94e6-3624a01584c8"), new Guid("6accf29d-8d1c-4edd-b48a-c70251516b99"), new DateTime(2025, 1, 12, 11, 0, 56, 0, DateTimeKind.Unspecified), "7 ore", new DateTime(2026, 1, 12, 11, 0, 56, 0, DateTimeKind.Unspecified), true, true, new Guid("0e7c0a9e-09ac-44c9-af1d-b51af2f7fe15"), "Navigazione Ligure", "Cinque Terre, Liguria", 120m, new DateTime(2025, 2, 23, 11, 0, 56, 0, DateTimeKind.Unspecified), "Tour in barca delle Cinque Terre", "2320d7a9-4381-4a11-a9f1-5dca5879d332", "847EYR3B-SJCK38EI-ASLWOE93" },
                     { new Guid("292c0ec5-a9a7-4484-8b6a-b42ae494a2c7"), new Guid("1652310e-b8f3-43e7-bd9d-287f73f939b5"), new DateTime(2025, 2, 23, 11, 0, 56, 0, DateTimeKind.Unspecified), "6 ore", new DateTime(2027, 2, 23, 11, 0, 56, 0, DateTimeKind.Unspecified), true, true, new Guid("1baad7eb-e2a6-45d9-bf8c-e68579cedfd6"), "Sicilia Avventure", "Catania, Sicilia", 120m, new DateTime(2026, 6, 21, 11, 0, 56, 0, DateTimeKind.Unspecified), "Escursione notturna sull'Etna", "698c347e-bb57-4cb4-b672-9940647f250d", "MCNXVAST-234756DF-CGDETQ09" },
                     { new Guid("44f90443-8008-4cb5-87a6-074388ad37a6"), new Guid("b70671a5-3989-4e7c-9cd5-c6343e09fcde"), new DateTime(2025, 1, 12, 11, 0, 56, 0, DateTimeKind.Unspecified), "3 ore", new DateTime(2026, 1, 12, 11, 0, 56, 0, DateTimeKind.Unspecified), true, true, new Guid("dc2a8bdd-f6cc-4637-9104-639f0e020777"), "Terme Naturali", "Saturnia, Toscana", 95m, new DateTime(2025, 8, 28, 11, 0, 56, 0, DateTimeKind.Unspecified), "Percorso benessere in grotta termale", "698c347e-bb57-4cb4-b672-9940647f250d", "A10CVD32-XCMZ12WE-CDC34509" },
                     { new Guid("5885d06b-8a41-4e7d-994a-9c87a7133a53"), new Guid("bda4ee71-af9c-46c6-b1bf-95f178773a2f"), new DateTime(2025, 1, 12, 11, 0, 56, 0, DateTimeKind.Unspecified), "6 ore", new DateTime(2025, 7, 12, 11, 0, 56, 0, DateTimeKind.Unspecified), true, true, new Guid("dc2a8bdd-f6cc-4637-9104-639f0e020777"), "Italia Escursioni", "Costiera Amalfitana, Campania", 65m, new DateTime(2025, 4, 12, 11, 0, 56, 0, DateTimeKind.Unspecified), "Trekking sul sentiero degli Dei", "698c347e-bb57-4cb4-b672-9940647f250d", "POET3512-DCF456WR-ASVCTE76" },
@@ -1069,6 +1089,8 @@ namespace Klicko_be.Migrations
                     { new Guid("af5e7042-c9c7-4535-b3f6-d1956eb25441"), new Guid("5fdffa0f-a615-43f2-aa15-88bc8dcec27f"), new DateTime(2024, 2, 9, 11, 0, 56, 0, DateTimeKind.Unspecified), "2 ore", new DateTime(2025, 2, 9, 11, 0, 56, 0, DateTimeKind.Unspecified), true, true, new Guid("089b2a7e-4287-4e1c-8928-693a736db304"), "Cantine Toscane", "Montepulciano, Toscana", 75m, new DateTime(2024, 4, 17, 11, 0, 56, 0, DateTimeKind.Unspecified), "Degustazione di vini in cantina sotterranea", "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2", "ER57HF75-RTIP39E8-WE3210PQ" },
                     { new Guid("bb706e8b-7647-431d-ab27-99572fb64415"), new Guid("6f3a957c-df09-437c-bc37-f069173eabe2"), new DateTime(2025, 4, 28, 11, 0, 56, 0, DateTimeKind.Unspecified), "2 ore", new DateTime(2027, 4, 28, 11, 0, 56, 0, DateTimeKind.Unspecified), true, true, new Guid("d1f55060-cb7a-4c66-b674-adda6099dde5"), "Motor Experience", "Monza, Lombardia", 399m, new DateTime(2026, 7, 15, 11, 0, 56, 0, DateTimeKind.Unspecified), "Ferrari Driving Experience a Monza", "698c347e-bb57-4cb4-b672-9940647f250d", "QWE23CDT-VBHGDTWQ-ZSDE125E" },
                     { new Guid("bbc9cf87-e09b-4e31-9b82-6d7086c199d0"), new Guid("6accf29d-8d1c-4edd-b48a-c70251516b99"), new DateTime(2025, 4, 28, 11, 0, 56, 0, DateTimeKind.Unspecified), "4 ore", new DateTime(2026, 4, 28, 11, 0, 56, 0, DateTimeKind.Unspecified), true, true, new Guid("d1f55060-cb7a-4c66-b674-adda6099dde5"), "Avventure Italiane", "Scheggino, Umbria", 80.75m, new DateTime(2025, 7, 23, 11, 0, 56, 0, DateTimeKind.Unspecified), "Rafting nelle rapide del fiume Nera", "698c347e-bb57-4cb4-b672-9940647f250d", "4563HDGR-CV6S7E34-VBXNAJEI" },
+                    { new Guid("bcc17554-d43e-444c-8c09-2e8d462a99d9"), new Guid("5fdffa0f-a615-43f2-aa15-88bc8dcec27f"), new DateTime(2025, 1, 12, 11, 0, 56, 0, DateTimeKind.Unspecified), "5 ore", new DateTime(2026, 1, 12, 11, 0, 56, 0, DateTimeKind.Unspecified), true, true, new Guid("0e7c0a9e-09ac-44c9-af1d-b51af2f7fe15"), "Sapori d'Italia", "Chianti, Toscana", 150m, new DateTime(2025, 5, 10, 11, 0, 56, 0, DateTimeKind.Unspecified), "Cucina toscana nella tenuta di un castello", "2320d7a9-4381-4a11-a9f1-5dca5879d332", "SHDEI394-ALE20495-237DUEO3" },
+                    { new Guid("bfa7fa19-bea1-4ac1-be9f-1d10c5060921"), new Guid("6f3a957c-df09-437c-bc37-f069173eabe2"), new DateTime(2024, 10, 28, 11, 0, 56, 0, DateTimeKind.Unspecified), "2 ore", new DateTime(2027, 4, 28, 11, 0, 56, 0, DateTimeKind.Unspecified), true, true, new Guid("3dcfb704-133f-4da2-bdae-8bab37977d81"), "Motor Experience", "Monza, Lombardia", 399m, new DateTime(2024, 11, 29, 11, 0, 56, 0, DateTimeKind.Unspecified), "Ferrari Driving Experience a Monza", "2320d7a9-4381-4a11-a9f1-5dca5879d332", "DJFUR736-BF63RD6Q-0PWISJF6" },
                     { new Guid("c5a9d186-ec49-4568-9a87-a5832ce2957f"), new Guid("1652310e-b8f3-43e7-bd9d-287f73f939b5"), new DateTime(2025, 2, 23, 11, 0, 56, 0, DateTimeKind.Unspecified), "6 ore", new DateTime(2027, 2, 23, 11, 0, 56, 0, DateTimeKind.Unspecified), true, true, new Guid("1baad7eb-e2a6-45d9-bf8c-e68579cedfd6"), "Sicilia Avventure", "Catania, Sicilia", 120m, new DateTime(2026, 6, 21, 11, 0, 56, 0, DateTimeKind.Unspecified), "Escursione notturna sull'Etna", "698c347e-bb57-4cb4-b672-9940647f250d", "POWE3456-CMZXNCE5-CMV45012" },
                     { new Guid("e6ebc89b-fefb-43ab-a8e0-df2a48fbe369"), new Guid("5fdffa0f-a615-43f2-aa15-88bc8dcec27f"), new DateTime(2024, 7, 25, 11, 0, 56, 0, DateTimeKind.Unspecified), "5 ore", new DateTime(2025, 7, 25, 11, 0, 56, 0, DateTimeKind.Unspecified), true, true, new Guid("cf854aee-04c4-43ff-bb30-445daa75478a"), "Sapori d'Italia", "Chianti, Toscana", 150m, new DateTime(2025, 4, 28, 11, 0, 56, 0, DateTimeKind.Unspecified), "Cucina toscana nella tenuta di un castello", "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2", "QW12EDCM-SX2091QS-1AZWE937" },
                     { new Guid("f1dfe658-59e3-4917-adf1-99a7aae42cd1"), new Guid("5fdffa0f-a615-43f2-aa15-88bc8dcec27f"), new DateTime(2024, 7, 25, 11, 0, 56, 0, DateTimeKind.Unspecified), "5 ore", new DateTime(2025, 7, 25, 11, 0, 56, 0, DateTimeKind.Unspecified), true, true, new Guid("cf854aee-04c4-43ff-bb30-445daa75478a"), "Sapori d'Italia", "Chianti, Toscana", 150m, new DateTime(2025, 4, 28, 11, 0, 56, 0, DateTimeKind.Unspecified), "Cucina toscana nella tenuta di un castello", "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2", "SZMAPQ92-AXQW1200-QASW34FR" },

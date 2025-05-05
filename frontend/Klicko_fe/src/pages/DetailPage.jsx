@@ -181,7 +181,7 @@ const DetailPage = () => {
                   <Clock className='w-4.5 h-4.5' />
                   {experience.duration}
                 </span>
-                <span className='hidden xs:flex items-center gap-2'>
+                <span className='hidden sm:flex items-center gap-2'>
                   <Tag className='w-4.5 h-4.5' />
                   {experience.category.name}
                 </span>

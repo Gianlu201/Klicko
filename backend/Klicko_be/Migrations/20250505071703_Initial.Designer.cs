@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Klicko_be.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250503232001_Initial")]
+    [Migration("20250505071703_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -26,7 +26,7 @@ namespace Klicko_be.Migrations
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.HasSequence<int>("OrderNumber_seq")
-                .StartsAt(123456L);
+                .StartsAt(123460L);
 
             modelBuilder.Entity("Klicko_be.Models.Auth.ApplicationRole", b =>
                 {
@@ -134,7 +134,7 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("RegistrationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 5, 3, 23, 19, 59, 782, DateTimeKind.Utc).AddTicks(4008));
+                        .HasDefaultValue(new DateTime(2025, 5, 5, 7, 17, 0, 634, DateTimeKind.Utc).AddTicks(9690));
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -164,7 +164,7 @@ namespace Klicko_be.Migrations
                             Id = "3a8073b2-b954-428a-a4b9-6e4b3f5db051",
                             AccessFailedCount = 0,
                             CartId = new Guid("ad0b8ebb-3e25-4c9f-a7dd-7e07c3e7ab3f"),
-                            ConcurrencyStamp = "509e3836-6764-4a7b-91c0-f31fbd2e0bd0",
+                            ConcurrencyStamp = "1cbab858-7dcd-4cb9-92b1-54a4d10d9866",
                             Email = "admin@example.com",
                             EmailConfirmed = false,
                             FidelityCardId = new Guid("772e32cc-cdea-4413-8785-09312f52f33d"),
@@ -176,7 +176,7 @@ namespace Klicko_be.Migrations
                             PasswordHash = "AQAAAAIAAYagAAAAEJ924mp2s2BX/BpdalZ6f2s1qlMl3fxdcEPcaKFV6BxA5frV73oVpuC1V9F4PHCJ2g==",
                             PhoneNumberConfirmed = false,
                             RegistrationDate = new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified),
-                            SecurityStamp = "f205b61b-2072-407f-be82-427c8cfa0802",
+                            SecurityStamp = "dd64bd23-6831-4488-ac59-6208193049c1",
                             TwoFactorEnabled = false,
                             UserName = "admin@example.com"
                         },
@@ -185,7 +185,7 @@ namespace Klicko_be.Migrations
                             Id = "d9ee1702-09f8-4ec2-ac09-7f41c05fcd4c",
                             AccessFailedCount = 0,
                             CartId = new Guid("59a9d57e-c339-4a73-8d02-69cc186a5385"),
-                            ConcurrencyStamp = "3b4e91b2-2e55-4eee-bb4d-ba2a941de234",
+                            ConcurrencyStamp = "5d5266a2-0b01-472a-abfa-4a65dbd3f627",
                             Email = "seller@example.com",
                             EmailConfirmed = false,
                             FidelityCardId = new Guid("326ddfe3-754b-4f24-8cd6-1011bc3cc37e"),
@@ -197,7 +197,7 @@ namespace Klicko_be.Migrations
                             PasswordHash = "AQAAAAIAAYagAAAAEJP1xbBcaikPe32EBy3MLTcexMUhKB7jQsEGuRiIlRJOWuiJwUGI/v0s83m7H70okg==",
                             PhoneNumberConfirmed = false,
                             RegistrationDate = new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified),
-                            SecurityStamp = "85b24eac-eb05-444c-948b-27672303e907",
+                            SecurityStamp = "e0eb8004-fa5c-4143-8260-dbabdc63b7a0",
                             TwoFactorEnabled = false,
                             UserName = "seller@example.com"
                         },
@@ -206,7 +206,7 @@ namespace Klicko_be.Migrations
                             Id = "21f6b4b5-9616-4380-a9d3-3ddb2f4b72c2",
                             AccessFailedCount = 0,
                             CartId = new Guid("b64a049a-6d76-4c1c-866c-e0169c92f1d6"),
-                            ConcurrencyStamp = "4a2a6619-6add-48ab-89f0-f3f106ebaa99",
+                            ConcurrencyStamp = "b9bfe59f-d274-4556-a3d5-5fb85a980a25",
                             Email = "user@example.com",
                             EmailConfirmed = false,
                             FidelityCardId = new Guid("12d1edf2-df86-41d9-8594-0b1859e31932"),
@@ -218,7 +218,7 @@ namespace Klicko_be.Migrations
                             PasswordHash = "AQAAAAIAAYagAAAAEL6u4Tox47kxNqt9nm4+vRn+SzahthaQ55UejBFFdJvvUNNCfqIWRI246s9wJiZ43A==",
                             PhoneNumberConfirmed = false,
                             RegistrationDate = new DateTime(2025, 4, 9, 11, 0, 56, 0, DateTimeKind.Unspecified),
-                            SecurityStamp = "581e42f1-ad70-4a5d-805a-4fa2af55860a",
+                            SecurityStamp = "487b4cd9-6d0b-47a2-930a-c6b9a96f3025",
                             TwoFactorEnabled = false,
                             UserName = "user@example.com"
                         },
@@ -227,7 +227,7 @@ namespace Klicko_be.Migrations
                             Id = "698c347e-bb57-4cb4-b672-9940647f250d",
                             AccessFailedCount = 0,
                             CartId = new Guid("a32de9e5-58e6-4ae8-8590-204bf8677abf"),
-                            ConcurrencyStamp = "1650e26a-b558-4ab3-b9d4-fde4e81bad5f",
+                            ConcurrencyStamp = "910b3284-884c-4b2a-ad0b-647786366e2d",
                             Email = "mario.rossi@example.com",
                             EmailConfirmed = false,
                             FidelityCardId = new Guid("ac983a29-21fe-4d7b-822f-2de328dee367"),
@@ -239,7 +239,7 @@ namespace Klicko_be.Migrations
                             PasswordHash = "AQAAAAIAAYagAAAAEGqAB3rWtm9yNytryjcGs97J9AVY4J6GC/pnd/eL+/lSc8KXctmVoydETBEp6qnKAg==",
                             PhoneNumberConfirmed = false,
                             RegistrationDate = new DateTime(2025, 4, 19, 11, 0, 56, 0, DateTimeKind.Unspecified),
-                            SecurityStamp = "97a71588-b7c5-4075-9e0f-3916354aefdd",
+                            SecurityStamp = "9239fa5e-987a-49f4-b0a3-88a65d6551ae",
                             TwoFactorEnabled = false,
                             UserName = "mario.rossi@example.com"
                         },
@@ -248,7 +248,7 @@ namespace Klicko_be.Migrations
                             Id = "e5675086-e91e-442a-9c22-27d41bee49a4",
                             AccessFailedCount = 0,
                             CartId = new Guid("0b61eb1c-7294-49ea-94a2-f90273f7e5c9"),
-                            ConcurrencyStamp = "2f5819f4-f6ab-4f08-bd9b-22aa4090ed72",
+                            ConcurrencyStamp = "fb57737b-3614-4454-9a0f-4a2e6b3c0764",
                             Email = "luigi.bianchi@example.com",
                             EmailConfirmed = false,
                             FidelityCardId = new Guid("3f05415d-e413-4430-bdcd-e668d6f7aa83"),
@@ -260,9 +260,30 @@ namespace Klicko_be.Migrations
                             PasswordHash = "AQAAAAIAAYagAAAAENabfBTfVAnfCT/fg0+WNYZFHUGtBkj2cdOTFH8XkxudV8ZObX5QzlvepD9DwevyLA==",
                             PhoneNumberConfirmed = false,
                             RegistrationDate = new DateTime(2025, 4, 19, 11, 0, 56, 0, DateTimeKind.Unspecified),
-                            SecurityStamp = "3b7bf41d-17a8-407a-80df-24a498209eaf",
+                            SecurityStamp = "b1fec3be-61d9-45bc-8b97-e5bcaf761014",
                             TwoFactorEnabled = false,
                             UserName = "luigi.bianchi@example.com"
+                        },
+                        new
+                        {
+                            Id = "2320d7a9-4381-4a11-a9f1-5dca5879d332",
+                            AccessFailedCount = 0,
+                            CartId = new Guid("dada1f92-fc39-4db3-ba15-aacb30d5094e"),
+                            ConcurrencyStamp = "fba10794-7297-4cc8-8de4-3f834d1e916f",
+                            Email = "gianlu.test201@gmail.com",
+                            EmailConfirmed = false,
+                            FidelityCardId = new Guid("476bab2c-8a68-42ae-a7f3-d8799feebafb"),
+                            FirstName = "Gianluca",
+                            LastName = "Di Diego",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "GIANLU.TEST201@GMAIL.COM",
+                            NormalizedUserName = "GIANLU.TEST201@GMAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAhO2X2Mwom+CdQCmG/k6jVMWPCEyRDWlBhzztf58kmfYLCaBsSECR2ypEUPYIsTeA==",
+                            PhoneNumberConfirmed = false,
+                            RegistrationDate = new DateTime(2025, 4, 19, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            SecurityStamp = "d99540f1-ff29-4090-97d9-03428acfdaf3",
+                            TwoFactorEnabled = false,
+                            UserName = "gianlu.test201@gmail.com"
                         });
                 });
 
@@ -313,6 +334,12 @@ namespace Klicko_be.Migrations
                             UserId = "e5675086-e91e-442a-9c22-27d41bee49a4",
                             RoleId = "849b8726-44b3-434b-9b18-48a4e8d4e9dd",
                             UserRoleId = new Guid("24d7ceb7-a7c8-48d8-a0b0-1ad0ce9f0fcf")
+                        },
+                        new
+                        {
+                            UserId = "2320d7a9-4381-4a11-a9f1-5dca5879d332",
+                            RoleId = "849b8726-44b3-434b-9b18-48a4e8d4e9dd",
+                            UserRoleId = new Guid("420f55bd-f60f-4ad7-a873-bf6d55ed096d")
                         });
                 });
 
@@ -947,12 +974,12 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 5, 3, 23, 19, 59, 783, DateTimeKind.Utc).AddTicks(119));
+                        .HasDefaultValue(new DateTime(2025, 5, 5, 7, 17, 0, 635, DateTimeKind.Utc).AddTicks(7210));
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 5, 3, 23, 19, 59, 783, DateTimeKind.Utc).AddTicks(917));
+                        .HasDefaultValue(new DateTime(2025, 5, 5, 7, 17, 0, 635, DateTimeKind.Utc).AddTicks(7612));
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -1000,6 +1027,13 @@ namespace Klicko_be.Migrations
                             CreatedAt = new DateTime(2025, 4, 19, 11, 0, 56, 0, DateTimeKind.Unspecified),
                             UpdatedAt = new DateTime(2025, 4, 19, 11, 0, 56, 0, DateTimeKind.Unspecified),
                             UserId = "e5675086-e91e-442a-9c22-27d41bee49a4"
+                        },
+                        new
+                        {
+                            CartId = new Guid("dada1f92-fc39-4db3-ba15-aacb30d5094e"),
+                            CreatedAt = new DateTime(2025, 4, 19, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            UpdatedAt = new DateTime(2025, 4, 19, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            UserId = "2320d7a9-4381-4a11-a9f1-5dca5879d332"
                         });
                 });
 
@@ -1015,7 +1049,7 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 5, 3, 23, 19, 59, 783, DateTimeKind.Utc).AddTicks(1652));
+                        .HasDefaultValue(new DateTime(2025, 5, 5, 7, 17, 0, 635, DateTimeKind.Utc).AddTicks(8057));
 
                     b.Property<Guid>("ExperienceId")
                         .HasColumnType("uniqueidentifier");
@@ -1280,6 +1314,29 @@ namespace Klicko_be.Migrations
                             MinimumAmount = 100,
                             PercentualSaleAmount = 5,
                             UserId = "e5675086-e91e-442a-9c22-27d41bee49a4"
+                        },
+                        new
+                        {
+                            CouponId = new Guid("3e656ae8-9289-4027-8233-c6f7e1792b3b"),
+                            Code = "WELCOME5",
+                            FixedSaleAmount = 0,
+                            IsActive = true,
+                            IsUniversal = false,
+                            MinimumAmount = 100,
+                            PercentualSaleAmount = 5,
+                            UserId = "2320d7a9-4381-4a11-a9f1-5dca5879d332"
+                        },
+                        new
+                        {
+                            CouponId = new Guid("8c8dd85c-e3a5-4d86-b500-2896744dd2cb"),
+                            Code = "DEMODAY15",
+                            ExpireDate = new DateTime(2025, 5, 31, 23, 59, 59, 0, DateTimeKind.Unspecified),
+                            FixedSaleAmount = 0,
+                            IsActive = true,
+                            IsUniversal = false,
+                            MinimumAmount = 250,
+                            PercentualSaleAmount = 15,
+                            UserId = "2320d7a9-4381-4a11-a9f1-5dca5879d332"
                         });
                 });
 
@@ -1331,12 +1388,12 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("LastEditDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 5, 3, 23, 19, 59, 782, DateTimeKind.Utc).AddTicks(5150));
+                        .HasDefaultValue(new DateTime(2025, 5, 5, 7, 17, 0, 635, DateTimeKind.Utc).AddTicks(2235));
 
                     b.Property<DateTime>("LoadingDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 5, 3, 23, 19, 59, 782, DateTimeKind.Utc).AddTicks(4597));
+                        .HasDefaultValue(new DateTime(2025, 5, 5, 7, 17, 0, 635, DateTimeKind.Utc).AddTicks(1050));
 
                     b.Property<int>("MaxParticipants")
                         .HasColumnType("int");
@@ -1962,6 +2019,14 @@ namespace Klicko_be.Migrations
                             CardNumber = "873524120039",
                             Points = 0,
                             UserId = "e5675086-e91e-442a-9c22-27d41bee49a4"
+                        },
+                        new
+                        {
+                            FidelityCardId = new Guid("476bab2c-8a68-42ae-a7f3-d8799feebafb"),
+                            AvailablePoints = 669,
+                            CardNumber = "483524721629",
+                            Points = 669,
+                            UserId = "2320d7a9-4381-4a11-a9f1-5dca5879d332"
                         });
                 });
 
@@ -2701,7 +2766,7 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 5, 3, 23, 19, 59, 782, DateTimeKind.Utc).AddTicks(7834));
+                        .HasDefaultValue(new DateTime(2025, 5, 5, 7, 17, 0, 635, DateTimeKind.Utc).AddTicks(5217));
 
                     b.Property<int>("OrderNumber")
                         .ValueGeneratedOnAdd()
@@ -2796,6 +2861,30 @@ namespace Klicko_be.Migrations
                             TotalDiscount = 0m,
                             TotalPrice = 484.74m,
                             UserId = "698c347e-bb57-4cb4-b672-9940647f250d"
+                        },
+                        new
+                        {
+                            OrderId = new Guid("3dcfb704-133f-4da2-bdae-8bab37977d81"),
+                            CreatedAt = new DateTime(2024, 10, 28, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            OrderNumber = 123455,
+                            ShippingPrice = 4.99m,
+                            State = "Completato",
+                            SubTotalPrice = 399m,
+                            TotalDiscount = 0m,
+                            TotalPrice = 403.99m,
+                            UserId = "2320d7a9-4381-4a11-a9f1-5dca5879d332"
+                        },
+                        new
+                        {
+                            OrderId = new Guid("0e7c0a9e-09ac-44c9-af1d-b51af2f7fe15"),
+                            CreatedAt = new DateTime(2025, 1, 12, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            OrderNumber = 123456,
+                            ShippingPrice = 4.99m,
+                            State = "Completato",
+                            SubTotalPrice = 270m,
+                            TotalDiscount = 0m,
+                            TotalPrice = 274.99m,
+                            UserId = "2320d7a9-4381-4a11-a9f1-5dca5879d332"
                         });
                 });
 
@@ -2913,6 +3002,33 @@ namespace Klicko_be.Migrations
                             Title = "Ferrari Driving Experience a Monza",
                             TotalPrice = 399m,
                             UnitPrice = 399m
+                        },
+                        new
+                        {
+                            OrderExperienceId = new Guid("80a838c4-5755-49ce-98fd-648ae8f96eca"),
+                            OrderId = new Guid("3dcfb704-133f-4da2-bdae-8bab37977d81"),
+                            Quantity = 1,
+                            Title = "Ferrari Driving Experience a Monza",
+                            TotalPrice = 399m,
+                            UnitPrice = 399m
+                        },
+                        new
+                        {
+                            OrderExperienceId = new Guid("df1cccb6-14c7-4d69-b3a5-ebbaad8234d2"),
+                            OrderId = new Guid("0e7c0a9e-09ac-44c9-af1d-b51af2f7fe15"),
+                            Quantity = 1,
+                            Title = "Tour in barca delle Cinque Terre",
+                            TotalPrice = 120m,
+                            UnitPrice = 120m
+                        },
+                        new
+                        {
+                            OrderExperienceId = new Guid("f2262b58-9a0a-4134-8961-1b9a986ea613"),
+                            OrderId = new Guid("0e7c0a9e-09ac-44c9-af1d-b51af2f7fe15"),
+                            Quantity = 1,
+                            Title = "Cucina toscana nella tenuta di un castello",
+                            TotalPrice = 150m,
+                            UnitPrice = 150m
                         });
                 });
 
@@ -2928,7 +3044,7 @@ namespace Klicko_be.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 5, 3, 23, 19, 59, 783, DateTimeKind.Utc).AddTicks(2918));
+                        .HasDefaultValue(new DateTime(2025, 5, 5, 7, 17, 0, 635, DateTimeKind.Utc).AddTicks(9419));
 
                     b.Property<string>("Duration")
                         .IsRequired()
@@ -3221,6 +3337,60 @@ namespace Klicko_be.Migrations
                             Title = "Ferrari Driving Experience a Monza",
                             UserId = "698c347e-bb57-4cb4-b672-9940647f250d",
                             VoucherCode = "QWE23CDT-VBHGDTWQ-ZSDE125E"
+                        },
+                        new
+                        {
+                            VoucherId = new Guid("bfa7fa19-bea1-4ac1-be9f-1d10c5060921"),
+                            CategoryId = new Guid("6f3a957c-df09-437c-bc37-f069173eabe2"),
+                            CreatedAt = new DateTime(2024, 10, 28, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            Duration = "2 ore",
+                            ExpirationDate = new DateTime(2027, 4, 28, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            IsFreeCancellable = true,
+                            IsUsed = true,
+                            OrderId = new Guid("3dcfb704-133f-4da2-bdae-8bab37977d81"),
+                            Organiser = "Motor Experience",
+                            Place = "Monza, Lombardia",
+                            Price = 399m,
+                            ReservationDate = new DateTime(2024, 11, 29, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            Title = "Ferrari Driving Experience a Monza",
+                            UserId = "2320d7a9-4381-4a11-a9f1-5dca5879d332",
+                            VoucherCode = "DJFUR736-BF63RD6Q-0PWISJF6"
+                        },
+                        new
+                        {
+                            VoucherId = new Guid("131c7cb3-f4a4-4d52-94e6-3624a01584c8"),
+                            CategoryId = new Guid("6accf29d-8d1c-4edd-b48a-c70251516b99"),
+                            CreatedAt = new DateTime(2025, 1, 12, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            Duration = "7 ore",
+                            ExpirationDate = new DateTime(2026, 1, 12, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            IsFreeCancellable = true,
+                            IsUsed = true,
+                            OrderId = new Guid("0e7c0a9e-09ac-44c9-af1d-b51af2f7fe15"),
+                            Organiser = "Navigazione Ligure",
+                            Place = "Cinque Terre, Liguria",
+                            Price = 120m,
+                            ReservationDate = new DateTime(2025, 2, 23, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            Title = "Tour in barca delle Cinque Terre",
+                            UserId = "2320d7a9-4381-4a11-a9f1-5dca5879d332",
+                            VoucherCode = "847EYR3B-SJCK38EI-ASLWOE93"
+                        },
+                        new
+                        {
+                            VoucherId = new Guid("bcc17554-d43e-444c-8c09-2e8d462a99d9"),
+                            CategoryId = new Guid("5fdffa0f-a615-43f2-aa15-88bc8dcec27f"),
+                            CreatedAt = new DateTime(2025, 1, 12, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            Duration = "5 ore",
+                            ExpirationDate = new DateTime(2026, 1, 12, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            IsFreeCancellable = true,
+                            IsUsed = true,
+                            OrderId = new Guid("0e7c0a9e-09ac-44c9-af1d-b51af2f7fe15"),
+                            Organiser = "Sapori d'Italia",
+                            Place = "Chianti, Toscana",
+                            Price = 150m,
+                            ReservationDate = new DateTime(2025, 5, 10, 11, 0, 56, 0, DateTimeKind.Unspecified),
+                            Title = "Cucina toscana nella tenuta di un castello",
+                            UserId = "2320d7a9-4381-4a11-a9f1-5dca5879d332",
+                            VoucherCode = "SHDEI394-ALE20495-237DUEO3"
                         });
                 });
 

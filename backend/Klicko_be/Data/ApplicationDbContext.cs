@@ -194,7 +194,7 @@ namespace Klicko_be.Data
             // Tabella Order
             builder.Entity<Order>().Property(o => o.CreatedAt).HasDefaultValue(DateTime.UtcNow);
 
-            builder.HasSequence<int>("OrderNumber_seq").StartsAt(123456).IncrementsBy(1);
+            builder.HasSequence<int>("OrderNumber_seq").StartsAt(123460).IncrementsBy(1);
 
             builder
                 .Entity<Order>()
@@ -334,6 +334,14 @@ namespace Klicko_be.Data
                         UserId = "e5675086-e91e-442a-9c22-27d41bee49a4",
                         CreatedAt = DateTime.Parse("19/04/2025 11:00:56"),
                         UpdatedAt = DateTime.Parse("19/04/2025 11:00:56"),
+                    },
+                    new Cart()
+                    {
+                        //Gianluca Di Diego
+                        CartId = Guid.Parse("dada1f92-fc39-4db3-ba15-aacb30d5094e"),
+                        UserId = "2320d7a9-4381-4a11-a9f1-5dca5879d332",
+                        CreatedAt = DateTime.Parse("19/04/2025 11:00:56"),
+                        UpdatedAt = DateTime.Parse("19/04/2025 11:00:56"),
                     }
                 );
 
@@ -420,6 +428,22 @@ namespace Klicko_be.Data
                             "AQAAAAIAAYagAAAAENabfBTfVAnfCT/fg0+WNYZFHUGtBkj2cdOTFH8XkxudV8ZObX5QzlvepD9DwevyLA==",
                         CartId = Guid.Parse("0b61eb1c-7294-49ea-94a2-f90273f7e5c9"),
                         FidelityCardId = Guid.Parse("3f05415d-e413-4430-bdcd-e668d6f7aa83"),
+                    },
+                    new ApplicationUser()
+                    {
+                        Id = "2320d7a9-4381-4a11-a9f1-5dca5879d332",
+                        FirstName = "Gianluca",
+                        LastName = "Di Diego",
+                        RegistrationDate = DateTime.Parse("19/04/2025 11:00:56"),
+                        Email = "gianlu.test201@gmail.com",
+                        NormalizedEmail = "GIANLU.TEST201@GMAIL.COM",
+                        UserName = "gianlu.test201@gmail.com",
+                        NormalizedUserName = "GIANLU.TEST201@GMAIL.COM",
+                        // gianlutest
+                        PasswordHash =
+                            "AQAAAAIAAYagAAAAEAhO2X2Mwom+CdQCmG/k6jVMWPCEyRDWlBhzztf58kmfYLCaBsSECR2ypEUPYIsTeA==",
+                        CartId = Guid.Parse("dada1f92-fc39-4db3-ba15-aacb30d5094e"),
+                        FidelityCardId = Guid.Parse("476bab2c-8a68-42ae-a7f3-d8799feebafb"),
                     }
                 );
 
@@ -471,6 +495,15 @@ namespace Klicko_be.Data
                         Points = 0,
                         AvailablePoints = 0,
                         UserId = "e5675086-e91e-442a-9c22-27d41bee49a4",
+                    },
+                    // Gianluca Di Diego
+                    new FidelityCard()
+                    {
+                        FidelityCardId = Guid.Parse("476bab2c-8a68-42ae-a7f3-d8799feebafb"),
+                        CardNumber = "483524721629",
+                        Points = 669,
+                        AvailablePoints = 669,
+                        UserId = "2320d7a9-4381-4a11-a9f1-5dca5879d332",
                     }
                 );
 
@@ -578,6 +611,31 @@ namespace Klicko_be.Data
                         Code = "WELCOME5",
                         MinimumAmount = 100,
                         UserId = "e5675086-e91e-442a-9c22-27d41bee49a4",
+                    },
+                    // Gianluca Di Diego
+                    new Coupon()
+                    {
+                        CouponId = Guid.Parse("3e656ae8-9289-4027-8233-c6f7e1792b3b"),
+                        PercentualSaleAmount = 5,
+                        FixedSaleAmount = 0,
+                        IsActive = true,
+                        IsUniversal = false,
+                        ExpireDate = null,
+                        Code = "WELCOME5",
+                        MinimumAmount = 100,
+                        UserId = "2320d7a9-4381-4a11-a9f1-5dca5879d332",
+                    },
+                    new Coupon()
+                    {
+                        CouponId = Guid.Parse("8c8dd85c-e3a5-4d86-b500-2896744dd2cb"),
+                        PercentualSaleAmount = 15,
+                        FixedSaleAmount = 0,
+                        IsActive = true,
+                        IsUniversal = false,
+                        ExpireDate = DateTime.Parse("31/05/2025 23:59:59"),
+                        Code = "DEMODAY15",
+                        MinimumAmount = 250,
+                        UserId = "2320d7a9-4381-4a11-a9f1-5dca5879d332",
                     }
                 );
 
@@ -613,6 +671,12 @@ namespace Klicko_be.Data
                     {
                         UserRoleId = Guid.Parse("24d7ceb7-a7c8-48d8-a0b0-1ad0ce9f0fcf"),
                         UserId = "e5675086-e91e-442a-9c22-27d41bee49a4",
+                        RoleId = "849b8726-44b3-434b-9b18-48a4e8d4e9dd",
+                    },
+                    new ApplicationUserRole()
+                    {
+                        UserRoleId = Guid.Parse("420f55bd-f60f-4ad7-a873-bf6d55ed096d"),
+                        UserId = "2320d7a9-4381-4a11-a9f1-5dca5879d332",
                         RoleId = "849b8726-44b3-434b-9b18-48a4e8d4e9dd",
                     }
                 );
@@ -2621,6 +2685,31 @@ namespace Klicko_be.Data
                         ShippingPrice = 4.99m,
                         TotalPrice = 484.74m,
                         CreatedAt = DateTime.Parse("28/04/2025 11:00:56"),
+                    },
+                    // Ordini Gianluca Di Diego
+                    new Order()
+                    {
+                        OrderId = Guid.Parse("3dcfb704-133f-4da2-bdae-8bab37977d81"),
+                        OrderNumber = 123455,
+                        UserId = "2320d7a9-4381-4a11-a9f1-5dca5879d332",
+                        State = "Completato",
+                        SubTotalPrice = 399,
+                        TotalDiscount = 0,
+                        ShippingPrice = 4.99m,
+                        TotalPrice = 403.99m,
+                        CreatedAt = DateTime.Parse("28/10/2024 11:00:56"),
+                    },
+                    new Order()
+                    {
+                        OrderId = Guid.Parse("0e7c0a9e-09ac-44c9-af1d-b51af2f7fe15"),
+                        OrderNumber = 123456,
+                        UserId = "2320d7a9-4381-4a11-a9f1-5dca5879d332",
+                        State = "Completato",
+                        SubTotalPrice = 270,
+                        TotalDiscount = 0,
+                        ShippingPrice = 4.99m,
+                        TotalPrice = 274.99m,
+                        CreatedAt = DateTime.Parse("12/01/2025 11:00:56"),
                     }
                 );
 
@@ -2712,6 +2801,35 @@ namespace Klicko_be.Data
                         UnitPrice = 399,
                         TotalPrice = 399,
                         OrderId = Guid.Parse("d1f55060-cb7a-4c66-b674-adda6099dde5"),
+                        Quantity = 1,
+                    },
+                    // sesto ordine
+                    new OrderExperience()
+                    {
+                        OrderExperienceId = Guid.Parse("80a838c4-5755-49ce-98fd-648ae8f96eca"),
+                        Title = "Ferrari Driving Experience a Monza",
+                        UnitPrice = 399,
+                        TotalPrice = 399,
+                        OrderId = Guid.Parse("3dcfb704-133f-4da2-bdae-8bab37977d81"),
+                        Quantity = 1,
+                    },
+                    // settimo ordine
+                    new OrderExperience()
+                    {
+                        OrderExperienceId = Guid.Parse("df1cccb6-14c7-4d69-b3a5-ebbaad8234d2"),
+                        Title = "Tour in barca delle Cinque Terre",
+                        UnitPrice = 120,
+                        TotalPrice = 120,
+                        OrderId = Guid.Parse("0e7c0a9e-09ac-44c9-af1d-b51af2f7fe15"),
+                        Quantity = 1,
+                    },
+                    new OrderExperience()
+                    {
+                        OrderExperienceId = Guid.Parse("f2262b58-9a0a-4134-8961-1b9a986ea613"),
+                        Title = "Cucina toscana nella tenuta di un castello",
+                        UnitPrice = 150,
+                        TotalPrice = 150,
+                        OrderId = Guid.Parse("0e7c0a9e-09ac-44c9-af1d-b51af2f7fe15"),
                         Quantity = 1,
                     }
                 );
@@ -2958,6 +3076,63 @@ namespace Klicko_be.Data
                         CreatedAt = DateTime.Parse("28/04/2025 11:00:56"),
                         ExpirationDate = DateTime.Parse("28/04/2027 11:00:56"),
                         OrderId = Guid.Parse("d1f55060-cb7a-4c66-b674-adda6099dde5"),
+                    },
+                    // sesto ordine
+                    new Voucher()
+                    {
+                        VoucherId = Guid.Parse("bfa7fa19-bea1-4ac1-be9f-1d10c5060921"),
+                        Title = "Ferrari Driving Experience a Monza",
+                        CategoryId = Guid.Parse("6F3A957C-DF09-437C-BC37-F069173EABE2"),
+                        Duration = "2 ore",
+                        Place = "Monza, Lombardia",
+                        Price = 399,
+                        Organiser = "Motor Experience",
+                        IsFreeCancellable = true,
+                        VoucherCode = "DJFUR736-BF63RD6Q-0PWISJF6",
+                        ReservationDate = DateTime.Parse("29/11/2024 11:00:56"),
+                        IsUsed = true,
+                        UserId = "2320d7a9-4381-4a11-a9f1-5dca5879d332",
+                        CreatedAt = DateTime.Parse("28/10/2024 11:00:56"),
+                        ExpirationDate = DateTime.Parse("28/04/2027 11:00:56"),
+                        OrderId = Guid.Parse("3dcfb704-133f-4da2-bdae-8bab37977d81"),
+                    },
+                    // settimo ordine
+                    new Voucher()
+                    {
+                        VoucherId = Guid.Parse("131c7cb3-f4a4-4d52-94e6-3624a01584c8"),
+                        Title = "Tour in barca delle Cinque Terre",
+                        CategoryId = Guid.Parse("6ACCF29D-8D1C-4EDD-B48A-C70251516B99"),
+                        Duration = "7 ore",
+                        Place = "Cinque Terre, Liguria",
+                        Price = 120,
+                        Organiser = "Navigazione Ligure",
+                        IsFreeCancellable = true,
+                        VoucherCode = "847EYR3B-SJCK38EI-ASLWOE93",
+                        ReservationDate = DateTime.Parse("23/02/2025 11:00:56"),
+                        IsUsed = true,
+                        UserId = "2320d7a9-4381-4a11-a9f1-5dca5879d332",
+                        CreatedAt = DateTime.Parse("12/01/2025 11:00:56"),
+                        ExpirationDate = DateTime.Parse("12/01/2026 11:00:56"),
+                        OrderId = Guid.Parse("0e7c0a9e-09ac-44c9-af1d-b51af2f7fe15"),
+                    },
+                    // VOUCHER CUCINA TOSCANA
+                    new Voucher()
+                    {
+                        VoucherId = Guid.Parse("bcc17554-d43e-444c-8c09-2e8d462a99d9"),
+                        Title = "Cucina toscana nella tenuta di un castello",
+                        CategoryId = Guid.Parse("5FDFFA0F-A615-43F2-AA15-88BC8DCEC27F"),
+                        Duration = "5 ore",
+                        Place = "Chianti, Toscana",
+                        Price = 150,
+                        Organiser = "Sapori d'Italia",
+                        IsFreeCancellable = true,
+                        VoucherCode = "SHDEI394-ALE20495-237DUEO3",
+                        ReservationDate = DateTime.Parse("10/05/2025 11:00:56"),
+                        IsUsed = true,
+                        UserId = "2320d7a9-4381-4a11-a9f1-5dca5879d332",
+                        CreatedAt = DateTime.Parse("12/01/2025 11:00:56"),
+                        ExpirationDate = DateTime.Parse("12/01/2026 11:00:56"),
+                        OrderId = Guid.Parse("0e7c0a9e-09ac-44c9-af1d-b51af2f7fe15"),
                     }
                 );
         }
