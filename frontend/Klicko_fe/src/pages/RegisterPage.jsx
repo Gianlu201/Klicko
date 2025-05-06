@@ -14,6 +14,7 @@ const RegisterPage = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
 
   const profile = useSelector((state) => {
     return state.profile;
@@ -21,9 +22,23 @@ const RegisterPage = () => {
 
   const navigate = useNavigate();
 
-  const sendRegistrationForm = async (e) => {
+  const checkFormValidity = (e) => {
+    e.preventDefault();
+    if (
+      name.length > 0 &&
+      surname.length > 0 &&
+      email.length > 0 &&
+      password.length > 0 &&
+      confirmPassword.length > 0
+    ) {
+      sendRegistrationForm();
+    } else {
+      setShowErrorMessage(true);
+    }
+  };
+
+  const sendRegistrationForm = async () => {
     try {
-      e.preventDefault();
       setErrorMessage('');
 
       if (password !== confirmPassword) {
@@ -55,7 +70,7 @@ const RegisterPage = () => {
           throw new Error('Qualcosa è andato storto, riprova!');
         }
       }
-    } catch {
+    } catch (e) {
       toast.error(
         <>
           <p className='font-bold'>Errore nella registrazione!</p>
@@ -112,7 +127,7 @@ const RegisterPage = () => {
         <form
           className='mb-5'
           onSubmit={(e) => {
-            sendRegistrationForm(e);
+            checkFormValidity(e);
           }}
         >
           <div className='flex flex-col mb-4'>
@@ -126,7 +141,13 @@ const RegisterPage = () => {
                 setName(e.target.value);
               }}
             />
+            {showErrorMessage && name.length === 0 && (
+              <span className='text-sm text-red-500 mt-1'>
+                Questo campo è obbligatorio!
+              </span>
+            )}
           </div>
+
           <div className='flex flex-col mb-4'>
             <label className='mb-2'>Cognome</label>
             <input
@@ -138,11 +159,17 @@ const RegisterPage = () => {
                 setSurname(e.target.value);
               }}
             />
+            {showErrorMessage && surname.length === 0 && (
+              <span className='text-sm text-red-500 mt-1'>
+                Questo campo è obbligatorio!
+              </span>
+            )}
           </div>
+
           <div className='flex flex-col mb-4'>
             <label className='mb-2'>Email</label>
             <input
-              type='text'
+              type='email'
               placeholder='Inserisci la tua email..'
               className='text-sm sm:text-base bg-background border border-gray-600/20 rounded-lg py-1.5 px-3'
               value={email}
@@ -150,7 +177,13 @@ const RegisterPage = () => {
                 setEmail(e.target.value);
               }}
             />
+            {showErrorMessage && email.length === 0 && (
+              <span className='text-sm text-red-500 mt-1'>
+                Questo campo è obbligatorio!
+              </span>
+            )}
           </div>
+
           <div className='flex flex-col mb-4'>
             <label className='mb-2'>Password</label>
             <input
@@ -162,11 +195,17 @@ const RegisterPage = () => {
                 setPassword(e.target.value);
               }}
             />
+            {showErrorMessage && password.length === 0 && (
+              <span className='text-sm text-red-500 mt-1'>
+                Questo campo è obbligatorio!
+              </span>
+            )}
           </div>
+
           <div className='flex flex-col mb-6'>
             <label className='mb-2'>Conferma password</label>
             <input
-              type='text'
+              type='password'
               placeholder='Conferma la tua password..'
               className='text-sm sm:text-base bg-background border border-gray-600/20 rounded-lg py-1.5 px-3'
               value={confirmPassword}
@@ -174,9 +213,16 @@ const RegisterPage = () => {
                 setConfirmPassword(e.target.value);
               }}
             />
+            {showErrorMessage && confirmPassword.length === 0 && (
+              <span className='text-sm text-red-500 mt-1'>
+                Questo campo è obbligatorio!
+              </span>
+            )}
           </div>
 
-          {errorMessage !== '' && <p>{errorMessage}</p>}
+          {errorMessage !== '' && (
+            <p className='text-sm text-red-500 my-2'>{errorMessage}</p>
+          )}
 
           <Button type='submit' variant='primary' fullWidth={true}>
             Registrati
