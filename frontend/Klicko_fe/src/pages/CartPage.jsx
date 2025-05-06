@@ -250,7 +250,7 @@ const CartPage = () => {
                     <td className='hidden md:block col-span-3 overflow-hidden'>
                       <div className='aspect-square rounded-lg overflow-hidden'>
                         <img
-                          src={`https://localhost:7235/uploads/${exp.coverImage}`}
+                          src={`https://klicko-backend-api.azurewebsites.net/uploads/${exp.coverImage}`}
                           className='w-full h-full object-cover'
                         />
                       </div>

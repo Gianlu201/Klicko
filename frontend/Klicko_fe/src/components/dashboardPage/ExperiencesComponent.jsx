@@ -415,7 +415,7 @@ const ExperiencesComponent = () => {
                       <div className='hidden md:block'>
                         <div className='h-[40px] aspect-square rounded overflow-hidden'>
                           <img
-                            src={`https://localhost:7235/uploads/${exp.coverImage}`}
+                            src={`https://klicko-backend-api.azurewebsites.net/uploads/${exp.coverImage}`}
                             alt={exp.title}
                             className='w-full h-full object-cover'
                           />

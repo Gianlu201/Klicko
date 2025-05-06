@@ -63,7 +63,7 @@ const ImagesPreview = ({
                 className='relative w-full h-28 rounded-lg overflow-hidden border border-gray-200 shadow-sm group'
               >
                 <img
-                  src={`https://localhost:7235/uploads/${img.url}`}
+                  src={`https://klicko-backend-api.azurewebsites.net/uploads/${img.url}`}
                   alt={`preview-${idx}`}
                   className='object-cover w-full h-full'
                 />
@@ -87,7 +87,7 @@ const ImagesPreview = ({
           <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mt-4'>
             <div className='relative w-full h-28 rounded-lg overflow-hidden border border-gray-200 shadow-sm group'>
               <img
-                src={`https://localhost:7235/uploads/${prevCoverImage}`}
+                src={`https://klicko-backend-api.azurewebsites.net/uploads/${prevCoverImage}`}
                 className='object-cover w-full h-full'
               />
               <button

@@ -163,7 +163,7 @@ const DetailPage = () => {
         <div>
           <div className='relative h-[30vh] md:h-[50vh] lg:h-[70vh] overflow-hidden'>
             <img
-              src={`https://localhost:7235/uploads/${experience.coverImage}`}
+              src={`https://klicko-backend-api.azurewebsites.net/uploads/${experience.coverImage}`}
               alt={experience.title}
               className='absolute top-1/2 start-0 -translate-y-1/2  w-full'
             />

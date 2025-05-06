@@ -15,7 +15,7 @@ const ExperienceCard = ({ experience, className }) => {
           {/* card top */}
           <div className='relative aspect-16/9 overflow-hidden'>
             <img
-              src={`https://localhost:7235/uploads/${experience.coverImage}`}
+              src={`https://klicko-backend-api.azurewebsites.net/uploads/${experience.coverImage}`}
               className='absolute top-1/2 start-1/2 -translate-y-1/2 -translate-x-1/2 z-0 w-full h-full'
             />
             {experience.isInEvidence ? (

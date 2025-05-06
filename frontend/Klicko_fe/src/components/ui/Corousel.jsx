@@ -49,7 +49,7 @@ export default function Carousel({
         {items.map((item, index) => (
           <div key={index}>
             <img
-              src={`https://localhost:7235/uploads/${item.url}`}
+              src={`https://klicko-backend-api.azurewebsites.net/uploads/${item.url}`}
               className='w-full h-full rounded-2xl cursor-pointer'
               onClick={() => {
                 setSelectedImgUrl(item.url);
@@ -80,7 +80,7 @@ export default function Carousel({
           onClick={() => setOpenModal(false)}
         />
         <img
-          src={`https://localhost:7235/uploads/${selectedImgUrl}`}
+          src={`https://klicko-backend-api.azurewebsites.net/uploads/${selectedImgUrl}`}
           className='w-full h-full rounded-2xl'
         />
       </Modal>
