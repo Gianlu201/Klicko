@@ -3,12 +3,7 @@ import Button from '../components/ui/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import { ShoppingCart, Trash2 } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  addExperienceUnitToLocalCart,
-  cartModified,
-  removeExperienceFromLocalCart,
-  removeExperienceUnitFromLocalCart,
-} from '../redux/actions';
+import { cartModified } from '../redux/actions';
 import { toast } from 'sonner';
 
 const CartPage = () => {
@@ -47,27 +42,6 @@ const CartPage = () => {
     return totalDiscount;
   };
 
-  const removeExperienceUnitManage = (experienceId) => {
-    switch (cart.cartId !== '') {
-      case true:
-        removeExperienceUnit(experienceId);
-        break;
-
-      case false:
-        removeExperienceUnitFromLocalCartFunction(experienceId);
-        break;
-
-      default:
-        toast.error(
-          <>
-            <p className='font-bold'>Errore!</p>
-            <p>Errore nella modifica del carrello</p>
-          </>
-        );
-        break;
-    }
-  };
-
   const removeExperienceUnit = async (experienceId) => {
     try {
       const response = await fetch(
@@ -95,31 +69,6 @@ const CartPage = () => {
     }
   };
 
-  const removeExperienceUnitFromLocalCartFunction = (experienceId) => {
-    dispatch(removeExperienceUnitFromLocalCart(experienceId));
-  };
-
-  const addExperienceUnitManage = (experienceId) => {
-    switch (cart.cartId !== '') {
-      case true:
-        addExperienceUnit(experienceId);
-        break;
-
-      case false:
-        addExperienceUnitToLocalCartFunction(experienceId);
-        break;
-
-      default:
-        toast.error(
-          <>
-            <p className='font-bold'>Errore!</p>
-            <p>Errore nella modifica del carrello</p>
-          </>
-        );
-        break;
-    }
-  };
-
   const addExperienceUnit = async (experienceId) => {
     try {
       const response = await fetch(
@@ -144,31 +93,6 @@ const CartPage = () => {
           <p>{e.message}</p>
         </>
       );
-    }
-  };
-
-  const addExperienceUnitToLocalCartFunction = (experienceId) => {
-    dispatch(addExperienceUnitToLocalCart(experienceId));
-  };
-
-  const removeExperienceFromCartManage = (experienceId) => {
-    switch (cart.cartId !== '') {
-      case true:
-        removeExperienceFromCart(experienceId);
-        break;
-
-      case false:
-        removeExperienceFromLocalCartFunction(experienceId);
-        break;
-
-      default:
-        toast.error(
-          <>
-            <p className='font-bold'>Errore!</p>
-            <p>Errore nella modifica del carrello</p>
-          </>
-        );
-        break;
     }
   };
 
@@ -204,16 +128,6 @@ const CartPage = () => {
         </>
       );
     }
-  };
-
-  const removeExperienceFromLocalCartFunction = (experienceId) => {
-    dispatch(removeExperienceFromLocalCart(experienceId));
-    toast.success(
-      <>
-        <p className='font-bold'>Carrello modificato!</p>
-        <p>Esperienza rimossa dal carrello!</p>
-      </>
-    );
   };
 
   return (
@@ -277,7 +191,7 @@ const CartPage = () => {
                         size='sm'
                         className='order-2 md:order-1 col-span-2 md:col-span-1 text-xl font-bold w-8 h-8'
                         onClick={() => {
-                          removeExperienceUnitManage(exp.experienceId);
+                          removeExperienceUnit(exp.experienceId);
                         }}
                       >
                         -
@@ -292,7 +206,7 @@ const CartPage = () => {
                         size='sm'
                         className='order-3 md:order-3 col-span-2 md:col-span-1 text-xl font-bold w-8 h-8'
                         onClick={() => {
-                          addExperienceUnitManage(exp.experienceId);
+                          addExperienceUnit(exp.experienceId);
                         }}
                       >
                         +
@@ -321,7 +235,7 @@ const CartPage = () => {
                       <Trash2
                         className='text-red-500 w-4 h-4 ms-auto cursor-pointer'
                         onClick={() => {
-                          removeExperienceFromCartManage(exp.experienceId);
+                          removeExperienceFromCart(exp.experienceId);
                         }}
                       />
                     </td>
@@ -374,7 +288,7 @@ const CartPage = () => {
               fullWidth={true}
               className='mb-3'
               onClick={() => {
-                navigate(`${cart.cartId === '' ? '/login' : '/checkout'}`);
+                navigate('/checkout');
               }}
             >
               Procedi al checkout

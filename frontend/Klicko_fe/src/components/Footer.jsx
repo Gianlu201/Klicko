@@ -165,29 +165,21 @@ const Footer = () => {
           <p className='mb-4'>
             Iscriviti per ricevere offerte speciali e scoprire nuove esperienze
           </p>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              sendNewsLetterEmail();
-            }}
+          <input
+            type='email'
+            placeholder='La tua email'
+            className='bg-gray-800 w-full text-gray-50 py-2 ps-4 rounded-lg border border-gray-700 mb-2'
+            value={newsLetterEmail}
+            onChange={(e) => setNewsLetterEmail(e.target.value)}
+          />
+          <Button
+            variant='primary'
+            fullWidth={true}
+            disabled={newsLetterEmail === '' ? true : false}
+            onClick={() => sendNewsLetterEmail()}
           >
-            <input
-              type='email'
-              placeholder='La tua email'
-              className='bg-gray-800 w-full text-gray-50 py-2 ps-4 rounded-lg border border-gray-700 mb-2'
-              value={newsLetterEmail}
-              onChange={(e) => setNewsLetterEmail(e.target.value)}
-              required
-            />
-            <Button
-              type='submit'
-              variant='primary'
-              fullWidth={true}
-              disabled={newsLetterEmail === '' ? true : false}
-            >
-              Iscriviti
-            </Button>
-          </form>
+            Iscriviti
+          </Button>
         </div>
       </div>
       <div className='mx-6 md:flex justify-between max-w-7xl lg:mx-auto border-t border-t-gray-600 text-gray-500 pt-4'>

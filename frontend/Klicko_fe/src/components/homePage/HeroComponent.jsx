@@ -30,14 +30,7 @@ const HeroComponent = () => {
           Esperienze uniche che trasformeranno il tuo modo di viaggiare
         </p>
 
-        <form
-          className='flex flex-col md:flex-row w-full max-w-xl gap-3 px-10 2xl:px-0'
-          onSubmit={(e) => {
-            e.preventDefault();
-            dispatch(setSearchBarQuery(searchBar));
-            navigate('/experiences');
-          }}
-        >
+        <div className='flex flex-col md:flex-row w-full max-w-xl gap-3 px-10 2xl:px-0'>
           <input
             type='text'
             placeholder='Cerca la tua prossima avventura…'
@@ -47,10 +40,16 @@ const HeroComponent = () => {
               setSearchBar(e.target.value);
             }}
           />
-          <Button variant='secondary' type='submit'>
+          <Button
+            variant='secondary'
+            onClick={() => {
+              dispatch(setSearchBarQuery(searchBar));
+              navigate('/experiences');
+            }}
+          >
             Cerca
           </Button>
-        </form>
+        </div>
       </div>
     </section>
   );

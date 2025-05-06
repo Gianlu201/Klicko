@@ -10,8 +10,6 @@ const LoginPage = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [showErrorMessage, setShowErrorMessage] = useState(false);
-  const [credentialsError, setCredentialsError] = useState(false);
 
   const profile = useSelector((state) => {
     return state.profile;
@@ -20,15 +18,6 @@ const LoginPage = () => {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
-
-  const checkFormValidity = () => {
-    setCredentialsError(false);
-    if (email.length === 0 || password.length === 0) {
-      setShowErrorMessage(true);
-    } else {
-      sendLoginForm();
-    }
-  };
 
   const sendLoginForm = async () => {
     try {
@@ -54,8 +43,6 @@ const LoginPage = () => {
         } else {
           throw new Error();
         }
-      } else if (response.status === 400) {
-        setCredentialsError(true);
       } else {
         throw new Error();
       }
@@ -120,7 +107,7 @@ const LoginPage = () => {
           <div className='flex flex-col mb-4'>
             <label className='mb-2'>Email</label>
             <input
-              type='email'
+              type='text'
               placeholder='Inserisci la tua email..'
               className='text-sm sm:text-base bg-background border border-gray-600/20 rounded-lg py-1.5 px-3'
               value={email}
@@ -128,13 +115,7 @@ const LoginPage = () => {
                 setEmail(e.target.value);
               }}
             />
-            {showErrorMessage && email.length === 0 && (
-              <span className='text-sm text-red-500 mt-1'>
-                Questo campo è obbligatorio!
-              </span>
-            )}
           </div>
-
           <div className='flex flex-col mb-5'>
             <label className='mb-2'>Password</label>
             <input
@@ -146,24 +127,12 @@ const LoginPage = () => {
                 setPassword(e.target.value);
               }}
             />
-            {showErrorMessage && password.length === 0 && (
-              <span className='text-sm text-red-500 mt-1'>
-                Questo campo è obbligatorio!
-              </span>
-            )}
           </div>
-
-          {credentialsError && (
-            <p className='text-sm text-red-600 font-medium text-center py-4 px-3 bg-red-200/60 mb-4 rounded-xl'>
-              Email o password non corretti, riprovare!
-            </p>
-          )}
-
           <Button
             type='button'
             variant='primary'
             fullWidth={true}
-            onClick={checkFormValidity}
+            onClick={sendLoginForm}
           >
             Accedi
           </Button>

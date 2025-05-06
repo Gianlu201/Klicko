@@ -1,6 +1,5 @@
 ﻿using Klicko_be.Data;
 using Klicko_be.DTOs.Cart;
-using Klicko_be.DTOs.CartExperience;
 using Klicko_be.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -225,87 +224,6 @@ namespace Klicko_be.Services
                     return false;
                 }
                 _context.CartExperiences.RemoveRange(cartExperiences);
-                var result = await TrySaveAsync();
-
-                if (result)
-                {
-                    await UpdateCartDateByIdAsync(cartId);
-                }
-
-                return result;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public async Task<bool> AddExperienceFromLocalCartAsync(
-            Guid cartId,
-            List<CreateCartExperienceFromLocalCartRequestDto> localExperiences
-        )
-        {
-            try
-            {
-                var cart = await GetCartByIdAsync(cartId);
-                if (cart == null)
-                {
-                    return false;
-                }
-
-                var experiences = await _context.Experiences.ToListAsync();
-
-                if (experiences == null || experiences.Count == 0)
-                {
-                    return false;
-                }
-
-                List<CartExperience> newCartExperiences = [];
-
-                foreach (var localExp in localExperiences)
-                {
-                    var experience = experiences!.FirstOrDefault(e =>
-                        e.ExperienceId == localExp.ExperienceId
-                    );
-
-                    if (experience != null)
-                    {
-                        var next = false;
-
-                        if (cart.CartExperiences != null && cart.CartExperiences.Count > 0)
-                        {
-                            foreach (var cartExp in cart.CartExperiences)
-                            {
-                                if (cartExp.ExperienceId == localExp.ExperienceId)
-                                {
-                                    cartExp.Quantity += localExp.Quantity;
-                                    next = true;
-                                    break;
-                                }
-                            }
-                        }
-
-                        if (next)
-                        {
-                            continue;
-                        }
-
-                        var cartExperience = new CartExperience()
-                        {
-                            ExperienceId = experience!.ExperienceId,
-                            CartId = cart.CartId,
-                            Quantity = localExp.Quantity,
-                        };
-
-                        newCartExperiences.Add(cartExperience);
-                    }
-                }
-
-                if (newCartExperiences.Count > 0)
-                {
-                    await _context.CartExperiences.AddRangeAsync(newCartExperiences);
-                }
-
                 var result = await TrySaveAsync();
 
                 if (result)

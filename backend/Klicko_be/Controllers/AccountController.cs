@@ -171,42 +171,7 @@ namespace Klicko_be.Controllers
                     AvailablePoints = 0,
                     UserId = newUserId,
                 },
-                Coupons = new List<Coupon>()
-                {
-                    new Coupon()
-                    {
-                        CouponId = Guid.NewGuid(),
-                        UserId = newUserId,
-                        PercentualSaleAmount = 5,
-                        FixedSaleAmount = 0,
-                        IsActive = true,
-                        IsUniversal = false,
-                        ExpireDate = null,
-                        Code = "WELCOME5",
-                        MinimumAmount = 100,
-                    },
-                },
             };
-
-            // se la data attuale di registrazione è precedente al 31/05/2025 aggiunge alla
-            // lista coupon associata al nuovo utente un altro coupon speciale in occasione del DEMODAY
-            if (newUser.RegistrationDate < new DateTime(2025, 5, 31))
-            {
-                newUser.Coupons.Add(
-                    new Coupon()
-                    {
-                        CouponId = Guid.NewGuid(),
-                        UserId = newUserId,
-                        PercentualSaleAmount = 15,
-                        FixedSaleAmount = 0,
-                        IsActive = true,
-                        IsUniversal = false,
-                        ExpireDate = DateTime.Parse("31/05/2025 23:59:59"),
-                        Code = "DEMODAY15",
-                        MinimumAmount = 250,
-                    }
-                );
-            }
 
             var result = await _userManager.CreateAsync(newUser, registerRequestDto.Password);
 
@@ -233,17 +198,7 @@ namespace Klicko_be.Controllers
                 return BadRequest();
             }
 
-            var result = await _signInManager.PasswordSignInAsync(
-                user,
-                loginRequestDto.Password,
-                false,
-                false
-            );
-
-            if (result.Succeeded == false)
-            {
-                return BadRequest(new { Message = "Invalid credentials!" });
-            }
+            await _signInManager.PasswordSignInAsync(user, loginRequestDto.Password, false, false);
 
             var roles = await _signInManager.UserManager.GetRolesAsync(user);
 

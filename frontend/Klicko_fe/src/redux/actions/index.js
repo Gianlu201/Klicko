@@ -4,16 +4,8 @@ import { toast } from 'sonner';
 export const SET_LOGGED_USER = 'SET_LOGGED_USER';
 export const LOGOUT = 'LOGOUT';
 export const SET_USER_CART = 'SET_USER_CART';
-export const EMPTY_CART = 'EMPTY_CART';
 export const CART_MODIFIED = 'CART_MODIFIED';
-export const SET_CART_FROM_LOCAL = 'SET_CART_FROM_LOCAL';
-export const ADD_EXPERIENCE_TO_LOCAL_CART = 'ADD_EXPERIENCE_TO_LOCAL_CART';
-export const REMOVE_EXPERIENCE_FROM_LOCAL_CART =
-  'REMOVE_EXPERIENCE_FROM_LOCAL_CART';
-export const ADD_EXPERIENCE_UNIT_TO_LOCAL_CART =
-  'ADD_EXPERIENCE_UNIT_TO_LOCAL_CART';
-export const REMOVE_EXPERIENCE_UNIT_FROM_LOCAL_CART =
-  'REMOVE_EXPERIENCE_UNIT_FROM_LOCAL_CART';
+export const EMPTY_CART = 'EMPTY_CART';
 export const SET_SEARCHBAR_QUERY = 'SET_SEARCHBAR_QUERY';
 export const SET_SELECTED_CATEGORY = 'SET_SELECTED_CATEGORY';
 export const SET_USER_FIDELITY_CARD = 'SET_USER_FIDELITY_CARD';
@@ -92,46 +84,6 @@ export const emptyCart = () => ({
 
 export const cartModified = () => ({
   type: CART_MODIFIED,
-});
-
-export const setCartFromLocal = (localCart) => ({
-  type: SET_CART_FROM_LOCAL,
-  payload: localCart,
-});
-
-export const addExperienceToLocalCart = (experience) => {
-  let newCartExperience = {
-    title: experience.title,
-    categoryName: experience.category.name,
-    coverImage: experience.coverImage,
-    experienceId: experience.experienceId,
-    isFreeCancellable: experience.isFreeCancellable,
-    place: experience.place,
-    duration: experience.duration,
-    price: experience.price,
-    quantity: 1,
-    sale: experience.sale,
-  };
-
-  return {
-    type: ADD_EXPERIENCE_TO_LOCAL_CART,
-    payload: newCartExperience,
-  };
-};
-
-export const removeExperienceFromLocalCart = (experienceId) => ({
-  type: REMOVE_EXPERIENCE_FROM_LOCAL_CART,
-  payload: experienceId,
-});
-
-export const addExperienceUnitToLocalCart = (experienceId) => ({
-  type: ADD_EXPERIENCE_UNIT_TO_LOCAL_CART,
-  payload: experienceId,
-});
-
-export const removeExperienceUnitFromLocalCart = (experienceId) => ({
-  type: REMOVE_EXPERIENCE_UNIT_FROM_LOCAL_CART,
-  payload: experienceId,
 });
 
 export const setUserFidelityCard = (fidelityCard) => {

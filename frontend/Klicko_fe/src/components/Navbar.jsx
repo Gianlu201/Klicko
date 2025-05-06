@@ -19,7 +19,6 @@ import { Dropdown, DropdownItem, DropdownHeader } from './ui/DropdownMenu';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   logoutUser,
-  setCartFromLocal,
   setLoggedUser,
   setUserCart,
   setUserFidelityCard,
@@ -30,7 +29,6 @@ import { toast } from 'sonner';
 const Navbar = () => {
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
-  const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const profile = useSelector((state) => {
@@ -147,11 +145,8 @@ const Navbar = () => {
         cartId = profile.cartId;
       } else {
         const tokenDecoded = jwtDecode(data.token);
-        cartId = tokenDecoded.cartId;
-      }
 
-      if (cart.cartId === '' && cart.experiences.length > 0) {
-        await sendExperiencesFromLocalCart(cartId);
+        cartId = tokenDecoded.cartId;
       }
 
       const response = await fetch(`${backendUrl}/Cart/GetCart/${cartId}`, {
@@ -166,41 +161,6 @@ const Navbar = () => {
         dispatch(setUserCart(data.cart));
       } else {
         throw new Error('Errore nel recupero del carrello!');
-      }
-    } catch (e) {
-      toast.error(
-        <>
-          <p className='font-bold'>Errore!</p>
-          <p>{e.message}</p>
-        </>
-      );
-    }
-  };
-
-  const sendExperiencesFromLocalCart = async (cartId) => {
-    try {
-      let body = [];
-      cart.experiences.forEach((exp) => {
-        body.push({
-          experienceId: exp.experienceId,
-          quantity: exp.quantity,
-        });
-      });
-
-      const response = await fetch(
-        `${backendUrl}/Cart/AddExperienceFromLocalCart/${cartId}`,
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(body),
-        }
-      );
-      if (response.ok) {
-        localStorage.removeItem('klickoLocalCart');
-      } else {
-        throw new Error('Errore nel recupero dei dati!');
       }
     } catch (e) {
       toast.error(
@@ -247,18 +207,6 @@ const Navbar = () => {
     navigate('/');
   };
 
-  const updateLocalStorageCart = () => {
-    if (isFirstLoad) {
-      const localCart = localStorage.getItem('klickoLocalCart');
-      dispatch(setCartFromLocal(JSON.parse(localCart)));
-      setIsFirstLoad(false);
-    } else {
-      localStorage.removeItem('klickoLocalCart');
-
-      localStorage.setItem('klickoLocalCart', JSON.stringify(cart));
-    }
-  };
-
   const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
 
   useEffect(() => {
@@ -272,10 +220,6 @@ const Navbar = () => {
   useEffect(() => {
     if (cart.modified === true) {
       getUserCart(null);
-    }
-
-    if (cart.cartId === '') {
-      updateLocalStorageCart();
     }
   }, [cart]);
 
@@ -333,11 +277,11 @@ const Navbar = () => {
             }}
           >
             {cart.experiences != undefined && cart.experiences.length > 0 && (
-              <span className='absolute -top-2 -end-2 bg-secondary rounded-full flex justify-center items-center w-5 h-5 text-xs text-white font-semibold'>
+              <span className='text-lg font-semibold'>
                 {cart.experiences.length}
               </span>
             )}
-            <ShoppingCart className='w-full h-full' />
+            <ShoppingCart className='h-6 w-6' />
           </Link>
 
           {profile?.email ? (

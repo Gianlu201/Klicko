@@ -213,27 +213,5 @@ namespace Klicko_be.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
-
-        [HttpPut("AddExperienceFromLocalCart/{cartId:guid}")]
-        public async Task<IActionResult> AddExperienceFromLocalCart(
-            [FromBody] List<CreateCartExperienceFromLocalCartRequestDto> experiences,
-            Guid cartId
-        )
-        {
-            try
-            {
-                var result = await _cartService.AddExperienceFromLocalCartAsync(
-                    cartId,
-                    experiences
-                );
-                return result
-                    ? Ok(new EditCartResponseDto() { Message = "Cart modified successfully!" })
-                    : BadRequest(new EditCartResponseDto() { Message = "Something went wrong!" });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-            }
-        }
     }
 }
