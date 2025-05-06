@@ -250,7 +250,9 @@ const Navbar = () => {
   const updateLocalStorageCart = () => {
     if (isFirstLoad) {
       const localCart = localStorage.getItem('klickoLocalCart');
-      dispatch(setCartFromLocal(JSON.parse(localCart)));
+      if (localCart !== null) {
+        dispatch(setCartFromLocal(JSON.parse(localCart)));
+      }
       setIsFirstLoad(false);
     } else {
       localStorage.removeItem('klickoLocalCart');
