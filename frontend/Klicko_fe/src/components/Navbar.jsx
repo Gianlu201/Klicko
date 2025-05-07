@@ -352,7 +352,11 @@ const Navbar = () => {
                     setMobileMenuOpen(false);
                   }}
                 >
-                  <User className='h-5 w-5' />
+                  {/* <User className='h-5 w-5' /> */}
+                  <span className='font-bold'>
+                    {profile.name[0]}
+                    {profile.surname[0]}
+                  </span>
                 </Button>
               }
               align='right'

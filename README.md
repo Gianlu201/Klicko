@@ -73,15 +73,31 @@ Klicko/
 
 ## ⚙️ Funzionalità Principali
 
-- **Esplorazione esperienze**: Gli utenti possono navigare tra diverse esperienze e avventure disponibili.
-- **Acquisti**: Possibilità di acquistare Voucher per riscattare esperienze da vivere.
-- **Prenotazioni**: Possibilità di prenotare esperienze direttamente dalla piattaforma.
-- **Programma fedeltà**: Area riservata che presenta un riepilogo dei bonus volti alla fidelizzazione del cliente.
-- **Gestione utenti**: Registrazione, login e gestione del profilo utente.
-- **Pagamenti sicuri**: Integrazione con Stripe per effettuare pagamenti in modo sicuro.
-- **Notifiche email**: Invio di conferme e notifiche tramite SendGrid.
-- **Dashboard personale**: Area riservata dove poter consultare i propri ordini effettuati.
-- **Pannello admin**: Gestione delle esperienze, visualizzazione delle prenotazioni e controllo degli utenti.
+- #### Visitatore
+
+  - **Esplorazione esperienze**: Navigazione tra diverse esperienze e avventure disponibili.
+  - **Aggiunta esperienze al carrello**: Possibilità di salvare le esperienze desiderate nel carrello (mediante LocalStorage).
+  - **Gestione utenti**: Registrazione, login e gestione del profilo utente.
+  - **Registrazione NewsLetter**: Possibilità di iscriversi alla newsletter.
+
+- #### Utente
+
+  - **Acquisti**: Possibilità di acquistare Voucher per riscattare esperienze da vivere.
+  - **Prenotazioni**: Possibilità di prenotare esperienze direttamente dalla piattaforma.
+  - **Programma fedeltà**: Area riservata che presenta un riepilogo dei bonus volti alla fidelizzazione del cliente.
+  - **Area Coupon**: Area riservata che raccoglie i Coupon personali.
+  - **Pagamenti sicuri**: Integrazione con Stripe per effettuare pagamenti in modo sicuro.
+  - **Notifiche email**: Invio di conferme e notifiche tramite SendGrid.
+  - **Dashboard personale**: Area riservata dove poter consultare i propri ordini effettuati.
+
+- #### Venditore
+
+  - **Gestione esperienze**: Possibilità di creare, modificare ed eliminare le esperienze proposte agli utenti.
+  - **Protezione esperienze**: Ogni venditore può modificare solo le proprie esperienze.
+
+- #### Admin
+  - **Pannello admin**: Gestione di tutte le esperienze, visualizzazione degli ordini e controllo degli utenti.
+  - **Resoconto**: Visione generale delle statistiche globale come totale delle vendite, acquirenti attivi ed esperienze nascoste.
 
 ---
 
@@ -118,8 +134,6 @@ npm install
 2. Avvia l'applicazione:
 
 ```bash
-npm run preview
-oppure
 npm run dev
 ```
 
@@ -134,12 +148,11 @@ cd Klicko/backend/Klicko_be
 1. Configura il file `appsettings.json` con:
 
    - Connection string al database SQL Server
-   - Chiavi API Stripe
-   - Chiavi API SendGrid
 
 2. Imposta le variabili d'ambiente necessarie:
 
    - Chiavi API Stripe
+   - Chiavi API SendGrid
 
 3. Configura il database dalla Console di gestione pacchetti:
 
@@ -148,6 +161,18 @@ Update-Database
 ```
 
 4. Avvia l'applicazione
+
+---
+
+## 💯 Note
+
+- Indicizzazione dell'e-commerce
+- SEO sviluppata per una ricerca ottimale sul motore di ricerca Google
+- Carrello implementato con l'utilizzo del LocalStorage per utenti non loggati
+
+---
+
+## 📸 Anteprima
 
 ---
 
