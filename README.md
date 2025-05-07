@@ -12,6 +12,28 @@
 
 ---
 
+## 🧭 Indice
+
+- [Demo](#demo)
+- [Panoramica del progetto](#panoramica-del-progetto)
+- [Tecnologie utilizzate](#tecnologie-utilizzate)
+- [Struttura del progetto](#struttura-del-progetto)
+- [Funzioni principali](#funzioni-principali)
+  - [Visitatore](#visitatore)
+  - [Utente](#utente)
+  - [Venditore](#venditore)
+  - [Amministratore](#amministratore)
+- [Avvio del progetto in locale](#avvio-del-progetto-in-locale)
+  - [Prerequisiti](#prerequisiti)
+  - [Clonazione del Repository](#clonazione-del-repository)
+  - [Avvio Frontend](#avvio-frontend)
+  - [Avvio Backend](#avvio-backend)
+- [Note](#note)
+- [Anteprima](#anteprima)
+- [Contatti](#contatti)
+
+---
+
 ## 👀 DEMO
 
 È disponibile una demo testabile al seguente [link!](https://klicko.vercel.app/)
@@ -71,7 +93,7 @@ Klicko/
 
 ---
 
-## ⚙️ Funzionalità Principali
+## ⚙️ Funzioni Principali
 
 - #### Visitatore
 
@@ -95,7 +117,7 @@ Klicko/
   - **Gestione esperienze**: Possibilità di creare, modificare ed eliminare le esperienze proposte agli utenti.
   - **Protezione esperienze**: Ogni venditore può modificare solo le proprie esperienze.
 
-- #### Admin
+- #### Amministratore
   - **Pannello admin**: Gestione di tutte le esperienze, visualizzazione degli ordini e controllo degli utenti.
   - **Resoconto**: Visione generale delle statistiche globale come totale delle vendite, acquirenti attivi ed esperienze nascoste.
 
@@ -173,6 +195,51 @@ Update-Database
 ---
 
 ## 📸 Anteprima
+
+_Pagina Home_
+![Screen HomePage](screen/screenHomePage.jpg)
+
+_Pagina Esperienze_
+![Screen ExperiencesPage](screen/screenExperiencesPage.jpg)
+
+_Pagina Dettagli Esperienza_
+![Screen ExperiencesPage](screen/screenExperienceDetail.jpg)
+
+_Pagina Carrello_
+![Screen ExperiencesPage](screen/screenCartPage.jpg)
+
+_Pagina Coupons_
+![Screen ExperiencesPage](screen/screenCouponPage.jpg)
+
+_Pagina CheckOut_
+![Screen ExperiencesPage](screen/screenCheckOutPage.jpg)
+
+_Pagina Conferma Ordine_
+![Screen ExperiencesPage](screen/screenOrderConfirmation.jpg)
+
+_Pagina Programma Fedeltà_
+![Screen ExperiencesPage](screen/screenLoyaltyPage.jpg)
+
+_Pagina Dashboard Ordini_
+![Screen ExperiencesPage](screen/screenDashboardOrders.jpg)
+
+_Pagina Vouchers Riscossi_
+![Screen ExperiencesPage](screen/screenRedeemedVouchers.jpg)
+
+_Pagina Ricerca Voucher_
+![Screen ExperiencesPage](screen/screenRedeemVoucher.jpg)
+
+_Pagina Dashboard Venditore Esperienze_
+![Screen ExperiencesPage](screen/screenDashboardExperiences.jpg)
+
+_Pagina Dashboard Venditore Form Esperienza_
+![Screen ExperiencesPage](screen/screenDashboardExperienceForm.jpg)
+
+_Pagina Dashboard Admin Ordini Ricevuti_
+![Screen ExperiencesPage](screen/screenDashboardAdmin.jpg)
+
+_Pagina Dashboard Admin Gestione Utenti_
+![Screen ExperiencesPage](screen/screenDashboardUsers.jpg)
 
 ---
 
