@@ -44,7 +44,7 @@ const HeroComponent = () => {
             className='flex-grow px-4 py-3 rounded-xl text-gray-800 focus:outline-none bg-white text-xs xs:text-sm md:text-base'
             value={searchBar}
             onChange={(e) => {
-              setSearchBar(e.target.value);
+              setSearchBar(e.target.value.toLowerCase());
             }}
           />
           <Button variant='secondary' type='submit'>

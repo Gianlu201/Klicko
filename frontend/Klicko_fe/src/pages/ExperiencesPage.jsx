@@ -89,7 +89,7 @@ const ExperiencesPage = () => {
   const searchExperiences = () => {
     const filtExperiences = experiences.filter(
       (exp) =>
-        exp.title.toLowerCase().includes(searchBar) &&
+        exp.title.toLowerCase().includes(searchBar.toLowerCase()) &&
         (exp.category.name === selectedCategory ||
           exp.category.name.includes(selectedCategory)) &&
         exp.price >= minPrice &&
@@ -187,7 +187,7 @@ const ExperiencesPage = () => {
               placeholder='Cerca esperienze...'
               value={searchBar}
               onChange={(e) => {
-                setSearchBar(e.target.value);
+                setSearchBar(e.target.value.toLowerCase());
               }}
             />
             <Search className='absolute start-2 top-1/2 -translate-y-1/2' />

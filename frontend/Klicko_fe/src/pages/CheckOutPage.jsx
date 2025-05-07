@@ -6,6 +6,7 @@ import { setUserCart } from '../redux/actions';
 import { toast } from 'sonner';
 import { BadgePercent, X } from 'lucide-react';
 import StripeContainer from '../components/StripeContainer';
+import AddressFormComponent from '../components/AddressFormComponent';
 
 const CheckOutPage = () => {
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
@@ -14,6 +15,13 @@ const CheckOutPage = () => {
   const [couponCode, setCouponCode] = useState('');
   const [selectedCoupon, setSelectedCoupon] = useState(null);
   const [couponError, setCouponError] = useState('');
+
+  const [name, setName] = useState('');
+  const [surname, setSurname] = useState('');
+  const [city, setCity] = useState('');
+  const [cap, setCap] = useState('');
+  const [address, setAddress] = useState('');
+  const [showError, setShowError] = useState(false);
 
   const cart = useSelector((state) => {
     return state.cart;
@@ -135,6 +143,21 @@ const CheckOutPage = () => {
       }
     } catch {
       setCouponError(`Coupon non valido`);
+    }
+  };
+
+  const checkFormFields = () => {
+    if (
+      name.trim() === '' ||
+      surname.trim() === '' ||
+      city.trim() === '' ||
+      cap.trim() === '' ||
+      address.trim() === ''
+    ) {
+      setShowError(true);
+      return false;
+    } else {
+      return true;
     }
   };
 
@@ -332,13 +355,33 @@ const CheckOutPage = () => {
           </div>
 
           {/* modalità pagamento */}
-          <div className='col-span-3 lg:col-span-2 bg-white rounded-lg px-6 py-5 shadow mb-10'>
-            <h2 className='text-2xl font-bold mb-2'>Pagamento</h2>
-            {/* Stripe Container */}
-            <StripeContainer
-              sendOrder={sendOrder}
-              orderAmount={getFinalPrice()}
-            />
+          <div className='col-span-3 lg:col-span-2'>
+            <div className='bg-white rounded-lg px-6 py-5 shadow mb-10'>
+              <h2 className='text-2xl font-bold mb-2'>Indirizzo spedizione</h2>
+              <AddressFormComponent
+                name={name}
+                setName={(data) => setName(data)}
+                surname={surname}
+                setSurname={(data) => setSurname(data)}
+                city={city}
+                setCity={(data) => setCity(data)}
+                cap={cap}
+                setCap={(data) => setCap(data)}
+                address={address}
+                setAddress={(data) => setAddress(data)}
+                showError={showError}
+              />
+            </div>
+
+            <div className='bg-white rounded-lg px-6 py-5 shadow mb-10'>
+              <h2 className='text-2xl font-bold mb-2'>Pagamento</h2>
+              {/* Stripe Container */}
+              <StripeContainer
+                sendOrder={sendOrder}
+                orderAmount={getFinalPrice()}
+                checkFormFields={checkFormFields}
+              />
+            </div>
           </div>
         </div>
       )}

@@ -10,7 +10,7 @@ import Button from './ui/Button';
 import { X } from 'lucide-react';
 import { toast } from 'sonner';
 
-const CheckoutForm = ({ sendOrder, orderAmount }) => {
+const CheckoutForm = ({ sendOrder, orderAmount, checkFormFields }) => {
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   const stripe = useStripe();
@@ -62,6 +62,10 @@ const CheckoutForm = ({ sendOrder, orderAmount }) => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
+
+      if (!checkFormFields()) {
+        return;
+      }
 
       setErrorMessage('');
       setSuccessMessage('');
