@@ -15,12 +15,14 @@ import Accordion from '../ui/Accordion';
 import BottomBanner from '../ui/BottomBanner';
 import { toast } from 'sonner';
 import { useSelector } from 'react-redux';
+import SkeletonList from '../ui/SkeletonList';
 
 const DashboardAdmin = () => {
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   const [isAuthorized, setIsAuthorized] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(true);
   const [orders, setOrders] = useState([]);
   const [filteredOrders, setFilteredOrders] = useState([]);
   const [isBannerOpen, setIsBannerOpen] = useState(false);
@@ -43,6 +45,8 @@ const DashboardAdmin = () => {
 
   const getAllOrders = async () => {
     try {
+      setIsLoading(true);
+
       let tokenObj = localStorage.getItem('klicko_token');
 
       if (!tokenObj) {
@@ -61,6 +65,7 @@ const DashboardAdmin = () => {
       if (response.ok) {
         const data = await response.json();
 
+        setIsLoading(false);
         setOrders(data.orders);
         setFilteredOrders(data.orders);
       } else {
@@ -73,6 +78,7 @@ const DashboardAdmin = () => {
           <p>{e.message}</p>
         </>
       );
+      setIsLoading(false);
     }
   };
 
@@ -340,11 +346,15 @@ const DashboardAdmin = () => {
           {/* tabella storico ordini */}
           <div className='px-6 py-5 border border-gray-400/40 rounded-xl'>
             <h2 className='text-xl font-semibold mb-2'>Tutti gli ordini</h2>
-            <p className='text-gray-500 font-normal mb-6'>
-              {filteredOrders.length} ordini trovati
-            </p>
+            {!isLoading && (
+              <p className='text-gray-500 font-normal mb-6'>
+                {filteredOrders.length} ordini trovati
+              </p>
+            )}
 
-            {filteredOrders.length > 0 ? (
+            {isLoading ? (
+              <SkeletonList />
+            ) : filteredOrders.length > 0 ? (
               <div className='overflow-x-auto'>
                 <table className='min-w-sm w-full'>
                   <thead>
@@ -586,9 +596,6 @@ const DashboardAdmin = () => {
             ) : (
               <div className='flex flex-col justify-center items-center gap-2 py-10'>
                 <h3 className='text-xl font-semibold'>Nessun ordine trovato</h3>
-                <p className='text-gray-500 font-normal'>
-                  Non è stato effettuato ancora nessun ordine.
-                </p>
               </div>
             )}
           </div>

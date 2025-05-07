@@ -3,10 +3,12 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Accordion from '../ui/Accordion';
 import { toast } from 'sonner';
+import SkeletonText from '../ui/SkeletonText';
 
 const OrdersComponent = () => {
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
+  const [isLoading, setIsLoading] = useState(true);
   const [orders, setOrders] = useState([]);
   const [filteredOrders, setFilteredOrders] = useState([]);
 
@@ -14,6 +16,8 @@ const OrdersComponent = () => {
 
   const getAllUserOrders = async () => {
     try {
+      setIsLoading(true);
+
       let tokenObj = localStorage.getItem('klicko_token');
 
       if (!tokenObj) {
@@ -32,6 +36,7 @@ const OrdersComponent = () => {
       if (response.ok) {
         const data = await response.json();
 
+        setIsLoading(false);
         setOrders(data.orders);
         setFilteredOrders(data.orders);
       } else {
@@ -44,6 +49,7 @@ const OrdersComponent = () => {
           <p>{e.message}</p>
         </>
       );
+      setIsLoading(false);
     }
   };
 
@@ -181,7 +187,9 @@ const OrdersComponent = () => {
 
       {/* tabella storico ordini */}
       <div className='border border-gray-400/40 shadow-sm rounded-xl px-6 py-5'>
-        {filteredOrders.length > 0 ? (
+        {isLoading ? (
+          <SkeletonText />
+        ) : filteredOrders.length > 0 ? (
           <>
             <h2 className='text-xl font-semibold mb-2'>Tutti gli ordini</h2>
             <p className='text-gray-500 font-normal mb-6'>

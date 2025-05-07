@@ -3,14 +3,18 @@ import Button from '../ui/Button';
 import ExperienceCard from '../ExperienceCard';
 import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
+import HomeSkeletonLoader from '../ui/HomeSkeletonLoader';
 
 const HighlightedComponent = () => {
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
+  const [isLoading, setIsLoading] = useState(true);
   const [highlightedExperiences, setHighlightedExperiences] = useState([]);
 
   const getExperiences = async () => {
     try {
+      setIsLoading(true);
+
       const response = await fetch(`${backendUrl}/Experience/Highlighted`, {
         method: 'GET',
         headers: {
@@ -19,6 +23,7 @@ const HighlightedComponent = () => {
       });
       if (response.ok) {
         const data = await response.json();
+        setIsLoading(false);
         setHighlightedExperiences(data.experiences);
       } else {
         throw new Error('Errore nel recupero dei dati!');
@@ -30,6 +35,7 @@ const HighlightedComponent = () => {
           <p>{e.message}</p>
         </>
       );
+      setIsLoading(false);
     }
   };
 
@@ -39,20 +45,22 @@ const HighlightedComponent = () => {
 
   return (
     <>
-      {highlightedExperiences.length > 0 && (
-        <div className='max-w-7xl mx-auto my-18 px-4 xl:px-0'>
-          <p className='text-sm md:text-base text-secondary font-semibold mb-2'>
-            Esperienze in evidenza
-          </p>
-          <div className='xs:flex justify-between items-center'>
-            <h2 className='text-xl xs:text-2xl 2xl:text-4xl font-bold mb-3'>
-              Le nostre migliori avventure
-            </h2>
-            <Button variant='outline' size='md' className='ms-auto xs:ms-0'>
-              <Link to='/experiences'>Vedi tutte</Link>
-            </Button>
-          </div>
+      <div className='max-w-7xl mx-auto my-18 px-4 xl:px-0'>
+        <p className='text-sm md:text-base text-secondary font-semibold mb-2'>
+          Esperienze in evidenza
+        </p>
+        <div className='xs:flex justify-between items-center'>
+          <h2 className='text-xl xs:text-2xl 2xl:text-4xl font-bold mb-3'>
+            Le nostre migliori avventure
+          </h2>
+          <Button variant='outline' size='md' className='ms-auto xs:ms-0'>
+            <Link to='/experiences'>Vedi tutte</Link>
+          </Button>
+        </div>
 
+        {isLoading && <HomeSkeletonLoader />}
+
+        {highlightedExperiences.length > 0 && (
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10'>
             {highlightedExperiences.map((experience) => {
               return (
@@ -63,8 +71,8 @@ const HighlightedComponent = () => {
               );
             })}
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </>
   );
 };

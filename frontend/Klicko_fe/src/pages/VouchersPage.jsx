@@ -6,10 +6,15 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { toast } from 'sonner';
 import { Modal, ModalBody, ModalHeader } from 'flowbite-react';
+import SkeletonList from '../components/ui/SkeletonList';
+import Spinner from '../components/ui/Spinner';
+import SkeletonText from '../components/ui/SkeletonText';
 
 const VouchersPage = () => {
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSearchingVoucher, setIsSearchingVoucher] = useState(false);
   const [redeemVoucherOption, setRedeemVoucherOption] = useState(true);
   const [redeemedVouchers, setRedeemedVouchers] = useState([]);
   const [voucherCodeSearch, setVoucherCodeSearch] = useState('');
@@ -24,28 +29,34 @@ const VouchersPage = () => {
 
   const getUserVouchers = async () => {
     try {
+      setIsLoading(true);
+
       let tokenObj = localStorage.getItem('klicko_token');
 
-      if (!tokenObj) {
+      if (tokenObj === null) {
         navigate('/login');
-      }
-
-      let token = JSON.parse(tokenObj).token;
-
-      const response = await fetch(`${backendUrl}/Voucher/getAllUserVouchers`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-
-        setRedeemedVouchers(data.vouchers);
       } else {
-        throw new Error('Errore nel recupero dei dati!');
+        let token = JSON.parse(tokenObj).token;
+
+        const response = await fetch(
+          `${backendUrl}/Voucher/getAllUserVouchers`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+
+          setIsLoading(false);
+          setRedeemedVouchers(data.vouchers);
+        } else {
+          throw new Error('Errore nel recupero dei dati!');
+        }
       }
     } catch (e) {
       toast.error(
@@ -61,6 +72,8 @@ const VouchersPage = () => {
 
   const getVoucherByCode = async () => {
     try {
+      setIsSearchingVoucher(true);
+
       setVoucherNotFound(false);
       setSearchedVoucher(null);
 
@@ -86,6 +99,7 @@ const VouchersPage = () => {
       if (response.ok) {
         const data = await response.json();
 
+        setIsSearchingVoucher(false);
         setSearchedVoucher(data.voucher);
         setVoucherCodeSearch('');
       } else {
@@ -98,6 +112,7 @@ const VouchersPage = () => {
           <p>Qualcosa è andato storto, riprovare</p>
         </>
       );
+      setIsSearchingVoucher(false);
     }
   };
 
@@ -246,14 +261,19 @@ const VouchersPage = () => {
             Riscatta Voucher
           </button>
           <button
-            className={`text-sm font-medium rounded-sm grow p-1 cursor-pointer ${
+            className={`flex justify-center items-center text-sm font-medium rounded-sm grow p-1 cursor-pointer ${
               !redeemVoucherOption && 'bg-white'
             }`}
             onClick={() => {
               setRedeemVoucherOption(false);
             }}
           >
-            I miei Voucher ({redeemedVouchers.length})
+            {isLoading && (
+              <span className='inline-block me-2'>
+                <Spinner size='sm' />
+              </span>
+            )}
+            I miei Voucher {!isLoading && `(${redeemedVouchers.length})`}
           </button>
         </div>
 
@@ -301,6 +321,8 @@ const VouchersPage = () => {
                   Cerca
                 </Button>
               </form>
+
+              {isSearchingVoucher && <SkeletonText />}
 
               {voucherNotFound && (
                 <div className='bg-red-200/60 px-4 py-3 mx-3 rounded-lg '>
@@ -369,8 +391,11 @@ const VouchersPage = () => {
                 </div>
               )}
             </div>
+          ) : // I miei Voucher
+
+          isLoading ? (
+            <SkeletonList />
           ) : (
-            // I miei Voucher
             <div>
               <div className='flex justify-start items-center gap-2 mb-1.5'>
                 <TicketCheck className='text-primary pt-0.5' />

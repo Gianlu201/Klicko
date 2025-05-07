@@ -201,9 +201,6 @@ const Footer = () => {
           <Link to='/privacyPolicy' className='hover:text-white'>
             Privacy
           </Link>
-          <Link to='/#' className='hover:text-white'>
-            Cookie
-          </Link>
         </div>
       </div>
     </div>

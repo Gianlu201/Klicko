@@ -18,12 +18,14 @@ import { Modal, ModalBody, ModalHeader } from 'flowbite-react';
 import { toast } from 'sonner';
 import { cartModified } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
+import SkeletonList from '../ui/SkeletonList';
 
 const ExperiencesComponent = () => {
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   const [isAuthorized, setIsAuthorized] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(true);
   const [experiences, setExperiences] = useState([]);
   const [categories, setCategories] = useState([]);
   const [filteredExperiences, setFilteredExperiences] = useState([]);
@@ -56,6 +58,8 @@ const ExperiencesComponent = () => {
 
   const getAllExperiences = async () => {
     try {
+      setIsLoading(true);
+
       let tokenObj = localStorage.getItem('klicko_token');
 
       if (!tokenObj) {
@@ -74,6 +78,7 @@ const ExperiencesComponent = () => {
       if (response.ok) {
         const data = await response.json();
 
+        setIsLoading(false);
         setExperiences(data.experiences);
         setFilteredExperiences(data.experiences);
       } else {
@@ -86,6 +91,7 @@ const ExperiencesComponent = () => {
           <p>{e.message}</p>
         </>
       );
+      setIsLoading(false);
     }
   };
 
@@ -380,7 +386,9 @@ const ExperiencesComponent = () => {
       </div>
 
       <div>
-        {filteredExperiences.length > 0 && (
+        {isLoading ? (
+          <SkeletonList />
+        ) : filteredExperiences.length > 0 ? (
           <div className='overflow-x-auto'>
             <table className='w-full'>
               <thead>
@@ -500,9 +508,7 @@ const ExperiencesComponent = () => {
               </tbody>
             </table>
           </div>
-        )}
-
-        {experiences.length === 0 && (
+        ) : (
           <div className='flex flex-col items-center justify-center gap-3 py-12'>
             <h4 className='text-xl font-semibold'>Nesuna esperienza trovata</h4>
             <p className='text-gray-500 font-normal'>

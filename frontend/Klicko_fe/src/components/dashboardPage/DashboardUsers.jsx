@@ -4,12 +4,14 @@ import Button from '../ui/Button';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
+import SkeletonList from '../ui/SkeletonList';
 
 const DashboardUsers = () => {
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   const [isAuthorized, setIsAuthorized] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(true);
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [roles, setRoles] = useState([]);
@@ -31,6 +33,8 @@ const DashboardUsers = () => {
 
   const getAllUsers = async () => {
     try {
+      setIsLoading(true);
+
       const response = await fetch(`${backendUrl}/Account`, {
         method: 'GET',
         headers: {
@@ -40,6 +44,7 @@ const DashboardUsers = () => {
       if (response.ok) {
         const data = await response.json();
 
+        setIsLoading(false);
         setUsers(data.accounts);
         setFilteredUsers(data.accounts);
       } else {
@@ -52,6 +57,7 @@ const DashboardUsers = () => {
           <p>{e.message}</p>
         </>
       );
+      setIsLoading(false);
     }
   };
 
@@ -166,7 +172,9 @@ const DashboardUsers = () => {
 
           {/* tabella utenti registrati */}
           <div className='border border-gray-400/40 shadow-sm rounded-xl px-4 py-5'>
-            {filteredUsers.length > 0 ? (
+            {isLoading ? (
+              <SkeletonList />
+            ) : filteredUsers.length > 0 ? (
               <div className='overflow-x-auto'>
                 <h3 className='text-xl font-semibold mb-2'>Utenti</h3>
                 <p className='text-gray-500 font-normal text-sm mb-5'>

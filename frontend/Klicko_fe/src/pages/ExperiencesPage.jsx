@@ -4,8 +4,8 @@ import Button from '../components/ui/Button';
 import ExperienceCard from '../components/ExperienceCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedCategoryName, setSearchBarQuery } from '../redux/actions';
-import Spinner from '../components/ui/Spinner';
 import { toast } from 'sonner';
+import ExperiencesSkeletonLoader from '../components/ui/ExperiencesSkeletonLoader';
 
 const ExperiencesPage = () => {
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
@@ -57,6 +57,7 @@ const ExperiencesPage = () => {
           <p>{e.message}</p>
         </>
       );
+      setIsLoading(false);
     }
   };
 
@@ -277,30 +278,32 @@ const ExperiencesPage = () => {
       </div>
 
       <div>
-        <div className='sm:flex justify-between items-center my-6'>
-          <h4 className='text-xl font-semibold mb-4'>
-            {filteredExperiences.length} esperienze trovate
-          </h4>
+        {!isLoading && (
+          <div className='sm:flex justify-between items-center my-6'>
+            <h4 className='text-xl font-semibold mb-4'>
+              {filteredExperiences.length} esperienze trovate
+            </h4>
 
-          <select
-            name=''
-            id=''
-            className='bg-background border border-gray-800/30 rounded-xl py-2 px-3'
-            value={sortOption}
-            onChange={(e) => {
-              setSortOption(e.target.value);
-            }}
-            hidden={filteredExperiences.length === 0 ? true : false}
-          >
-            <option value='suggested'>Consigliati</option>
-            <option value='priceUp'>Prezzo: crescente</option>
-            <option value='priceDown'>Prezzo: decrescente</option>
-            <option value='latest'>Più recenti</option>
-            <option value='lessRecent'>Meno recenti</option>
-          </select>
-        </div>
+            <select
+              name=''
+              id=''
+              className='bg-background border border-gray-800/30 rounded-xl py-2 px-3'
+              value={sortOption}
+              onChange={(e) => {
+                setSortOption(e.target.value);
+              }}
+              hidden={filteredExperiences.length === 0 ? true : false}
+            >
+              <option value='suggested'>Consigliati</option>
+              <option value='priceUp'>Prezzo: crescente</option>
+              <option value='priceDown'>Prezzo: decrescente</option>
+              <option value='latest'>Più recenti</option>
+              <option value='lessRecent'>Meno recenti</option>
+            </select>
+          </div>
+        )}
 
-        {isLoading && <Spinner />}
+        {isLoading && <ExperiencesSkeletonLoader />}
 
         {filteredExperiences.length > 0 && (
           <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>

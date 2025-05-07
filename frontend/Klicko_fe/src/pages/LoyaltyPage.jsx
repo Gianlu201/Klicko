@@ -5,10 +5,12 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Modal, ModalBody, ModalHeader } from 'flowbite-react';
 import { toast } from 'sonner';
+import SkeletonText from '../components/ui/SkeletonText';
 
 const LoyaltyPage = () => {
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
+  const [isLoading, setIsLoading] = useState(true);
   const [fidelityCard, setFidelityCard] = useState(null);
   const [fidelityLevel, setFidelityLevel] = useState(null);
   const [nextLevel, setNextLevel] = useState(null);
@@ -79,6 +81,8 @@ const LoyaltyPage = () => {
 
   const getFidelityCard = async () => {
     try {
+      setIsLoading(true);
+
       let tokenObj = localStorage.getItem('klicko_token');
 
       if (!tokenObj) {
@@ -100,6 +104,7 @@ const LoyaltyPage = () => {
       if (response.ok) {
         const data = await response.json();
 
+        setIsLoading(false);
         setFidelityCard(data.fidelityCard);
         getFidelityLevel(data.fidelityCard.points);
       } else {
@@ -107,10 +112,10 @@ const LoyaltyPage = () => {
       }
     } catch (e) {
       toast.error(
-        <>
+        <p>
           <p className='font-bold'>Errore!</p>
           <p>{e.message}</p>
-        </>
+        </p>
       );
       navigate('/');
     }
@@ -231,7 +236,11 @@ const LoyaltyPage = () => {
     <div className='max-w-7xl mx-auto min-h-screen px-6 xl:px-0'>
       <h1 className='text-4xl font-bold mt-10 mb-6'>Programma Fedeltà</h1>
 
-      {fidelityCard === null ? (
+      {isLoading ? (
+        <div className='mt-8'>
+          <SkeletonText />
+        </div>
+      ) : fidelityCard === null ? (
         <div className='bg-white py-8 border border-gray-400/30 rounded-xl shadow mt-6'>
           <p className='text-2xl text-gray-500 text-center font-semibold'>
             Carta fedeltà non trovata!

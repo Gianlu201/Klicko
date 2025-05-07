@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CouponCard from '../components/CouponCard';
 import { toast } from 'sonner';
+import CouponsSkeletonLoader from '../components/ui/CouponsSkeletonLoader';
 
 const CouponPage = () => {
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
+  const [isLoading, setIsLoading] = useState(true);
   const [availableCoupon, setAvailableCoupon] = useState([]);
   const [unavailableCoupon, setUnavailableCoupon] = useState([]);
 
@@ -13,6 +15,8 @@ const CouponPage = () => {
 
   const getAllCoupons = async () => {
     try {
+      setIsLoading(true);
+
       let tokenObj = localStorage.getItem('klicko_token');
 
       if (!tokenObj) {
@@ -32,6 +36,7 @@ const CouponPage = () => {
       if (response.ok) {
         const data = await response.json();
 
+        setIsLoading(false);
         setAvailableCoupon(data.availableCoupons);
         setUnavailableCoupon(data.unavailableCoupons);
       } else {
@@ -57,30 +62,37 @@ const CouponPage = () => {
       <h1 className='text-4xl font-bold mt-10 mb-8'>Coupon</h1>
 
       <h2 className='text-xl font-semibold mb-4'>I tuoi coupon disponibili</h2>
-      {availableCoupon.length > 0 ? (
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6'>
-          {availableCoupon.map((coupon) => (
-            <CouponCard key={coupon.couponId} coupon={coupon} />
-          ))}
-        </div>
-      ) : (
-        <div className='bg-white border border-gray-400/40 rounded-xl mb-6 flex justify-center items-center'>
-          <p className='text-gray-500 font-semibold text-lg py-8'>
-            Nessun coupon utilizzabile trovato!
-          </p>
-        </div>
-      )}
 
-      {unavailableCoupon.length > 0 && (
+      {isLoading ? (
+        <CouponsSkeletonLoader />
+      ) : (
         <>
-          <h2 className='text-xl font-semibold mb-4'>
-            Coupon utilizzati o scaduti
-          </h2>
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6'>
-            {unavailableCoupon.map((coupon) => (
-              <CouponCard key={coupon.couponId} coupon={coupon} />
-            ))}
-          </div>
+          {availableCoupon.length > 0 ? (
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6'>
+              {availableCoupon.map((coupon) => (
+                <CouponCard key={coupon.couponId} coupon={coupon} />
+              ))}
+            </div>
+          ) : (
+            <div className='bg-white border border-gray-400/40 rounded-xl mb-6 flex justify-center items-center'>
+              <p className='text-gray-500 font-semibold text-lg py-8'>
+                Nessun coupon utilizzabile trovato!
+              </p>
+            </div>
+          )}
+
+          {unavailableCoupon.length > 0 && (
+            <>
+              <h2 className='text-xl font-semibold mb-4'>
+                Coupon utilizzati o scaduti
+              </h2>
+              <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6'>
+                {unavailableCoupon.map((coupon) => (
+                  <CouponCard key={coupon.couponId} coupon={coupon} />
+                ))}
+              </div>
+            </>
+          )}
         </>
       )}
     </div>
