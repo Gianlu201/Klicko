@@ -14,23 +14,23 @@
 
 ## 🧭 Indice
 
-- [Demo](#demo)
-- [Panoramica del progetto](#panoramica-del-progetto)
-- [Tecnologie utilizzate](#tecnologie-utilizzate)
-- [Struttura del progetto](#struttura-del-progetto)
-- [Funzioni principali](#funzioni-principali)
+- [Demo](#-demo)
+- [Panoramica del progetto](#-panoramica-del-progetto)
+- [Tecnologie utilizzate](#%EF%B8%8F-tecnologie-utilizzate)
+- [Struttura del progetto](#-struttura-del-progetto)
+- [Funzioni principali](#%EF%B8%8F-funzioni-principali)
   - [Visitatore](#visitatore)
   - [Utente](#utente)
   - [Venditore](#venditore)
   - [Amministratore](#amministratore)
-- [Avvio del progetto in locale](#avvio-del-progetto-in-locale)
-  - [Prerequisiti](#prerequisiti)
-  - [Clonazione del Repository](#clonazione-del-repository)
-  - [Avvio Frontend](#avvio-frontend)
-  - [Avvio Backend](#avvio-backend)
-- [Note](#note)
-- [Anteprima](#anteprima)
-- [Contatti](#contatti)
+- [Avvio del progetto in locale](#-avvio-del-progetto-in-locale)
+  - [Prerequisiti](#-prerequisiti)
+  - [Clonazione del Repository](#-clonazione-del-repository)
+  - [Avvio Frontend](#%EF%B8%8F-avvio-frontend)
+  - [Avvio Backend](#%EF%B8%8F-avvio-backend)
+- [Note](#-note)
+- [Anteprima](#-anteprima)
+- [Contatti](#-contatti)
 
 ---
 
