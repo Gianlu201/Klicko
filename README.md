@@ -4,10 +4,19 @@
 [![Tailwind CSS](https://img.shields.io/badge/Styled%20with-Tailwind%20CSS-38B2AC)](https://tailwindcss.com/)
 [![Stripe](https://img.shields.io/badge/Payments-Stripe-blueviolet)](https://stripe.com/)
 [![SendGrid](https://img.shields.io/badge/Emails-SendGrid-00b2ff)](https://sendgrid.com/)
+[![Demo](https://img.shields.io/badge/Demo-Click_Me-ff0000)](https://klicko.vercel.app/)
 
 ---
 
 **Klicko** è una piattaforma e-commerce full stack progettata per offrire agli utenti la possibilità di esplorare e prenotare esperienze e avventure uniche. L'applicazione è sviluppata con un'architettura moderna che combina un frontend dinamico con un backend robusto, garantendo un'esperienza utente fluida e sicura.
+
+---
+
+## 👀 DEMO
+
+È disponibile una demo testabile al seguente [link!](https://klicko.vercel.app/)
+
+Il progetto è stato pubblicato su Vercel (front-end) e su Azure (back-end e database)
 
 ---
 
@@ -47,6 +56,7 @@ Klicko/
 │       ├── Controllers/
 │       ├── Models/
 │       ├── Services/
+│       ├── DTOs/
 │       └── ...
 └── frontend/
     └── Klicko_fe/
@@ -54,7 +64,7 @@ Klicko/
         ├── src/
         │   ├── components/
         │   ├── pages/
-        │   ├── App.js
+        │   ├── App.jsx
         │   └── ...
         └── ...
 ```
@@ -64,10 +74,13 @@ Klicko/
 ## ⚙️ Funzionalità Principali
 
 - **Esplorazione esperienze**: Gli utenti possono navigare tra diverse esperienze e avventure disponibili.
+- **Acquisti**: Possibilità di acquistare Voucher per riscattare esperienze da vivere.
 - **Prenotazioni**: Possibilità di prenotare esperienze direttamente dalla piattaforma.
+- **Programma fedeltà**: Area riservata che presenta un riepilogo dei bonus volti alla fidelizzazione del cliente.
 - **Gestione utenti**: Registrazione, login e gestione del profilo utente.
 - **Pagamenti sicuri**: Integrazione con Stripe per effettuare pagamenti in modo sicuro.
 - **Notifiche email**: Invio di conferme e notifiche tramite SendGrid.
+- **Dashboard personale**: Area riservata dove poter consultare i propri ordini effettuati.
 - **Pannello admin**: Gestione delle esperienze, visualizzazione delle prenotazioni e controllo degli utenti.
 
 ---
@@ -95,7 +108,19 @@ git clone https://github.com/Gianlu201/Klicko.git
 ```bash
 cd Klicko/frontend/Klicko_fe
 npm install
-npm start
+```
+
+1. Configura le variabili d'ambiente necessarie:
+
+   - Endpoint per le chiamate al server
+   - Chiavi API Stripe
+
+2. Avvia l'applicazione:
+
+```bash
+npm run preview
+oppure
+npm run dev
 ```
 
 ---
@@ -112,11 +137,17 @@ cd Klicko/backend/Klicko_be
    - Chiavi API Stripe
    - Chiavi API SendGrid
 
-2. Avvia l'applicazione:
+2. Imposta le variabili d'ambiente necessarie:
+
+   - Chiavi API Stripe
+
+3. Configura il database dalla Console di gestione pacchetti:
 
 ```bash
-dotnet run
+Update-Database
 ```
+
+4. Avvia l'applicazione
 
 ---
 
