@@ -24,9 +24,10 @@ export const setLoggedUser = (data) => {
   const userInfos = {
     aud: tokenDecoded.aud,
     exp: tokenDecoded.exp,
-    role: tokenDecoded[
-      'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
-    ],
+    // role: tokenDecoded[
+    //   'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
+    // ],
+    role: tokenDecoded.role,
     email: tokenDecoded.email,
     name: tokenDecoded.name,
     surname: tokenDecoded.surname,

@@ -30,7 +30,7 @@ namespace Klicko_be.Controllers
             try
             {
                 var user = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
-                var userRole = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role);
+                var userRole = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
                 var userId = user!.Value;
 
                 List<Experience>? experiences;

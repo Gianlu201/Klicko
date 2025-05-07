@@ -257,10 +257,12 @@ namespace Klicko_be.Controllers
             claims.Add(new Claim("nameIdentifier", user.Id));
             claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id));
 
-            foreach (var role in roles)
-            {
-                claims.Add(new Claim(ClaimTypes.Role, role));
-            }
+            //foreach (var role in roles)
+            //{
+            //    claims.Add(new Claim("role", role));
+            //}
+
+            claims.Add(new Claim("role", roles[0]));
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.SecurityKey));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
