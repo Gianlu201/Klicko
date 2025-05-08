@@ -291,7 +291,10 @@ const Navbar = () => {
             setMobileMenuOpen(false);
           }}
         >
-          <span className='font-serif text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-700'>
+          <span
+            translate='no'
+            className='notranslate font-serif text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-700'
+          >
             Klicko
           </span>
         </Link>
