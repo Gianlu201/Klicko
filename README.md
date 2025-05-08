@@ -203,43 +203,43 @@ _Pagina Esperienze_
 ![Screen ExperiencesPage](screen/screenExperiencesPage.jpg)
 
 _Pagina Dettagli Esperienza_
-![Screen ExperiencesPage](screen/screenExperienceDetail.jpg)
+![Screen ExperienceDetailPage](screen/screenExperienceDetail.jpg)
 
 _Pagina Carrello_
-![Screen ExperiencesPage](screen/screenCartPage.jpg)
+![Screen CartPage](screen/screenCartPage.jpg)
 
 _Pagina Coupons_
-![Screen ExperiencesPage](screen/screenCouponPage.jpg)
+![Screen CouponsPage](screen/screenCouponPage.jpg)
 
 _Pagina CheckOut_
-![Screen ExperiencesPage](screen/screenCheckOutPage.jpg)
+![Screen CheckOutPage](screen/screenCheckOutPage.jpg)
 
 _Pagina Conferma Ordine_
-![Screen ExperiencesPage](screen/screenOrderConfirmation.jpg)
+![Screen OrderConfirmationPage](screen/screenOrderConfirmation.jpg)
 
 _Pagina Programma Fedeltà_
-![Screen ExperiencesPage](screen/screenLoyaltyPage.jpg)
+![Screen LoyaltyPage](screen/screenLoyaltyPage.jpg)
 
 _Pagina Dashboard Ordini_
-![Screen ExperiencesPage](screen/screenDashboardOrders.jpg)
+![Screen DashboardOrdersPage](screen/screenDashboardOrders.jpg)
 
 _Pagina Vouchers Riscossi_
-![Screen ExperiencesPage](screen/screenRedeemedVouchers.jpg)
+![Screen RedeemVoucherPage](screen/screenRedeemedVouchers.jpg)
 
 _Pagina Ricerca Voucher_
-![Screen ExperiencesPage](screen/screenRedeemVoucher.jpg)
+![Screen RedeemVoucherPage](screen/screenRedeemVoucher.jpg)
 
 _Pagina Dashboard Venditore Esperienze_
-![Screen ExperiencesPage](screen/screenDashboardExperiences.jpg)
+![Screen DashboardExperiencesPage](screen/screenDashboardExperiences.jpg)
 
 _Pagina Dashboard Venditore Form Esperienza_
-![Screen ExperiencesPage](screen/screenDashboardExperienceForm.jpg)
+![Screen DashboardExperienceFormPage](screen/screenDashboardExperienceForm.jpg)
 
 _Pagina Dashboard Admin Ordini Ricevuti_
-![Screen ExperiencesPage](screen/screenDashboardAdmin.jpg)
+![Screen DashboardAdminPage](screen/screenDashboardAdmin.jpg)
 
 _Pagina Dashboard Admin Gestione Utenti_
-![Screen ExperiencesPage](screen/screenDashboardUsers.jpg)
+![Screen DashboardUsersPage](screen/screenDashboardUsers.jpg)
 
 ---
 
