@@ -201,7 +201,7 @@ namespace Klicko_be.Controllers
                         FixedSaleAmount = 0,
                         IsActive = true,
                         IsUniversal = false,
-                        ExpireDate = DateTime.Parse("31/05/2025 23:59:59"),
+                        ExpireDate = new DateTime(2025, 5, 31, 23, 59, 59),
                         Code = "DEMODAY15",
                         MinimumAmount = 250,
                     }
