@@ -31,9 +31,20 @@ namespace Klicko_be.Services
                 var from = new EmailAddress("noreply.gididi@gmail.com", "Klicko");
                 var to = new EmailAddress(toEmail);
 
-                var htmlContent = File.ReadAllText(
-                    "../Klicko_be/EmailTemplate/OrderConfirmation.html"
+                var filePath = Path.Combine(
+                    Directory.GetCurrentDirectory(),
+                    "wwwroot",
+                    "EmailTemplate",
+                    "OrderConfirmation.html"
                 );
+
+                if (!File.Exists(filePath))
+                {
+                    Console.WriteLine("⚠️ File template non trovato: " + filePath);
+                    return false;
+                }
+
+                var htmlContent = File.ReadAllText(filePath);
 
                 var vouchersContent = "";
                 if (order.Vouchers != null)
@@ -83,10 +94,20 @@ namespace Klicko_be.Services
                 var from = new EmailAddress("noreply.gididi@gmail.com", "Klicko");
                 var to = new EmailAddress(toEmail);
 
-                // Qui inserisci l'HTML creato prima
-                var htmlContent = File.ReadAllText(
-                    "../Klicko_be/EmailTemplate/NewsLetterSubscription.html"
+                var filePath = Path.Combine(
+                    Directory.GetCurrentDirectory(),
+                    "wwwroot",
+                    "EmailTemplate",
+                    "NewsLetterSubscription.html"
                 );
+
+                if (!File.Exists(filePath))
+                {
+                    Console.WriteLine("⚠️ File template non trovato: " + filePath);
+                    return false;
+                }
+
+                var htmlContent = File.ReadAllText(filePath);
 
                 var msg = MailHelper.CreateSingleEmail(
                     from,
