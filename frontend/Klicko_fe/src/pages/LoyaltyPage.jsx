@@ -233,16 +233,16 @@ const LoyaltyPage = () => {
   }, [profile]);
 
   return (
-    <div className='max-w-7xl mx-auto min-h-screen px-6 xl:px-0'>
-      <h1 className='text-4xl font-bold mt-10 mb-6'>Programma Fedeltà</h1>
+    <div className='min-h-screen px-6 mx-auto max-w-7xl xl:px-0'>
+      <h1 className='mt-10 mb-6 text-4xl font-bold'>Programma Fedeltà</h1>
 
       {isLoading ? (
         <div className='mt-8'>
           <SkeletonText />
         </div>
       ) : fidelityCard === null ? (
-        <div className='bg-white py-8 border border-gray-400/30 rounded-xl shadow mt-6'>
-          <p className='text-2xl text-gray-500 text-center font-semibold'>
+        <div className='py-8 mt-6 bg-white border shadow border-gray-400/30 rounded-xl'>
+          <p className='text-2xl font-semibold text-center text-gray-500'>
             Carta fedeltà non trovata!
           </p>
         </div>
@@ -255,12 +255,12 @@ const LoyaltyPage = () => {
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
-            <div className='flex justify-between items-start mb-6'>
+            <div className='flex items-start justify-between mb-6'>
               <div>
-                <h3 className='text-xs uppercase tracking-wider opacity-80'>
+                <h3 className='text-xs tracking-wider uppercase opacity-80'>
                   Klicko
                 </h3>
-                <h2 className='text-xl sm:text-2xl font-semibold'>
+                <h2 className='text-xl font-semibold sm:text-2xl'>
                   Carta Fedeltà
                 </h2>
               </div>
@@ -270,7 +270,7 @@ const LoyaltyPage = () => {
             </div>
 
             <div className='mb-6'>
-              <p className='text-xs uppercase tracking-wide opacity-80 mb-1'>
+              <p className='mb-1 text-xs tracking-wide uppercase opacity-80'>
                 Numero carta
               </p>
               <p className='text-lg slashed-zero'>
@@ -280,7 +280,7 @@ const LoyaltyPage = () => {
 
             <div className='flex justify-between'>
               <div>
-                <p className='text-xs uppercase tracking-wide opacity-80 mb-1'>
+                <p className='mb-1 text-xs tracking-wide uppercase opacity-80'>
                   Titolare
                 </p>
                 <p className='font-medium'>
@@ -288,28 +288,28 @@ const LoyaltyPage = () => {
                 </p>
               </div>
               <div className='text-right'>
-                <p className='text-xs uppercase tracking-wide opacity-80 mb-1'>
+                <p className='mb-1 text-xs tracking-wide uppercase opacity-80'>
                   Punti
                 </p>
-                <p className='font-bold text-lg'>{fidelityCard.points}</p>
+                <p className='text-lg font-bold'>{fidelityCard.points}</p>
               </div>
             </div>
           </div>
 
           {/* main section */}
-          <div className='grid grid-cols-12 lg:gap-8 mb-12'>
-            <div className='col-span-12 lg:col-span-8 bg-white border border-gray-400/30 rounded-2xl px-6 py-5 shadow h-fit mb-8'>
-              <h2 className='flex justify-start items-center gap-2 text-3xl font-semibold mb-2'>
+          <div className='grid grid-cols-12 mb-12 lg:gap-8'>
+            <div className='col-span-12 px-6 py-5 mb-8 bg-white border shadow lg:col-span-8 border-gray-400/30 rounded-2xl h-fit'>
+              <h2 className='flex items-center justify-start gap-2 mb-2 text-3xl font-semibold'>
                 <Trophy className='mt-1 text-primary' />
                 Il tuo status
               </h2>
-              <p className='text-gray-500 text-sm font-medium mb-4'>
+              <p className='mb-4 text-sm font-medium text-gray-500'>
                 Guadagna punti con ogni acquisto e accedi a benefici esclusivi
               </p>
 
               <div className='mb-6'>
-                <div className='flex justify-between items-center mb-2'>
-                  <div className='flex justify-start items-center gap-2'>
+                <div className='flex items-center justify-between mb-2'>
+                  <div className='flex items-center justify-start gap-2'>
                     <div
                       className={`rounded-full p-2 ${fidelityLevel.mainBgColor}`}
                     ></div>
@@ -322,7 +322,7 @@ const LoyaltyPage = () => {
 
                 {/* barra range livello */}
                 {nextLevel !== null && (
-                  <div className='rounded-full w-full mb-4 bg-slate-300/80 overflow-hidden'>
+                  <div className='w-full mb-4 overflow-hidden rounded-full bg-slate-300/80'>
                     <div
                       className={`py-1.5 bg-green-400`}
                       style={{ width: `${calculateNextLevelPointsPercent()}%` }}
@@ -331,7 +331,7 @@ const LoyaltyPage = () => {
                 )}
 
                 {nextLevel !== null && (
-                  <p className='text-sm text-gray-500 font-medium'>
+                  <p className='text-sm font-medium text-gray-500'>
                     Ti mancano {nextLevel.minPoints - fidelityCard.points} punti
                     per raggiungere il livello {nextLevel.name} e ottenere nuovi
                     benefici
@@ -340,7 +340,7 @@ const LoyaltyPage = () => {
               </div>
 
               <div className='grid grid-cols-1 min-[480px]:grid-cols-2 gap-6 mb-2'>
-                <div className='bg-gray-100 rounded-xl p-6'>
+                <div className='p-6 bg-gray-100 rounded-xl'>
                   <h4 className='min-[480px]:text-xl font-semibold mb-2'>
                     Punti disponibili
                   </h4>
@@ -349,7 +349,7 @@ const LoyaltyPage = () => {
                   </p>
                 </div>
                 {nextLevel !== null && (
-                  <div className='bg-gray-100 rounded-xl p-6'>
+                  <div className='p-6 bg-gray-100 rounded-xl'>
                     <h4 className='min-[480px]:text-xl font-semibold mb-2'>
                       Prossimo livello tra
                     </h4>
@@ -362,12 +362,12 @@ const LoyaltyPage = () => {
             </div>
 
             {/* converti punti */}
-            <div className='col-span-12 lg:col-span-4 bg-white border border-gray-400/30 rounded-2xl px-6 py-5 shadow'>
-              <h2 className='flex justify-start items-center gap-2 text-3xl font-semibold mb-2'>
+            <div className='col-span-12 px-6 py-5 bg-white border shadow lg:col-span-4 border-gray-400/30 rounded-2xl'>
+              <h2 className='flex items-center justify-start gap-2 mb-2 text-3xl font-semibold'>
                 <Gift className='mt-1 text-primary' />
                 Riscatta punti
               </h2>
-              <p className='text-gray-500 text-sm font-medium mb-6'>
+              <p className='mb-6 text-sm font-medium text-gray-500'>
                 Converti i tuoi punti in sconti per i tuoi prossimi acquisti!
               </p>
 
@@ -375,7 +375,7 @@ const LoyaltyPage = () => {
                 {bonusList.map((bonus) => (
                   <div
                     key={bonus.id}
-                    className='bg-gray-100 border border-gray-400/20 rounded-xl px-5 py-4 flex justify-between items-center mb-4'
+                    className='flex items-center justify-between px-5 py-4 mb-4 bg-gray-100 border border-gray-400/20 rounded-xl'
                   >
                     <div>
                       <p className='text-lg font-medium'>
@@ -422,19 +422,19 @@ const LoyaltyPage = () => {
           </div>
 
           {/* livelli */}
-          <div className='bg-white border border-gray-400/30 rounded-2xl px-6 py-5 mb-10 shadow'>
-            <h2 className='flex justify-start items-center gap-2 text-3xl font-semibold mb-2'>
+          <div className='px-6 py-5 mb-10 bg-white border shadow border-gray-400/30 rounded-2xl'>
+            <h2 className='flex items-center justify-start gap-2 mb-2 text-3xl font-semibold'>
               <Star className='mt-1 text-primary' />
               Livelli e Benefici
             </h2>
-            <p className='text-gray-500 text-sm mb-4'>
+            <p className='mb-4 text-sm text-gray-500'>
               Scopri i vantaggi di ogni livello
             </p>
 
             <div className='overflow-x-auto'>
               <table className='w-full min-w-sm'>
                 <thead>
-                  <tr className='grid grid-cols-24 gap-4 border-b border-gray-400/30 pb-3'>
+                  <tr className='grid gap-4 pb-3 border-b grid-cols-24 border-gray-400/30'>
                     <th className='col-span-8 font-semibold text-start'>
                       Livello
                     </th>
@@ -451,9 +451,9 @@ const LoyaltyPage = () => {
                   {levels.map((level) => (
                     <tr
                       key={level.id}
-                      className='grid grid-cols-24 gap-4 items-center hover:bg-gray-100 border-b border-gray-400/30 py-3 px-2 last-of-type:border-0'
+                      className='grid items-center gap-4 px-2 py-3 border-b grid-cols-24 hover:bg-gray-100 border-gray-400/30 last-of-type:border-0'
                     >
-                      <td className='col-span-8 flex justify-start items-center gap-2'>
+                      <td className='flex items-center justify-start col-span-8 gap-2'>
                         <div
                           className={`rounded-full p-2 ${level.mainBgColor}`}
                         ></div>
@@ -482,7 +482,7 @@ const LoyaltyPage = () => {
               <ModalHeader className='bg-background rounded-t-2xl' />
               <ModalBody className='bg-background rounded-b-2xl'>
                 <div className='text-center'>
-                  <BadgePercent className='mx-auto mb-4 h-14 w-14 text-green-500' />
+                  <BadgePercent className='mx-auto mb-4 text-green-500 h-14 w-14' />
                   <h3 className='mb-5 text-lg font-medium'>
                     Sicuro di voler convertire {selectedBonus.points} punti?
                   </h3>

@@ -47,12 +47,12 @@ const PopularComponent = () => {
 
   return (
     <>
-      <div className='max-w-7xl mx-auto my-18 px-4 xl:px-0'>
+      <div className='px-4 mx-auto max-w-7xl my-18 xl:px-0'>
         <p className='text-sm md:text-base text-[#19aeff] font-semibold mb-2'>
           Esperienze in evidenza
         </p>
-        <div className='xs:flex justify-between items-center'>
-          <h2 className='text-xl xs:text-2xl 2xl:text-4xl font-bold'>
+        <div className='items-center justify-between xs:flex'>
+          <h2 className='text-xl font-bold xs:text-2xl 2xl:text-4xl'>
             Le nostre avventure più popolari
           </h2>
           <Button variant='outline' size='md' className='ms-auto xs:ms-0'>
@@ -63,7 +63,7 @@ const PopularComponent = () => {
         {isLoading && <HomeSkeletonLoader />}
 
         {popularExperiences.length > 0 && (
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-10'>
+          <div className='grid grid-cols-1 gap-8 mt-10 md:grid-cols-2 lg:grid-cols-4'>
             {popularExperiences.map((experience) => {
               return (
                 <ExperienceCard

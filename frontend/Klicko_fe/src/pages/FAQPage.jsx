@@ -52,14 +52,14 @@ const FAQPage = () => {
 
   return (
     <div className='max-w-7xl min-h-[80vh] mx-auto mb-8 mt-6 px-6 xl:px-0'>
-      <h1 className='text-3xl font-semibold mb-6'>Domande Frequenti</h1>
+      <h1 className='mb-6 text-3xl font-semibold'>Domande Frequenti</h1>
 
       <div className='flex flex-col gap-4'>
         {faqs.map((faq) => (
           <Accordion
             key={faq.id}
             intestation={<p className='cursor-pointer'>{faq.question}</p>}
-            className='border border-gray-400/40 rounded-lg'
+            className='border rounded-lg border-gray-400/40'
           >
             <p>{faq.answer}</p>
           </Accordion>

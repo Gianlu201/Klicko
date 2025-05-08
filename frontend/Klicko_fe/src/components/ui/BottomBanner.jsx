@@ -41,7 +41,7 @@ export default function BottomBanner({
   return (
     <AnimatePresence>
       {isOpen && (
-        <div ref={overlayRef} className='fixed inset-0 bg-black/40 z-50'>
+        <div ref={overlayRef} className='fixed inset-0 z-50 bg-black/40'>
           <motion.div
             className={`absolute bottom-0 left-0 right-0 rounded-t-2xl shadow-xl p-4 h-[70vh] flex flex-col items-center justify-start overflow-y-auto ${themes[theme]}`}
             initial={{ y: '100%' }}
@@ -61,7 +61,7 @@ export default function BottomBanner({
               <div className='w-12 h-1.5 bg-gray-400 rounded-full mt-2'></div>
             </div>
 
-            <div className='w-md md:w-xl lg:w-3xl px-4 my-4 grow overflow-y-auto'>
+            <div className='px-4 my-4 overflow-y-auto w-md md:w-xl lg:w-3xl grow'>
               {children}
               <Button
                 variant='outline'

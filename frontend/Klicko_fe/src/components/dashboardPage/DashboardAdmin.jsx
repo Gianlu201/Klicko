@@ -236,25 +236,25 @@ const DashboardAdmin = () => {
       id: 1,
       title: 'Totale ordini',
       value: orders.length,
-      icon: <ShoppingBag className='text-primary/40 w-8 h-8' />,
+      icon: <ShoppingBag className='w-8 h-8 text-primary/40' />,
     },
     {
       id: 2,
       title: 'Fatturato totale',
       value: `${getTotalTurnover().toFixed(2).replace('.', ',')} €`,
-      icon: <BanknoteArrowUp className='text-green-500/40 w-8 h-8' />,
+      icon: <BanknoteArrowUp className='w-8 h-8 text-green-500/40' />,
     },
     {
       id: 3,
       title: 'Clienti',
       value: getCustomersNumber(),
-      icon: <Users className='text-indigo-500/40 w-8 h-8' />,
+      icon: <Users className='w-8 h-8 text-indigo-500/40' />,
     },
     {
       id: 4,
       title: 'In attesa',
       value: getNumberOfPending(),
-      icon: <Calendar className='text-amber-500/40 w-8 h-8' />,
+      icon: <Calendar className='w-8 h-8 text-amber-500/40' />,
     },
   ];
 
@@ -291,8 +291,8 @@ const DashboardAdmin = () => {
     <>
       {isAuthorized && (
         <>
-          <h2 className='text-2xl font-bold mb-2'>Dashboard amministrativa</h2>
-          <p className='text-gray-500 font-normal mb-6'>
+          <h2 className='mb-2 text-2xl font-bold'>Dashboard amministrativa</h2>
+          <p className='mb-6 font-normal text-gray-500'>
             Panoramica di tutti gli ordini e le statistiche
           </p>
 
@@ -301,10 +301,10 @@ const DashboardAdmin = () => {
             {options.map((opt) => (
               <div
                 key={opt.id}
-                className='flex justify-between items-start border border-gray-400/40 shadow-xs rounded-xl px-4 py-6'
+                className='flex items-start justify-between px-4 py-6 border shadow-xs border-gray-400/40 rounded-xl'
               >
-                <div className='flex flex-col justify-center items-start gap-2'>
-                  <span className='text-gray-500 font-medium text-sm'>
+                <div className='flex flex-col items-start justify-center gap-2'>
+                  <span className='text-sm font-medium text-gray-500'>
                     {opt.title}
                   </span>
                   <span className='text-2xl font-semibold'>{opt.value}</span>
@@ -314,7 +314,7 @@ const DashboardAdmin = () => {
             ))}
           </div>
 
-          <div className='xs:flex justify-between items-center gap-4 mb-8'>
+          <div className='items-center justify-between gap-4 mb-8 xs:flex'>
             <div className='relative grow max-[480px]:mb-4'>
               <input
                 type='text'
@@ -328,7 +328,7 @@ const DashboardAdmin = () => {
             </div>
 
             <select
-              className='rounded-md border border-gray-300 bg-white py-2 px-4 pr-8 shadow-sm focus:border-primary focus:ring-primary focus:outline-none focus:ring-1 text-gray-700 text-sm'
+              className='px-4 py-2 pr-8 text-sm text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:border-primary focus:ring-primary focus:outline-none focus:ring-1'
               value={stateFilter}
               onChange={(e) => {
                 filterBy('', e.target.value);
@@ -345,9 +345,9 @@ const DashboardAdmin = () => {
 
           {/* tabella storico ordini */}
           <div className='px-6 py-5 border border-gray-400/40 rounded-xl'>
-            <h2 className='text-xl font-semibold mb-2'>Tutti gli ordini</h2>
+            <h2 className='mb-2 text-xl font-semibold'>Tutti gli ordini</h2>
             {!isLoading && (
-              <p className='text-gray-500 font-normal mb-6'>
+              <p className='mb-6 font-normal text-gray-500'>
                 {filteredOrders.length} ordini trovati
               </p>
             )}
@@ -356,19 +356,19 @@ const DashboardAdmin = () => {
               <SkeletonList />
             ) : filteredOrders.length > 0 ? (
               <div className='overflow-x-auto'>
-                <table className='min-w-sm w-full'>
+                <table className='w-full min-w-sm'>
                   <thead>
-                    <tr className='grid grid-cols-12 text-gray-500 text-sm font-normal border-b border-gray-400/40 p-3 hover:bg-gray-100'>
+                    <tr className='grid grid-cols-12 p-3 text-sm font-normal text-gray-500 border-b border-gray-400/40 hover:bg-gray-100'>
                       <th className='col-span-3 md:col-span-2 text-start'>
                         Numero ordine
                       </th>
                       <th className='col-span-5 md:col-span-3 text-start'>
                         Cliente
                       </th>
-                      <th className='hidden md:block col-span-2 text-start'>
+                      <th className='hidden col-span-2 md:block text-start'>
                         Data
                       </th>
-                      <th className='hidden md:block col-span-2 text-start'>
+                      <th className='hidden col-span-2 md:block text-start'>
                         Totale
                       </th>
                       <th className='col-span-3 md:col-span-2 text-start'>
@@ -382,20 +382,20 @@ const DashboardAdmin = () => {
                     {filteredOrders.map((order) => (
                       <tr
                         key={order.orderNumber}
-                        className='grid grid-cols-12 items-center text-sm border-b border-gray-400/40 p-3 hover:bg-gray-100 last-of-type:border-none'
+                        className='grid items-center grid-cols-12 p-3 text-sm border-b border-gray-400/40 hover:bg-gray-100 last-of-type:border-none'
                       >
                         <td className='col-span-3 md:col-span-2 text-start'>
                           #{order.orderNumber}
                         </td>
 
-                        <td className='col-span-5 md:col-span-3 overflow-hidden me-3'>
+                        <td className='col-span-5 overflow-hidden md:col-span-3 me-3'>
                           <p className='font-semibold'>
                             {order.user.firstName} {order.user.lastName}
                           </p>
                           <p className='max-md:text-xs'>{order.user.email}</p>
                         </td>
 
-                        <td className='hidden md:flex col-span-2 flex-col justify-center items-start gap-1'>
+                        <td className='flex-col items-start justify-center hidden col-span-2 gap-1 md:flex'>
                           <span>
                             {new Date(order.createdAt).toLocaleDateString(
                               'it-IT',
@@ -414,7 +414,7 @@ const DashboardAdmin = () => {
                           </span>
                         </td>
 
-                        <td className='hidden md:block col-span-2'>
+                        <td className='hidden col-span-2 md:block'>
                           {order.totalPrice.toFixed(2).replace('.', ',')} €
                         </td>
 
@@ -428,7 +428,7 @@ const DashboardAdmin = () => {
                           </span>
                         </td>
 
-                        <td className='col-span-1 flex justify-center items-center max-md:ps-1'>
+                        <td className='flex items-center justify-center col-span-1 max-md:ps-1'>
                           <Cog
                             className='w-6 h-6 cursor-pointer'
                             onClick={() => {
@@ -451,7 +451,7 @@ const DashboardAdmin = () => {
                       <h3 className='text-lg font-semibold tracking-tight'>
                         Ordine #{selectedOrder.orderNumber}
                       </h3>
-                      <p className='text-sm text-gray-500 mb-6'>
+                      <p className='mb-6 text-sm text-gray-500'>
                         {new Date(selectedOrder.createdAt).toLocaleDateString(
                           'it-IT',
                           {
@@ -462,9 +462,9 @@ const DashboardAdmin = () => {
                         )}
                       </p>
 
-                      <div className='flex justify-between items-start mb-6'>
+                      <div className='flex items-start justify-between mb-6'>
                         <div>
-                          <p className='text-sm text-gray-500 font-medium tracking-tight mb-2'>
+                          <p className='mb-2 text-sm font-medium tracking-tight text-gray-500'>
                             Cliente
                           </p>
                           <p className='font-semibold'>
@@ -476,11 +476,11 @@ const DashboardAdmin = () => {
                           </p>
                         </div>
                         <div>
-                          <p className='text-sm text-gray-500 font-medium tracking-tight mb-2 text-end'>
+                          <p className='mb-2 text-sm font-medium tracking-tight text-gray-500 text-end'>
                             Stato
                           </p>
                           <select
-                            className='rounded-md border border-gray-300 bg-white py-2 px-4 pr-8 shadow-sm focus:border-primary focus:ring-primary focus:outline-none focus:ring-1 text-gray-700 text-sm'
+                            className='px-4 py-2 pr-8 text-sm text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:border-primary focus:ring-primary focus:outline-none focus:ring-1'
                             value={selectedOrder.state}
                             onChange={(e) => {
                               editOrderState(
@@ -506,14 +506,14 @@ const DashboardAdmin = () => {
                         <h4 className='font-medium'>Dettagli ordine</h4>
                         <table className='w-full'>
                           <thead>
-                            <tr className='grid grid-cols-12 text-gray-500 text-sm font-normal border-b border-gray-400/40 p-3 hover:bg-gray-100'>
+                            <tr className='grid grid-cols-12 p-3 text-sm font-normal text-gray-500 border-b border-gray-400/40 hover:bg-gray-100'>
                               <th className='col-span-7 text-start'>
                                 Esperienza
                               </th>
                               <th className='col-span-2 md:col-span-1 text-end'>
                                 Quantità
                               </th>
-                              <th className='hidden md:block col-span-2 text-end'>
+                              <th className='hidden col-span-2 md:block text-end'>
                                 Prezzo
                               </th>
                               <th className='col-span-3 md:col-span-2 text-end'>
@@ -526,7 +526,7 @@ const DashboardAdmin = () => {
                             {selectedOrder.orderExperiences.map((exp) => (
                               <tr
                                 key={exp.orderExperienceId}
-                                className='grid grid-cols-12 text-sm border-b border-gray-400/40 p-3 hover:bg-gray-100'
+                                className='grid grid-cols-12 p-3 text-sm border-b border-gray-400/40 hover:bg-gray-100'
                               >
                                 <td className='col-span-7 text-start'>
                                   {exp.title}
@@ -534,7 +534,7 @@ const DashboardAdmin = () => {
                                 <td className='col-span-2 md:col-span-1 text-end'>
                                   {exp.quantity}
                                 </td>
-                                <td className='hidden md:block col-span-2 text-end'>
+                                <td className='hidden col-span-2 md:block text-end'>
                                   {exp.unitPrice.toFixed(2).replace('.', ',')} €
                                 </td>
                                 <td className='col-span-3 md:col-span-2 text-end'>
@@ -547,7 +547,7 @@ const DashboardAdmin = () => {
 
                           <tfoot>
                             {selectedOrder.shippingPrice > 0 && (
-                              <tr className='grid grid-cols-12 text-gray-500 font-medium p-3 hover:bg-gray-100'>
+                              <tr className='grid grid-cols-12 p-3 font-medium text-gray-500 hover:bg-gray-100'>
                                 <td className='col-span-9 md:col-span-10 text-end'>
                                   Spedizione:
                                 </td>
@@ -561,7 +561,7 @@ const DashboardAdmin = () => {
                             )}
 
                             {selectedOrder.totalDiscount > 0 && (
-                              <tr className='grid grid-cols-12 text-gray-500 font-medium p-3 hover:bg-gray-100'>
+                              <tr className='grid grid-cols-12 p-3 font-medium text-gray-500 hover:bg-gray-100'>
                                 <td className='col-span-9 md:col-span-10 text-end'>
                                   Sconto coupon:
                                 </td>
@@ -575,7 +575,7 @@ const DashboardAdmin = () => {
                               </tr>
                             )}
 
-                            <tr className='grid grid-cols-12 font-bold p-3 hover:bg-gray-100'>
+                            <tr className='grid grid-cols-12 p-3 font-bold hover:bg-gray-100'>
                               <td className='col-span-9 md:col-span-10 text-end'>
                                 Totale ordine
                               </td>
@@ -594,7 +594,7 @@ const DashboardAdmin = () => {
                 )}
               </div>
             ) : (
-              <div className='flex flex-col justify-center items-center gap-2 py-10'>
+              <div className='flex flex-col items-center justify-center gap-2 py-10'>
                 <h3 className='text-xl font-semibold'>Nessun ordine trovato</h3>
               </div>
             )}

@@ -181,9 +181,9 @@ const CheckoutForm = ({ sendOrder, orderAmount, checkFormFields }) => {
       </div>
 
       {/* Scadenza e CVV */}
-      <div className='flex justify-between items-start gap-6 my-5'>
+      <div className='flex items-start justify-between gap-6 my-5'>
         {/* Scadenza */}
-        <div className='w-full flex flex-col gap-2'>
+        <div className='flex flex-col w-full gap-2'>
           <label htmlFor='cardExpiry' className='text-sm font-medium'>
             Scadenza
           </label>
@@ -197,7 +197,7 @@ const CheckoutForm = ({ sendOrder, orderAmount, checkFormFields }) => {
         </div>
 
         {/* CVC */}
-        <div className='w-full flex flex-col gap-2'>
+        <div className='flex flex-col w-full gap-2'>
           <label htmlFor='cardCvc' className='text-sm font-medium'>
             CVV
           </label>
@@ -230,7 +230,7 @@ const CheckoutForm = ({ sendOrder, orderAmount, checkFormFields }) => {
 
       {/* Messaggio di errore */}
       {errorMessage && (
-        <p className='relative text-center text-sm font-medium text-red-600 bg-red-200/70 py-3 mt-4 rounded-xl'>
+        <p className='relative py-3 mt-4 text-sm font-medium text-center text-red-600 bg-red-200/70 rounded-xl'>
           {errorMessage}
           <X
             className='absolute top-1 right-1.5 z-40 w-5 h-5 cursor-pointer'
@@ -241,7 +241,7 @@ const CheckoutForm = ({ sendOrder, orderAmount, checkFormFields }) => {
 
       {/* Messaggio di successo */}
       {successMessage && (
-        <p className='relative text-center text-sm font-medium text-green-600 bg-green-200/70 py-3 mt-4 rounded-xl'>
+        <p className='relative py-3 mt-4 text-sm font-medium text-center text-green-600 bg-green-200/70 rounded-xl'>
           {successMessage}
           <X
             className='absolute top-1 right-1.5 z-40 w-5 h-5 cursor-pointer'

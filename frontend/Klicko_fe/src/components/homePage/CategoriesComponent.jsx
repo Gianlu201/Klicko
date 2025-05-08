@@ -38,26 +38,26 @@ const CategoriesComponent = () => {
 
   return (
     <div className='text-center bg-[#F1F5F9] py-15 px-6 md-px-0'>
-      <p className='text-primary font-semibold'>Categorie</p>
+      <p className='font-semibold text-primary'>Categorie</p>
 
-      <h2 className='text-2xl xs:text-4xl font-bold'>Esplora per categoria</h2>
+      <h2 className='text-2xl font-bold xs:text-4xl'>Esplora per categoria</h2>
 
-      <p className='text-gray-500 my-8'>
+      <p className='my-8 text-gray-500'>
         Scopri la nostra selezione di esperienze uniche suddivise per categoria
       </p>
 
-      <div className='grid grid-cols-2 md:grid-cols-4 gap-10 max-w-7xl mx-auto'>
+      <div className='grid grid-cols-2 gap-10 mx-auto md:grid-cols-4 max-w-7xl'>
         {categories.map((category) => (
           <div
             key={category.id}
-            className='text-xs xs:text-base text-center bg-white py-6 px-2 xs:px-10 md:px-8 lg:px-12 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-3 duration-700 ease-in-out cursor-pointer'
+            className='px-2 py-6 text-xs text-center duration-700 ease-in-out bg-white shadow-sm cursor-pointer xs:text-base xs:px-10 md:px-8 lg:px-12 rounded-2xl hover:shadow-xl hover:-translate-y-3'
             onClick={() => {
               dispatch(setSelectedCategoryName(category.name));
               navigate('/experiences');
             }}
           >
             {category.icon}
-            <h4 className='text-lg font-semibold my-3'>{category.name}</h4>
+            <h4 className='my-3 text-lg font-semibold'>{category.name}</h4>
             <p className='text-sm text-gray-500'>{category.description}</p>
           </div>
         ))}

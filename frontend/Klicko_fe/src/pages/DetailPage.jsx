@@ -167,33 +167,33 @@ const DetailPage = () => {
   return (
     <div className='min-h-[100vh]'>
       {isLoading ? (
-        <div className='mt-10 w-2/3 min-w-sm mx-auto'>
+        <div className='w-2/3 mx-auto mt-10 min-w-sm'>
           <SkeletonCompleteImage />
         </div>
       ) : (
         experience?.title != null && (
           <div>
-            <div className='relative h-[30vh] md:h-[50vh] lg:h-[70vh] overflow-hidden'>
+            <div className='relative h-[25vh] xs:h-[30vh] md:h-[50vh] lg:h-[70vh] overflow-hidden'>
               <img
                 src={`https://klicko-backend-api.azurewebsites.net/uploads/${experience.coverImage}`}
                 alt={experience.title}
-                className='absolute top-1/2 start-0 -translate-y-1/2  w-full'
+                className='absolute w-full -translate-y-1/2 top-1/2 start-0'
               />
-              <div className='absolute bg-black/30 w-full h-full'></div>
-              <div className='absolute bottom-0 start-10 lg:start-40 z-20 text-white max-w-3/4'>
-                <h1 className='text-3xl md:text-4xl lg:text-5xl font-bold mb-4'>
+              <div className='absolute w-full h-full bg-black/30'></div>
+              <div className='absolute bottom-0 z-20 text-white start-10 lg:start-40 max-w-3/4'>
+                <h1 className='mb-4 text-3xl font-bold md:text-4xl lg:text-5xl line-clamp-2'>
                   {experience.title}
                 </h1>
                 <div className='flex gap-8 mb-8 text-sm md:text-base'>
                   <span className='flex items-center gap-2'>
                     <MapPin className='w-4.5 h-4.5' />
-                    {experience.place}
+                    <span className='line-clamp-2'>{experience.place}</span>
                   </span>
                   <span className='flex items-center gap-2'>
                     <Clock className='w-4.5 h-4.5' />
                     {experience.duration}
                   </span>
-                  <span className='hidden sm:flex items-center gap-2'>
+                  <span className='items-center hidden gap-2 sm:flex'>
                     <Tag className='w-4.5 h-4.5' />
                     {experience.category.name}
                   </span>
@@ -201,11 +201,11 @@ const DetailPage = () => {
               </div>
             </div>
 
-            <div className='grid grid-cols-3 gap-4 max-w-7xl mx-auto mb-20 px-6 xl:px-0'>
+            <div className='grid grid-cols-3 gap-4 px-6 mx-auto mb-20 max-w-7xl xl:px-0'>
               {/* first column */}
-              <div className='bg-white col-span-3 lg:col-span-2 rounded-b-2xl shadow-lg mb-16'>
+              <div className='col-span-3 mb-16 bg-white shadow-lg lg:col-span-2 rounded-b-2xl'>
                 {/* navigation tables */}
-                <div className='inline-block mx-6 px-2 pb-2 bg-gray-100 rounded-b-2xl'>
+                <div className='inline-block px-2 pb-2 mx-6 bg-gray-100 rounded-b-2xl'>
                   <button
                     className={`px-4 py-1 cursor-pointer ${
                       description ? 'bg-white rounded-b-xl' : ''
@@ -244,15 +244,15 @@ const DetailPage = () => {
                 {/* description table */}
                 {description && (
                   <div className='px-6 mt-10 mb-8'>
-                    <p className='lg:text-xl text-gray-600 mb-3'>
+                    <p className='mb-3 text-gray-600 lg:text-xl'>
                       {experience.description}
                     </p>
 
-                    <hr className='text-gray-500/50 my-3' />
+                    <hr className='my-3 text-gray-500/50' />
 
                     <h4 className='text-xl font-semibold'>Dettagli</h4>
 
-                    <div className='sm:flex gap-2 my-2'>
+                    <div className='gap-2 my-2 sm:flex'>
                       <span className='flex items-center gap-1.5 text-gray-600'>
                         <Clock className='w-4 h-4' />
                         Durata:
@@ -261,14 +261,14 @@ const DetailPage = () => {
                         {experience?.duration}
                       </span>
                     </div>
-                    <div className='sm:flex gap-2 my-2'>
+                    <div className='gap-2 my-2 sm:flex'>
                       <span className='flex items-center gap-1.5 text-gray-600'>
                         <MapPin className='w-4 h-4' />
                         Luogo:
                       </span>
                       <span className='font-semibold'>{experience?.place}</span>
                     </div>
-                    <div className='sm:flex gap-2 my-2'>
+                    <div className='gap-2 my-2 sm:flex'>
                       <span className='flex items-center gap-1.5 text-gray-600'>
                         <User className='w-4 h-4' />
                         Organizzato da:
@@ -277,7 +277,7 @@ const DetailPage = () => {
                         {experience?.organiser}
                       </span>
                     </div>
-                    <div className='sm:flex gap-2 my-2'>
+                    <div className='gap-2 my-2 sm:flex'>
                       <span className='flex items-center gap-1.5 text-gray-600'>
                         <Calendar className='w-4 h-4' />
                         Aggiornato il:
@@ -315,7 +315,7 @@ const DetailPage = () => {
                 {info && (
                   <div className='px-6 mt-10 mb-8'>
                     <div className='my-3'>
-                      <h4 className='text-xl font-semibold mb-3'>
+                      <h4 className='mb-3 text-xl font-semibold'>
                         Cosa è incluso
                       </h4>
                       <p className='text-gray-600'>
@@ -326,7 +326,7 @@ const DetailPage = () => {
                     {experience?.carryWiths &&
                       experience?.carryWiths.length > 0 && (
                         <div className='my-3'>
-                          <h4 className='text-xl font-semibold mb-3'>
+                          <h4 className='mb-3 text-xl font-semibold'>
                             Cosa portare
                           </h4>
                           <ul className='ps-6'>
@@ -343,7 +343,7 @@ const DetailPage = () => {
                       )}
 
                     <div className='my-3'>
-                      <h4 className='text-xl font-semibold mb-3'>
+                      <h4 className='mb-3 text-xl font-semibold'>
                         Politica di cancellazione
                       </h4>
                       <p className='text-gray-600 flex gap-1.5 items-center'>
@@ -368,8 +368,8 @@ const DetailPage = () => {
 
               {/* second column */}
               <div className='col-span-3 lg:col-span-1'>
-                <div className='bg-white rounded-2xl shadow-lg px-6 py-6 -translate-y-10 sticky top-32'>
-                  <h4 className='text-lg text-gray-500 mb-1'>Prezzo totale</h4>
+                <div className='sticky px-6 py-6 -translate-y-10 bg-white shadow-lg rounded-2xl top-32'>
+                  <h4 className='mb-1 text-lg text-gray-500'>Prezzo totale</h4>
                   <div className='mb-3'>
                     {experience.sale > 0 && (
                       <span className={`font-bold text-3xl me-2`}>
@@ -400,14 +400,14 @@ const DetailPage = () => {
                     Aggiungi al carrello
                   </Button>
 
-                  <hr className='text-gray-500/30 my-5' />
+                  <hr className='my-5 text-gray-500/30' />
 
-                  <h4 className='font-semibold mb-2'>
+                  <h4 className='mb-2 font-semibold'>
                     Informazioni importanti
                   </h4>
 
                   <div className='sm:flex items-center gap-1.5 mb-2'>
-                    <UsersRound className='w-4 h-4 inline-block me-2' />
+                    <UsersRound className='inline-block w-4 h-4 me-2' />
                     <span>
                       Esperienze per{' '}
                       <span className='font-semibold'>

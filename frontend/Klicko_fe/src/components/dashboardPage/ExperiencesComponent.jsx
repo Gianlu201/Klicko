@@ -281,8 +281,8 @@ const ExperiencesComponent = () => {
 
   return (
     <>
-      <div className='xs:flex justify-between items-center mb-6'>
-        <h2 className='text-xl xs:text-2xl font-bold mb-2'>
+      <div className='items-center justify-between mb-6 xs:flex'>
+        <h2 className='mb-2 text-xl font-bold xs:text-2xl'>
           Gestione esperienze
         </h2>
         <Button
@@ -297,12 +297,12 @@ const ExperiencesComponent = () => {
       </div>
 
       <div className='mb-12'>
-        <div className='xs:flex justify-between items-center gap-4'>
+        <div className='items-center justify-between gap-4 xs:flex'>
           <div className='relative grow max-xs:mb-4'>
             <input
               type='text'
               placeholder='Cerca esperienze...'
-              className='bg-background border border-gray-400/30 rounded-xl py-2 ps-10 w-full'
+              className='w-full py-2 border bg-background border-gray-400/30 rounded-xl ps-10'
               value={searchBar}
               onChange={(e) => {
                 setSearchBar(e.target.value);
@@ -323,8 +323,8 @@ const ExperiencesComponent = () => {
         </div>
         {showFilters && (
           <div className='grid grid-cols-1 min-[480px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-start items-end gap-8 mt-4'>
-            <div className='flex flex-col justify-start items-start gap-2'>
-              <span className='font-medium text-sm'>Categoria</span>
+            <div className='flex flex-col items-start justify-start gap-2'>
+              <span className='text-sm font-medium'>Categoria</span>
               <select
                 name='category'
                 id='categorySelect'
@@ -342,8 +342,8 @@ const ExperiencesComponent = () => {
                 ))}
               </select>
             </div>
-            <div className='flex flex-col justify-start items-start gap-2'>
-              <span className='font-medium text-sm'>Prezzo minimo</span>
+            <div className='flex flex-col items-start justify-start gap-2'>
+              <span className='text-sm font-medium'>Prezzo minimo</span>
               <input
                 type='number'
                 step={1}
@@ -356,8 +356,8 @@ const ExperiencesComponent = () => {
                 }}
               />
             </div>
-            <div className='flex flex-col justify-start items-start gap-2'>
-              <span className='font-medium text-sm'>Prezzo massimo</span>
+            <div className='flex flex-col items-start justify-start gap-2'>
+              <span className='text-sm font-medium'>Prezzo massimo</span>
               <input
                 type='number'
                 step={1}
@@ -392,23 +392,23 @@ const ExperiencesComponent = () => {
           <div className='overflow-x-auto'>
             <table className='w-full'>
               <thead>
-                <tr className='grid grid-cols-24 gap-4 border-b border-gray-400/30 pb-3'>
-                  <th className='col-span-10 md:col-span-8 text-gray-500 text-sm font-medium text-start ps-3'>
+                <tr className='grid gap-4 pb-3 border-b grid-cols-24 border-gray-400/30'>
+                  <th className='col-span-10 text-sm font-medium text-gray-500 md:col-span-8 text-start ps-3'>
                     Esperienza
                   </th>
-                  <th className='col-span-5 md:col-span-3 text-gray-500 text-sm font-medium text-start'>
+                  <th className='col-span-5 text-sm font-medium text-gray-500 md:col-span-3 text-start'>
                     Categoria
                   </th>
-                  <th className='col-span-5 md:col-span-3 text-gray-500 text-sm font-medium text-start'>
+                  <th className='col-span-5 text-sm font-medium text-gray-500 md:col-span-3 text-start'>
                     Prezzo
                   </th>
-                  <th className='hidden md:block col-span-4 text-gray-500 text-sm font-medium text-start'>
+                  <th className='hidden col-span-4 text-sm font-medium text-gray-500 md:block text-start'>
                     Luogo
                   </th>
-                  <th className='hidden md:block col-span-3 text-gray-500 text-sm font-medium text-start'>
+                  <th className='hidden col-span-3 text-sm font-medium text-gray-500 md:block text-start'>
                     Data
                   </th>
-                  <th className='col-span-4 md:col-span-3 text-gray-500 text-sm font-medium text-end pe-3'>
+                  <th className='col-span-4 text-sm font-medium text-gray-500 md:col-span-3 text-end pe-3'>
                     Azioni
                   </th>
                 </tr>
@@ -417,21 +417,21 @@ const ExperiencesComponent = () => {
                 {filteredExperiences.map((exp) => (
                   <tr
                     key={exp.experienceId}
-                    className='grid grid-cols-24 gap-4 items-center hover:bg-gray-100 border-b border-gray-400/30 py-3 px-2 last-of-type:border-0'
+                    className='grid items-center gap-4 px-2 py-3 border-b grid-cols-24 hover:bg-gray-100 border-gray-400/30 last-of-type:border-0'
                   >
-                    <td className='col-span-10 md:col-span-8 flex justify-start items-center gap-3'>
+                    <td className='flex items-center justify-start col-span-10 gap-3 md:col-span-8'>
                       <div className='hidden md:block'>
                         <div className='h-[40px] aspect-square rounded overflow-hidden'>
                           <img
                             src={`https://klicko-backend-api.azurewebsites.net/uploads/${exp.coverImage}`}
                             alt={exp.title}
-                            className='w-full h-full object-cover'
+                            className='object-cover w-full h-full'
                           />
                         </div>
                       </div>
                       <div className=''>
                         <p className='text-sm font-semibold'>{exp.title}</p>
-                        <p className='text-gray-500 text-xs'>{exp.organiser}</p>
+                        <p className='text-xs text-gray-500'>{exp.organiser}</p>
                       </div>
                     </td>
 
@@ -447,11 +447,11 @@ const ExperiencesComponent = () => {
                       </p>
                     </td>
 
-                    <td className='hidden md:block col-span-4'>
+                    <td className='hidden col-span-4 md:block'>
                       <p className='text-xs lg:text-sm'>{exp.place}</p>
                     </td>
 
-                    <td className='hidden md:block col-span-3'>
+                    <td className='hidden col-span-3 md:block'>
                       <p className='text-sm'>
                         {new Date(exp.lastEditDate).toLocaleDateString(
                           'it-IT',
@@ -465,9 +465,9 @@ const ExperiencesComponent = () => {
                     </td>
 
                     <td className='col-span-4 md:col-span-3'>
-                      <div className='flex max-sm:flex-col justify-end items-center gap-4 pe-3'>
+                      <div className='flex items-center justify-end gap-4 max-sm:flex-col pe-3'>
                         <Pencil
-                          className='w-4 h-4 md:w-4 md:h-4 text-gray-600 cursor-pointer'
+                          className='w-4 h-4 text-gray-600 cursor-pointer md:w-4 md:h-4'
                           onClick={() => {
                             navigate(
                               `/dashboard/experiences/edit/${exp.experienceId}`
@@ -477,7 +477,7 @@ const ExperiencesComponent = () => {
                         {exp.isDeleted ? (
                           <div>
                             <ArchiveRestore
-                              className='w-4 h-4 md:w-4 md:h-4 text-green-600 cursor-pointer mb-2'
+                              className='w-4 h-4 mb-2 text-green-600 cursor-pointer md:w-4 md:h-4'
                               onClick={() => {
                                 setOpenRestoreModal(true);
                                 setSelectedExperience(exp);
@@ -485,7 +485,7 @@ const ExperiencesComponent = () => {
                             />
 
                             <OctagonXIcon
-                              className='w-4 h-4 md:w-4 md:h-4 text-red-600 cursor-pointer'
+                              className='w-4 h-4 text-red-600 cursor-pointer md:w-4 md:h-4'
                               onClick={() => {
                                 setOpenHardDeleteModal(true);
                                 setSelectedExperience(exp);
@@ -494,7 +494,7 @@ const ExperiencesComponent = () => {
                           </div>
                         ) : (
                           <Trash2
-                            className='w-4 h-4 md:w-4 md:h-4 text-red-600 cursor-pointer'
+                            className='w-4 h-4 text-red-600 cursor-pointer md:w-4 md:h-4'
                             onClick={() => {
                               setOpenSoftDeleteModal(true);
                               setSelectedExperience(exp);
@@ -511,7 +511,7 @@ const ExperiencesComponent = () => {
         ) : (
           <div className='flex flex-col items-center justify-center gap-3 py-12'>
             <h4 className='text-xl font-semibold'>Nesuna esperienza trovata</h4>
-            <p className='text-gray-500 font-normal'>
+            <p className='font-normal text-gray-500'>
               Nessuna esperienza corrispondente ai criteri di ricerca.
             </p>
             <Button
@@ -538,7 +538,7 @@ const ExperiencesComponent = () => {
           <ModalHeader className='bg-background rounded-t-2xl' />
           <ModalBody className='bg-background rounded-b-2xl'>
             <div className='text-center'>
-              <CircleAlert className='mx-auto mb-4 h-14 w-14 text-red-500' />
+              <CircleAlert className='mx-auto mb-4 text-red-500 h-14 w-14' />
               <h3 className='mb-5 text-lg font-medium'>
                 Sicuro di voler eliminare questa esperienza?
               </h3>
@@ -584,7 +584,7 @@ const ExperiencesComponent = () => {
           <ModalHeader className='bg-background rounded-t-2xl' />
           <ModalBody className='bg-background rounded-b-2xl'>
             <div className='text-center'>
-              <CircleFadingArrowUp className='mx-auto mb-4 h-14 w-14 text-green-500' />
+              <CircleFadingArrowUp className='mx-auto mb-4 text-green-500 h-14 w-14' />
               <h3 className='mb-5 text-lg font-medium'>
                 Sicuro di voler ripristinare questa esperienza?
               </h3>
@@ -630,7 +630,7 @@ const ExperiencesComponent = () => {
           <ModalHeader className='bg-background rounded-t-2xl' />
           <ModalBody className='bg-background rounded-b-2xl'>
             <div className='text-center'>
-              <CircleAlert className='mx-auto mb-4 h-14 w-14 text-red-500' />
+              <CircleAlert className='mx-auto mb-4 text-red-500 h-14 w-14' />
               <h3 className='mb-5 text-lg font-medium'>
                 Sicuro di voler eliminare definitivamente questa esperienza?
               </h3>

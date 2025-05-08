@@ -5,7 +5,7 @@ import { toast } from 'sonner';
 
 const CouponCard = ({ coupon }) => {
   return (
-    <div className='relative bg-white border border-gray-400/40 rounded-xl overflow-hidden'>
+    <div className='relative overflow-hidden bg-white border border-gray-400/40 rounded-xl'>
       <div className='px-6 py-4'>
         <h3
           className={`text-xl font-medium mb-4 ${
@@ -39,13 +39,13 @@ const CouponCard = ({ coupon }) => {
         )}
 
         {coupon.percentualSaleAmount > 0 && (
-          <p className='text-sm mb-3'>
+          <p className='mb-3 text-sm'>
             Sconto del {coupon.percentualSaleAmount}% sul tuo ordine.
           </p>
         )}
 
         {coupon.fixedSaleAmount > 0 && (
-          <p className='text-sm mb-3'>
+          <p className='mb-3 text-sm'>
             Sconto di {coupon.fixedSaleAmount.toFixed(2).replace('.', ',')}€ sul
             tuo ordine.
           </p>
@@ -57,7 +57,7 @@ const CouponCard = ({ coupon }) => {
       </div>
 
       {coupon.isActive && (
-        <div className='p-4 bg-background border-t border-gray-400/40'>
+        <div className='p-4 border-t bg-background border-gray-400/40'>
           <Button
             variant='primary'
             fullWidth={true}

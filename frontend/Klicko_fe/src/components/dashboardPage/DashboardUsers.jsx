@@ -152,16 +152,16 @@ const DashboardUsers = () => {
     <>
       {isAuthorized && (
         <>
-          <h2 className='text-2xl font-bold mb-2'>Gestione utenti</h2>
-          <p className='text-gray-500 font-normal mb-6'>
+          <h2 className='mb-2 text-2xl font-bold'>Gestione utenti</h2>
+          <p className='mb-6 font-normal text-gray-500'>
             Visualizza e modifica i ruoli degli utenti
           </p>
 
-          <form className='relative grow mb-8'>
+          <form className='relative mb-8 grow'>
             <input
               type='text'
               placeholder='Cerca utenti...'
-              className='bg-background border border-gray-400/30 rounded-xl py-2 ps-10 w-full'
+              className='w-full py-2 border bg-background border-gray-400/30 rounded-xl ps-10'
               value={userSearch}
               onChange={(e) => {
                 setUserSearch(e.target.value);
@@ -171,29 +171,29 @@ const DashboardUsers = () => {
           </form>
 
           {/* tabella utenti registrati */}
-          <div className='border border-gray-400/40 shadow-sm rounded-xl px-4 py-5'>
+          <div className='px-4 py-5 border shadow-sm border-gray-400/40 rounded-xl'>
             {isLoading ? (
               <SkeletonList />
             ) : filteredUsers.length > 0 ? (
               <div className='overflow-x-auto'>
-                <h3 className='text-xl font-semibold mb-2'>Utenti</h3>
-                <p className='text-gray-500 font-normal text-sm mb-5'>
+                <h3 className='mb-2 text-xl font-semibold'>Utenti</h3>
+                <p className='mb-5 text-sm font-normal text-gray-500'>
                   {filteredUsers.length} utenti trovati
                 </p>
 
                 <table className='w-full min-w-sm'>
                   <thead>
-                    <tr className='grid grid-cols-24 gap-4 border-b border-gray-400/30 pb-3'>
-                      <th className='col-span-7 md:col-span-6 text-gray-500 text-sm font-medium text-start ps-3'>
+                    <tr className='grid gap-4 pb-3 border-b grid-cols-24 border-gray-400/30'>
+                      <th className='col-span-7 text-sm font-medium text-gray-500 md:col-span-6 text-start ps-3'>
                         Nome
                       </th>
-                      <th className='col-span-11 md:col-span-8 text-gray-500 text-sm font-medium text-start ps-3'>
+                      <th className='col-span-11 text-sm font-medium text-gray-500 md:col-span-8 text-start ps-3'>
                         Email
                       </th>
-                      <th className='hidden md:block col-span-6 text-gray-500 text-sm font-medium text-start ps-3'>
+                      <th className='hidden col-span-6 text-sm font-medium text-gray-500 md:block text-start ps-3'>
                         Data registrazione
                       </th>
-                      <th className='col-span-6 md:col-span-4 text-gray-500 text-sm font-medium text-start md:text-center ps-3'>
+                      <th className='col-span-6 text-sm font-medium text-gray-500 md:col-span-4 text-start md:text-center ps-3'>
                         Ruolo
                       </th>
                     </tr>
@@ -202,15 +202,15 @@ const DashboardUsers = () => {
                     {filteredUsers.map((user) => (
                       <tr
                         key={user.userId}
-                        className='grid grid-cols-24 gap-4 items-center hover:bg-gray-100 border-b border-gray-400/30 py-3 last-of-type:border-0 text-sm'
+                        className='grid items-center gap-4 py-3 text-sm border-b grid-cols-24 hover:bg-gray-100 border-gray-400/30 last-of-type:border-0'
                       >
-                        <td className='col-span-7 md:col-span-6 overflow-hidden ps-2'>
+                        <td className='col-span-7 overflow-hidden md:col-span-6 ps-2'>
                           {user.firstName} {user.lastName}
                         </td>
-                        <td className='col-span-11 md:col-span-8 overflow-hidden max-md:text-xs max-md:font-medium'>
+                        <td className='col-span-11 overflow-hidden md:col-span-8 max-md:text-xs max-md:font-medium'>
                           {user.email}
                         </td>
-                        <td className='hidden md:block col-span-6 text-center'>
+                        <td className='hidden col-span-6 text-center md:block'>
                           {new Date(user.registrationDate).toLocaleDateString(
                             'it-IT',
                             {
@@ -220,7 +220,7 @@ const DashboardUsers = () => {
                             }
                           )}
                         </td>
-                        <td className='col-span-6 md:col-span-4 text-center pe-2'>
+                        <td className='col-span-6 text-center md:col-span-4 pe-2'>
                           {roles.length > 0 ? (
                             <select
                               value={user.userRole.roleId}
@@ -244,9 +244,9 @@ const DashboardUsers = () => {
                 </table>
               </div>
             ) : (
-              <div className='flex flex-col justify-center items-center gap-2 py-10'>
+              <div className='flex flex-col items-center justify-center gap-2 py-10'>
                 <h3 className='text-xl font-semibold'>Nessun utente trovato</h3>
-                <p className='text-gray-500 font-normal'>
+                <p className='font-normal text-gray-500'>
                   Non è stato trovato nessun utente.
                 </p>
               </div>

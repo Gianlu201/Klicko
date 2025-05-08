@@ -13,7 +13,7 @@ const AddressFormComponent = ({
 }) => {
   return (
     <form>
-      <div className='grid grid-cols-2 items-start gap-10'>
+      <div className='grid items-start grid-cols-2 gap-10'>
         <div className='flex flex-col gap-2 my-3'>
           <label className='text-sm font-medium'>Nome</label>
           <input
@@ -47,7 +47,7 @@ const AddressFormComponent = ({
         </div>
       </div>
 
-      <div className='grid grid-cols-2 items-start gap-10'>
+      <div className='grid items-start grid-cols-2 gap-10'>
         <div className='flex flex-col gap-2 my-3'>
           <label className='text-sm font-medium'>Città</label>
           <input

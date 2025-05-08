@@ -78,12 +78,12 @@ const CategoriesPage = () => {
   ];
 
   return (
-    <div className='max-w-7xl mx-auto mt-6 px-6 xl:px-0'>
-      <div className='text-center mb-4'>
-        <h1 className='text-3xl md:text-4xl font-bold mb-3'>
+    <div className='px-6 mx-auto mt-6 max-w-7xl xl:px-0'>
+      <div className='mb-4 text-center'>
+        <h1 className='mb-3 text-3xl font-bold md:text-4xl'>
           Categorie delle Esperienze
         </h1>
-        <p className='text-gray-500 max-w-sm md:max-w-md lg:max-w-xl mx-auto'>
+        <p className='max-w-sm mx-auto text-gray-500 md:max-w-md lg:max-w-xl'>
           Scopri il mondo attraverso le nostre esclusive categorie di
           esperienze, progettate per soddisfare ogni tipo di avventuriero.
         </p>
@@ -91,7 +91,7 @@ const CategoriesPage = () => {
 
       <div className='mb-4'>
         {categories.map((category) => (
-          <div key={category.id} className='md:flex items-center gap-20 my-16'>
+          <div key={category.id} className='items-center gap-20 my-16 md:flex'>
             <div
               className={`mb-4 md:mb-0 md:w-3/5 lg:w-1/2 aspect-16/9 rounded-3xl overflow-hidden shadow-xl ${
                 category.id % 2 == 0 ? 'order-2' : 'order-1'
@@ -109,13 +109,13 @@ const CategoriesPage = () => {
                 category.id % 2 == 0 ? 'order-1' : 'order-2'
               }`}
             >
-              <div className='flex md:block justify-start items-center gap-2'>
+              <div className='flex items-center justify-start gap-2 md:block'>
                 {category.icon}
-                <h2 className='text-3xl md:text-2xl lg:text-3xl font-bold my-6 md:my-4'>
+                <h2 className='my-6 text-3xl font-bold md:text-2xl lg:text-3xl md:my-4'>
                   {category.title}
                 </h2>
               </div>
-              <p className='text-gray-500 text-xl md:text-base lg:text-lg xl:text-xl mb-6'>
+              <p className='mb-6 text-xl text-gray-500 md:text-base lg:text-lg xl:text-xl'>
                 {category.description}
               </p>
               <Button
@@ -134,9 +134,9 @@ const CategoriesPage = () => {
         ))}
       </div>
 
-      <div className='flex flex-col items-center text-center mb-10'>
-        <h2 className='text-3xl font-bold mb-3'>Non sai da dove iniziare?</h2>
-        <p className='text-gray-500 max-w-sm md:max-w-md mb-3'>
+      <div className='flex flex-col items-center mb-10 text-center'>
+        <h2 className='mb-3 text-3xl font-bold'>Non sai da dove iniziare?</h2>
+        <p className='max-w-sm mb-3 text-gray-500 md:max-w-md'>
           Sfoglia tutte le nostre esperienze e trova quella perfetta per te,
           indipendentemente dalla categoria.
         </p>

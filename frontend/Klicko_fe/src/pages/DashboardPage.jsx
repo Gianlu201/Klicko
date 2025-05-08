@@ -124,14 +124,14 @@ const DashboardPage = () => {
   }, []);
 
   return (
-    <div className='max-w-7xl mx-auto min-h-screen pt-10 px-6 xl:px-0'>
-      <h1 className='text-3xl font-bold mb-3'>Dashboard</h1>
-      <p className='text-gray-500 font-normal mb-5'>
+    <div className='min-h-screen px-6 pt-10 mx-auto max-w-7xl xl:px-0'>
+      <h1 className='mb-3 text-3xl font-bold'>Dashboard</h1>
+      <p className='mb-5 font-normal text-gray-500'>
         Benvenuto, {profile.name}
       </p>
 
-      <div className='lg:grid lg:grid-cols-4 gap-6'>
-        <div className='hidden lg:block col-span-1 bg-white shadow rounded-xl h-fit overflow-hidden'>
+      <div className='gap-6 lg:grid lg:grid-cols-4'>
+        <div className='hidden col-span-1 overflow-hidden bg-white shadow lg:block rounded-xl h-fit'>
           <ul>
             {options.map(
               (opt) =>
@@ -157,7 +157,7 @@ const DashboardPage = () => {
           </ul>
         </div>
 
-        <div className='col-span-3 bg-white shadow rounded-xl h-fit px-6 py-8 mb-20'>
+        <div className='col-span-3 px-6 py-8 mb-20 bg-white shadow rounded-xl h-fit'>
           {getContent()}
         </div>
       </div>

@@ -125,9 +125,9 @@ const UploadFile = ({ onFilesSelected, multiple = false }) => {
           onChange={handleInputChange}
         />
 
-        <Upload className='w-10 h-10 text-primary mb-2' />
+        <Upload className='w-10 h-10 mb-2 text-primary' />
 
-        <p className='text-sm text-primary font-medium'>
+        <p className='text-sm font-medium text-primary'>
           {multiple
             ? 'Trascina qui i file o clicca per selezionare'
             : 'Trascina qui il file o clicca per selezionare'}
@@ -138,11 +138,11 @@ const UploadFile = ({ onFilesSelected, multiple = false }) => {
       </label>
 
       {previews !== null && previews.length > 0 && (
-        <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mt-4'>
+        <div className='grid grid-cols-2 gap-4 mt-4 sm:grid-cols-3 md:grid-cols-4'>
           {previews.map((p, idx) => (
             <div
               key={idx}
-              className='relative w-full h-28 rounded-lg overflow-hidden border border-gray-200 shadow-sm group'
+              className='relative w-full overflow-hidden border border-gray-200 rounded-lg shadow-sm h-28 group'
             >
               <img
                 src={p.url}
@@ -152,9 +152,9 @@ const UploadFile = ({ onFilesSelected, multiple = false }) => {
               <button
                 type='button'
                 onClick={() => handleRemove(p.id)}
-                className='absolute top-1 right-1 justify-center items-center bg-red-500 text-white rounded-full p-1 text-xs w-fit aspect-square cursor-pointer hover:opacity-100 hover:bg-red-600 transition'
+                className='absolute items-center justify-center p-1 text-xs text-white transition bg-red-500 rounded-full cursor-pointer top-1 right-1 w-fit aspect-square hover:opacity-100 hover:bg-red-600'
               >
-                <X className='text-white font-bold w-4 h-4' />
+                <X className='w-4 h-4 font-bold text-white' />
               </button>
             </div>
           ))}

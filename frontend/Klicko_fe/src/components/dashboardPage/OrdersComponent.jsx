@@ -127,28 +127,28 @@ const OrdersComponent = () => {
       id: 1,
       title: 'Totale ordini',
       value: orders.length,
-      icon: <ShoppingBag className='max-xs:hidden text-primary/40 w-8 h-8' />,
+      icon: <ShoppingBag className='w-8 h-8 max-xs:hidden text-primary/40' />,
       filter: 'getAll',
     },
     {
       id: 2,
       title: 'In attesa',
       value: getNumberOfPending(),
-      icon: <Calendar className='max-xs:hidden text-amber-500/40 w-8 h-8' />,
+      icon: <Calendar className='w-8 h-8 max-xs:hidden text-amber-500/40' />,
       filter: 'In attesa',
     },
     {
       id: 3,
       title: 'Completati',
       value: getNumberOfCompleted(),
-      icon: <Package className='max-xs:hidden text-green-500/40 w-8 h-8' />,
+      icon: <Package className='w-8 h-8 max-xs:hidden text-green-500/40' />,
       filter: 'Completato',
     },
     {
       id: 4,
       title: 'Cancellati',
       value: getNumberOfDeleted(),
-      icon: <TicketX className='max-xs:hidden text-red-500/40 w-8 h-8' />,
+      icon: <TicketX className='w-8 h-8 max-xs:hidden text-red-500/40' />,
       filter: 'Cancellato',
     },
   ];
@@ -159,13 +159,13 @@ const OrdersComponent = () => {
 
   return (
     <>
-      <h2 className='text-2xl font-bold mb-2'>I tuoi ordini</h2>
-      <p className='text-gray-500 font-normal mb-6'>
+      <h2 className='mb-2 text-2xl font-bold'>I tuoi ordini</h2>
+      <p className='mb-6 font-normal text-gray-500'>
         Visualizza e gestisci i tuoi acquisti
       </p>
 
       {/* orders overview */}
-      <div className='grid grid-cols-2 md:grid-cols-4 gap-6 mb-6'>
+      <div className='grid grid-cols-2 gap-6 mb-6 md:grid-cols-4'>
         {options.map((opt) => (
           <div
             key={opt.id}
@@ -174,8 +174,8 @@ const OrdersComponent = () => {
               filterBy(opt.filter);
             }}
           >
-            <div className='flex flex-col justify-center items-start gap-2'>
-              <span className='text-gray-500 font-medium text-sm'>
+            <div className='flex flex-col items-start justify-center gap-2'>
+              <span className='text-sm font-medium text-gray-500'>
                 {opt.title}
               </span>
               <span className='text-2xl font-semibold'>{opt.value}</span>
@@ -186,13 +186,13 @@ const OrdersComponent = () => {
       </div>
 
       {/* tabella storico ordini */}
-      <div className='border border-gray-400/40 shadow-sm rounded-xl px-6 py-5'>
+      <div className='px-6 py-5 border shadow-sm border-gray-400/40 rounded-xl'>
         {isLoading ? (
           <SkeletonText />
         ) : filteredOrders.length > 0 ? (
           <>
-            <h2 className='text-xl font-semibold mb-2'>Tutti gli ordini</h2>
-            <p className='text-gray-500 font-normal mb-6'>
+            <h2 className='mb-2 text-xl font-semibold'>Tutti gli ordini</h2>
+            <p className='mb-6 font-normal text-gray-500'>
               {filteredOrders.length} ordini trovati
             </p>
 
@@ -201,15 +201,15 @@ const OrdersComponent = () => {
                 <Accordion
                   key={order.orderId}
                   intestation={
-                    <div className='flex justify-between items-center cursor-pointer'>
-                      <div className='grow flex gap-2'>
+                    <div className='flex items-center justify-between cursor-pointer'>
+                      <div className='flex gap-2 grow'>
                         <span className='max-[480px]:hidden'>Ordine</span>
                         <h6 className='max-[480px]:text-xs'>
                           #{order.orderNumber}
                         </h6>
                       </div>
-                      <div className='flex justify-between items-center gap-4'>
-                        <span className='hidden md:block text-sm'>
+                      <div className='flex items-center justify-between gap-4'>
+                        <span className='hidden text-sm md:block'>
                           {new Date(order.createdAt).toLocaleDateString(
                             'it-IT',
                             {
@@ -233,12 +233,12 @@ const OrdersComponent = () => {
                   <div className='overflow-x-auto'>
                     <table className='min-w-[300px] w-full mb-10'>
                       <thead>
-                        <tr className='grid grid-cols-12 text-gray-500 text-sm font-normal border-b border-gray-400/40 p-3 hover:bg-gray-100'>
+                        <tr className='grid grid-cols-12 p-3 text-sm font-normal text-gray-500 border-b border-gray-400/40 hover:bg-gray-100'>
                           <th className='col-span-7 text-start'>Esperienza</th>
-                          <th className='col-span-2 md:col-span-1 text-center'>
+                          <th className='col-span-2 text-center md:col-span-1'>
                             Quantità
                           </th>
-                          <th className='hidden md:block col-span-2 text-end'>
+                          <th className='hidden col-span-2 md:block text-end'>
                             Prezzo
                           </th>
                           <th className='col-span-3 md:col-span-2 text-end'>
@@ -252,15 +252,15 @@ const OrdersComponent = () => {
                           order.orderExperiences.map((orderExp) => (
                             <tr
                               key={orderExp.orderExperienceId}
-                              className='grid grid-cols-12 text-sm border-b border-gray-400/40 p-3 hover:bg-gray-100'
+                              className='grid grid-cols-12 p-3 text-sm border-b border-gray-400/40 hover:bg-gray-100'
                             >
                               <td className='col-span-7 text-start'>
                                 {orderExp.title}
                               </td>
-                              <td className='col-span-2 md:col-span-1 text-center'>
+                              <td className='col-span-2 text-center md:col-span-1'>
                                 {orderExp.quantity}
                               </td>
-                              <td className='hidden md:block col-span-2 text-end'>
+                              <td className='hidden col-span-2 md:block text-end'>
                                 {orderExp.unitPrice
                                   .toFixed(2)
                                   .replace('.', ',')}{' '}
@@ -278,7 +278,7 @@ const OrdersComponent = () => {
 
                       <tfoot>
                         {order.shippingPrice > 0 && (
-                          <tr className='grid grid-cols-12 text-gray-500 font-medium p-3 hover:bg-gray-100'>
+                          <tr className='grid grid-cols-12 p-3 font-medium text-gray-500 hover:bg-gray-100'>
                             <td className='col-span-8 md:col-span-10 text-end'>
                               Spedizione:
                             </td>
@@ -290,7 +290,7 @@ const OrdersComponent = () => {
                         )}
 
                         {order.totalDiscount > 0 && (
-                          <tr className='grid grid-cols-12 text-gray-500 font-medium p-3 hover:bg-gray-100'>
+                          <tr className='grid grid-cols-12 p-3 font-medium text-gray-500 hover:bg-gray-100'>
                             <td className='col-span-8 md:col-span-10 text-end'>
                               Sconto coupon:
                             </td>
@@ -302,7 +302,7 @@ const OrdersComponent = () => {
                           </tr>
                         )}
 
-                        <tr className='grid grid-cols-12 font-bold p-3 hover:bg-gray-100'>
+                        <tr className='grid grid-cols-12 p-3 font-bold hover:bg-gray-100'>
                           <td className='col-span-8 md:col-span-10 text-end'>
                             Totale ordine:
                           </td>
@@ -318,16 +318,16 @@ const OrdersComponent = () => {
             </div>
           </>
         ) : orders.length === 0 ? (
-          <div className='flex flex-col justify-center items-center gap-2 py-10'>
+          <div className='flex flex-col items-center justify-center gap-2 py-10'>
             <h3 className='text-xl font-semibold'>Nessun ordine trovato</h3>
-            <p className='text-gray-500 font-normal'>
+            <p className='font-normal text-gray-500'>
               Non hai ancora effettuato nessun ordine.
             </p>
           </div>
         ) : (
-          <div className='flex flex-col justify-center items-center gap-2 py-10'>
+          <div className='flex flex-col items-center justify-center gap-2 py-10'>
             <h3 className='text-xl font-semibold'>Nessun ordine trovato</h3>
-            <p className='text-gray-500 font-normal'>
+            <p className='font-normal text-gray-500'>
               Non hai nessun ordine con questo stato.
             </p>
           </div>

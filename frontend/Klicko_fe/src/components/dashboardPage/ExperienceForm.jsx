@@ -370,11 +370,11 @@ const ExperienceForm = () => {
 
   return (
     <>
-      <div className='flex flex-col justify-start items-start mb-6'>
-        <h2 className='text-2xl font-bold mb-2'>
+      <div className='flex flex-col items-start justify-start mb-6'>
+        <h2 className='mb-2 text-2xl font-bold'>
           {editMode ? 'Modifica esperienza' : 'Aggiungi esperienza'}
         </h2>
-        <p className='text-gray-500 font-normal'>
+        <p className='font-normal text-gray-500'>
           {editMode
             ? `Modifica i dettagli dell'esperienza`
             : 'Crea una nuova esperienza da offrire ai clienti'}
@@ -382,16 +382,16 @@ const ExperienceForm = () => {
       </div>
 
       <form>
-        <div className='grid md:grid-cols-2 gap-8 mb-8'>
+        <div className='grid gap-8 mb-8 md:grid-cols-2'>
           {/* titolo */}
-          <div className='flex flex-col justify-start items-start gap-2'>
-            <label htmlFor='title' className='font-semibold text-sm'>
+          <div className='flex flex-col items-start justify-start gap-2'>
+            <label htmlFor='title' className='text-sm font-semibold'>
               Titolo
             </label>
             <input
               type='text'
               id='title'
-              className='text-sm bg-background border border-gray-400/30 rounded-lg py-2 px-3 w-full'
+              className='w-full px-3 py-2 text-sm border rounded-lg bg-background border-gray-400/30'
               placeholder='Inserisci un titolo accattivante'
               value={title}
               onChange={(e) => {
@@ -400,24 +400,24 @@ const ExperienceForm = () => {
             />
 
             {checkFormValidity && title.trim() === '' && (
-              <span className='text-red-500 text-sm font-medium'>
+              <span className='text-sm font-medium text-red-500'>
                 Questo campo è obligatorio!
               </span>
             )}
 
-            <span className='text-gray-500 text-sm'>
+            <span className='text-sm text-gray-500'>
               Questo sarà il titolo principale dell'esperienza
             </span>
           </div>
 
           {/* categoria */}
-          <div className='flex flex-col justify-start items-start gap-2'>
-            <label htmlFor='category' className='font-semibold text-sm'>
+          <div className='flex flex-col items-start justify-start gap-2'>
+            <label htmlFor='category' className='text-sm font-semibold'>
               Categoria
             </label>
             <select
               id='category'
-              className='text-sm bg-background border border-gray-400/30 rounded-lg py-2 px-3 w-full'
+              className='w-full px-3 py-2 text-sm border rounded-lg bg-background border-gray-400/30'
               value={categoryId}
               onChange={(e) => {
                 setCategoryId(e.target.value);
@@ -432,26 +432,26 @@ const ExperienceForm = () => {
             </select>
 
             {checkFormValidity && categoryId.trim() === '' && (
-              <span className='text-red-500 text-sm font-medium'>
+              <span className='text-sm font-medium text-red-500'>
                 Questo campo è obligatorio!
               </span>
             )}
 
-            <span className='text-gray-500 text-sm'>
+            <span className='text-sm text-gray-500'>
               La categoria aiuta i clienti a trovare la tua esperienza
             </span>
           </div>
         </div>
 
         {/* descrizione breve */}
-        <div className='flex flex-col justify-start items-start gap-2 mb-8'>
-          <label htmlFor='descriptionShort' className='font-semibold text-sm'>
+        <div className='flex flex-col items-start justify-start gap-2 mb-8'>
+          <label htmlFor='descriptionShort' className='text-sm font-semibold'>
             Descrizione breve
           </label>
           <textarea
             type='text'
             id='descriptionShort'
-            className='text-sm bg-background border border-gray-400/30 rounded-lg py-2 px-3 w-full'
+            className='w-full px-3 py-2 text-sm border rounded-lg bg-background border-gray-400/30'
             placeholder={`Una breve descrizione dell'esperienza`}
             value={descriptionShort}
             onChange={(e) => {
@@ -460,25 +460,25 @@ const ExperienceForm = () => {
           ></textarea>
 
           {checkFormValidity && descriptionShort.trim() === '' && (
-            <span className='text-red-500 text-sm font-medium'>
+            <span className='text-sm font-medium text-red-500'>
               Questo campo è obligatorio!
             </span>
           )}
 
-          <span className='text-gray-500 text-sm'>
+          <span className='text-sm text-gray-500'>
             Questa verrà mostrata nelle anteprime delle card
           </span>
         </div>
 
         {/* descrizione completa */}
-        <div className='flex flex-col justify-start items-start gap-2 mb-8'>
-          <label htmlFor='description' className='font-semibold text-sm'>
+        <div className='flex flex-col items-start justify-start gap-2 mb-8'>
+          <label htmlFor='description' className='text-sm font-semibold'>
             Descrizione completa
           </label>
           <textarea
             type='text'
             id='description'
-            className='text-sm bg-background border border-gray-400/30 rounded-lg py-2 px-3 w-full'
+            className='w-full px-3 py-2 text-sm border rounded-lg bg-background border-gray-400/30'
             placeholder={`Descrivi in dettaglio cosa include questa esperienza`}
             value={description}
             onChange={(e) => {
@@ -487,27 +487,27 @@ const ExperienceForm = () => {
           ></textarea>
 
           {checkFormValidity && description.trim() === '' && (
-            <span className='text-red-500 text-sm font-medium'>
+            <span className='text-sm font-medium text-red-500'>
               Questo campo è obligatorio!
             </span>
           )}
 
-          <span className='text-gray-500 text-sm'>
+          <span className='text-sm text-gray-500'>
             Descrivi ogni aspetto dell'esperienza: cosa include, cosa
             aspettarsi, ecc.
           </span>
         </div>
 
-        <div className='grid md:grid-cols-3 gap-8 mb-8'>
+        <div className='grid gap-8 mb-8 md:grid-cols-3'>
           {/* organizzatore */}
-          <div className='flex flex-col justify-start items-start gap-2'>
-            <label htmlFor='organiser' className='font-semibold text-sm'>
+          <div className='flex flex-col items-start justify-start gap-2'>
+            <label htmlFor='organiser' className='text-sm font-semibold'>
               Organizzatore
             </label>
             <input
               type='text'
               id='organiser'
-              className='text-sm bg-background border border-gray-400/30 rounded-lg py-2 px-3 w-full'
+              className='w-full px-3 py-2 text-sm border rounded-lg bg-background border-gray-400/30'
               placeholder='Es: Italia Avventure'
               value={organiser}
               onChange={(e) => {
@@ -516,21 +516,21 @@ const ExperienceForm = () => {
             />
 
             {checkFormValidity && organiser.trim() === '' && (
-              <span className='text-red-500 text-sm font-medium'>
+              <span className='text-sm font-medium text-red-500'>
                 Questo campo è obligatorio!
               </span>
             )}
           </div>
 
           {/* località */}
-          <div className='flex flex-col justify-start items-start gap-2'>
-            <label htmlFor='place' className='font-semibold text-sm'>
+          <div className='flex flex-col items-start justify-start gap-2'>
+            <label htmlFor='place' className='text-sm font-semibold'>
               Località
             </label>
             <input
               type='text'
               id='place'
-              className='text-sm bg-background border border-gray-400/30 rounded-lg py-2 px-3 w-full'
+              className='w-full px-3 py-2 text-sm border rounded-lg bg-background border-gray-400/30'
               placeholder='Es: Roma, Lazio'
               value={place}
               onChange={(e) => {
@@ -539,21 +539,21 @@ const ExperienceForm = () => {
             />
 
             {checkFormValidity && place.trim() === '' && (
-              <span className='text-red-500 text-sm font-medium'>
+              <span className='text-sm font-medium text-red-500'>
                 Questo campo è obligatorio!
               </span>
             )}
           </div>
 
           {/* durata */}
-          <div className='flex flex-col justify-start items-start gap-2'>
-            <label htmlFor='duration' className='font-semibold text-sm'>
+          <div className='flex flex-col items-start justify-start gap-2'>
+            <label htmlFor='duration' className='text-sm font-semibold'>
               Durata
             </label>
             <input
               type='text'
               id='duration'
-              className='text-sm bg-background border border-gray-400/30 rounded-lg py-2 px-3 w-full'
+              className='w-full px-3 py-2 text-sm border rounded-lg bg-background border-gray-400/30'
               placeholder='Es: 2 ore, 3 giorni'
               value={duration}
               onChange={(e) => {
@@ -562,17 +562,17 @@ const ExperienceForm = () => {
             />
 
             {checkFormValidity && duration.trim() === '' && (
-              <span className='text-red-500 text-sm font-medium'>
+              <span className='text-sm font-medium text-red-500'>
                 Questo campo è obligatorio!
               </span>
             )}
           </div>
         </div>
 
-        <div className='grid md:grid-cols-4 items-start gap-8 mb-8'>
+        <div className='grid items-start gap-8 mb-8 md:grid-cols-4'>
           {/* prezzo */}
-          <div className='flex flex-col justify-start items-start gap-2'>
-            <label htmlFor='price' className='font-semibold text-sm'>
+          <div className='flex flex-col items-start justify-start gap-2'>
+            <label htmlFor='price' className='text-sm font-semibold'>
               Prezzo
             </label>
             <input
@@ -580,7 +580,7 @@ const ExperienceForm = () => {
               min={0}
               step={0.01}
               id='price'
-              className='text-sm bg-background border border-gray-400/30 rounded-lg py-2 px-3 w-full'
+              className='w-full px-3 py-2 text-sm border rounded-lg bg-background border-gray-400/30'
               placeholder='0'
               value={price}
               onChange={(e) => {
@@ -589,15 +589,15 @@ const ExperienceForm = () => {
             />
 
             {checkFormValidity && price.toString().trim() === '' && (
-              <span className='text-red-500 text-sm font-medium'>
+              <span className='text-sm font-medium text-red-500'>
                 Questo campo è obligatorio!
               </span>
             )}
           </div>
 
           {/* massimo di partecipanti */}
-          <div className='flex flex-col justify-start items-start gap-2'>
-            <label htmlFor='maxParticipants' className='font-semibold text-sm'>
+          <div className='flex flex-col items-start justify-start gap-2'>
+            <label htmlFor='maxParticipants' className='text-sm font-semibold'>
               Massimo di partecipanti
             </label>
             <input
@@ -605,7 +605,7 @@ const ExperienceForm = () => {
               min={1}
               step={1}
               id='maxParticipants'
-              className='text-sm bg-background border border-gray-400/30 rounded-lg py-2 px-3 w-full'
+              className='w-full px-3 py-2 text-sm border rounded-lg bg-background border-gray-400/30'
               placeholder='1'
               value={maxParticipants}
               onChange={(e) => {
@@ -614,22 +614,22 @@ const ExperienceForm = () => {
             />
 
             {checkFormValidity && maxParticipants.toString().trim() === '' && (
-              <span className='text-red-500 text-sm font-medium'>
+              <span className='text-sm font-medium text-red-500'>
                 Questo campo è obligatorio!
               </span>
             )}
 
             {maxParticipants.toString().trim() !== '' &&
               maxParticipants < 1 && (
-                <span className='text-red-500 text-sm font-medium'>
+                <span className='text-sm font-medium text-red-500'>
                   Il numero di partecipanti deve essere almeno 1!
                 </span>
               )}
           </div>
 
           {/* sconto */}
-          <div className='flex flex-col justify-start items-start gap-2'>
-            <label htmlFor='sale' className='font-semibold text-sm'>
+          <div className='flex flex-col items-start justify-start gap-2'>
+            <label htmlFor='sale' className='text-sm font-semibold'>
               Sconto
             </label>
             <input
@@ -637,7 +637,7 @@ const ExperienceForm = () => {
               min={0}
               step={1}
               id='sale'
-              className='text-sm bg-background border border-gray-400/30 rounded-lg py-2 px-3 w-full'
+              className='w-full px-3 py-2 text-sm border rounded-lg bg-background border-gray-400/30'
               placeholder='0'
               value={sale}
               onChange={(e) => {
@@ -646,21 +646,21 @@ const ExperienceForm = () => {
             />
 
             {checkFormValidity && sale.toString().trim() === '' && (
-              <span className='text-red-500 text-sm font-medium'>
+              <span className='text-sm font-medium text-red-500'>
                 Questo campo è obligatorio!
               </span>
             )}
 
             {sale.length > 0 && sale < 0 && (
-              <span className='text-red-500 text-sm font-medium'>
+              <span className='text-sm font-medium text-red-500'>
                 Il valore minimo è 0!
               </span>
             )}
           </div>
 
           {/* validità in mesi */}
-          <div className='flex flex-col justify-start items-start gap-2'>
-            <label htmlFor='sale' className='font-semibold text-sm'>
+          <div className='flex flex-col items-start justify-start gap-2'>
+            <label htmlFor='sale' className='text-sm font-semibold'>
               Validità in mesi
             </label>
             <input
@@ -668,7 +668,7 @@ const ExperienceForm = () => {
               min={1}
               step={1}
               id='validity'
-              className='text-sm bg-background border border-gray-400/30 rounded-lg py-2 px-3 w-full'
+              className='w-full px-3 py-2 text-sm border rounded-lg bg-background border-gray-400/30'
               placeholder='0'
               value={validityInMonths}
               onChange={(e) => {
@@ -677,13 +677,13 @@ const ExperienceForm = () => {
             />
 
             {checkFormValidity && validityInMonths.toString().trim() === '' && (
-              <span className='text-red-500 text-sm font-medium'>
+              <span className='text-sm font-medium text-red-500'>
                 Questo campo è obligatorio!
               </span>
             )}
 
             {validityInMonths && validityInMonths < 1 && (
-              <span className='text-red-500 text-sm font-medium'>
+              <span className='text-sm font-medium text-red-500'>
                 Il valore minimo è 1!
               </span>
             )}
@@ -691,30 +691,30 @@ const ExperienceForm = () => {
         </div>
 
         {/* cosa è incluso */}
-        <div className='flex flex-col justify-start items-start gap-2 mb-8'>
-          <label htmlFor='included' className='font-semibold text-sm'>
+        <div className='flex flex-col items-start justify-start gap-2 mb-8'>
+          <label htmlFor='included' className='text-sm font-semibold'>
             Cosa è incluso:
           </label>
           <textarea
             type='text'
             id='included'
-            className='text-sm bg-background border border-gray-400/30 rounded-lg py-2 px-3 w-full'
+            className='w-full px-3 py-2 text-sm border rounded-lg bg-background border-gray-400/30'
             placeholder={`Una breve descrizione di cosa include l'esperienza`}
             value={includedDescription}
             onChange={(e) => {
               setIncludedDescription(e.target.value);
             }}
           ></textarea>
-          <span className='text-gray-500 text-sm'>
+          <span className='text-sm text-gray-500'>
             Indica cosa include l'esperienza
           </span>
         </div>
 
-        <div className='grid md:grid-cols-2 gap-8 mb-8'>
+        <div className='grid gap-8 mb-8 md:grid-cols-2'>
           {/* in evidenza */}
-          <div className='flex justify-between items-center gap-3 border border-gray-400/30 rounded-lg p-3'>
+          <div className='flex items-center justify-between gap-3 p-3 border rounded-lg border-gray-400/30'>
             <div className='w-[calc(100%-50px)] flex flex-col justify-center items-start gap-2'>
-              <span className='font-semibold text-sm'>In evidenza</span>
+              <span className='text-sm font-semibold'>In evidenza</span>
               <span className='text-sm text-gray-500'>
                 Mostra questa esperienza nella sezione in evidenza della
                 homepage
@@ -731,9 +731,9 @@ const ExperienceForm = () => {
           </div>
 
           {/* popolare */}
-          <div className='flex justify-between items-center gap-3 border border-gray-400/30 rounded-lg p-3'>
+          <div className='flex items-center justify-between gap-3 p-3 border rounded-lg border-gray-400/30'>
             <div className='w-[calc(100%-50px)] flex flex-col justify-center items-start gap-2'>
-              <span className='font-semibold text-sm'>Popolare</span>
+              <span className='text-sm font-semibold'>Popolare</span>
               <span className='text-sm text-gray-500'>
                 Mostra questa esperienza nella sezione esperienze popolari
               </span>
@@ -749,9 +749,9 @@ const ExperienceForm = () => {
           </div>
 
           {/* cancellazione gratuita */}
-          <div className='flex justify-between items-center gap-3 border border-gray-400/30 rounded-lg p-3'>
+          <div className='flex items-center justify-between gap-3 p-3 border rounded-lg border-gray-400/30'>
             <div className='w-[calc(100%-50px)] flex flex-col justify-center items-start gap-2'>
-              <span className='font-semibold text-sm'>
+              <span className='text-sm font-semibold'>
                 Cancellazione gratuita
               </span>
               <span className='text-sm text-gray-500'>
@@ -770,8 +770,8 @@ const ExperienceForm = () => {
         </div>
 
         {/* immagine copertina */}
-        <div className='flex flex-col justify-start items-start gap-2 mb-8'>
-          <label className='font-semibold text-sm'>Immagine copertina</label>
+        <div className='flex flex-col items-start justify-start gap-2 mb-8'>
+          <label className='text-sm font-semibold'>Immagine copertina</label>
 
           <UploadFile
             multiple={false}
@@ -788,34 +788,34 @@ const ExperienceForm = () => {
               />
             )}
 
-          <span className='text-gray-500 text-sm'>
+          <span className='text-sm text-gray-500'>
             Questa immagine verrà mostrata nell'anteprima dell'esperienza
           </span>
         </div>
 
         {/* cosa portare */}
-        <div className='flex flex-col justify-start items-start gap-2 mb-8'>
-          <label htmlFor='carryWithInput' className='font-semibold text-sm'>
+        <div className='flex flex-col items-start justify-start gap-2 mb-8'>
+          <label htmlFor='carryWithInput' className='text-sm font-semibold'>
             Cosa portare
           </label>
           <input
             type='text'
             id='carryWithInput'
-            className='text-sm bg-background border border-gray-400/30 rounded-lg py-2 px-3 w-full'
+            className='w-full px-3 py-2 text-sm border rounded-lg bg-background border-gray-400/30'
             placeholder='Es: Scarpe comode, Ombrello, Acqua'
             value={carryWith}
             onChange={(e) => {
               setCarryWith(e.target.value);
             }}
           />
-          <span className='text-gray-500 text-sm'>
+          <span className='text-sm text-gray-500'>
             Inserire le cose da portare separate tra loro da una virgola
           </span>
         </div>
 
         {/* elenco immagini multiple */}
-        {/* <div className='flex flex-col justify-start items-start gap-2 mb-8'>
-          <label htmlFor='otherimages' className='font-semibold text-sm'>
+        {/* <div className='flex flex-col items-start justify-start gap-2 mb-8'>
+          <label htmlFor='otherimages' className='text-sm font-semibold'>
             Immagini aggiuntive
           </label>
           <input
@@ -823,19 +823,19 @@ const ExperienceForm = () => {
             multiple
             accept='image/*'
             id='otherimages'
-            className='text-sm bg-background border border-gray-400/30 rounded-lg py-2 px-3'
+            className='px-3 py-2 text-sm border rounded-lg bg-background border-gray-400/30'
             onChange={(e) => {
               setImages([...e.target.files]);
             }}
           />
-          <span className='text-gray-500 text-sm'>
+          <span className='text-sm text-gray-500'>
             Questa immagine verrà mostrata nei dettagli dell'esperienza
           </span>
         </div> */}
 
         {/* elenco immagini multiple */}
-        <div className='flex flex-col justify-start items-start gap-2 my-8'>
-          <label className='font-semibold text-sm'>Immagini aggiuntive</label>
+        <div className='flex flex-col items-start justify-start gap-2 my-8'>
+          <label className='text-sm font-semibold'>Immagini aggiuntive</label>
 
           <UploadFile
             multiple={true}
@@ -850,12 +850,12 @@ const ExperienceForm = () => {
             />
           )}
 
-          <span className='text-gray-500 text-sm'>
+          <span className='text-sm text-gray-500'>
             Questa immagine verrà mostrata nei dettagli dell'esperienza
           </span>
         </div>
 
-        <div className='flex justify-start items-center gap-3'>
+        <div className='flex items-center justify-start gap-3'>
           <Button
             variant='outline'
             onClick={() => {

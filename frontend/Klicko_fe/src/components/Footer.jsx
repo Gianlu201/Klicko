@@ -111,10 +111,10 @@ const Footer = () => {
   };
 
   return (
-    <div className='bg-slate-950 py-10'>
-      <div className='px-6 xl:px-0 max-w-7xl mx-auto md:flex gap-6 text-gray-500 mb-8'>
-        <div className='md:w-1/4 pe-6 mb-6'>
-          <h3 className='text-white text-2xl font-semibold mb-4'>Klicko</h3>
+    <div className='py-10 bg-slate-950'>
+      <div className='gap-6 px-6 mx-auto mb-8 text-gray-500 xl:px-0 max-w-7xl md:flex'>
+        <div className='mb-6 md:w-1/4 pe-6'>
+          <h3 className='mb-4 text-2xl font-semibold text-white'>Klicko</h3>
           <p className='mb-4'>
             Trova e prenota esperienze uniche in tutto il mondo. Rendi ogni
             viaggio indimenticabile con le nostre avventure selezionate.
@@ -140,8 +140,8 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className='md:w-1/4 mb-6'>
-          <h4 className='text-white text-lg font-semibold mb-4'>Esperienze</h4>
+        <div className='mb-6 md:w-1/4'>
+          <h4 className='mb-4 text-lg font-semibold text-white'>Esperienze</h4>
           <ul>
             {experienceOptions.map((exp) => (
               <li key={exp.id} className='mb-2'>
@@ -159,8 +159,8 @@ const Footer = () => {
           </ul>
         </div>
 
-        <div className='md:w-1/4 mb-6'>
-          <h4 className='text-white text-lg font-semibold mb-4'>
+        <div className='mb-6 md:w-1/4'>
+          <h4 className='mb-4 text-lg font-semibold text-white'>
             Informazioni
           </h4>
           <ul>
@@ -175,7 +175,7 @@ const Footer = () => {
         </div>
 
         <div className='md:w-1/4'>
-          <h4 className='text-white text-lg font-semibold mb-4'>Newsletter</h4>
+          <h4 className='mb-4 text-lg font-semibold text-white'>Newsletter</h4>
           <p className='mb-4'>
             Iscriviti per ricevere offerte speciali e scoprire nuove esperienze
           </p>
@@ -188,7 +188,7 @@ const Footer = () => {
             <input
               type='email'
               placeholder='La tua email'
-              className='bg-gray-800 w-full text-gray-50 py-2 ps-4 rounded-lg border border-gray-700 mb-2'
+              className='w-full py-2 mb-2 bg-gray-800 border border-gray-700 rounded-lg text-gray-50 ps-4'
               value={newsLetterEmail}
               onChange={(e) => setNewsLetterEmail(e.target.value)}
               required
@@ -204,7 +204,7 @@ const Footer = () => {
           </form>
         </div>
       </div>
-      <div className='mx-6 md:flex justify-between max-w-7xl lg:mx-auto border-t border-t-gray-600 text-gray-500 pt-4'>
+      <div className='justify-between pt-4 mx-6 text-gray-500 border-t md:flex max-w-7xl lg:mx-auto border-t-gray-600'>
         <p className='mb-3 md:mb-0'>
           &copy; 2025 Klicko. Tutti i diritti riservati
         </p>

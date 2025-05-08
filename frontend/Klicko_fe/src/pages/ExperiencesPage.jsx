@@ -171,26 +171,26 @@ const ExperiencesPage = () => {
   return (
     <div className='max-w-7xl min-h-[80vh] mx-auto mb-8 mt-6 px-6 xl:px-0'>
       <div>
-        <h1 className='text-3xl font-bold mb-3'>Esperienze</h1>
-        <p className='text-gray-500 max-w-md'>
+        <h1 className='mb-3 text-3xl font-bold'>Esperienze</h1>
+        <p className='max-w-md text-gray-500'>
           Esplora la nostra collezione di avventure incredibili. Dalle
           esperienze adrenaliniche al relax, trova l atua prossima avventura.
         </p>
       </div>
 
       {/* search area */}
-      <div className='bg-white p-4 rounded-2xl my-6 shadow-xs'>
-        <div className='xs:flex justify-between items-center gap-2'>
-          <div className='relative grow flex items-center me-3 max-xs:mb-4'>
+      <div className='p-4 my-6 bg-white shadow-xs rounded-2xl'>
+        <div className='items-center justify-between gap-2 xs:flex'>
+          <div className='relative flex items-center grow me-3 max-xs:mb-4'>
             <input
-              className='bg-background border border-gray-800/30 rounded-xl py-2 ps-10 w-full text-sm xs:text-base'
+              className='w-full py-2 text-sm border bg-background border-gray-800/30 rounded-xl ps-10 xs:text-base'
               placeholder='Cerca esperienze...'
               value={searchBar}
               onChange={(e) => {
                 setSearchBar(e.target.value.toLowerCase());
               }}
             />
-            <Search className='absolute start-2 top-1/2 -translate-y-1/2' />
+            <Search className='absolute -translate-y-1/2 start-2 top-1/2' />
           </div>
 
           <div className='inline-block me-3 xs:me-0'>
@@ -213,9 +213,9 @@ const ExperiencesPage = () => {
         </div>
 
         {showFilters && (
-          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-start items-end gap-8 border-t border-gray-500/30 mt-6 pt-4'>
-            <div className='flex flex-col justify-start items-start gap-2'>
-              <span className='font-medium text-sm'>Categoria</span>
+          <div className='grid items-end justify-start grid-cols-1 gap-8 pt-4 mt-6 border-t sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 border-gray-500/30'>
+            <div className='flex flex-col items-start justify-start gap-2'>
+              <span className='text-sm font-medium'>Categoria</span>
               <select
                 name='category'
                 id='categorySelect'
@@ -234,8 +234,8 @@ const ExperiencesPage = () => {
                   ))}
               </select>
             </div>
-            <div className='flex flex-col justify-start items-start gap-2'>
-              <span className='font-medium text-sm'>Prezzo minimo</span>
+            <div className='flex flex-col items-start justify-start gap-2'>
+              <span className='text-sm font-medium'>Prezzo minimo</span>
               <input
                 type='number'
                 step={1}
@@ -248,8 +248,8 @@ const ExperiencesPage = () => {
                 }}
               />
             </div>
-            <div className='flex flex-col justify-start items-start gap-2'>
-              <span className='font-medium text-sm'>Prezzo massimo</span>
+            <div className='flex flex-col items-start justify-start gap-2'>
+              <span className='text-sm font-medium'>Prezzo massimo</span>
               <input
                 type='number'
                 step={1}
@@ -279,15 +279,15 @@ const ExperiencesPage = () => {
 
       <div>
         {!isLoading && (
-          <div className='sm:flex justify-between items-center my-6'>
-            <h4 className='text-xl font-semibold mb-4'>
+          <div className='items-center justify-between my-6 sm:flex'>
+            <h4 className='mb-4 text-xl font-semibold'>
               {filteredExperiences.length} esperienze trovate
             </h4>
 
             <select
               name=''
               id=''
-              className='bg-background border border-gray-800/30 rounded-xl py-2 px-3'
+              className='px-3 py-2 border bg-background border-gray-800/30 rounded-xl'
               value={sortOption}
               onChange={(e) => {
                 setSortOption(e.target.value);
@@ -306,7 +306,7 @@ const ExperiencesPage = () => {
         {isLoading && <ExperiencesSkeletonLoader />}
 
         {filteredExperiences.length > 0 && (
-          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
+          <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
             {/* elenco esperienze */}
             {filteredExperiences.map((exp) => (
               <ExperienceCard

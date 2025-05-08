@@ -106,14 +106,14 @@ const LoginPage = () => {
   });
 
   return (
-    <div className='flex flex-col justify-center items-center gap-5 min-h-screen px-6'>
-      <h1 className='relative -translate-y-10 text-4xl sm:text-5xl font-bold'>
+    <div className='flex flex-col items-center justify-center min-h-screen gap-5 px-6'>
+      <h1 className='relative text-4xl font-bold -translate-y-10 sm:text-5xl'>
         Bentornato su Klicko
       </h1>
 
-      <div className='relative -translate-y-10 bg-white rounded-2xl shadow-xl p-4 sm:p-6 mx-auto max-w-lg'>
-        <h2 className='text-xl font-bold mb-2'>Accedi</h2>
-        <p className='text-gray-500 mb-5'>
+      <div className='relative max-w-lg p-4 mx-auto -translate-y-10 bg-white shadow-xl rounded-2xl sm:p-6'>
+        <h2 className='mb-2 text-xl font-bold'>Accedi</h2>
+        <p className='mb-5 text-gray-500'>
           Inserisci le tue credenziali per accedere al tuo account
         </p>
         <form className='mb-3'>
@@ -129,7 +129,7 @@ const LoginPage = () => {
               }}
             />
             {showErrorMessage && email.length === 0 && (
-              <span className='text-sm text-red-500 mt-1'>
+              <span className='mt-1 text-sm text-red-500'>
                 Questo campo è obbligatorio!
               </span>
             )}
@@ -147,14 +147,14 @@ const LoginPage = () => {
               }}
             />
             {showErrorMessage && password.length === 0 && (
-              <span className='text-sm text-red-500 mt-1'>
+              <span className='mt-1 text-sm text-red-500'>
                 Questo campo è obbligatorio!
               </span>
             )}
           </div>
 
           {credentialsError && (
-            <p className='text-sm text-red-600 font-medium text-center py-4 px-3 bg-red-200/60 mb-4 rounded-xl'>
+            <p className='px-3 py-4 mb-4 text-sm font-medium text-center text-red-600 bg-red-200/60 rounded-xl'>
               Email o password non corretti, riprovare!
             </p>
           )}

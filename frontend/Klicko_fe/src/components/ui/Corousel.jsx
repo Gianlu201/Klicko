@@ -40,7 +40,7 @@ export default function Carousel({
       className={`relative w-full overflow-hidden rounded-2xl shadow-lg ${className}`}
     >
       <div
-        className='flex gap-4 transition-transform duration-700 ease-in-out py-6 px-4'
+        className='flex gap-4 px-4 py-6 transition-transform duration-700 ease-in-out'
         style={{
           width: `${(items.length / slidesVisible) * 100}%`,
           transform: `translateX(-${(100 / items.length) * current}%)`,
@@ -50,7 +50,7 @@ export default function Carousel({
           <div key={index}>
             <img
               src={`https://klicko-backend-api.azurewebsites.net/uploads/${item.url}`}
-              className='w-full h-full rounded-2xl cursor-pointer'
+              className='w-full h-full cursor-pointer rounded-2xl'
               onClick={() => {
                 setSelectedImgUrl(item.url);
                 setOpenModal(true);
@@ -62,13 +62,13 @@ export default function Carousel({
 
       <button
         onClick={prevSlide}
-        className='absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow transition'
+        className='absolute p-2 transition -translate-y-1/2 rounded-full shadow left-4 top-1/2 bg-white/80 hover:bg-white'
       >
         <ChevronLeft className='w-5 h-5 text-gray-700 cursor-pointer' />
       </button>
       <button
         onClick={nextSlide}
-        className='absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow transition'
+        className='absolute p-2 transition -translate-y-1/2 rounded-full shadow right-4 top-1/2 bg-white/80 hover:bg-white'
       >
         <ChevronRight className='w-5 h-5 text-gray-700 cursor-pointer' />
       </button>
@@ -76,7 +76,7 @@ export default function Carousel({
       {/* Modale */}
       <Modal dismissible show={openModal} onClose={() => setOpenModal(false)}>
         <X
-          className='absolute top-4 right-4 z-50 text-white w-6 h-6 p-1 bg-black/60 rounded-full cursor-pointer'
+          className='absolute z-50 w-6 h-6 p-1 text-white rounded-full cursor-pointer top-4 right-4 bg-black/60'
           onClick={() => setOpenModal(false)}
         />
         <img

@@ -58,24 +58,24 @@ const CouponPage = () => {
   }, []);
 
   return (
-    <div className='max-w-7xl mx-auto min-h-screen px-6 xl:px-0'>
-      <h1 className='text-4xl font-bold mt-10 mb-8'>Coupon</h1>
+    <div className='min-h-screen px-6 mx-auto max-w-7xl xl:px-0'>
+      <h1 className='mt-10 mb-8 text-4xl font-bold'>Coupon</h1>
 
-      <h2 className='text-xl font-semibold mb-4'>I tuoi coupon disponibili</h2>
+      <h2 className='mb-4 text-xl font-semibold'>I tuoi coupon disponibili</h2>
 
       {isLoading ? (
         <CouponsSkeletonLoader />
       ) : (
         <>
           {availableCoupon.length > 0 ? (
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6'>
+            <div className='grid grid-cols-1 gap-6 mb-6 md:grid-cols-2 lg:grid-cols-3'>
               {availableCoupon.map((coupon) => (
                 <CouponCard key={coupon.couponId} coupon={coupon} />
               ))}
             </div>
           ) : (
-            <div className='bg-white border border-gray-400/40 rounded-xl mb-6 flex justify-center items-center'>
-              <p className='text-gray-500 font-semibold text-lg py-8'>
+            <div className='flex items-center justify-center mb-6 bg-white border border-gray-400/40 rounded-xl'>
+              <p className='py-8 text-lg font-semibold text-gray-500'>
                 Nessun coupon utilizzabile trovato!
               </p>
             </div>
@@ -83,10 +83,10 @@ const CouponPage = () => {
 
           {unavailableCoupon.length > 0 && (
             <>
-              <h2 className='text-xl font-semibold mb-4'>
+              <h2 className='mb-4 text-xl font-semibold'>
                 Coupon utilizzati o scaduti
               </h2>
-              <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6'>
+              <div className='grid grid-cols-1 gap-6 mb-6 md:grid-cols-2 lg:grid-cols-3'>
                 {unavailableCoupon.map((coupon) => (
                   <CouponCard key={coupon.couponId} coupon={coupon} />
                 ))}

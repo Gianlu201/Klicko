@@ -282,8 +282,8 @@ const Navbar = () => {
   }, [cart]);
 
   return (
-    <header className='bg-white shadow-sm sticky top-0 z-40'>
-      <div className='max-w-7xl mx-auto px-4 py-3 flex justify-between items-center'>
+    <header className='sticky top-0 z-40 bg-white shadow-sm'>
+      <div className='flex items-center justify-between px-4 py-3 mx-auto max-w-7xl'>
         <Link
           to='/'
           className='flex items-center space-x-2'
@@ -291,27 +291,27 @@ const Navbar = () => {
             setMobileMenuOpen(false);
           }}
         >
-          <span className='font-serif text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-blue-700'>
+          <span className='font-serif text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-700'>
             Klicko
           </span>
         </Link>
 
-        <nav className='hidden md:flex items-center space-x-6'>
+        <nav className='items-center hidden space-x-6 md:flex'>
           <Link
             to='/experiences'
-            className='font-medium hover:text-primary transition-colors'
+            className='font-medium transition-colors hover:text-primary'
           >
             Esperienze
           </Link>
           <Link
             to='/categories'
-            className='font-medium hover:text-primary transition-colors'
+            className='font-medium transition-colors hover:text-primary'
           >
             Categorie
           </Link>
           <Link
             to='/about'
-            className='font-medium hover:text-primary transition-colors'
+            className='font-medium transition-colors hover:text-primary'
           >
             Chi siamo
           </Link>
@@ -319,7 +319,7 @@ const Navbar = () => {
           {profile?.email && (
             <Link
               to='/loyalty'
-              className='font-medium hover:text-primary transition-colors'
+              className='font-medium transition-colors hover:text-primary'
             >
               Programma fedeltà
             </Link>
@@ -335,7 +335,7 @@ const Navbar = () => {
             }}
           >
             {cart.experiences != undefined && cart.experiences.length > 0 && (
-              <span className='absolute -top-2 -end-2 bg-secondary rounded-full flex justify-center items-center w-5 h-5 text-xs text-white font-semibold'>
+              <span className='absolute flex items-center justify-center w-5 h-5 text-xs font-semibold text-white rounded-full -top-2 -end-2 bg-secondary'>
                 {cart.experiences.length}
               </span>
             )}
@@ -352,7 +352,7 @@ const Navbar = () => {
                     setMobileMenuOpen(false);
                   }}
                 >
-                  {/* <User className='h-5 w-5' /> */}
+                  {/* <User className='w-5 h-5' /> */}
                   <span className='font-bold'>
                     {profile.name[0]}
                     {profile.surname[0]}
@@ -362,7 +362,7 @@ const Navbar = () => {
               align='right'
             >
               <DropdownHeader>Il tuo account</DropdownHeader>
-              <p className='text-gray-500 text-xs px-4 mb-2'>{profile.email}</p>
+              <p className='px-4 mb-2 text-xs text-gray-500'>{profile.email}</p>
 
               {dropDownOptions.map(
                 (option) =>
@@ -386,7 +386,7 @@ const Navbar = () => {
               </DropdownItem>
             </Dropdown>
           ) : (
-            <div className='hidden md:flex items-center space-x-2'>
+            <div className='items-center hidden space-x-2 md:flex'>
               <Button
                 variant='outline'
                 size='md'
@@ -409,34 +409,34 @@ const Navbar = () => {
 
           <button className='md:hidden' onClick={toggleMobileMenu}>
             {mobileMenuOpen ? (
-              <X className='h-6 w-6 cursor-pointer' />
+              <X className='w-6 h-6 cursor-pointer' />
             ) : (
-              <Menu className='h-6 w-6 cursor-pointer' />
+              <Menu className='w-6 h-6 cursor-pointer' />
             )}
           </button>
         </div>
       </div>
 
       {mobileMenuOpen && (
-        <div className='md:hidden bg-white border-t shadow-2xl'>
-          <div className='container mx-auto py-4 space-y-3 shadow-2xl'>
+        <div className='bg-white border-t shadow-2xl md:hidden'>
+          <div className='container py-4 mx-auto space-y-3 shadow-2xl'>
             <Link
               to='/experiences'
-              className='block px-4 py-2 hover:bg-muted rounded-md hover:text-primary'
+              className='block px-4 py-2 rounded-md hover:bg-muted hover:text-primary'
               onClick={toggleMobileMenu}
             >
               Esperienze
             </Link>
             <Link
               to='/categories'
-              className='block px-4 py-2 hover:bg-muted rounded-md hover:text-primary'
+              className='block px-4 py-2 rounded-md hover:bg-muted hover:text-primary'
               onClick={toggleMobileMenu}
             >
               Categorie
             </Link>
             <Link
               to='/about'
-              className='block px-4 py-2 hover:bg-muted rounded-md hover:text-primary'
+              className='block px-4 py-2 rounded-md hover:bg-muted hover:text-primary'
               onClick={toggleMobileMenu}
             >
               Chi siamo
@@ -444,7 +444,7 @@ const Navbar = () => {
             {profile?.email && (
               <Link
                 to='/loyalty'
-                className='block px-4 py-2 hover:bg-muted rounded-md hover:text-primary'
+                className='block px-4 py-2 rounded-md hover:bg-muted hover:text-primary'
                 onClick={toggleMobileMenu}
               >
                 Programma fedeltà
@@ -452,7 +452,7 @@ const Navbar = () => {
             )}
 
             {!profile?.email && (
-              <div className='flex flex-col space-y-2 pt-3 border-t'>
+              <div className='flex flex-col pt-3 space-y-2 border-t'>
                 <Button
                   variant='outline'
                   size='md'

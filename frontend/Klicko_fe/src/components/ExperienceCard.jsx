@@ -13,19 +13,19 @@ const ExperienceCard = ({ experience, className }) => {
           }`}
         >
           {/* card top */}
-          <div className='relative aspect-16/9 overflow-hidden'>
+          <div className='relative overflow-hidden aspect-16/9'>
             <img
               src={`https://klicko-backend-api.azurewebsites.net/uploads/${experience.coverImage}`}
               alt={experience.title}
-              className='absolute top-1/2 start-1/2 -translate-y-1/2 -translate-x-1/2 z-0 w-full h-full'
+              className='absolute z-0 w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 start-1/2'
             />
             {experience.isInEvidence ? (
-              <span className='text-xs xs:text-sm absolute top-2 start-2 text-white md:text-xs font-semibold px-2 py-1 bg-secondary rounded-full z-10'>
+              <span className='absolute z-10 px-2 py-1 text-xs font-semibold text-white rounded-full xs:text-sm top-2 start-2 md:text-xs bg-secondary'>
                 In evidenza
               </span>
             ) : (
               experience.isPopular && (
-                <span className='text-xs xs:text-sm absolute top-2 start-2 text-white md:text-xs font-semibold px-2 py-1 bg-primary rounded-full z-10'>
+                <span className='absolute z-10 px-2 py-1 text-xs font-semibold text-white rounded-full xs:text-sm top-2 start-2 md:text-xs bg-primary'>
                   Popolare
                 </span>
               )
@@ -39,8 +39,8 @@ const ExperienceCard = ({ experience, className }) => {
 
           {/* card bottom */}
           <div className='p-4'>
-            <div className='flex justify-between items-center mb-2'>
-              <span className='text-gray-500 font-medium md:font-normal text-xs xs:text-base md:text-sm'>
+            <div className='flex items-center justify-between mb-2'>
+              <span className='text-xs font-medium text-gray-500 md:font-normal xs:text-base md:text-sm'>
                 {experience.category.name}
               </span>
               <div className='flex items-center'>
@@ -65,7 +65,7 @@ const ExperienceCard = ({ experience, className }) => {
                 )}
               </div>
             </div>
-            <h4 className='text-xl md:text-lg font-semibold mb-2 line-clamp-2'>
+            <h4 className='mb-2 text-xl font-semibold md:text-lg line-clamp-2'>
               {experience.title}
             </h4>
             <p className='text-gray-600 md:text-[0.9rem] line-clamp-2'>
@@ -73,13 +73,13 @@ const ExperienceCard = ({ experience, className }) => {
             </p>
 
             <div className='absolute w-full start-4 bottom-2'>
-              <div className='flex justify-between pe-8 my-2'>
-                <span className='flex items-center gap-1 md:text-sm text-gray-500 max-w-3/5'>
-                  <MapPin className='h-4 w-4' />
+              <div className='flex justify-between my-2 pe-8'>
+                <span className='flex items-center gap-1 text-gray-500 md:text-sm max-w-3/5'>
+                  <MapPin className='w-4 h-4' />
                   <span className='line-clamp-1'>{experience.place}</span>
                 </span>
-                <span className='flex items-center gap-1 md:text-sm text-gray-500'>
-                  <Clock className='h-4 w-4' />
+                <span className='flex items-center gap-1 text-gray-500 md:text-sm'>
+                  <Clock className='w-4 h-4' />
                   {experience.duration}
                 </span>
               </div>

@@ -8,19 +8,19 @@ const SettingsComponent = () => {
 
   return (
     <>
-      <h1 className='text-2xl font-bold flex justify-start items-center gap-2 mb-10'>
+      <h1 className='flex items-center justify-start gap-2 mb-10 text-2xl font-bold'>
         <Settings className='w-6 h-6' />
         Impostazioni
       </h1>
 
       <div className='my-2'>
-        <div className='border border-gray-400/40 rounded-xl shadow p-6'>
-          <h2 className='text-2xl font-bold flex justify-start items-center gap-2 mb-6'>
+        <div className='p-6 border shadow border-gray-400/40 rounded-xl'>
+          <h2 className='flex items-center justify-start gap-2 mb-6 text-2xl font-bold'>
             <Bell className='w-6 h-6' />
             Notifiche
           </h2>
 
-          <div className='flex justify-between items-center mb-4'>
+          <div className='flex items-center justify-between mb-4'>
             <p>Notifiche push</p>
 
             <ToggleSwitch
@@ -31,7 +31,7 @@ const SettingsComponent = () => {
             />
           </div>
 
-          <div className='flex justify-between items-center'>
+          <div className='flex items-center justify-between'>
             <p>Aggiornamenti via email</p>
 
             <ToggleSwitch

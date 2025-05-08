@@ -56,11 +56,11 @@ const ImagesPreview = ({
         <>
           <p>Immagini attualmente presenti:</p>
 
-          <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mt-4'>
+          <div className='grid grid-cols-2 gap-4 mt-4 sm:grid-cols-3 md:grid-cols-4'>
             {images.map((img, idx) => (
               <div
                 key={idx}
-                className='relative w-full h-28 rounded-lg overflow-hidden border border-gray-200 shadow-sm group'
+                className='relative w-full overflow-hidden border border-gray-200 rounded-lg shadow-sm h-28 group'
               >
                 <img
                   src={`https://klicko-backend-api.azurewebsites.net/uploads/${img.url}`}
@@ -70,9 +70,9 @@ const ImagesPreview = ({
                 <button
                   type='button'
                   onClick={() => handleRemove(img.imageId)}
-                  className='absolute top-1 right-1 justify-center items-center bg-red-500 text-white rounded-full p-1 text-xs w-fit aspect-square cursor-pointer hover:opacity-100 hover:bg-red-600 transition'
+                  className='absolute items-center justify-center p-1 text-xs text-white transition bg-red-500 rounded-full cursor-pointer top-1 right-1 w-fit aspect-square hover:opacity-100 hover:bg-red-600'
                 >
-                  <X className='text-white font-bold w-4 h-4' />
+                  <X className='w-4 h-4 font-bold text-white' />
                 </button>
               </div>
             ))}
@@ -84,8 +84,8 @@ const ImagesPreview = ({
         <>
           <p>Immagini attualmente presenti:</p>
 
-          <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mt-4'>
-            <div className='relative w-full h-28 rounded-lg overflow-hidden border border-gray-200 shadow-sm group'>
+          <div className='grid grid-cols-2 gap-4 mt-4 sm:grid-cols-3 md:grid-cols-4'>
+            <div className='relative w-full overflow-hidden border border-gray-200 rounded-lg shadow-sm h-28 group'>
               <img
                 src={`https://klicko-backend-api.azurewebsites.net/uploads/${prevCoverImage}`}
                 className='object-cover w-full h-full'
@@ -93,9 +93,9 @@ const ImagesPreview = ({
               <button
                 type='button'
                 onClick={() => handleRemove(prevCoverImage)}
-                className='absolute top-1 right-1 justify-center items-center bg-red-500 text-white rounded-full p-1 text-xs w-fit aspect-square cursor-pointer hover:opacity-100 hover:bg-red-600 transition'
+                className='absolute items-center justify-center p-1 text-xs text-white transition bg-red-500 rounded-full cursor-pointer top-1 right-1 w-fit aspect-square hover:opacity-100 hover:bg-red-600'
               >
-                <X className='text-white font-bold w-4 h-4' />
+                <X className='w-4 h-4 font-bold text-white' />
               </button>
             </div>
           </div>

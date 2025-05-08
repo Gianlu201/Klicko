@@ -87,31 +87,31 @@ const RegisterPage = () => {
   });
 
   return (
-    <div className='lg:grid lg:grid-cols-2 max-w-7xl mx-auto min-h-screen pt-14 pb-20 items-center gap-12 px-6 xl:px-0'>
+    <div className='items-center min-h-screen gap-12 px-6 pb-20 mx-auto lg:grid lg:grid-cols-2 max-w-7xl pt-14 xl:px-0'>
       <div className='mb-10'>
-        <h1 className='text-5xl font-bold mb-3 md:max-lg:text-center'>
+        <h1 className='mb-3 text-5xl font-bold md:max-lg:text-center'>
           Unisciti a Klicko
         </h1>
-        <p className='text-gray-500 text-lg mb-3 md:max-lg:text-center md:max-lg:max-w-3/5 md:max-lg:mx-auto'>
+        <p className='mb-3 text-lg text-gray-500 md:max-lg:text-center md:max-lg:max-w-3/5 md:max-lg:mx-auto'>
           Crea un account per scoprire esperienze uniche e iniziare il tuo
           viaggio di avventure.
         </p>
-        <div className='sm:flex md:flex-col md:max-lg:items-center gap-5'>
-          <div className='bg-white rounded-xl shadow-sm px-5 py-4 md:max-lg:w-3/5 mb-4 sm:mb-0'>
-            <span className='inline-block bg-primary/20 text-primary p-2 rounded-full'>
+        <div className='gap-5 sm:flex md:flex-col md:max-lg:items-center'>
+          <div className='px-5 py-4 mb-4 bg-white shadow-sm rounded-xl md:max-lg:w-3/5 sm:mb-0'>
+            <span className='inline-block p-2 rounded-full bg-primary/20 text-primary'>
               <SquareUserRound />
             </span>
-            <h4 className='text-lg font-semibold mb-1'>Prenota esperienze</h4>
+            <h4 className='mb-1 text-lg font-semibold'>Prenota esperienze</h4>
             <p className='text-sm text-gray-500'>
               Trova e prenota la tua prossima avventura in pochi click
             </p>
           </div>
 
-          <div className='bg-white rounded-xl shadow-sm px-5 py-4 md:max-lg:w-3/5'>
-            <span className='inline-block bg-secondary/20 text-secondary p-2 rounded-full'>
+          <div className='px-5 py-4 bg-white shadow-sm rounded-xl md:max-lg:w-3/5'>
+            <span className='inline-block p-2 rounded-full bg-secondary/20 text-secondary'>
               <Users />
             </span>
-            <h4 className='text-lg font-semibold mb-1'>Gestisci il profilo</h4>
+            <h4 className='mb-1 text-lg font-semibold'>Gestisci il profilo</h4>
             <p className='text-sm text-gray-500'>
               Tieni traccia delle tue prenotazioni e preferenze
             </p>
@@ -119,9 +119,9 @@ const RegisterPage = () => {
         </div>
       </div>
 
-      <div className='bg-white rounded-2xl shadow-xl p-6 mx-auto w-full max-w-md'>
-        <h2 className='text-xl font-bold mb-2'>Crea un account</h2>
-        <p className='text-gray-500 mb-5'>
+      <div className='w-full max-w-md p-6 mx-auto bg-white shadow-xl rounded-2xl'>
+        <h2 className='mb-2 text-xl font-bold'>Crea un account</h2>
+        <p className='mb-5 text-gray-500'>
           Inserisci i tuoi dati per registrarti
         </p>
         <form
@@ -142,7 +142,7 @@ const RegisterPage = () => {
               }}
             />
             {showErrorMessage && name.length === 0 && (
-              <span className='text-sm text-red-500 mt-1'>
+              <span className='mt-1 text-sm text-red-500'>
                 Questo campo è obbligatorio!
               </span>
             )}
@@ -160,7 +160,7 @@ const RegisterPage = () => {
               }}
             />
             {showErrorMessage && surname.length === 0 && (
-              <span className='text-sm text-red-500 mt-1'>
+              <span className='mt-1 text-sm text-red-500'>
                 Questo campo è obbligatorio!
               </span>
             )}
@@ -178,7 +178,7 @@ const RegisterPage = () => {
               }}
             />
             {showErrorMessage && email.length === 0 && (
-              <span className='text-sm text-red-500 mt-1'>
+              <span className='mt-1 text-sm text-red-500'>
                 Questo campo è obbligatorio!
               </span>
             )}
@@ -196,7 +196,7 @@ const RegisterPage = () => {
               }}
             />
             {showErrorMessage && password.length === 0 && (
-              <span className='text-sm text-red-500 mt-1'>
+              <span className='mt-1 text-sm text-red-500'>
                 Questo campo è obbligatorio!
               </span>
             )}
@@ -214,14 +214,14 @@ const RegisterPage = () => {
               }}
             />
             {showErrorMessage && confirmPassword.length === 0 && (
-              <span className='text-sm text-red-500 mt-1'>
+              <span className='mt-1 text-sm text-red-500'>
                 Questo campo è obbligatorio!
               </span>
             )}
           </div>
 
           {errorMessage !== '' && (
-            <p className='text-sm text-red-500 my-2'>{errorMessage}</p>
+            <p className='my-2 text-sm text-red-500'>{errorMessage}</p>
           )}
 
           <Button type='submit' variant='primary' fullWidth={true}>

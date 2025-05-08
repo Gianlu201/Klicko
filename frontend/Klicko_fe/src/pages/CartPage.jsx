@@ -217,25 +217,25 @@ const CartPage = () => {
   };
 
   return (
-    <div className='max-w-7xl mx-auto min-h-screen px-6 xl:px-0'>
-      <h1 className='text-4xl font-bold mt-10 mb-8'>Carrello</h1>
+    <div className='min-h-screen px-6 mx-auto max-w-7xl xl:px-0'>
+      <h1 className='mt-10 mb-8 text-4xl font-bold'>Carrello</h1>
       {cart.experiences != undefined && cart.experiences.length > 0 ? (
         <div className='grid grid-cols-3 gap-10 mb-10'>
           {/* colonna tabella esperienze */}
-          <div className='col-span-3 lg:col-span-2 bg-white rounded-2xl shadow-lg px-4 py-6 overflow-x-auto'>
+          <div className='col-span-3 px-4 py-6 overflow-x-auto bg-white shadow-lg lg:col-span-2 rounded-2xl'>
             <table className='w-full'>
               <thead>
-                <tr className='grid grid-cols-24 gap-4 border-b border-gray-400/30 pb-3'>
-                  <th className='hidden md:block col-span-3 text-gray-500 text-sm font-medium'>
+                <tr className='grid gap-4 pb-3 border-b grid-cols-24 border-gray-400/30'>
+                  <th className='hidden col-span-3 text-sm font-medium text-gray-500 md:block'>
                     Prodotto
                   </th>
-                  <th className='col-span-12 md:col-span-10 text-gray-500 text-sm font-medium'>
+                  <th className='col-span-12 text-sm font-medium text-gray-500 md:col-span-10'>
                     Dettagli
                   </th>
-                  <th className='col-span-5 text-gray-500 text-sm font-medium'>
+                  <th className='col-span-5 text-sm font-medium text-gray-500'>
                     Quantità
                   </th>
-                  <th className='col-span-5 md:col-span-4 text-gray-500 text-sm font-medium'>
+                  <th className='col-span-5 text-sm font-medium text-gray-500 md:col-span-4'>
                     Prezzo
                   </th>
                   <th className='col-span-2'></th>
@@ -245,13 +245,13 @@ const CartPage = () => {
                 {cart.experiences.map((exp) => (
                   <tr
                     key={exp.experienceId}
-                    className='grid grid-cols-24 gap-4 items-center hover:bg-gray-100 border-b border-gray-400/30 py-3 px-2 last-of-type:border-0'
+                    className='grid items-center gap-4 px-2 py-3 border-b grid-cols-24 hover:bg-gray-100 border-gray-400/30 last-of-type:border-0'
                   >
-                    <td className='hidden md:block col-span-3 overflow-hidden'>
-                      <div className='aspect-square rounded-lg overflow-hidden'>
+                    <td className='hidden col-span-3 overflow-hidden md:block'>
+                      <div className='overflow-hidden rounded-lg aspect-square'>
                         <img
                           src={`https://klicko-backend-api.azurewebsites.net/uploads/${exp.coverImage}`}
-                          className='w-full h-full object-cover'
+                          className='object-cover w-full h-full'
                         />
                       </div>
                     </td>
@@ -266,16 +266,16 @@ const CartPage = () => {
                       <p className='text-gray-500 text-sm font-normal my-0.5'>
                         {exp.place}
                       </p>
-                      <p className='text-gray-500 text-sm font-normal'>
+                      <p className='text-sm font-normal text-gray-500'>
                         {exp.duration}
                       </p>
                     </td>
 
-                    <td className='col-span-5 grid grid-cols-4 justify-center items-center gap-2'>
+                    <td className='grid items-center justify-center grid-cols-4 col-span-5 gap-2'>
                       <Button
                         variant='outline'
                         size='sm'
-                        className='order-2 md:order-1 col-span-2 md:col-span-1 text-xl font-bold w-8 h-8'
+                        className='order-2 w-8 h-8 col-span-2 text-xl font-bold md:order-1 md:col-span-1'
                         onClick={() => {
                           removeExperienceUnitManage(exp.experienceId);
                         }}
@@ -283,14 +283,14 @@ const CartPage = () => {
                         -
                       </Button>
 
-                      <span className='order-1 md:order-2 col-span-4 md:col-span-2 flex justify-center items-center bg-background border border-gray-400/30 rounded-xl h-8'>
+                      <span className='flex items-center justify-center order-1 h-8 col-span-4 border md:order-2 md:col-span-2 bg-background border-gray-400/30 rounded-xl'>
                         {exp.quantity}
                       </span>
 
                       <Button
                         variant='outline'
                         size='sm'
-                        className='order-3 md:order-3 col-span-2 md:col-span-1 text-xl font-bold w-8 h-8'
+                        className='order-3 w-8 h-8 col-span-2 text-xl font-bold md:order-3 md:col-span-1'
                         onClick={() => {
                           addExperienceUnitManage(exp.experienceId);
                         }}
@@ -300,17 +300,17 @@ const CartPage = () => {
                     </td>
 
                     <td className='col-span-6 md:col-span-4'>
-                      <p className='text-sm md:text-lg font-semibold text-center mb-1'>
+                      <p className='mb-1 text-sm font-semibold text-center md:text-lg'>
                         {(exp.price * (1 - exp.sale / 100) * exp.quantity)
                           .toFixed(2)
                           .replace('.', ',')}{' '}
                         €
                       </p>
-                      <p className='text-gray-500 text-xs sm:text-sm font-normal text-center'>
+                      <p className='text-xs font-normal text-center text-gray-500 sm:text-sm'>
                         {exp.quantity} x{' '}
                         {exp.price.toFixed(2).replace('.', ',')} €
                         {exp.sale > 0 && (
-                          <span className='block text-gray-500 text-xs sm:text-sm font-normal ms-2 mt-1'>
+                          <span className='block mt-1 text-xs font-normal text-gray-500 sm:text-sm ms-2'>
                             -{exp.sale}%
                           </span>
                         )}
@@ -319,7 +319,7 @@ const CartPage = () => {
 
                     <td className='col-span-2 pe-1'>
                       <Trash2
-                        className='text-red-500 w-4 h-4 ms-auto cursor-pointer'
+                        className='w-4 h-4 text-red-500 cursor-pointer ms-auto'
                         onClick={() => {
                           removeExperienceFromCartManage(exp.experienceId);
                         }}
@@ -332,9 +332,9 @@ const CartPage = () => {
           </div>
 
           {/* colonna resoconto */}
-          <div className='col-span-3 lg:col-span-1 bg-white rounded-2xl shadow-lg px-4 py-6 h-fit'>
-            <h3 className='text-xl font-semibold mb-4'>Riepilogo ordine</h3>
-            <div className='xs:flex justify-between items-center text-gray-600 my-3'>
+          <div className='col-span-3 px-4 py-6 bg-white shadow-lg lg:col-span-1 rounded-2xl h-fit'>
+            <h3 className='mb-4 text-xl font-semibold'>Riepilogo ordine</h3>
+            <div className='items-center justify-between my-3 text-gray-600 xs:flex'>
               <span className='block mb-1 sm:mb-0'>
                 Subtotale ({cart.experiences.length} esperienze)
               </span>
@@ -343,7 +343,7 @@ const CartPage = () => {
               </span>
             </div>
             {cartTotalExperienceDiscount() > 0 && (
-              <div className='sm:flex justify-between items-center text-gray-600 my-3'>
+              <div className='items-center justify-between my-3 text-gray-600 sm:flex'>
                 <span className='block mb-1 sm:mb-0'>Totale sconti</span>
                 <span>
                   -{cartTotalExperienceDiscount().toFixed(2).replace('.', ',')}{' '}
@@ -352,14 +352,14 @@ const CartPage = () => {
               </div>
             )}
 
-            <div className='flex justify-between items-center text-gray-600 my-3'>
+            <div className='flex items-center justify-between my-3 text-gray-600'>
               <span>Costo di spedizione</span>
               <span>{shippingPrice.toFixed(2).replace('.', ',')} €</span>
             </div>
 
-            <hr className='text-gray-400/30 my-3' />
+            <hr className='my-3 text-gray-400/30' />
 
-            <div className='flex justify-between items-center text-gray-600 font-semibold my-5'>
+            <div className='flex items-center justify-between my-5 font-semibold text-gray-600'>
               <span>Totale</span>
               <span>
                 {(cartTotal() - cartTotalExperienceDiscount() + shippingPrice)
@@ -382,7 +382,7 @@ const CartPage = () => {
 
             <Link
               to='/experiences'
-              className='text-primary text-sm hover:underline'
+              className='text-sm text-primary hover:underline'
             >
               Continua lo shopping
             </Link>
@@ -391,11 +391,11 @@ const CartPage = () => {
       ) : (
         <div>
           <div className='flex flex-col min-h-[60vh] justify-center items-center bg-white rounded-2xl shadow-lg'>
-            <ShoppingCart className='w-20 h-20 text-gray-400/60 mb-3' />
-            <h3 className='text-xl font-semibold mb-3'>
+            <ShoppingCart className='w-20 h-20 mb-3 text-gray-400/60' />
+            <h3 className='mb-3 text-xl font-semibold'>
               Il tuo carrello è vuoto
             </h3>
-            <p className='text-gray-500 mb-5 px-26 text-center'>
+            <p className='mb-5 text-center text-gray-500 px-26'>
               Non hai ancora aggiunto esperienze al tuo carrello
             </p>
             <Button

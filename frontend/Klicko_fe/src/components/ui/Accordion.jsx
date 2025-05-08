@@ -12,7 +12,7 @@ export default function Accordion({ intestation, children, className = '' }) {
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className='flex w-full items-center justify-between gap-2 px-4 py-3 text-left hover:bg-gray-50 transition'
+        className='flex items-center justify-between w-full gap-2 px-4 py-3 text-left transition hover:bg-gray-50'
       >
         <div className='w-full'>{intestation}</div>
         <ChevronDown

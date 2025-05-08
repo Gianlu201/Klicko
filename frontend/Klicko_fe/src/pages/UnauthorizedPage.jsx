@@ -7,13 +7,13 @@ const UnauthorizedPage = () => {
 
   return (
     <div className='max-w-7xl mx-auto flex flex-col justify-center items-center gap-5 min-h-[100vh] px-12 xl:px-0 -translate-y-20'>
-      <h1 className='text-4xl md:text-7xl text-primary font-bold'>
+      <h1 className='text-4xl font-bold md:text-7xl text-primary'>
         Area riservata
       </h1>
-      <p className='text-sm md:text-base text-gray-500 text-center max-w-xl'>
+      <p className='max-w-xl text-sm text-center text-gray-500 md:text-base'>
         Il tuo profilo non è autorizzato ad accedere a quest'area!
       </p>
-      <div className='flex justify-center items-center gap-6'>
+      <div className='flex items-center justify-center gap-6'>
         <Button
           variant='primary'
           onClick={() => {

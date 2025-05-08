@@ -228,15 +228,15 @@ const CheckOutPage = () => {
   }, [isAuthenticated]);
 
   return (
-    <div className='max-w-7xl mx-auto min-h-screen mt-8 px-6 xl:px-0'>
-      <h1 className='text-3xl font-bold mb-6'>Completa il tuo ordine</h1>
+    <div className='min-h-screen px-6 mx-auto mt-8 max-w-7xl xl:px-0'>
+      <h1 className='mb-6 text-3xl font-bold'>Completa il tuo ordine</h1>
       {cart?.cartId && (
-        <div className='grid grid-cols-3 justify-between items-start gap-6'>
+        <div className='grid items-start justify-between grid-cols-3 gap-6'>
           {/* riepilogo ordine */}
           {cart.experiences.length === 0 && navigate('/cart')}
-          <div className='col-span-3 lg:col-span-1 bg-white rounded-lg px-6 py-5 shadow'>
-            <h2 className='text-2xl font-bold mb-2'>Riepilogo ordine</h2>
-            <p className='text-gray-500 mb-5'>
+          <div className='col-span-3 px-6 py-5 bg-white rounded-lg shadow lg:col-span-1'>
+            <h2 className='mb-2 text-2xl font-bold'>Riepilogo ordine</h2>
+            <p className='mb-5 text-gray-500'>
               {cart.experiences.length} esperienze
             </p>
 
@@ -245,7 +245,7 @@ const CheckOutPage = () => {
                 cart.experiences.map((exp, index) => (
                   <div
                     key={index}
-                    className='grid grid-cols-12 items-center gap-2 border-b border-gray-400/40 py-3'
+                    className='grid items-center grid-cols-12 gap-2 py-3 border-b border-gray-400/40'
                   >
                     <div className='col-span-1 font-semibold text-end'>
                       {exp.quantity}x
@@ -253,7 +253,7 @@ const CheckOutPage = () => {
                     <div className='col-span-7 xs:col-span-8 sm:text-sm ps-1'>
                       {exp.title}
                     </div>
-                    <div className='col-span-4 xs:col-span-3 text-end font-semibold'>
+                    <div className='col-span-4 font-semibold xs:col-span-3 text-end'>
                       {(exp.price * (1 - exp.sale / 100))
                         .toFixed(2)
                         .replace('.', ',')}{' '}
@@ -264,9 +264,9 @@ const CheckOutPage = () => {
             </div>
 
             <div className='mb-8'>
-              <h5 className='text-sm mb-2'>Hai un codice sconto?</h5>
+              <h5 className='mb-2 text-sm'>Hai un codice sconto?</h5>
               <form
-                className='flex justify-center items-center gap-4'
+                className='flex items-center justify-center gap-4'
                 onSubmit={(e) => {
                   e.preventDefault();
                   getCoupon();
@@ -287,10 +287,10 @@ const CheckOutPage = () => {
               </form>
 
               {couponError.length > 0 && (
-                <p className='relative mx-4 mt-3 ps-4 pe-6 py-3 text-sm bg-red-200/50 rounded-lg'>
+                <p className='relative py-3 mx-4 mt-3 text-sm rounded-lg ps-4 pe-6 bg-red-200/50'>
                   {couponError}
                   <X
-                    className='absolute top-2 end-2 w-4 h-4 cursor-pointer'
+                    className='absolute w-4 h-4 cursor-pointer top-2 end-2'
                     onClick={() => {
                       setCouponError('');
                     }}
@@ -300,7 +300,7 @@ const CheckOutPage = () => {
 
               {selectedCoupon !== null && (
                 <div className='relative bg-gray-100 rounded-lg px-4 py-2.5 font-medium mt-4 mx-3'>
-                  <p className='flex justify-start items-center gap-2'>
+                  <p className='flex items-center justify-start gap-2'>
                     {selectedCoupon.code}
                     <span className='text-sm text-gray-500'>
                       (-
@@ -312,7 +312,7 @@ const CheckOutPage = () => {
                     </span>
                   </p>
                   <X
-                    className='absolute top-2 end-2 w-4 h-4 cursor-pointer'
+                    className='absolute w-4 h-4 cursor-pointer top-2 end-2'
                     onClick={() => {
                       setSelectedCoupon(null);
                     }}
@@ -321,32 +321,32 @@ const CheckOutPage = () => {
               )}
             </div>
 
-            <div className='flex justify-between items-center mb-2'>
-              <span className='text-gray-500 font-medium'>Subtotale:</span>
-              <span className='text-gray-500 font-semibold'>
+            <div className='flex items-center justify-between mb-2'>
+              <span className='font-medium text-gray-500'>Subtotale:</span>
+              <span className='font-semibold text-gray-500'>
                 {getSubTotalPrice().toFixed(2).replace('.', ',')} €
               </span>
             </div>
 
             {selectedCoupon !== null && (
-              <div className='flex justify-between items-center mb-2'>
-                <span className='text-gray-500 font-medium'>
+              <div className='flex items-center justify-between mb-2'>
+                <span className='font-medium text-gray-500'>
                   Sconto coupon:
                 </span>
-                <span className='text-gray-500 font-semibold'>
+                <span className='font-semibold text-gray-500'>
                   -{getCouponSale().toFixed(2).replace('.', ',')} €
                 </span>
               </div>
             )}
 
-            <div className='flex justify-between items-center mb-2'>
-              <span className='text-gray-500 font-medium'>Spedizione:</span>
-              <span className='text-gray-500 font-semibold'>
+            <div className='flex items-center justify-between mb-2'>
+              <span className='font-medium text-gray-500'>Spedizione:</span>
+              <span className='font-semibold text-gray-500'>
                 {shippingPrice.toFixed(2).replace('.', ',')} €
               </span>
             </div>
 
-            <div className='flex justify-between items-center'>
+            <div className='flex items-center justify-between'>
               <span className='text-xl font-bold'>Totale</span>
               <span className='text-lg font-bold'>
                 {getFinalPrice().toFixed(2).replace('.', ',')} €
@@ -356,8 +356,8 @@ const CheckOutPage = () => {
 
           {/* modalità pagamento */}
           <div className='col-span-3 lg:col-span-2'>
-            <div className='bg-white rounded-lg px-6 py-5 shadow mb-10'>
-              <h2 className='text-2xl font-bold mb-2'>Indirizzo spedizione</h2>
+            <div className='px-6 py-5 mb-10 bg-white rounded-lg shadow'>
+              <h2 className='mb-2 text-2xl font-bold'>Indirizzo spedizione</h2>
               <AddressFormComponent
                 name={name}
                 setName={(data) => setName(data)}
@@ -373,8 +373,8 @@ const CheckOutPage = () => {
               />
             </div>
 
-            <div className='bg-white rounded-lg px-6 py-5 shadow mb-10'>
-              <h2 className='text-2xl font-bold mb-2'>Pagamento</h2>
+            <div className='px-6 py-5 mb-10 bg-white rounded-lg shadow'>
+              <h2 className='mb-2 text-2xl font-bold'>Pagamento</h2>
               {/* Stripe Container */}
               <StripeContainer
                 sendOrder={sendOrder}

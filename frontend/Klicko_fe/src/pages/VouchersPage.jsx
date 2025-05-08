@@ -241,15 +241,15 @@ const VouchersPage = () => {
   }, []);
 
   return (
-    <div className='max-w-7xl mx-auto min-h-screen px-6 xl:px-0'>
-      <h1 className='text-4xl font-bold mt-10 mb-3'>Utilizza il tuo Voucher</h1>
-      <p className='text-gray-500 font-normal mb-8'>
+    <div className='min-h-screen px-6 mx-auto max-w-7xl xl:px-0'>
+      <h1 className='mt-10 mb-3 text-4xl font-bold'>Utilizza il tuo Voucher</h1>
+      <p className='mb-8 font-normal text-gray-500'>
         Utilizza il codice del tuo voucher per riscattare o prenotare la tua
         esperienza
       </p>
 
       <div className='max-w-3xl mx-auto'>
-        <div className='bg-gray-100 rounded-lg p-1 flex justify-center items-center mb-6'>
+        <div className='flex items-center justify-center p-1 mb-6 bg-gray-100 rounded-lg'>
           <button
             className={`text-sm font-medium rounded-sm grow p-1 cursor-pointer ${
               redeemVoucherOption && 'bg-white'
@@ -277,7 +277,7 @@ const VouchersPage = () => {
           </button>
         </div>
 
-        <div className='bg-white rounded-lg border border-gray-400/10 p-5 shadow mb-16'>
+        <div className='p-5 mb-16 bg-white border rounded-lg shadow border-gray-400/10'>
           {redeemVoucherOption ? (
             // Riscatta Voucher
             <div>
@@ -288,16 +288,16 @@ const VouchersPage = () => {
                 </h4>
               </div>
 
-              <p className='text-gray-500 text-sm mb-6'>
+              <p className='mb-6 text-sm text-gray-500'>
                 Inserisci il codice del tuo voucher ricevuto via email o tramite
                 cofanetto regalo
               </p>
 
-              <p className='text-gray-500 font-bold text-sm mb-2'>
+              <p className='mb-2 text-sm font-bold text-gray-500'>
                 Codice Voucher
               </p>
               <form
-                className='xs:flex justify-center items-center gap-2 mb-4'
+                className='items-center justify-center gap-2 mb-4 xs:flex'
                 onSubmit={(e) => {
                   e.preventDefault();
                 }}
@@ -325,7 +325,7 @@ const VouchersPage = () => {
               {isSearchingVoucher && <SkeletonText />}
 
               {voucherNotFound && (
-                <div className='bg-red-200/60 px-4 py-3 mx-3 rounded-lg '>
+                <div className='px-4 py-3 mx-3 rounded-lg bg-red-200/60 '>
                   <p className='text-gray-600'>
                     Il codice inserito non corrisponde a nessun voucher o il
                     voucher cercato è già stato riscattato
@@ -334,10 +334,10 @@ const VouchersPage = () => {
               )}
 
               {searchedVoucher !== null && (
-                <div className='border border-gray-400/30 rounded-lg px-5 py-6'>
-                  <h4 className='text-xl mb-2'>{searchedVoucher.title}</h4>
+                <div className='px-5 py-6 border rounded-lg border-gray-400/30'>
+                  <h4 className='mb-2 text-xl'>{searchedVoucher.title}</h4>
 
-                  <p className='text-sm text-gray-600 mb-4'>
+                  <p className='mb-4 text-sm text-gray-600'>
                     È possibile riscuotere il Voucher entro il{' '}
                     {new Date(
                       searchedVoucher.expirationDate
@@ -348,7 +348,7 @@ const VouchersPage = () => {
                     })}
                   </p>
 
-                  <p className='text-sm text-gray-500 mb-4'>
+                  <p className='mb-4 text-sm text-gray-500'>
                     Scegli una data per prenotare la tua esperienza
                   </p>
 
@@ -358,7 +358,7 @@ const VouchersPage = () => {
                     }}
                     className='w-full'
                   >
-                    <label className='text-sm font-semibold block mb-1'>
+                    <label className='block mb-1 text-sm font-semibold'>
                       Data desiderata
                     </label>
 
@@ -370,11 +370,11 @@ const VouchersPage = () => {
                       filterDate={isWeekday}
                       placeholderText='Seleziona una data (solo lun-ven)'
                       dateFormat='dd/MM/yyyy'
-                      className='w-full bg-background border border-gray-400/30 rounded-lg px-4 py-2 mb-2'
+                      className='w-full px-4 py-2 mb-2 border rounded-lg bg-background border-gray-400/30'
                       wrapperClassName='w-full'
                     />
 
-                    <p className='text-sm text-gray-500 mb-5'>
+                    <p className='mb-5 text-sm text-gray-500'>
                       Disponibile dal lunedì al venerdì, con prenotazione minimo
                       7 giorni in anticipo
                     </p>
@@ -402,7 +402,7 @@ const VouchersPage = () => {
                 <h4 className='text-2xl font-semibold'>I miei Voucher</h4>
               </div>
 
-              <p className='text-gray-500 text-sm mb-6'>
+              <p className='mb-6 text-sm text-gray-500'>
                 Visualizza tutti i voucher delle esperienze che hai prenotato
               </p>
 
@@ -415,7 +415,7 @@ const VouchersPage = () => {
                         checkIsPassed(voucher.reservationDate) && 'bg-gray-100'
                       }`}
                     >
-                      <div className='flex justify-between items-center gap-4 mb-2'>
+                      <div className='flex items-center justify-between gap-4 mb-2'>
                         <h4 className='text-xl'>{voucher.title}</h4>
                         <span
                           className={`max-[480px]:hidden text-xs  rounded-md px-2 py-1 ${
@@ -428,9 +428,9 @@ const VouchersPage = () => {
                         </span>
                       </div>
 
-                      <p className='text-xs mb-3'>{voucher.voucherCode}</p>
+                      <p className='mb-3 text-xs'>{voucher.voucherCode}</p>
 
-                      <p className='text-sm text-gray-500 mb-3'>
+                      <p className='mb-3 text-sm text-gray-500'>
                         Prenotato per:{' '}
                         {new Date(voucher.reservationDate).toLocaleDateString(
                           'it-IT',
@@ -460,10 +460,10 @@ const VouchersPage = () => {
                 </div>
               ) : (
                 <div className='py-4'>
-                  <p className='text-gray-500 font-medium text-center mb-2'>
+                  <p className='mb-2 font-medium text-center text-gray-500'>
                     Non hai ancora nessun voucher prenotato
                   </p>
-                  <p className='text-gray-500 font-medium text-center text-sm'>
+                  <p className='text-sm font-medium text-center text-gray-500'>
                     Puoi prenotare un'esperienza con un voucher utilizzando il
                     codice ricevuto nel cofanetto regalo
                   </p>
@@ -484,7 +484,7 @@ const VouchersPage = () => {
                   <ModalHeader className='bg-background rounded-t-2xl' />
                   <ModalBody className='bg-background rounded-b-2xl'>
                     <div className='text-center'>
-                      <CircleAlert className='mx-auto mb-4 h-14 w-14 text-red-500' />
+                      <CircleAlert className='mx-auto mb-4 text-red-500 h-14 w-14' />
                       <h3 className='mb-5 text-lg font-medium'>
                         Sicuro di voler eliminare questa prenotazione?
                       </h3>

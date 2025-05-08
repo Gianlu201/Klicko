@@ -35,22 +35,22 @@ const AboutPage = () => {
 
   return (
     <div>
-      <div className='flex flex-col justify-center items-center gap-4 py-20 px-6 xl:px-0'>
+      <div className='flex flex-col items-center justify-center gap-4 px-6 py-20 xl:px-0'>
         <h1 className='text-5xl font-bold'>La nostra storia</h1>
         <p className='text-xl text-gray-500'>
           Basta un click per uscire dalla routine
         </p>
       </div>
 
-      <div className='max-w-3xl mx-auto mb-16 lg:mb-30 px-6 xl:px-0'>
-        <p className='text-lg mb-10'>
-          <span className='text-primary font-bold'>Klicko</span> nasce nel 2025
+      <div className='max-w-3xl px-6 mx-auto mb-16 lg:mb-30 xl:px-0'>
+        <p className='mb-10 text-lg'>
+          <span className='font-bold text-primary'>Klicko</span> nasce nel 2025
           dalla passione di un gruppo di viaggiatori instancabili che
           desideravano condividere con gli altri le loro esperienze più
           emozionanti e significative.
         </p>
 
-        <p className='text-lg mb-10'>
+        <p className='mb-10 text-lg'>
           Il nostro fondatore, Gianluca Di Diego, dopo aver esplorato più di 50
           paesi e sperimentato centinaia di avventure diverse, ha deciso di
           creare una piattaforma che permettesse a tutti di accedere facilmente
@@ -58,7 +58,7 @@ const AboutPage = () => {
           l'incertezza e la complessità di organizzarle da soli.
         </p>
 
-        <p className='text-lg mb-10'>
+        <p className='mb-10 text-lg'>
           Oggi, con migliaia di clienti soddisfatti e centinaia di esperienze
           curate in tutto il mondo, continuiamo a perseguire la nostra missione:
           trasformare i viaggi ordinari in avventure straordinarie, creando
@@ -68,23 +68,23 @@ const AboutPage = () => {
         <img
           src={GroupPhoto}
           alt='group of people photo'
-          className='rounded-xl shadow'
+          className='shadow rounded-xl'
         />
       </div>
 
-      <div className='text-center bg-gray-100 py-16'>
-        <h2 className='text-3xl font-bold mb-4'>I nostri valori</h2>
-        <p className='text-xl text-gray-500 mb-10'>
+      <div className='py-16 text-center bg-gray-100'>
+        <h2 className='mb-4 text-3xl font-bold'>I nostri valori</h2>
+        <p className='mb-10 text-xl text-gray-500'>
           Questi sono i principi che guidano ogni nostra azione e decisione
         </p>
-        <div className='max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-6 xl:px-0'>
+        <div className='grid max-w-6xl grid-cols-1 gap-6 px-6 mx-auto sm:grid-cols-2 lg:grid-cols-4 xl:px-0'>
           {values.map((value) => (
             <div
               key={value.id}
-              className='bg-white rounded-2xl shadow-lg text-center px-10 py-8'
+              className='px-10 py-8 text-center bg-white shadow-lg rounded-2xl'
             >
               <div className='flex justify-center mb-4'>{value.icon}</div>
-              <h4 className='text-xl font-bold mb-4'>{value.title}</h4>
+              <h4 className='mb-4 text-xl font-bold'>{value.title}</h4>
               <p className='text-gray-500'>{value.description}</p>
             </div>
           ))}
