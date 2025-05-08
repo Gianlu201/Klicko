@@ -177,7 +177,7 @@ const DetailPage = () => {
               <img
                 src={`https://klicko-backend-api.azurewebsites.net/uploads/${experience.coverImage}`}
                 alt={experience.title}
-                className='absolute w-full -translate-y-1/2 top-1/2 start-0'
+                className='absolute w-full h-full -translate-y-1/2 top-1/2 start-0'
               />
               <div className='absolute w-full h-full bg-black/30'></div>
               <div className='absolute bottom-0 z-20 text-white start-10 lg:start-40 max-w-3/4'>
