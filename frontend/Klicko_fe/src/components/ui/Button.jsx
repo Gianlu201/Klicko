@@ -11,6 +11,7 @@ const Button = ({
   fullWidth = false,
   icon = null,
   iconPosition = 'left',
+  translate = 'yes',
 }) => {
   const variants = {
     primary: 'bg-primary hover:bg-primary/80 text-white rounded-xl', // #19AEFF
@@ -31,7 +32,7 @@ const Button = ({
     sm: 'py-1 px-3 text-sm',
     md: 'py-2 px-4 text-base',
     lg: 'py-3 px-6 text-lg',
-    icon: 'p-2',
+    icon: 'p-2 w-11 h-11',
   };
 
   const width = fullWidth ? 'w-full' : '';
@@ -42,6 +43,7 @@ const Button = ({
 
   return (
     <button
+      translate={translate}
       type={type}
       className={`
         ${variants[variant]} 

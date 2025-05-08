@@ -349,6 +349,7 @@ const Navbar = () => {
             <Dropdown
               trigger={
                 <Button
+                  translate='no'
                   variant='icon'
                   size='icon'
                   onClick={() => {
