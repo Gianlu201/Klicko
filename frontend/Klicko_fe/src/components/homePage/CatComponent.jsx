@@ -12,7 +12,7 @@ const CatComponent = () => {
     <div
       className='relative h-[400px] xl:h-[300px] bg-cover bg-center'
       style={{
-        backgroundImage: `url('../../../public/assets/images/heroBackground.jpg')`,
+        backgroundImage: `url('/assets/images/heroBackground.jpg')`,
       }}
     >
       <div className='h-full w-full bg-primary/70'></div>

@@ -15,7 +15,7 @@ const HeroComponent = () => {
     <section
       className='relative h-[550px] bg-cover bg-center'
       style={{
-        backgroundImage: `url('../../../public/assets/images/heroBackground.jpg')`,
+        backgroundImage: `url('/assets/images/heroBackground.jpg')`,
       }}
     >
       <div className='absolute inset-0 bg-gradient-to-b from-black/0 to-black/60'></div>
