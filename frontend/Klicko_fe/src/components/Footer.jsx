@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Twitter } from 'lucide-react';
+import { Facebook, Github, Instagram, Linkedin, Twitter } from 'lucide-react';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from './ui/Button';
@@ -123,6 +123,20 @@ const Footer = () => {
             <Facebook className='cursor-pointer hover:text-white' />
             <Instagram className='cursor-pointer hover:text-white' />
             <Twitter className='cursor-pointer hover:text-white' />
+            <a
+              href='https://github.com/Gianlu201'
+              className='cursor-pointer hover:text-white'
+              target='_blank'
+            >
+              <Github />
+            </a>
+            <a
+              href='https://www.linkedin.com/in/gianluca-di-diego-a3604716b/'
+              className='cursor-pointer hover:text-white'
+              target='_blank'
+            >
+              <Linkedin />
+            </a>
           </div>
         </div>
 
