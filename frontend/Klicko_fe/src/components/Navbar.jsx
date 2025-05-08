@@ -357,8 +357,8 @@ const Navbar = () => {
                 >
                   {/* <User className='w-5 h-5' /> */}
                   <span className='font-bold'>
-                    {profile.name[0]}
-                    {profile.surname[0]}
+                    {profile?.name[0]}
+                    {profile?.surname[0]}
                   </span>
                 </Button>
               }
