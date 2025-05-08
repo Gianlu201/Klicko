@@ -32,7 +32,6 @@ const CheckoutForm = ({ sendOrder, orderAmount, checkFormFields }) => {
         '::placeholder': {
           color: '#a0aec0',
         },
-        padding: '12px 16px',
       },
       invalid: {
         color: '#e53e3e',
@@ -41,7 +40,6 @@ const CheckoutForm = ({ sendOrder, orderAmount, checkFormFields }) => {
   };
 
   const CARD_NUMBER_OPTIONS = {
-    autoComplete: 'off',
     style: {
       base: {
         color: '#000',
@@ -50,7 +48,6 @@ const CheckoutForm = ({ sendOrder, orderAmount, checkFormFields }) => {
         '::placeholder': {
           color: '#a0aec0',
         },
-        padding: '12px 16px',
       },
       invalid: {
         color: '#e53e3e',
