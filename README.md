@@ -40,6 +40,12 @@
 
 Il progetto è stato pubblicato su Vercel (front-end) e su Azure (back-end e database)
 
+Account di prova:
+
+- User User ➡️ user@example.com / useruser (account utente)
+- Seller User ➡️ seller@example.com / sellerseller (account venditore)
+- Admin User ➡️ **@example.com / ** (account amministratore)
+
 ---
 
 ## 🌐 Panoramica del Progetto
